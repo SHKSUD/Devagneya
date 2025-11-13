@@ -1,0 +1,86 @@
+/* Base */
+:root{--bg1:#aee1f9;--bg2:#fefefe}
+*{box-sizing:border-box}
+body{margin:0;overflow:hidden;background:linear-gradient(var(--bg1),var(--bg2));height:100vh;font-family:Georgia,serif;color:#222}
+
+/* Parallax layers */
+.layer{position:absolute;width:200%;height:100%;background-repeat:repeat-x;background-size:cover}
+.sky{background:linear-gradient(var(--bg1),var(--bg2));z-index:1}
+.clouds{background-image:url('clouds-layer.png');animation:moveClouds 60s linear infinite;z-index:2}
+.mountains{background-image:url('mountains-layer.png');animation:moveMountains 120s linear infinite;z-index:3}
+@keyframes moveClouds{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+@keyframes moveMountains{from{transform:translateX(0)}to{transform:translateX(-25%)}}
+
+/* Floating */
+.leaf,.lantern{position:absolute;width:80px;height:80px;background-size:contain;background-repeat:no-repeat;animation:floaty 6s ease-in-out infinite;z-index:4}
+.leaf{background-image:url('leaf.png');top:40%;left:20%}
+.lantern{background-image:url('lantern.png');top:60%;left:70%;animation-delay:2s}
+@keyframes floaty{0%{transform:translateY(0)}50%{transform:translateY(-15px)}100%{transform:translateY(0)}}
+
+/* Hero */
+.hero{position:absolute;top:16%;left:50%;transform:translateX(-50%);text-align:center;z-index:6}
+.hero-title{margin:0;font-size:3rem;letter-spacing:0.6px}
+.hero-sub{margin:6px 0 0;color:#444;font-size:1.05rem}
+/* Hero section text colors */
+.hero-title {
+  color: #ffffff;   /* pure white */
+  text-shadow: 0 2px 6px rgba(0,0,0,0.4);
+  font-family: 'Papyrus', 'Comic Sans MS', cursive, sans-serif;
+}
+
+.hero-sub {
+  color: #2ecc71;   /* a fresh green shade */
+  text-shadow: 0 1px 4px rgba(0,0,0,0.3);
+  font-family: 'Papyrus', 'Comic Sans MS', cursive, sans-serif;
+}
+
+/* Controls */
+#musicToggle{position:absolute;top:20px;right:20px;z-index:10;padding:10px 14px;border-radius:8px;background:rgba(255,255,255,0.9);border:none;cursor:pointer}
+#projectsBtn,#carsBtn{position:absolute;top:20px;z-index:10;padding:10px 12px;border-radius:8px;background:rgba(255,255,255,0.92);border:none;cursor:pointer}
+#projectsBtn{left:20px} #carsBtn{left:140px}
+
+/* Modal */
+.modal{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.45);z-index:60}
+.panel{background:#fff;padding:18px;border-radius:12px;max-width:760px;width:94%;box-shadow:0 12px 40px rgba(0,0,0,0.12);max-height:80vh;overflow:auto}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+label{display:block;margin-bottom:6px}
+input[type="text"],input[type="url"],input[type="password"],input[type="file"]{width:100%;padding:8px;border-radius:8px;border:1px solid #ddd}
+.actions{display:flex;gap:8px;margin-top:10px}
+button.small{padding:8px 10px;border-radius:8px;border:none;background:#f0f0f0;cursor:pointer}
+
+/* Project/Car list */
+.projects-list{margin-top:12px}
+.project-item{display:flex;gap:10px;align-items:center;padding:8px;border-radius:8px;background:rgba(0,0,0,0.03);margin-bottom:8px}
+.thumb{width:64px;height:48px;background:#fafafa;border-radius:6px;display:flex;align-items:center;justify-content:center;overflow:hidden}
+.thumb img{width:100%;height:100%;object-fit:cover}
+.meta{flex:1}
+.meta strong{display:block}
+.meta small{color:#666}
+.project-actions{display:flex;gap:6px}
+
+/* Home video */
+.home-video{position:absolute;left:50%;top:46%;transform:translateX(-50%);width:min(88vw,960px);z-index:6}
+.video-wrapper{display:flex;flex-direction:column;gap:12px}
+.video-block{position:relative;padding-bottom:56.25%;height:0;overflow:hidden;border-radius:12px;box-shadow:0 10px 30px rgba(0,0,0,0.12);background:#000}
+.video-block iframe{position:absolute;top:0;left:0;width:100%;height:100%;border:0;border-radius:12px}
+.video-controls{display:flex;gap:8px;margin-top:8px;justify-content:center}
+.video-btn{padding:8px 12px;border-radius:8px;border:none;background:rgba(255,255,255,0.95);cursor:pointer}
+
+/* Fallback */
+.video-fallback{display:none;flex-direction:row;gap:12px;align-items:center;padding:12px;background:#fff;border-radius:12px;box-shadow:0 8px 24px rgba(0,0,0,0.12)}
+.video-fallback img{width:220px;max-width:35%;border-radius:8px;object-fit:cover}
+.video-fallback .fallback-body{display:flex;flex-direction:column;gap:8px}
+.btn-link{display:inline-block;padding:8px 12px;background:#222;color:#fff;border-radius:8px;text-decoration:none}
+.video-fallback .small{background:#f0f0f0;border:none;padding:8px 10px;border-radius:8px;cursor:pointer}
+
+/* Lightbox tweaks */
+.car-link{color:#222;text-decoration:underline;font-size:0.95rem;display:inline-block;margin-top:8px}
+
+/* Responsive */
+@media (max-width:640px){
+  .grid{grid-template-columns:1fr}
+  .hero-title{font-size:2.4rem}
+  .home-video{width:94vw;top:52%}
+  .video-fallback{flex-direction:column}
+  .video-fallback img{width:100%;max-width:100%}
+}
