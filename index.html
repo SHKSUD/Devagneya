@@ -3,189 +3,461 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Devagneya's World — GreenCityProject</title>
+  <title>New Channel Portfolio — GreenCityProject</title>
+  
+  <!-- SEO & Theme Meta Tags -->
+  <meta name="description" content="Welcome to the New Channel Portfolio, a creative portfolio inspired by Studio Ghibli. Featuring the GreenCityProject." />
+  <meta name="author" content="Devagneya" />
+  <meta name="theme-color" content="#aee1f9">
+  <link rel="icon" href="/favicon.ico">
+
   <style>
-/* --- STYLES.CSS START --- */
-/* Base */
-:root{--bg1:#aee1f9;--bg2:#fefefe}
-*{box-sizing:border-box}
-body{margin:0;overflow:hidden;background:linear-gradient(var(--bg1),var(--bg2));height:100vh;font-family:Georgia,serif;color:#222}
+    /* --- Google Font Import --- */
+    @import url('https://fonts.googleapis.com/css2?family=IM+Fell+English:wght@400&family=Patrick+Hand&display=swap');
 
-/* Parallax layers */
-.layer{position:absolute;width:200%;height:100%;background-repeat:repeat-x;background-size:cover}
-.sky{background:linear-gradient(var(--bg1),var(--bg2));z-index:1}
-.clouds{background-image:url('clouds-layer.png');animation:moveClouds 60s linear infinite;z-index:2}
-.mountains{background-image:url('mountains-layer.png');animation:moveMountains 120s linear infinite;z-index:3}
-@keyframes moveClouds{from{transform:translateX(0)}to{transform:translateX(-50%)}}
-@keyframes moveMountains{from{transform:translateX(0)}to{transform:translateX(-25%)}}
+    /* --- Base --- */
+    :root {
+      --bg1: #aee1f9;
+      --bg2: #fefefe;
+      --text-dark: #3a3f47;
+      --text-light: #5f6773;
+      --whimsical-font: 'IM Fell English', serif;
+      --body-font: 'Patrick Hand', cursive;
+      --danger-bg: #e74c3c;
+      --danger-hover: #c0392b;
+    }
 
-/* Floating */
-.leaf,.lantern{position:absolute;width:80px;height:80px;background-size:contain;background-repeat:no-repeat;animation:floaty 6s ease-in-out infinite;z-index:4}
-.leaf{background-image:url('leaf.png');top:40%;left:20%}
-.lantern{background-image:url('lantern.png');top:60%;left:70%;animation-delay:2s}
-@keyframes floaty{0%{transform:translateY(0)}50%{transform:translateY(-15px)}100%{transform:translateY(0)}}
+    * {
+      box-sizing: border-box;
+    }
 
-/* Hero */
-.hero{position:absolute;top:16%;left:50%;transform:translateX(-50%);text-align:center;z-index:6}
-.hero-title{margin:0;font-size:3rem;letter-spacing:0.6px}
-.hero-sub{margin:6px 0 0;color:#444;font-size:1.05rem}
-/* Hero section text colors - Ghibli aesthetic */
-.hero-title {
-  color: #ffffff;
-  text-shadow: 0 2px 6px rgba(0,0,0,0.4);
-  font-family: 'Papyrus', 'Comic Sans MS', cursive, sans-serif;
-}
+    body {
+      margin: 0;
+      overflow: hidden;
+      background: linear-gradient(var(--bg1), var(--bg2));
+      height: 100vh;
+      font-family: var(--body-font), Georgia, serif;
+      color: var(--text-dark);
+      font-size: 1.1rem;
+      line-height: 1.5;
+    }
 
-.hero-sub {
-  color: #2ecc71;
-  text-shadow: 0 1px 4px rgba(0,0,0,0.3);
-  font-family: 'Papyrus', 'Comic Sans MS', cursive, sans-serif;
-}
+    /* --- Parallax layers --- */
+    .layer {
+      position: absolute;
+      width: 200%;
+      height: 100%;
+      background-repeat: repeat-x;
+      background-size: cover;
+      background-position: bottom center;
+    }
+    .sky {
+      background: linear-gradient(var(--bg1), var(--bg2));
+      z-index: 1;
+    }
+    .clouds {
+      /* NOTE: Ensure you have images/clouds-layer.png */
+      background-image: url('images/clouds-layer.png'); 
+      animation: moveClouds 60s linear infinite;
+      z-index: 2;
+      opacity: 0.7;
+    }
+    .mountains {
+      /* NOTE: Ensure you have images/mountains-layer.png */
+      background-image: url('images/mountains-layer.png'); 
+      animation: moveMountains 120s linear infinite;
+      z-index: 3;
+    }
+    @keyframes moveClouds {
+      from { transform: translateX(0); }
+      to { transform: translateX(-50%); }
+    }
+    @keyframes moveMountains {
+      from { transform: translateX(0); }
+      to { transform: translateX(-25%); }
+    }
 
-/* Controls */
-#musicToggle{position:absolute;top:20px;right:20px;z-index:10;padding:10px 14px;border-radius:8px;background:rgba(255,255,255,0.9);border:none;cursor:pointer}
-#projectsBtn,#carsBtn{position:absolute;top:20px;z-index:10;padding:10px 12px;border-radius:8px;background:rgba(255,255,255,0.92);border:none;cursor:pointer}
-#projectsBtn{left:20px} #carsBtn{left:140px}
+    /* --- Floating --- */
+    .leaf, .lantern {
+      position: absolute;
+      width: 80px;
+      height: 80px;
+      background-size: contain;
+      background-repeat: no-repeat;
+      animation: floaty 6s ease-in-out infinite;
+      z-index: 4;
+    }
+    .leaf {
+      /* NOTE: Ensure you have images/leaf.png */
+      background-image: url('images/leaf.png');
+      top: 40%;
+      left: 20%;
+      animation-duration: 7s;
+    }
+    .lantern {
+      /* NOTE: Ensure you have images/lantern.png */
+      background-image: url('images/lantern.png');
+      top: 60%;
+      left: 70%;
+      animation-delay: 2s;
+    }
+    @keyframes floaty {
+      0% { transform: translateY(0) rotate(-5deg); }
+      50% { transform: translateY(-15px) rotate(5deg); }
+      100% { transform: translateY(0) rotate(-5deg); }
+    }
 
-/* Modal */
-.modal{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.45);z-index:60}
-.panel{background:#fff;padding:18px;border-radius:12px;max-width:760px;width:94%;box-shadow:0 12px 40px rgba(0,0,0,0.12);max-height:80vh;overflow:auto}
-.grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-label{display:block;margin-bottom:6px}
-input[type="text"],input[type="url"],input[type="password"],input[type="file"]{width:100%;padding:8px;border-radius:8px;border:1px solid #ddd}
-.actions{display:flex;gap:8px;margin-top:10px}
-button.small{padding:8px 10px;border-radius:8px;border:none;background:#f0f0f0;cursor:pointer}
+    /* --- Hero --- */
+    .hero {
+      position: absolute;
+      top: 16%;
+      left: 50%;
+      transform: translateX(-50%);
+      text-align: center;
+      z-index: 6;
+    }
+    .hero-title {
+      margin: 0;
+      font-size: 3.5rem;
+      letter-spacing: 0.8px;
+      font-family: var(--whimsical-font);
+      color: #ffffff;
+      text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3), 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
+    .hero-sub {
+      margin: 6px 0 0;
+      color: #f0f0f0;
+      font-size: 1.5rem;
+      font-family: var(--body-font);
+      text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+    }
 
-/* Project/Car list */
-.projects-list{margin-top:12px}
-.project-item{display:flex;gap:10px;align-items:center;padding:8px;border-radius:8px;background:rgba(0,0,0,0.03);margin-bottom:8px}
-.thumb{width:64px;height:48px;background:#fafafa;border-radius:6px;display:flex;align-items:center;justify-content:center;overflow:hidden}
-.thumb img{width:100%;height:100%;object-fit:cover}
-.meta{flex:1}
-.meta strong{display:block}
-.meta small{color:#666}
-.project-actions{display:flex;gap:6px}
+    /* --- Controls --- */
+    .control-btn {
+      position: absolute;
+      top: 20px;
+      z-index: 10;
+      padding: 10px 14px;
+      border-radius: 8px;
+      background: rgba(255, 255, 255, 0.9);
+      border: 1px solid rgba(0,0,0,0.05);
+      cursor: pointer;
+      font-family: var(--body-font);
+      font-size: 1.1rem;
+      transition: all 0.3s ease;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    }
+    .control-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    }
+    #musicToggle { right: 20px; }
+    #projectsBtn { left: 20px; }
+    #carsBtn { left: 140px; }
 
-/* Home video */
-.home-video{position:absolute;left:50%;top:46%;transform:translateX(-50%);width:min(88vw,960px);z-index:6}
-.video-wrapper{display:flex;flex-direction:column;gap:12px}
+    /* --- Modal --- */
+    .modal {
+      position: fixed;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(0, 0, 0, 0.45);
+      z-index: 60;
+      backdrop-filter: blur(4px);
+      padding: 1rem;
+    }
+    .panel {
+      background: #fff;
+      padding: 24px;
+      border-radius: 12px;
+      max-width: 760px;
+      width: 94%;
+      box-shadow: 0 12px 40px rgba(0, 0, 0, 0.12);
+      max-height: 90vh;
+      overflow-y: auto;
+      position: relative;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+    label {
+      display: block;
+      margin-bottom: 6px;
+      font-weight: bold;
+    }
+    input[type="text"], input[type="url"], input[type="password"], input[type="file"] {
+      width: 100%;
+      padding: 10px;
+      border-radius: 8px;
+      border: 1px solid #ddd;
+      font-family: var(--body-font);
+      font-size: 1.1rem;
+    }
+    .actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 16px;
+    }
+    button.small {
+      padding: 8px 12px;
+      border-radius: 8px;
+      border: none;
+      background: #f0f0f0;
+      cursor: pointer;
+      font-family: var(--body-font);
+      font-size: 1.1rem;
+      transition: all 0.2s ease;
+    }
+    button.small:hover {
+      background: #e0e0e0;
+      transform: translateY(-1px);
+    }
+    button.btn-danger {
+      background: var(--danger-bg);
+      color: white;
+    }
+    button.btn-danger:hover {
+      background: var(--danger-hover);
+    }
+    .close-btn {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      font-size: 1.5rem;
+      width: 32px;
+      height: 32px;
+      padding: 0;
+      line-height: 1;
+    }
 
-/* MODIFIED: .video-block now holds the poster and play button */
-.video-block{
-  position:relative;
-  padding-bottom:56.25%; /* 16:9 aspect ratio */
-  height:0;
-  overflow:hidden;
-  border-radius:12px;
-  box-shadow:0 10px 30px rgba(0,0,0,0.12);
-  background:#000;
-  background-size: cover;
-  background-position: center;
-}
-/* This holds the iframe *after* it's loaded */
-.video-block iframe{position:absolute;top:0;left:0;width:100%;height:100%;border:0;border-radius:12px}
+    /* --- Project/Car list --- */
+    .projects-list {
+      margin-top: 16px;
+      border-top: 1px solid #f0f0f0;
+    }
+    .project-item {
+      display: flex;
+      gap: 12px;
+      align-items: center;
+      padding: 10px 8px;
+      border-radius: 8px;
+      background: rgba(0, 0, 0, 0.03);
+      margin-top: 10px;
+    }
+    .thumb {
+      width: 64px;
+      height: 48px;
+      background: #fafafa;
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      border: 1px solid #eee;
+      flex-shrink: 0;
+    }
+    .thumb img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    .meta {
+      flex: 1;
+      min-width: 0; /* Fix for flexbox overflow */
+    }
+    .meta strong {
+      display: block;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .meta small {
+      color: var(--text-light);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      display: block;
+    }
+    .project-actions {
+      display: flex;
+      gap: 6px;
+    }
 
-/* NEW: Play button styled to be large and centered */
-#videoPlayBtn {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  z-index: 10;
-  background: rgba(0, 0, 0, 0.5);
-  border: 2px solid white;
-  border-radius: 50%;
-  width: 70px;
-  height: 70px;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: all 0.2s ease;
-}
-#videoPlayBtn:hover {
-  background: rgba(0, 0, 0, 0.7);
-  transform: translate(-50%, -50%) scale(1.1);
-}
-/* SVG play icon */
-#videoPlayBtn svg {
-  width: 30px;
-  height: 30px;
-  fill: white;
-  margin-left: 5px; /* Optical centering */
-}
-/* REMOVED: .video-controls are no longer needed */
-.video-controls { display: none; }
-/* REMOVED: .video-fallback is no longer needed */
-.video-fallback { display: none; }
+    /* --- Home video (Click-to-Load) --- */
+    .home-video {
+      position: absolute;
+      left: 50%;
+      top: 46%;
+      transform: translateX(-50%);
+      width: min(88vw, 960px);
+      z-index: 6;
+    }
+    .video-wrapper {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .video-block {
+      position: relative;
+      padding-bottom: 56.25%; /* 16:9 aspect ratio */
+      height: 0;
+      overflow: hidden;
+      border-radius: 12px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
+      background: #000;
+      /* Thumbnail will be applied here */
+      background-size: cover;
+      background-position: center;
+      cursor: pointer;
+    }
+    /* The iframe *after* it's loaded */
+    .video-block iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      border: 0;
+      border-radius: 12px;
+    }
+    /* Large, centered play button */
+    #videoPlayBtn {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      z-index: 10;
+      background: rgba(0, 0, 0, 0.4);
+      border: 2px solid rgba(255, 255, 255, 0.8);
+      border-radius: 50%;
+      width: 70px;
+      height: 70px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.2s ease;
+      backdrop-filter: blur(5px);
+    }
+    #videoPlayBtn:hover {
+      background: rgba(0, 0, 0, 0.7);
+      border-color: white;
+      transform: translate(-50%, -50%) scale(1.1);
+    }
+    /* SVG play icon */
+    #videoPlayBtn svg {
+      width: 30px;
+      height: 30px;
+      fill: white;
+      margin-left: 5px; /* Optical centering for a play triangle */
+    }
 
-/* Lightbox tweaks */
-.car-link{color:#222;text-decoration:underline;font-size:0.95rem;display:inline-block;margin-top:8px}
+    /* --- Lightbox tweaks --- */
+    .car-link {
+      color: var(--text-dark);
+      text-decoration: underline;
+      font-size: 1.1rem;
+      display: inline-block;
+      margin-top: 8px;
+    }
 
-/* Responsive */
-@media (max-width:640px){
-  .grid{grid-template-columns:1fr}
-  .hero-title{font-size:2.4rem}
-  .home-video{width:94vw;top:52%}
-}
-/* --- STYLES.CSS END --- */
+    /* --- Responsive --- */
+    @media (max-width: 768px) {
+      .grid {
+        grid-template-columns: 1fr;
+      }
+      .hero-title {
+        font-size: 2.8rem;
+      }
+      .hero-sub {
+        font-size: 1.3rem;
+      }
+      .home-video {
+        width: 94vw;
+        top: 50%;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .hero {
+        top: 15%;
+      }
+      .hero-title {
+        font-size: 2.2rem;
+      }
+      .home-video {
+        top: 48%;
+      }
+      .control-btn {
+        padding: 8px 10px;
+      }
+      #carsBtn {
+        left: 110px;
+      }
+      .project-item {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+    }
   </style>
 </head>
 <body>
-  <!-- Parallax layers -->
+
+  <!-- Parallax Background Layers -->
   <div class="layer sky" aria-hidden="true"></div>
   <div class="layer clouds" aria-hidden="true"></div>
   <div class="layer mountains" aria-hidden="true"></div>
 
-  <!-- Floating foreground -->
+  <!-- Floating Foreground Elements -->
   <div class="leaf" aria-hidden="true"></div>
   <div class="lantern" aria-hidden="true"></div>
 
-<header class="hero">
-  <h1 class="hero-title">Devagneya's World</h1>
-  <p class="hero-sub">Featured — GreenCityProject</p>
-</header>
+  <header class="hero">
+    <h1 class="hero-title">New Channel Portfolio</h1>
+    <p class="hero-sub">Featured — GreenCityProject</p>
+  </header>
 
-  <!-- Home video block with robust fallback -->
+  <!-- Home video: "Click-to-Load" Pattern (Video stays embedded here) -->
   <section class="home-video" aria-label="GreenCityProject featured video">
     <div id="videoWrapper" class="video-wrapper">
       
-      <!-- MODIFIED: Video block now contains the play button. The iframe will be added here by JS -->
+      <!-- This block will be replaced by the iframe on click -->
       <div id="videoBlock" class="video-block" role="button" tabindex="0" aria-label="Play GreenCityProject video">
         
-        <!-- NEW: Large, centered play button -->
+        <!-- Large, centered play button -->
         <button id="videoPlayBtn" aria-label="Play video">
-          <svg viewBox="0 0 100 100">
+          <svg viewBox="0 0 100 100" aria-hidden="true" focusable="false">
             <polygon points="30,20 80,50 30,80"></polygon>
           </svg>
         </button>
 
       </div>
-
-      <!-- REMOVED: Fallback card is no longer needed -->
-      <!-- REMOVED: Old video controls are no longer needed -->
     </div>
-
   </section>
 
-  <!-- Top controls -->
-  <button id="musicToggle" aria-pressed="false">🔈 Music On</button>
-  <button id="projectsBtn" aria-haspopup="dialog" aria-controls="projectsModal">📁 Projects</button>
-  <button id="carsBtn" aria-haspopup="dialog" aria-controls="carsModal">🚗 Fav Cars</button>
+  <!-- Top Controls -->
+  <button id="musicToggle" class="control-btn" aria-pressed="false">🔈 Music On</button>
+  <button id="projectsBtn" class="control-btn" aria-haspopup="dialog" aria-controls="projectsModal">📁 Projects</button>
+  <button id="carsBtn" class="control-btn" aria-haspopup="dialog" aria-controls="carsModal">🚗 Fav Cars</button>
 
-  <!-- Background music -->
-  <audio id="bgMusic" src="Moonlight.mp3" loop preload="auto"></audio>
+  <!-- Background Music -->
+  <!-- NOTE: Ensure you have audio/Moonlight.mp3 -->
+  <audio id="bgMusic" src="audio/Moonlight.mp3" loop preload="auto"></audio>
 
-  <!-- Projects Modal (parent gated) -->
+  <!-- Projects Modal (Parent Gated) -->
   <div id="projectsModal" class="modal" style="display:none" role="dialog" aria-modal="true" aria-labelledby="projectsTitle">
     <div class="panel" role="document">
       <h3 id="projectsTitle">Projects (Parent access)</h3>
-      <div id="pinGate">
-        <label for="parentPin">Parent PIN</label>
-        <input id="parentPin" type="password" inputmode="numeric" aria-label="Parent PIN" />
+      <div id="pinGate-projects">
+        <label for="parentPin-projects">Parent PIN</label>
+        <input id="parentPin-projects" type="password" inputmode="numeric" aria-label="Parent PIN" />
         <div class="actions">
-          <button id="pinSubmit" class="small">Unlock</button>
-          <button id="pinClose" class="small">Close</button>
+          <button id="pinSubmit-projects" class="small">Unlock</button>
+          <button id="pinClose-projects" class="small">Close</button>
         </div>
       </div>
       <div id="projectsContent" style="display:none">
@@ -203,18 +475,18 @@ button.small{padding:8px 10px;border-radius:8px;border:none;background:#f0f0f0;c
         <div class="actions">
           <button id="saveFile" class="small">Save File</button>
           <button id="saveLink" class="small">Save Link</button>
-          <button id="closePanel" class="small">Done</button>
+          <button id="closePanel-projects" class="small">Done</button>
         </div>
         <div id="projectsList" class="projects-list" aria-live="polite"></div>
       </div>
     </div>
   </div>
 
-  <!-- Fav Cars Modal (parent gated) -->
+  <!-- Fav Cars Modal (Parent Gated) -->
   <div id="carsModal" class="modal" style="display:none" role="dialog" aria-modal="true" aria-labelledby="carsTitle">
     <div class="panel" role="document">
       <h3 id="carsTitle">Fav Cars (Parent access)</h3>
-      <div id="carsPinGate">
+      <div id="pinGate-cars">
         <label for="carsPin">Parent PIN</label>
         <input id="carsPin" type="password" inputmode="numeric" aria-label="Parent PIN for cars" />
         <div class="actions">
@@ -239,15 +511,17 @@ button.small{padding:8px 10px;border-radius:8px;border:none;background:#f0f0f0;c
     </div>
   </div>
 
-  <!-- Car Lightbox -->
-  <div id="carLightbox" class="modal" style="display:none" role="dialog" aria-modal="true">
+  <!-- Car Lightbox Modal -->
+  <div id="carLightbox" class="modal" style="display:none" role="dialog" aria-modal="true" aria-labelledby="lightboxTitle">
     <div class="panel" style="max-width:820px">
-      <button id="closeLightbox" class="small" style="float:right">Close</button>
-      <div id="lightboxContent" style="text-align:center"></div>
+      <button id="closeLightbox" class="small close-btn" aria-label="Close lightbox">&times;</button>
+      <div id="lightboxContent" style="text-align:center">
+         <!-- JS will populate this -->
+      </div>
     </div>
   </div>
 
-  <!-- Message Modal -->
+  <!-- Custom Message Modal (replaces alert()) -->
   <div id="messageModal" class="modal" style="display:none" role="alertdialog" aria-modal="true" aria-labelledby="messageTitle">
     <div class="panel" style="max-width:400px; text-align:center;">
       <h4 id="messageTitle" style="margin-top:0">Notice</h4>
@@ -258,237 +532,538 @@ button.small{padding:8px 10px;border-radius:8px;border:none;background:#f0f0f0;c
     </div>
   </div>
 
-  <!-- Confirmation Modal -->
+  <!-- Custom Confirmation Modal (replaces confirm()) -->
   <div id="confirmModal" class="modal" style="display:none" role="dialog" aria-modal="true" aria-labelledby="confirmTitle">
     <div class="panel" style="max-width:400px; text-align:center;">
       <h4 id="confirmTitle" style="margin-top:0">Confirm Action</h4>
       <p id="confirmText"></p>
       <div id="confirmActions" class="actions" style="justify-content:center">
-        <button id="confirmYes" class="small" style="background-color:#c0392b; color:white;">Yes, Delete</button>
+        <button id="confirmYes" class="small btn-danger">Yes, Delete</button>
         <button id="confirmNo" class="small">Cancel</button>
       </div>
     </div>
   </div>
 
-  <!-- Inline JS: focused, minimal -->
+
+  <!-- Inline JavaScript -->
   <script>
-  /* ---------- Music fade ---------- */
-  const bg = document.getElementById('bgMusic');
-  const musicBtn = document.getElementById('musicToggle');
-  let musicPlaying = false, fadeTimer;
-  function fadeVolume(from,to,ms,cb){ clearInterval(fadeTimer); const steps=20, step=ms/steps; let i=0; bg.volume=Math.max(0,Math.min(1,from)); fadeTimer=setInterval(()=>{ i++; bg.volume = from + (to-from)*(i/steps); if(i>=steps){ clearInterval(fadeTimer); if(cb) cb(); } }, step); }
-  document.body.addEventListener('click', function once(){ document.body.removeEventListener('click', once); bg.volume=0; bg.play().catch(()=>{}); fadeVolume(0,0.35,1200); musicPlaying=true; musicBtn.textContent='🔈 Music On'; musicBtn.setAttribute('aria-pressed','true'); }, {once:true});
-  musicBtn.addEventListener('click', ()=>{ if(musicPlaying){ fadeVolume(bg.volume,0,800,()=>bg.pause()); musicBtn.textContent='🔇 Music Off'; musicBtn.setAttribute('aria-pressed','false'); } else { bg.currentTime = bg.currentTime || 0; bg.play().catch(()=>{}); fadeVolume(0,0.35,1000); musicBtn.textContent='🔈 Music On'; musicBtn.setAttribute('aria-pressed','true'); } musicPlaying = !musicPlaying; });
+  (function() {
+    "use strict";
 
-  /* ---------- Custom Modals (Replacing alert/confirm) ---------- */
-  const messageModal = document.getElementById('messageModal');
-  const messageText = document.getElementById('messageText');
-  const messageOK = document.getElementById('messageOK');
+    /* ---------- Custom Modals (Replacing alert/confirm) ---------- */
+    const messageModal = document.getElementById('messageModal');
+    const messageText = document.getElementById('messageText');
+    const messageOK = document.getElementById('messageOK');
 
-  function showMessage(title, message) {
-    document.getElementById('messageTitle').textContent = title;
-    messageText.textContent = message;
-    messageModal.style.display = 'flex';
-    messageOK.onclick = () => messageModal.style.display = 'none';
-  }
-
-  const confirmModal = document.getElementById('confirmModal');
-  const confirmText = document.getElementById('confirmText');
-  const confirmYes = document.getElementById('confirmYes');
-  const confirmNo = document.getElementById('confirmNo');
-  let confirmCallback = null;
-
-  function showConfirm(message, callback) {
-    confirmText.textContent = message;
-    confirmCallback = callback;
-    confirmModal.style.display = 'flex';
-  }
-
-  confirmYes.addEventListener('click', () => {
-    confirmModal.style.display = 'none';
-    if (confirmCallback) confirmCallback(true);
-  });
-
-  confirmNo.addEventListener('click', () => {
-    confirmModal.style.display = 'none';
-    if (confirmCallback) confirmCallback(false);
-  });
-
-  /* ---------- Projects (lightweight local) ---------- */
-  (function(){
-    const PIN='1234';
-    const projectsBtn=document.getElementById('projectsBtn');
-    const projectsModal=document.getElementById('projectsModal');
-    const pinGate=document.getElementById('pinGate');
-    const projectsContent=document.getElementById('projectsContent');
-    const parentPinInput=document.getElementById('parentPin');
-    const saveFileBtn=document.getElementById('saveFile');
-    const saveLinkBtn=document.getElementById('saveLink');
-    const closePanel=document.getElementById('closePanel');
-    const fileInput=document.getElementById('fileInput');
-    const linkInput=document.getElementById('linkInput');
-    const projectsList=document.getElementById('projectsList');
-
-    function open(){ projectsModal.style.display='flex'; parentPinInput.focus(); }
-    function close(){ projectsModal.style.display='none'; }
-    projectsBtn.addEventListener('click', open);
-    document.getElementById('pinClose').addEventListener('click', close);
-    closePanel.addEventListener('click', close);
-
-    document.getElementById('pinSubmit').addEventListener('click', ()=> {
-      if(parentPinInput.value===PIN){ pinGate.style.display='none'; projectsContent.style.display='block'; load(); } else { showMessage('Error', 'Incorrect Parent PIN. Please try again.'); parentPinInput.focus(); }
-    });
-
-    function get(){ try{return JSON.parse(localStorage.getItem('devagneya_projects')||'[]')}catch(e){return[]} }
-    function set(v){ localStorage.setItem('devagneya_projects', JSON.stringify(v)) }
-
-    saveFileBtn.addEventListener('click', ()=> {
-      const f=fileInput.files[0]; if(!f){ showMessage('Missing File', 'Please choose a file to upload.'); return; } const r=new FileReader();
-      r.onload=function(e){ const data=e.target.result; const proj={id:Date.now(),kind:'file',name:f.name,mime:f.type,data}; const list=get(); list.unshift(proj); set(list); fileInput.value=''; load(); };
-      r.readAsDataURL(f);
-    });
-
-    saveLinkBtn.addEventListener('click', ()=> {
-      const url = linkInput.value.trim(); if(!url){ showMessage('Missing URL', 'Please enter a project link URL.'); return; }
-      try{ const u=new URL(url); const proj={id:Date.now(),kind:'link',name:u.hostname+u.pathname,url:u.href}; const list=get(); list.unshift(proj); set(list); linkInput.value=''; load(); }catch(e){ showMessage('Invalid URL', 'The link you entered is not a valid URL.'); }
-    });
-
-    function load(){
-      const list=get(); projectsList.innerHTML=''; if(list.length===0){ projectsList.innerHTML='<div>No projects yet</div>'; return; }
-      list.forEach(p=>{ const item=document.createElement('div'); item.className='project-item'; const thumb=document.createElement('div'); thumb.className='thumb';
-        if(p.kind==='file' && p.mime.startsWith('image/')){ const img=document.createElement('img'); img.src=p.data; img.alt=p.name; thumb.appendChild(img); }
-        else if(p.kind==='file' && p.mime==='application/pdf'){ thumb.innerHTML='<small>PDF</small>'; }
-        else if(p.kind==='link'){ thumb.innerHTML='<small>LINK</small>'; }
-        const meta=document.createElement('div'); meta.className='meta'; const title=document.createElement('strong'); title.textContent=p.name||p.url; const sub=document.createElement('small'); sub.textContent=p.kind==='link'?p.url:p.mime||''; meta.appendChild(title); meta.appendChild(sub);
-        const actions=document.createElement('div'); actions.className='project-actions';
-        if(p.kind==='link'){ const open=document.createElement('button'); open.className='small'; open.textContent='Open'; open.addEventListener('click', ()=>window.open(p.url,'_blank')); actions.appendChild(open); }
-        else if(p.kind==='file'){ const open=document.createElement('button'); open.className='small'; open.textContent='Open'; open.addEventListener('click', ()=>{ const w=window.open(); if(w){ w.document.write(`<title>${p.name}</title>`); if(p.mime.startsWith('image/')) w.document.write(`<img src="${p.data}" style="max-width:100%;">`); else w.document.write(`<iframe src="${p.data}" style="width:100%;height:100vh;border:none"></iframe>`); w.document.close(); } else { showMessage('Popup Blocked', 'Please allow popups in your browser to preview the file.'); } }); actions.appendChild(open); }
-        const del=document.createElement('button'); del.className='small'; del.textContent='Delete'; del.addEventListener('click', ()=>{ showConfirm(`Are you sure you want to permanently delete project: ${p.name}?`, (confirmed) => { if (confirmed) { const rem=get().filter(x=>x.id!==p.id); set(rem); load(); } }); }); actions.appendChild(del);
-        item.appendChild(thumb); item.appendChild(meta); item.appendChild(actions); projectsList.appendChild(item);
-      });
+    /**
+     * Shows a custom message modal.
+     * @param {string} title - The title of the modal.
+     * @param {string} message - The message to display.
+     */
+    function showMessage(title, message) {
+      document.getElementById('messageTitle').textContent = title;
+      messageText.textContent = message;
+      messageModal.style.display = 'flex';
+      messageOK.focus();
+      messageOK.onclick = () => messageModal.style.display = 'none';
     }
-    projectsModal.addEventListener('click', (e)=>{ if(e.target===projectsModal) close(); });
-    document.addEventListener('keydown', (e)=>{ if(e.key==='Escape' && projectsModal.style.display==='flex') close(); });
-  })();
 
-  /* ---------- Fav Cars (local) ---------- */
-  (function(){
-    const PIN='1234';
-    const carsBtn=document.getElementById('carsBtn');
-    const carsModal=document.getElementById('carsModal');
-    const carsPinGate=document.getElementById('carsPinGate');
-    const carsContent=document.getElementById('carsContent');
-    const carFile=document.getElementById('carFile');
-    const carName=document.getElementById('carName');
-    const carNote=document.getElementById('carNote');
-    const carLink=document.getElementById('carLink');
-    const saveCar=document.getElementById('saveCar');
-    const doneCars=document.getElementById('doneCars');
-    const carsList=document.getElementById('carsList');
-    const carLightbox=document.getElementById('carLightbox');
-    const lightboxContent=document.getElementById('lightboxContent');
+    const confirmModal = document.getElementById('confirmModal');
+    const confirmText = document.getElementById('confirmText');
+    const confirmYes = document.getElementById('confirmYes');
+    const confirmNo = document.getElementById('confirmNo');
+    let confirmCallback = null;
 
-    function open(){ carsModal.style.display='flex'; carsPinGate.querySelector('input').focus(); }
-    function close(){ carsModal.style.display='none'; }
-    carsBtn.addEventListener('click', open);
-    document.getElementById('carsPinClose').addEventListener('click', close);
-    doneCars.addEventListener('click', close);
+    /**
+     * Shows a custom confirmation modal.
+     * @param {string} message - The confirmation question.
+     * @param {function(boolean)} callback - Function to call with true (if yes) or false (if no).
+     */
+    function showConfirm(message, callback) {
+      confirmText.textContent = message;
+      confirmCallback = callback;
+      confirmModal.style.display = 'flex';
+      confirmNo.focus();
+    }
 
-    document.getElementById('carsPinSubmit').addEventListener('click', ()=>{
-      const v=document.getElementById('carsPin').value;
-      if(v===PIN){ carsPinGate.style.display='none'; carsContent.style.display='block'; loadCars(); } else { showMessage('Error', 'Incorrect Parent PIN. Please try again.'); document.getElementById('carsPin').focus(); }
+    confirmYes.addEventListener('click', () => {
+      confirmModal.style.display = 'none';
+      if (confirmCallback) confirmCallback(true);
+      confirmCallback = null;
     });
 
-    function get(){ try{return JSON.parse(localStorage.getItem('fav_cars')||'[]')}catch(e){return[]} }
-    function set(v){ localStorage.setItem('fav_cars', JSON.stringify(v)) }
-
-    saveCar.addEventListener('click', ()=>{
-      const f=carFile.files[0]; const name=carName.value.trim()||'Untitled'; const note=carNote.value.trim(); const link=carLink.value.trim();
-      if(!f){ showMessage('Missing Image', 'Please choose an image for the car.'); return; } const r=new FileReader();
-      r.onload=function(e){ const data=e.target.result; const car={id:Date.now(),name, note, link, data}; const list=get(); list.unshift(car); set(list); carFile.value=''; carName.value=''; carNote.value=''; carLink.value=''; loadCars(); };
-      r.readAsDataURL(f);
+    confirmNo.addEventListener('click', () => {
+      confirmModal.style.display = 'none';
+      if (confirmCallback) confirmCallback(false);
+      confirmCallback = null;
     });
 
-    function loadCars(){ const list=get(); carsList.innerHTML=''; if(!list.length){ carsList.innerHTML='<div>No favourite cars yet.</div>'; return; } list.forEach(c=>{ const item=document.createElement('div'); item.className='project-item car-item'; const thumb=document.createElement('div'); thumb.className='thumb'; const img=document.createElement('img'); img.src=c.data; img.alt=c.name; thumb.appendChild(img); const meta=document.createElement('div'); meta.className='meta car-meta'; const title=document.createElement('strong'); title.textContent=c.name; const s=document.createElement('small'); s.textContent=c.note||''; meta.appendChild(title); meta.appendChild(s); const actions=document.createElement('div'); actions.className='project-actions'; const view=document.createElement('button'); view.className='small'; view.textContent='View'; view.addEventListener('click', ()=>openLightbox(c)); actions.appendChild(view); if(c.link){ const go=document.createElement('button'); go.className='small'; go.textContent='Open'; go.addEventListener('click', ()=>window.open(c.link,'_blank')); actions.appendChild(go); } const del=document.createElement('button'); del.className='small'; del.textContent='Delete'; del.addEventListener('click', ()=>{ showConfirm(`Are you sure you want to permanently delete car: ${c.name}?`, (confirmed) => { if (confirmed) { const rem=get().filter(x=>x.id!==c.id); set(rem); loadCars(); } }); }); actions.appendChild(del); item.appendChild(thumb); item.appendChild(meta); item.appendChild(actions); carsList.appendChild(item); }); }
 
-    function openLightbox(car){ lightboxContent.innerHTML=''; const h=document.createElement('h3'); h.textContent=car.name; const img=document.createElement('img'); img.src=car.data; img.style.maxWidth='100%'; const p=document.createElement('p'); p.textContent=car.note||''; lightboxContent.appendChild(h); lightboxContent.appendChild(img); lightboxContent.appendChild(p); if(car.link){ const a=document.createElement('a'); a.href=car.link; a.target='_blank'; a.className='car-link'; a.textContent='Open link'; lightboxContent.appendChild(a);} carLightbox.style.display='flex'; }
+    /* ---------- Music fade ---------- */
+    const bg = document.getElementById('bgMusic');
+    const musicBtn = document.getElementById('musicToggle');
+    let musicPlaying = false, fadeTimer;
 
-    document.getElementById('closeLightbox').addEventListener('click', ()=> carLightbox.style.display='none');
-    carLightbox.addEventListener('click', (e)=>{ if(e.target===carLightbox) carLightbox.style.display='none'; });
-    document.addEventListener('keydown', (e)=>{ if(e.key==='Escape'){ carLightbox.style.display='none'; carsModal.style.display='none'; } });
-  })();
-
-  /* ---------- NEW: Home video "Click-to-Load" logic ---------- */
-  (function(){
-    const vidId = 'yR0N1ZnidPI';
-    const videoBlock = document.getElementById('videoBlock');
-    const playBtn = document.getElementById('videoPlayBtn');
-    
-    // 1. Find and set the thumbnail for the background
-    const candidates=[
-      `https://img.youtube.com/vi/${vidId}/maxresdefault.jpg`,
-      `https://img.youtube.com/vi/${vidId}/hqdefault.jpg`,
-      `https://img.youtube.com/vi/${vidId}/sddefault.jpg`,
-      `https://img.youtube.com/vi/${vidId}/mqdefault.jpg`
-    ];
-    const localFallback = 'poster-fallback.jpg'; // A local fallback just in case
-
-    async function findWorkingThumbnail(urls){
-      for(const u of urls){
-        try{
-          const res = await fetch(u, { method:'GET', cache:'no-store' });
-          if(res.ok){
-            const blob = await res.blob();
-            if(blob.size > 2000) return URL.createObjectURL(blob); // Found a good thumbnail
-          }
-        }catch(e){
-          // console.warn('Thumbnail fetch failed:', u);
+    function fadeVolume(from, to, ms, cb) {
+      clearInterval(fadeTimer);
+      const steps = 20, step = ms / steps;
+      let i = 0;
+      bg.volume = Math.max(0, Math.min(1, from));
+      fadeTimer = setInterval(() => {
+        i++;
+        bg.volume = from + (to - from) * (i / steps);
+        if (i >= steps) {
+          clearInterval(fadeTimer);
+          if (cb) cb();
         }
-      }
-      return null; // No thumbnail found
+      }, step);
     }
 
-    (async function applyThumbnail(){
-      const url = await findWorkingThumbnail(candidates);
-      if (url) {
-        videoBlock.style.backgroundImage = `url(${url})`;
+    // Play music on first user interaction with the page
+    document.body.addEventListener('click', function once() {
+      document.body.removeEventListener('click', once);
+      bg.volume = 0;
+      bg.play().catch(() => {}); // Autoplay might fail, that's okay.
+      fadeVolume(0, 0.35, 1200);
+      musicPlaying = true;
+      musicBtn.textContent = '🔈 Music On';
+      musicBtn.setAttribute('aria-pressed', 'true');
+    }, { once: true });
+
+    musicBtn.addEventListener('click', () => {
+      if (musicPlaying) {
+        fadeVolume(bg.volume, 0, 800, () => bg.pause());
+        musicBtn.textContent = '🔇 Music Off';
+        musicBtn.setAttribute('aria-pressed', 'false');
       } else {
-        videoBlock.style.backgroundImage = `url(${localFallback})`; // Use local fallback
+        bg.currentTime = bg.currentTime || 0;
+        bg.play().catch(() => {});
+        fadeVolume(0, 0.35, 1000);
+        musicBtn.textContent = '🔈 Music On';
+        musicBtn.setAttribute('aria-pressed', 'true');
+      }
+      musicPlaying = !musicPlaying;
+    });
+
+    /* ---------- Projects (lightweight local) ---------- */
+    (function() {
+      const PIN = '1234';
+      const projectsBtn = document.getElementById('projectsBtn');
+      const projectsModal = document.getElementById('projectsModal');
+      const pinGate = document.getElementById('pinGate-projects');
+      const projectsContent = document.getElementById('projectsContent');
+      const parentPinInput = document.getElementById('parentPin-projects');
+      const saveFileBtn = document.getElementById('saveFile');
+      const saveLinkBtn = document.getElementById('saveLink');
+      const closePanel = document.getElementById('closePanel-projects');
+      const fileInput = document.getElementById('fileInput');
+      const linkInput = document.getElementById('linkInput');
+      const projectsList = document.getElementById('projectsList');
+
+      function open() { projectsModal.style.display = 'flex'; parentPinInput.focus(); }
+      function close() { projectsModal.style.display = 'none'; }
+      
+      projectsBtn.addEventListener('click', open);
+      document.getElementById('pinClose-projects').addEventListener('click', close);
+      closePanel.addEventListener('click', close);
+
+      document.getElementById('pinSubmit-projects').addEventListener('click', () => {
+        if (parentPinInput.value === PIN) {
+          pinGate.style.display = 'none';
+          projectsContent.style.display = 'block';
+          load();
+        } else {
+          showMessage('Error', 'Incorrect Parent PIN. Please try again.');
+          parentPinInput.focus();
+        }
+      });
+
+      function get() { try { return JSON.parse(localStorage.getItem('devagneya_projects') || '[]') } catch (e) { return [] } }
+      function set(v) { localStorage.setItem('devagneya_projects', JSON.stringify(v)) }
+
+      saveFileBtn.addEventListener('click', () => {
+        const f = fileInput.files[0];
+        if (!f) {
+          showMessage('Missing File', 'Please choose a file to upload.');
+          return;
+        }
+        const r = new FileReader();
+        r.onload = function(e) {
+          const data = e.target.result;
+          const proj = { id: Date.now(), kind: 'file', name: f.name, mime: f.type, data };
+          const list = get();
+          list.unshift(proj);
+          set(list);
+          fileInput.value = '';
+          load();
+        };
+        r.readAsDataURL(f);
+      });
+
+      saveLinkBtn.addEventListener('click', () => {
+        const url = linkInput.value.trim();
+        if (!url) {
+          showMessage('Missing URL', 'Please enter a project link URL.');
+          return;
+        }
+        try {
+          const u = new URL(url);
+          const proj = { id: Date.now(), kind: 'link', name: u.hostname + u.pathname, url: u.href };
+          const list = get();
+          list.unshift(proj);
+          set(list);
+          linkInput.value = '';
+          load();
+        } catch (e) {
+          showMessage('Invalid URL', 'The link you entered is not a valid URL.');
+        }
+      });
+
+      function load() {
+        const list = get();
+        projectsList.innerHTML = '';
+        if (list.length === 0) {
+          projectsList.innerHTML = '<div>No projects yet</div>';
+          return;
+        }
+        list.forEach(p => {
+          const item = document.createElement('div');
+          item.className = 'project-item';
+          const thumb = document.createElement('div');
+          thumb.className = 'thumb';
+          
+          if (p.kind === 'file' && p.mime.startsWith('image/')) {
+            const img = document.createElement('img');
+            img.src = p.data;
+            img.alt = p.name;
+            thumb.appendChild(img);
+          } else if (p.kind === 'file' && p.mime === 'application/pdf') {
+            thumb.innerHTML = '<small>PDF</small>';
+          } else if (p.kind === 'link') {
+            thumb.innerHTML = '<small>LINK</small>';
+          }
+          
+          const meta = document.createElement('div');
+          meta.className = 'meta';
+          const title = document.createElement('strong');
+          title.textContent = p.name || p.url;
+          const sub = document.createElement('small');
+          sub.textContent = p.kind === 'link' ? p.url : p.mime || '';
+          meta.appendChild(title);
+          meta.appendChild(sub);
+          
+          const actions = document.createElement('div');
+          actions.className = 'project-actions';
+          
+          if (p.kind === 'link') {
+            const open = document.createElement('button');
+            open.className = 'small';
+            open.textContent = 'Open';
+            open.addEventListener('click', () => window.open(p.url, '_blank'));
+            actions.appendChild(open);
+          } else if (p.kind === 'file') {
+            const open = document.createElement('button');
+            open.className = 'small';
+            open.textContent = 'Open';
+            // NOTE: Opening PDF/Image files requires window.open() to prevent CORS/security issues inside the iframe.
+            open.addEventListener('click', () => {
+              const w = window.open();
+              if (w) {
+                w.document.write(`<title>${p.name}</title>`);
+                if (p.mime.startsWith('image/')) {
+                  w.document.write(`<img src="${p.data}" style="max-width:100%;">`);
+                } else {
+                  w.document.write(`<iframe src="${p.data}" style="width:100%;height:100vh;border:none"></iframe>`);
+                }
+                w.document.close(); // Finish writing
+              } else {
+                showMessage('Popup Blocked', 'Please allow popups in your browser to preview the file.');
+              }
+            });
+            actions.appendChild(open);
+          }
+          
+          const del = document.createElement('button');
+          del.className = 'small btn-danger';
+          del.textContent = 'Delete';
+          del.addEventListener('click', () => {
+            showConfirm(`Are you sure you want to permanently delete project: ${p.name}?`, (confirmed) => {
+              if (confirmed) {
+                const rem = get().filter(x => x.id !== p.id);
+                set(rem);
+                load();
+              }
+            });
+          });
+          actions.appendChild(del);
+          
+          item.appendChild(thumb);
+          item.appendChild(meta);
+          item.appendChild(actions);
+          projectsList.appendChild(item);
+        });
       }
     })();
 
-    // 2. Click-to-load
-    function loadVideo() {
-      // Clear the block (remove play button)
-      videoBlock.innerHTML = ''; 
+    /* ---------- Fav Cars (local) ---------- */
+    (function() {
+      const PIN = '1234';
+      const carsBtn = document.getElementById('carsBtn');
+      const carsModal = document.getElementById('carsModal');
+      const carsPinGate = document.getElementById('pinGate-cars');
+      const carsContent = document.getElementById('carsContent');
+      const carFile = document.getElementById('carFile');
+      const carName = document.getElementById('carName');
+      const carNote = document.getElementById('carNote');
+      const carLink = document.getElementById('carLink');
+      const saveCar = document.getElementById('saveCar');
+      const doneCars = document.getElementById('doneCars');
+      const carsList = document.getElementById('carsList');
+      const carLightbox = document.getElementById('carLightbox');
+      const lightboxContent = document.getElementById('lightboxContent');
+      const closeLightboxBtn = document.getElementById('closeLightbox');
+
+      function open() { carsModal.style.display = 'flex'; carsPinGate.querySelector('input').focus(); }
+      function close() { carsModal.style.display = 'none'; }
       
-      // Create and add the iframe
-      const iframe = document.createElement('iframe');
-      iframe.src = `https://www.youtube.com/embed/${vidId}?enablejsapi=1&rel=0&modestbranding=1&autoplay=1`;
-      iframe.title = "GreenCityProject";
-      iframe.allow = "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture";
-      iframe.allowFullscreen = true;
-      videoBlock.appendChild(iframe);
-    }
+      carsBtn.addEventListener('click', open);
+      document.getElementById('carsPinClose').addEventListener('click', close);
+      doneCars.addEventListener('click', close);
+
+      document.getElementById('carsPinSubmit').addEventListener('click', () => {
+        const v = document.getElementById('carsPin').value;
+        if (v === PIN) {
+          carsPinGate.style.display = 'none';
+          carsContent.style.display = 'block';
+          loadCars();
+        } else {
+          showMessage('Error', 'Incorrect Parent PIN. Please try again.');
+          document.getElementById('carsPin').focus();
+        }
+      });
+
+      function get() { try { return JSON.parse(localStorage.getItem('fav_cars') || '[]') } catch (e) { return [] } }
+      function set(v) { localStorage.setItem('fav_cars', JSON.stringify(v)) }
+
+      saveCar.addEventListener('click', () => {
+        const f = carFile.files[0];
+        const name = carName.value.trim() || 'Untitled';
+        const note = carNote.value.trim();
+        const link = carLink.value.trim();
+        
+        if (!f) {
+          showMessage('Missing Image', 'Please choose an image for the car.');
+          return;
+        }
+        const r = new FileReader();
+        r.onload = function(e) {
+          const data = e.target.result;
+          const car = { id: Date.now(), name, note, link, data };
+          const list = get();
+          list.unshift(car);
+          set(list);
+          carFile.value = '';
+          carName.value = '';
+          carNote.value = '';
+          carLink.value = '';
+          loadCars();
+        };
+        r.readAsDataURL(f);
+      });
+
+      function loadCars() {
+        const list = get();
+        carsList.innerHTML = '';
+        if (!list.length) {
+          carsList.innerHTML = '<div>No favourite cars yet.</div>';
+          return;
+        }
+        list.forEach(c => {
+          const item = document.createElement('div');
+          item.className = 'project-item car-item';
+          
+          const thumb = document.createElement('div');
+          thumb.className = 'thumb';
+          const img = document.createElement('img');
+          img.src = c.data;
+          img.alt = c.name;
+          thumb.appendChild(img);
+          
+          const meta = document.createElement('div');
+          meta.className = 'meta car-meta';
+          const title = document.createElement('strong');
+          title.textContent = c.name;
+          const s = document.createElement('small');
+          s.textContent = c.note || '';
+          meta.appendChild(title);
+          meta.appendChild(s);
+          
+          const actions = document.createElement('div');
+          actions.className = 'project-actions';
+          
+          const view = document.createElement('button');
+          view.className = 'small';
+          view.textContent = 'View';
+          view.addEventListener('click', () => openLightbox(c));
+          actions.appendChild(view);
+          
+          if (c.link) {
+            const go = document.createElement('button');
+            go.className = 'small';
+            go.textContent = 'Open';
+            go.addEventListener('click', () => window.open(c.link, '_blank'));
+            actions.appendChild(go);
+          }
+          
+          const del = document.createElement('button');
+          del.className = 'small btn-danger';
+          del.textContent = 'Delete';
+          del.addEventListener('click', () => {
+            showConfirm(`Are you sure you want to permanently delete car: ${c.name}?`, (confirmed) => {
+              if (confirmed) {
+                const rem = get().filter(x => x.id !== c.id);
+                set(rem);
+                loadCars();
+              }
+            });
+          });
+          actions.appendChild(del);
+          
+          item.appendChild(thumb);
+          item.appendChild(meta);
+          item.appendChild(actions);
+          carsList.appendChild(item);
+        });
+      }
+
+      function openLightbox(car) {
+        lightboxContent.innerHTML = ''; // Clear previous content
+        
+        const h = document.createElement('h3');
+        h.id = "lightboxTitle"; // For accessibility
+        h.textContent = car.name;
+        
+        const img = document.createElement('img');
+        img.src = car.data;
+        img.alt = car.note || car.name; // Use note as alt text if available
+        img.style.maxWidth = '100%';
+        img.style.borderRadius = '8px';
+
+        const p = document.createElement('p');
+        p.textContent = car.note || '';
+        
+        lightboxContent.appendChild(h);
+        lightboxContent.appendChild(img);
+        lightboxContent.appendChild(p);
+        
+        if (car.link) {
+          const a = document.createElement('a');
+          a.href = car.link;
+          a.target = '_blank';
+          a.className = 'car-link';
+          a.textContent = 'Open link';
+          lightboxContent.appendChild(a);
+        }
+        carLightbox.style.display = 'flex';
+        closeLightboxBtn.focus(); // Focus the close button
+      }
+
+      closeLightboxBtn.addEventListener('click', () => carLightbox.style.display = 'none');
+    })();
     
-    playBtn.addEventListener('click', loadVideo);
-    videoBlock.addEventListener('keydown', (e) => {
-      if (e.key === 'Enter' || e.key === ' ') {
-        loadVideo();
+    /* ---------- Home video "Click-to-Load" logic (Always loads within the page) ---------- */
+    (function() {
+      // The video ID has been confirmed from the user's input.
+      const vidId = 'YMTpdIZYGdg'; 
+      const videoBlock = document.getElementById('videoBlock');
+      const playBtn = document.getElementById('videoPlayBtn');
+      // NOTE: Ensure you have images/poster-fallback.jpg
+      const localFallback = 'images/poster-fallback.jpg'; 
+
+      // List of potential thumbnails, from highest to lowest quality
+      const candidates = [
+        `https://img.youtube.com/vi/${vidId}/maxresdefault.jpg`, // 1080p
+        `https://img.youtube.com/vi/${vidId}/sddefault.jpg`,   // 640p
+        `https://img.youtube.com/vi/${vidId}/hqdefault.jpg`,   // 480p
+        `https://img.youtube.com/vi/${vidId}/mqdefault.jpg`    // 320p
+      ];
+
+      /**
+       * Finds the best available YouTube thumbnail and sets it as the background.
+       */
+      async function findWorkingThumbnail(urls) {
+        for (const u of urls) {
+          try {
+            const res = await fetch(u, { method: 'GET', cache: 'no-store' });
+            if (res.ok) {
+              const blob = await res.blob();
+              // A good thumbnail will be larger than a few KB
+              if (blob.size > 2000) {
+                return URL.createObjectURL(blob);
+              }
+            }
+          } catch (e) {
+              // Network or CORS error, proceed to next candidate
+          }
+        }
+        return null; // No thumbnail found
+      }
+
+      (async function applyThumbnail() {
+        const url = await findWorkingThumbnail(candidates);
+        videoBlock.style.backgroundImage = `url(${url || localFallback})`;
+      })();
+
+      /**
+       * Loads the YouTube iframe and plays it. This ensures the video stays embedded.
+       */
+      function loadVideo() {
+        // Clear the block (remove play button and thumbnail background)
+        videoBlock.innerHTML = ''; 
+        videoBlock.style.backgroundImage = 'none';
+        
+        const iframe = document.createElement('iframe');
+        // Add enablejsapi=1 for future controls, and autoplay=1 to play on load
+        iframe.src = `https://www.youtube.com/embed/${vidId}?enablejsapi=1&rel=0&modestbranding=1&autoplay=1`;
+        iframe.title = "GreenCityProject";
+        iframe.allow = "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture";
+        iframe.allowFullscreen = true;
+        
+        videoBlock.appendChild(iframe);
+      }
+      
+      playBtn.addEventListener('click', loadVideo);
+      
+      // Also allow keyboard interaction (Enter/Space) on the video block
+      videoBlock.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          loadVideo();
+        }
+      });
+
+    })();
+
+    /* ---------- Generic modal helpers ---------- */
+    // Close any open modal by clicking on the backdrop
+    document.addEventListener('click', (e) => {
+      document.querySelectorAll('.modal').forEach(m => {
+        if (m.style.display === 'flex' && e.target === m) {
+          m.style.display = 'none';
+        }
+      });
+    });
+    
+    // Close any open modal with the Escape key
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        document.querySelectorAll('.modal').forEach(m => {
+          m.style.display = 'none';
+        });
       }
     });
 
   })();
-
-  /* ---------- Generic modal helpers (updated to include new modals) ---------- */
-  document.addEventListener('click', (e) => {
-    document.querySelectorAll('.modal').forEach(m => { if (m.style.display==='flex' && e.target===m) m.style.display='none'; });
-  });
-  document.addEventListener('keydown', (e) => { 
-    if (e.key==='Escape'){
-      document.querySelectorAll('.modal').forEach(m => { m.style.display='none'; });
-    }
-  });
   </script>
 </body>
 </html>
