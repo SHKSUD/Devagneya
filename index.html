@@ -1,496 +1,1053 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Devagneya's World — GreenCityProject</title>
-  <style>
-/* --- STYLES.CSS START --- */
-/* Base */
-:root{--bg1:#aee1f9;--bg2:#fefefe}
-*{box-sizing:border-box}
-body{margin:0;overflow:hidden;background:linear-gradient(var(--bg1),var(--bg2));height:100vh;font-family:Georgia,serif;color:#222}
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Devagneya's World</title>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root {
+  --yellow:#FFD93D; --orange:#FF6B35; --pink:#FF4D8B;
+  --blue:#4ECDC4; --purple:#A855F7; --green:#6BCB77;
+  --dark:#1a1a2e; --card:rgba(255,255,255,0.08);
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:'Nunito',sans-serif;background:var(--dark);color:#fff;min-height:100vh;overflow-x:hidden;}
 
-/* Parallax layers */
-.layer{position:absolute;width:200%;height:100%;background-repeat:repeat-x;background-size:cover}
-.sky{background:linear-gradient(var(--bg1),var(--bg2));z-index:1}
-.clouds{background-image:url('clouds-layer.png');animation:moveClouds 60s linear infinite;z-index:2}
-.mountains{background-image:url('mountains-layer.png');animation:moveMountains 120s linear infinite;z-index:3}
+/* Parallax cloud layer from clouds-layer.png */
+.clouds-bg{
+  position:fixed;inset:0;
+  width:200%;height:100%;
+  background-image:url('clouds-layer.png');
+  background-repeat:repeat-x;
+  background-size:cover;
+  opacity:0.13;
+  z-index:0;
+  pointer-events:none;
+  animation:moveClouds 60s linear infinite;
+}
 @keyframes moveClouds{from{transform:translateX(0)}to{transform:translateX(-50%)}}
-@keyframes moveMountains{from{transform:translateX(0)}to{transform:translateX(-25%)}}
 
-/* Floating */
-.leaf,.lantern{position:absolute;width:80px;height:80px;background-size:contain;background-repeat:no-repeat;animation:floaty 6s ease-in-out infinite;z-index:4}
-.leaf{background-image:url('leaf.png');top:40%;left:20%}
-.lantern{background-image:url('lantern.png');top:60%;left:70%;animation-delay:2s}
-@keyframes floaty{0%{transform:translateY(0)}50%{transform:translateY(-15px)}100%{transform:translateY(0)}}
-
-/* Hero */
-.hero{position:absolute;top:16%;left:50%;transform:translateX(-50%);text-align:center;z-index:6}
-.hero-title{margin:0;font-size:3rem;letter-spacing:0.6px}
-.hero-sub{margin:6px 0 0;color:#444;font-size:1.05rem}
-/* Hero section text colors - Ghibli aesthetic */
-.hero-title {
-  color: #ffffff;
-  text-shadow: 0 2px 6px rgba(0,0,0,0.4);
-  font-family: 'Papyrus', 'Comic Sans MS', cursive, sans-serif;
+/* Subtle star dots on top of clouds */
+body::before{
+  content:'';position:fixed;inset:0;pointer-events:none;z-index:0;opacity:.25;
+  background-image:
+    radial-gradient(1px 1px at 10% 20%,white,transparent),
+    radial-gradient(1px 1px at 30% 50%,white,transparent),
+    radial-gradient(1.5px 1.5px at 50% 10%,white,transparent),
+    radial-gradient(1px 1px at 70% 70%,white,transparent),
+    radial-gradient(1px 1px at 85% 30%,white,transparent),
+    radial-gradient(1px 1px at 20% 80%,white,transparent),
+    radial-gradient(1px 1px at 60% 40%,white,transparent),
+    radial-gradient(1.5px 1.5px at 90% 60%,white,transparent),
+    radial-gradient(1px 1px at 40% 90%,white,transparent),
+    radial-gradient(1px 1px at 75% 15%,white,transparent);
 }
+.container{max-width:980px;margin:0 auto;padding:20px;position:relative;z-index:1;}
 
-.hero-sub {
-  color: #2ecc71;
-  text-shadow: 0 1px 4px rgba(0,0,0,0.3);
-  font-family: 'Papyrus', 'Comic Sans MS', cursive, sans-serif;
+/* Music toggle button — matches original site style */
+#musicToggle{
+  position:fixed;bottom:24px;right:24px;z-index:100;
+  width:50px;height:50px;border-radius:50%;
+  background:rgba(255,255,255,0.15);
+  border:2px solid rgba(255,255,255,0.3);
+  backdrop-filter:blur(10px);
+  cursor:pointer;font-size:1.4rem;
+  display:flex;align-items:center;justify-content:center;
+  transition:background .2s,transform .2s;
+  box-shadow:0 4px 20px rgba(0,0,0,0.4);
 }
+#musicToggle:hover{background:rgba(255,255,255,0.25);transform:scale(1.1);}
+#musicToggle.playing{animation:pulse 2s ease-in-out infinite;}
+@keyframes pulse{0%,100%{box-shadow:0 4px 20px rgba(168,85,247,0.4)}50%{box-shadow:0 4px 28px rgba(168,85,247,0.8)}}
 
-/* Controls */
-#musicToggle{position:absolute;top:20px;right:20px;z-index:10;padding:10px 14px;border-radius:8px;background:rgba(255,255,255,0.9);border:none;cursor:pointer}
-#projectsBtn,#carsBtn{position:absolute;top:20px;z-index:10;padding:10px 12px;border-radius:8px;background:rgba(255,255,255,0.92);border:none;cursor:pointer}
-#projectsBtn{left:20px} #carsBtn{left:140px}
+/* HEADER */
+.page-header{text-align:center;padding:36px 0 28px;}
+.page-header h1{
+  font-family:'Fredoka One',cursive;font-size:clamp(2rem,5vw,3rem);
+  background:linear-gradient(135deg,#FFD93D,#FF6B35,#FF4D8B,#A855F7,#4ECDC4);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:6px;
+}
+.page-header p{color:rgba(255,255,255,.45);font-size:.95rem;}
 
-/* Modal */
-.modal{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.45);z-index:60}
-.panel{background:#fff;padding:18px;border-radius:12px;max-width:760px;width:94%;box-shadow:0 12px 40px rgba(0,0,0,0.12);max-height:80vh;overflow:auto}
-.grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-label{display:block;margin-bottom:6px}
-input[type="text"],input[type="url"],input[type="password"],input[type="file"]{width:100%;padding:8px;border-radius:8px;border:1px solid #ddd}
-.actions{display:flex;gap:8px;margin-top:10px}
-button.small{padding:8px 10px;border-radius:8px;border:none;background:#f0f0f0;cursor:pointer}
+/* NAV */
+.nav{display:flex;gap:10px;justify-content:center;margin-bottom:32px;flex-wrap:wrap;}
+.nav-btn{
+  font-family:'Fredoka One',cursive;font-size:1rem;padding:10px 22px;
+  border:none;border-radius:50px;cursor:pointer;
+  transition:transform .2s,box-shadow .2s;letter-spacing:.4px;white-space:nowrap;
+}
+.nav-btn:hover{transform:translateY(-3px);box-shadow:0 8px 20px rgba(0,0,0,.4);}
+.nav-btn.active{transform:translateY(-3px);box-shadow:0 8px 24px rgba(0,0,0,.5);}
+.nav-btn[data-tab="planets"]{background:linear-gradient(135deg,#4ECDC4,#A855F7);color:#fff;}
+.nav-btn[data-tab="arcade"]{background:linear-gradient(135deg,#FF6B35,#FFD93D);color:var(--dark);}
+.nav-btn[data-tab="diary"]{background:linear-gradient(135deg,#FF4D8B,#A855F7);color:#fff;}
+.nav-btn[data-tab="garage"]{background:linear-gradient(135deg,#FFD93D,#FF6B35);color:var(--dark);}
+.nav-btn[data-tab="piano"]{background:linear-gradient(135deg,#A855F7,#FF4D8B);color:#fff;}
+.nav-btn[data-tab="lyrics"]{background:linear-gradient(135deg,#6BCB77,#4ECDC4);color:var(--dark);}
+.nav-btn[data-tab="praclog"]{background:linear-gradient(135deg,#FF4D8B,#FF6B35);color:#fff;}
 
-/* Project/Car list */
-.projects-list{margin-top:12px}
-.project-item{display:flex;gap:10px;align-items:center;padding:8px;border-radius:8px;background:rgba(0,0,0,0.03);margin-bottom:8px}
-.thumb{width:64px;height:48px;background:#fafafa;border-radius:6px;display:flex;align-items:center;justify-content:center;overflow:hidden}
-.thumb img{width:100%;height:100%;object-fit:cover}
-.meta{flex:1}
-.meta strong{display:block}
-.meta small{color:#666}
-.project-actions{display:flex;gap:6px}
+/* SECTIONS */
+.section{display:none;animation:fadeIn .35s ease;}
+.section.active{display:block;}
+@keyframes fadeIn{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:translateY(0)}}
+.sec-title{font-family:'Fredoka One',cursive;font-size:2.2rem;text-align:center;margin-bottom:6px;}
+.sec-sub{text-align:center;color:rgba(255,255,255,.55);font-size:.95rem;margin-bottom:28px;}
 
-/* Home video */
-.home-video{position:absolute;left:50%;top:46%;transform:translateX(-50%);width:min(88vw,960px);z-index:6}
-.video-wrapper{display:flex;flex-direction:column;gap:12px}
+/* CARDS / SHARED */
+.card{background:var(--card);border-radius:20px;border:2px solid rgba(255,255,255,.08);backdrop-filter:blur(10px);}
+.btn{font-family:'Fredoka One',cursive;font-size:.95rem;padding:9px 24px;border:none;border-radius:50px;cursor:pointer;transition:transform .15s;}
+.btn:hover{transform:scale(1.05);}
+.btn-green{background:var(--green);color:var(--dark);}
+.btn-orange{background:var(--orange);color:#fff;}
+.btn-purple{background:var(--purple);color:#fff;}
+.btn-teal{background:var(--blue);color:var(--dark);}
+.btn-yellow{background:var(--yellow);color:var(--dark);}
 
-/* MODIFIED: .video-block now holds the poster and play button */
-.video-block{
+/* FORM ROWS */
+.frow{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:10px;}
+.frow input,.frow select,.frow textarea{
+  font-family:'Nunito',sans-serif;background:rgba(255,255,255,.06);
+  border:2px solid rgba(255,255,255,.12);border-radius:12px;color:#fff;
+  padding:9px 13px;font-size:.9rem;outline:none;flex:1;min-width:130px;
+  transition:border-color .2s;
+}
+.frow input:focus,.frow select:focus,.frow textarea:focus{border-color:var(--purple);}
+.frow input::placeholder,.frow textarea::placeholder{color:rgba(255,255,255,.3);}
+.frow select option{background:#1a1a2e;}
+.frow textarea{resize:vertical;min-height:75px;}
+.form-box{background:var(--card);border:2px solid rgba(255,255,255,.1);border-radius:20px;padding:20px;margin-bottom:24px;backdrop-filter:blur(10px);}
+.form-title{font-family:'Fredoka One',cursive;font-size:1.15rem;margin-bottom:14px;}
+
+/* MODAL */
+.overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.75);z-index:200;
+  align-items:center;justify-content:center;padding:20px;backdrop-filter:blur(4px);}
+.overlay.open{display:flex;}
+.modal{background:linear-gradient(135deg,#1a1a3e,#0f3460);border-radius:24px;
+  border:2px solid rgba(255,255,255,.15);padding:32px;max-width:500px;width:100%;
+  position:relative;animation:popIn .3s cubic-bezier(.34,1.56,.64,1);}
+@keyframes popIn{from{transform:scale(.85);opacity:0}to{transform:scale(1);opacity:1}}
+.modal-close{position:absolute;top:14px;right:18px;font-size:1.4rem;background:none;border:none;color:#fff;cursor:pointer;opacity:.5;line-height:1;}
+.modal-close:hover{opacity:1;}
+
+/* EMPTY STATE */
+.empty{text-align:center;padding:44px 20px;color:rgba(255,255,255,.3);}
+.empty-ico{font-size:3rem;margin-bottom:10px;}
+
+/* ======================================
+   PLANET EXPLORER
+====================================== */
+.planet-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:18px;}
+.planet-card{
+  background:var(--card);border-radius:22px;border:2px solid rgba(255,255,255,.1);
+  padding:22px 14px;text-align:center;cursor:pointer;
+  transition:transform .2s,border-color .2s;backdrop-filter:blur(10px);
+}
+.planet-card:hover{transform:translateY(-6px);border-color:rgba(255,255,255,.3);}
+.planet-emoji{font-size:3.8rem;display:block;margin-bottom:10px;animation:float 3s ease-in-out infinite;}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+.planet-card:nth-child(2) .planet-emoji{animation-delay:.3s}
+.planet-card:nth-child(3) .planet-emoji{animation-delay:.6s}
+.planet-card:nth-child(4) .planet-emoji{animation-delay:.9s}
+.planet-card:nth-child(5) .planet-emoji{animation-delay:1.2s}
+.planet-card:nth-child(6) .planet-emoji{animation-delay:1.5s}
+.planet-card:nth-child(7) .planet-emoji{animation-delay:1.8s}
+.planet-card:nth-child(8) .planet-emoji{animation-delay:2.1s}
+.planet-name{font-family:'Fredoka One',cursive;font-size:1.25rem;margin-bottom:3px;}
+.planet-tag{font-size:.78rem;color:rgba(255,255,255,.5);}
+.fact-list{list-style:none;display:flex;flex-direction:column;gap:9px;}
+.fact-list li{background:rgba(255,255,255,.07);border-radius:10px;padding:9px 13px;font-size:.88rem;line-height:1.5;}
+.fact-lbl{font-weight:800;color:var(--yellow);margin-right:5px;}
+.modal-ico{font-size:4.5rem;display:block;text-align:center;margin-bottom:14px;}
+.modal-name{font-family:'Fredoka One',cursive;font-size:1.9rem;text-align:center;margin-bottom:18px;}
+
+/* ======================================
+   ARCADE
+====================================== */
+.game-wrap{display:flex;flex-direction:column;align-items:center;gap:16px;}
+.score-bar{
+  display:flex;gap:28px;font-family:'Fredoka One',cursive;font-size:1.25rem;
+  background:var(--card);padding:10px 28px;border-radius:50px;border:2px solid rgba(255,255,255,.1);
+}
+.score-val{color:var(--yellow);}
+#gameCanvas{border-radius:18px;border:3px solid rgba(255,255,255,.18);box-shadow:0 0 40px rgba(78,205,196,.25);display:block;max-width:100%;cursor:none;}
+.game-hint{font-size:.83rem;color:rgba(255,255,255,.45);text-align:center;}
+
+/* ======================================
+   GAMES DIARY
+====================================== */
+.games-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:14px;}
+.game-card{background:var(--card);border-radius:18px;border:2px solid rgba(255,255,255,.08);padding:18px;position:relative;backdrop-filter:blur(10px);transition:transform .2s;}
+.game-card:hover{transform:translateY(-4px);}
+.gc-genre{font-size:.72rem;font-weight:800;text-transform:uppercase;letter-spacing:1px;padding:3px 10px;border-radius:50px;display:inline-block;margin-bottom:8px;}
+.gc-name{font-family:'Fredoka One',cursive;font-size:1.2rem;margin-bottom:5px;}
+.gc-stars{font-size:1rem;margin-bottom:6px;}
+.gc-status{font-size:.72rem;font-weight:700;padding:2px 9px;border-radius:50px;display:inline-block;margin-bottom:7px;}
+.gc-review{font-size:.82rem;color:rgba(255,255,255,.55);line-height:1.5;}
+.gc-del{position:absolute;top:11px;right:13px;background:none;border:none;color:rgba(255,255,255,.2);font-size:.95rem;cursor:pointer;transition:color .2s;}
+.gc-del:hover{color:var(--pink);}
+.genre-racing{background:rgba(255,107,53,.2);color:#FF6B35;}
+.genre-action{background:rgba(255,77,139,.2);color:#FF4D8B;}
+.genre-space{background:rgba(78,205,196,.2);color:#4ECDC4;}
+.genre-puzzle{background:rgba(168,85,247,.2);color:#A855F7;}
+.genre-adventure{background:rgba(107,203,119,.2);color:#6BCB77;}
+.genre-sports{background:rgba(255,217,61,.2);color:#FFD93D;}
+.genre-other{background:rgba(255,255,255,.1);color:rgba(255,255,255,.7);}
+.status-playing{background:rgba(107,203,119,.2);color:var(--green);}
+.status-completed{background:rgba(78,205,196,.2);color:var(--blue);}
+.status-wishlist{background:rgba(255,217,61,.2);color:var(--yellow);}
+.status-dropped{background:rgba(255,77,139,.2);color:var(--pink);}
+.star-row{display:flex;gap:4px;align-items:center;margin-bottom:12px;}
+.star-row span{font-family:'Fredoka One',cursive;margin-right:7px;color:rgba(255,255,255,.55);font-size:.88rem;}
+.star-btn{font-size:1.35rem;background:none;border:none;cursor:pointer;opacity:.3;transition:opacity .15s,transform .15s;}
+.star-btn.lit{opacity:1;transform:scale(1.15);}
+
+/* ======================================
+   DREAM GARAGE
+====================================== */
+.gtabs{display:flex;gap:10px;justify-content:center;margin-bottom:26px;flex-wrap:wrap;}
+.gtab{
+  font-family:'Fredoka One',cursive;font-size:.95rem;padding:8px 20px;border-radius:50px;
+  border:2px solid rgba(255,255,255,.15);background:transparent;color:rgba(255,255,255,.55);cursor:pointer;transition:all .2s;
+}
+.gtab.active,.gtab:hover{background:rgba(255,217,61,.12);border-color:var(--yellow);color:var(--yellow);}
+.cars-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:18px;}
+.car-card{background:var(--card);border-radius:22px;border:2px solid rgba(255,255,255,.08);overflow:hidden;cursor:default;transition:transform .2s,border-color .2s;backdrop-filter:blur(10px);}
+.car-card:hover{transform:translateY(-5px);border-color:rgba(255,217,61,.35);}
+.car-banner{height:96px;display:flex;align-items:center;justify-content:center;font-size:4rem;position:relative;}
+.car-banner::after{content:'';position:absolute;inset:0;background:linear-gradient(to bottom,transparent 40%,rgba(0,0,0,.5));}
+.car-body{padding:15px 17px 17px;}
+.car-make{font-size:.7rem;font-weight:800;text-transform:uppercase;letter-spacing:1.5px;color:var(--yellow);margin-bottom:2px;}
+.car-name{font-family:'Fredoka One',cursive;font-size:1.2rem;margin-bottom:9px;}
+.car-stats{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:9px;}
+.car-stat{font-size:.75rem;padding:2px 9px;border-radius:50px;background:rgba(255,255,255,.08);color:rgba(255,255,255,.65);}
+.car-note{font-size:.8rem;color:rgba(255,255,255,.48);font-style:italic;line-height:1.45;}
+.spd-lbl{font-size:.68rem;color:rgba(255,255,255,.38);margin:6px 0 3px;}
+.spd-bg{background:rgba(255,255,255,.08);border-radius:50px;height:5px;overflow:hidden;}
+.spd-fill{height:100%;border-radius:50px;background:linear-gradient(90deg,#FFD93D,#FF6B35);transition:width .8s ease;width:0%;}
+.car-del{float:right;background:none;border:none;color:rgba(255,255,255,.18);font-size:.85rem;cursor:pointer;transition:color .2s;margin-left:6px;}
+.car-del:hover{color:var(--pink);}
+
+/* ======================================
+   PIANO
+====================================== */
+.piano-wrap{display:flex;flex-direction:column;align-items:center;gap:18px;}
+.piano-info{display:flex;gap:16px;flex-wrap:wrap;justify-content:center;font-family:'Fredoka One',cursive;font-size:1.05rem;}
+.piano-info span{background:var(--card);padding:7px 18px;border-radius:50px;border:2px solid rgba(255,255,255,.1);}
+.piano-info .hi{color:var(--purple);}
+/* The keyboard container — white keys laid out, black keys absolutely positioned */
+.keyboard-outer{overflow-x:auto;overflow-y:visible;padding-bottom:4px;width:100%;display:flex;justify-content:center;}
+.keyboard{
   position:relative;
-  padding-bottom:56.25%; /* 16:9 aspect ratio */
-  height:0;
-  overflow:hidden;
-  border-radius:12px;
-  box-shadow:0 10px 30px rgba(0,0,0,0.12);
-  background:#000;
-  background-size: cover;
-  background-position: center;
+  display:flex;
+  background:linear-gradient(180deg,#2a1a4a,#1a0a2e);
+  border-radius:0 0 14px 14px;
+  border:3px solid rgba(168,85,247,.4);
+  box-shadow:0 8px 36px rgba(168,85,247,.3);
+  padding:0 6px 6px;
+  user-select:none;
+  touch-action:none;
+  flex-shrink:0;
 }
-/* This holds the iframe *after* it's loaded */
-.video-block iframe{position:absolute;top:0;left:0;width:100%;height:100%;border:0;border-radius:12px}
+.wkey{
+  width:44px;height:154px;
+  background:linear-gradient(180deg,#f0e8ff,#fff);
+  border:1px solid #c0a8e0;
+  border-radius:0 0 9px 9px;
+  cursor:pointer;
+  display:flex;align-items:flex-end;justify-content:center;
+  padding-bottom:7px;
+  font-family:'Fredoka One',cursive;font-size:.68rem;color:#8060b0;
+  box-shadow:0 3px 6px rgba(0,0,0,.3);
+  transition:background .06s,transform .06s;
+  flex-shrink:0;
+  -webkit-tap-highlight-color:transparent;
+}
+.wkey:hover,.wkey.pressed{background:linear-gradient(180deg,#d8b8ff,#c8a0ff);transform:translateY(2px);}
+.bkey{
+  position:absolute;
+  width:28px;height:94px;
+  background:linear-gradient(180deg,#2a0840,#110020);
+  border-radius:0 0 7px 7px;
+  cursor:pointer;
+  display:flex;align-items:flex-end;justify-content:center;
+  padding-bottom:5px;
+  font-family:'Fredoka One',cursive;font-size:.58rem;color:rgba(200,150,255,.6);
+  box-shadow:0 5px 10px rgba(0,0,0,.6);
+  border:1px solid rgba(168,85,247,.25);
+  z-index:2;
+  top:0;
+  transition:background .06s,transform .06s;
+  -webkit-tap-highlight-color:transparent;
+}
+.bkey:hover,.bkey.pressed{background:linear-gradient(180deg,#5520a0,#330060);transform:translateY(2px);}
+.chord-row{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;}
+.chord-btn{
+  font-family:'Fredoka One',cursive;font-size:.88rem;padding:7px 16px;border-radius:50px;
+  border:2px solid rgba(168,85,247,.3);background:rgba(168,85,247,.1);color:var(--purple);
+  cursor:pointer;transition:all .15s;
+}
+.chord-btn:hover{background:rgba(168,85,247,.25);border-color:var(--purple);transform:scale(1.05);}
+.piano-hint{font-size:.8rem;color:rgba(255,255,255,.38);text-align:center;max-width:500px;}
+.note-pop{position:fixed;pointer-events:none;font-size:1.5rem;animation:noteFly 1.1s ease-out forwards;z-index:999;}
+@keyframes noteFly{0%{opacity:1;transform:translateY(0) scale(1)}100%{opacity:0;transform:translateY(-70px) scale(1.4)}}
 
-/* NEW: Play button styled to be large and centered */
-#videoPlayBtn {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  z-index: 10;
-  background: rgba(0, 0, 0, 0.5);
-  border: 2px solid white;
-  border-radius: 50%;
-  width: 70px;
-  height: 70px;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: all 0.2s ease;
+/* ======================================
+   SONG JOURNAL
+====================================== */
+.lyrics-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:14px;}
+.lyric-card{
+  background:var(--card);border-radius:18px;border:2px solid rgba(255,255,255,.08);
+  padding:18px;backdrop-filter:blur(10px);transition:transform .2s;cursor:pointer;position:relative;
 }
-#videoPlayBtn:hover {
-  background: rgba(0, 0, 0, 0.7);
-  transform: translate(-50%, -50%) scale(1.1);
-}
-/* SVG play icon */
-#videoPlayBtn svg {
-  width: 30px;
-  height: 30px;
-  fill: white;
-  margin-left: 5px; /* Optical centering */
-}
-/* REMOVED: .video-controls are no longer needed */
-.video-controls { display: none; }
-/* REMOVED: .video-fallback is no longer needed */
-.video-fallback { display: none; }
+.lyric-card:hover{transform:translateY(-4px);border-color:rgba(107,203,119,.3);}
+.lc-title{font-family:'Fredoka One',cursive;font-size:1.15rem;margin-bottom:3px;}
+.lc-artist{font-size:.78rem;color:var(--blue);font-weight:700;margin-bottom:9px;}
+.lc-status{font-size:.7rem;font-weight:800;text-transform:uppercase;letter-spacing:1px;padding:2px 9px;border-radius:50px;display:inline-block;margin-bottom:9px;}
+.ls-learning{background:rgba(255,217,61,.2);color:var(--yellow);}
+.ls-know{background:rgba(107,203,119,.2);color:var(--green);}
+.ls-love{background:rgba(255,77,139,.2);color:var(--pink);}
+.lc-preview{font-size:.8rem;color:rgba(255,255,255,.42);font-style:italic;line-height:1.5;white-space:pre-wrap;}
+.lc-del{position:absolute;top:11px;right:13px;background:none;border:none;color:rgba(255,255,255,.2);font-size:.95rem;cursor:pointer;transition:color .2s;}
+.lc-del:hover{color:var(--pink);}
+.lm-title{font-family:'Fredoka One',cursive;font-size:1.75rem;margin-bottom:3px;}
+.lm-artist{color:var(--blue);font-weight:700;margin-bottom:16px;font-size:.9rem;}
+.lm-body{font-size:.92rem;white-space:pre-wrap;line-height:1.85;color:rgba(255,255,255,.83);max-height:340px;overflow-y:auto;}
+.lm-body::-webkit-scrollbar{width:4px;}
+.lm-body::-webkit-scrollbar-thumb{background:rgba(255,255,255,.2);border-radius:4px;}
 
-/* Lightbox tweaks */
-.car-link{color:#222;text-decoration:underline;font-size:0.95rem;display:inline-block;margin-top:8px}
-
-/* Responsive */
-@media (max-width:640px){
-  .grid{grid-template-columns:1fr}
-  .hero-title{font-size:2.4rem}
-  .home-video{width:94vw;top:52%}
+/* ======================================
+   PRACTICE LOG
+====================================== */
+.pstats{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:12px;margin-bottom:24px;}
+.pstat{background:var(--card);border-radius:16px;border:2px solid rgba(255,255,255,.08);padding:16px 14px;text-align:center;backdrop-filter:blur(10px);}
+.pstat-val{font-family:'Fredoka One',cursive;font-size:1.9rem;margin-bottom:3px;}
+.pstat-lbl{font-size:.75rem;color:rgba(255,255,255,.48);}
+.streak-bar{display:flex;gap:5px;flex-wrap:wrap;margin-bottom:22px;}
+.sday{width:28px;height:28px;border-radius:7px;font-size:.63rem;font-weight:800;display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,.38);}
+.sday.done{background:linear-gradient(135deg,#FF4D8B,#A855F7);color:#fff;}
+.sday.none{background:rgba(255,255,255,.07);}
+.plog-list{display:flex;flex-direction:column;gap:10px;}
+.plog-entry{
+  background:var(--card);border-radius:14px;border:2px solid rgba(255,255,255,.07);
+  padding:14px 16px;display:flex;gap:12px;align-items:center;backdrop-filter:blur(10px);
 }
-/* --- STYLES.CSS END --- */
-  </style>
+.pl-icon{font-size:1.9rem;flex-shrink:0;}
+.pl-info{flex:1;min-width:0;}
+.pl-title{font-family:'Fredoka One',cursive;font-size:1rem;margin-bottom:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.pl-meta{font-size:.75rem;color:rgba(255,255,255,.42);}
+.pl-mins{font-family:'Fredoka One',cursive;font-size:1.25rem;color:var(--pink);flex-shrink:0;}
+.pl-del{background:none;border:none;color:rgba(255,255,255,.15);font-size:.88rem;cursor:pointer;transition:color .2s;margin-left:6px;flex-shrink:0;}
+.pl-del:hover{color:var(--pink);}
+</style>
 </head>
 <body>
-  <!-- Parallax layers -->
-  <div class="layer sky" aria-hidden="true"></div>
-  <div class="layer clouds" aria-hidden="true"></div>
-  <div class="layer mountains" aria-hidden="true"></div>
 
-  <!-- Floating foreground -->
-  <div class="leaf" aria-hidden="true"></div>
-  <div class="lantern" aria-hidden="true"></div>
+<!-- Parallax cloud background (clouds-layer.png from original site) -->
+<div class="clouds-bg" aria-hidden="true"></div>
 
-<header class="hero">
-  <h1 class="hero-title">Devagneya's World</h1>
-  <p class="hero-sub">Featured — GreenCityProject</p>
-</header>
+<!-- Background music (Moonlight.mp3 from original site) -->
+<audio id="bgMusic" src="Moonlight.mp3" loop preload="none"></audio>
+<button id="musicToggle" title="Toggle music" aria-label="Toggle background music">🎵</button>
 
-  <!-- Home video block with robust fallback -->
-  <section class="home-video" aria-label="GreenCityProject featured video">
-    <div id="videoWrapper" class="video-wrapper">
-      
-      <!-- MODIFIED: Video block now contains the play button. The iframe will be added here by JS -->
-      <div id="videoBlock" class="video-block" role="button" tabindex="0" aria-label="Play GreenCityProject video">
-        
-        <!-- NEW: Large, centered play button -->
-        <button id="videoPlayBtn" aria-label="Play video">
-          <svg viewBox="0 0 100 100">
-            <polygon points="30,20 80,50 30,80"></polygon>
-          </svg>
-        </button>
+<div class="container">
 
-      </div>
+  <div class="page-header">
+    <h1>🌟 Devagneya's World</h1>
+    <p>Explore • Play • Create • Learn</p>
+  </div>
 
-      <!-- REMOVED: Fallback card is no longer needed -->
-      <!-- REMOVED: Old video controls are no longer needed -->
-    </div>
+  <nav class="nav">
+    <button class="nav-btn active" data-tab="planets">🪐 Planets</button>
+    <button class="nav-btn" data-tab="arcade">🕹️ Arcade</button>
+    <button class="nav-btn" data-tab="diary">🎮 Games</button>
+    <button class="nav-btn" data-tab="garage">🚗 Garage</button>
+    <button class="nav-btn" data-tab="piano">🎹 Piano</button>
+    <button class="nav-btn" data-tab="lyrics">🎵 Songs</button>
+    <button class="nav-btn" data-tab="praclog">🎤 Practice</button>
+  </nav>
 
+  <!-- PLANET EXPLORER -->
+  <section id="planets-section" class="section active">
+    <div class="sec-title">🪐 Planet Explorer</div>
+    <div class="sec-sub">Tap any planet to discover amazing facts!</div>
+    <div class="planet-grid" id="planetGrid"></div>
   </section>
 
-  <!-- Top controls -->
-  <button id="musicToggle" aria-pressed="false">🔈 Music On</button>
-  <button id="projectsBtn" aria-haspopup="dialog" aria-controls="projectsModal">📁 Projects</button>
-  <button id="carsBtn" aria-haspopup="dialog" aria-controls="carsModal">🚗 Fav Cars</button>
-
-  <!-- Background music -->
-  <audio id="bgMusic" src="Moonlight.mp3" loop preload="auto"></audio>
-
-  <!-- Projects Modal (parent gated) -->
-  <div id="projectsModal" class="modal" style="display:none" role="dialog" aria-modal="true" aria-labelledby="projectsTitle">
-    <div class="panel" role="document">
-      <h3 id="projectsTitle">Projects (Parent access)</h3>
-      <div id="pinGate">
-        <label for="parentPin">Parent PIN</label>
-        <input id="parentPin" type="password" inputmode="numeric" aria-label="Parent PIN" />
-        <div class="actions">
-          <button id="pinSubmit" class="small">Unlock</button>
-          <button id="pinClose" class="small">Close</button>
-        </div>
-      </div>
-      <div id="projectsContent" style="display:none">
-        <p>Upload image or PDF, or paste a project link. Saved locally in this browser only.</p>
-        <div class="grid">
-          <div>
-            <label for="fileInput">Upload file</label>
-            <input id="fileInput" type="file" accept="image/*,application/pdf" />
-          </div>
-          <div>
-            <label for="linkInput">Project link</label>
-            <input id="linkInput" type="url" placeholder="https://example.com" />
-          </div>
-        </div>
-        <div class="actions">
-          <button id="saveFile" class="small">Save File</button>
-          <button id="saveLink" class="small">Save Link</button>
-          <button id="closePanel" class="small">Done</button>
-        </div>
-        <div id="projectsList" class="projects-list" aria-live="polite"></div>
-      </div>
+  <!-- Planet modal -->
+  <div class="overlay" id="planetModal">
+    <div class="modal">
+      <button class="modal-close" id="pmClose">✕</button>
+      <span class="modal-ico" id="pmEmoji"></span>
+      <div class="modal-name" id="pmName"></div>
+      <ul class="fact-list" id="pmFacts"></ul>
     </div>
   </div>
 
-  <!-- Fav Cars Modal (parent gated) -->
-  <div id="carsModal" class="modal" style="display:none" role="dialog" aria-modal="true" aria-labelledby="carsTitle">
-    <div class="panel" role="document">
-      <h3 id="carsTitle">Fav Cars (Parent access)</h3>
-      <div id="carsPinGate">
-        <label for="carsPin">Parent PIN</label>
-        <input id="carsPin" type="password" inputmode="numeric" aria-label="Parent PIN for cars" />
-        <div class="actions">
-          <button id="carsPinSubmit" class="small">Unlock</button>
-          <button id="carsPinClose" class="small">Close</button>
+  <!-- ARCADE -->
+  <section id="arcade-section" class="section">
+    <div class="sec-title">🕹️ Asteroid Dodge</div>
+    <div class="sec-sub">Move your rocket and dodge the asteroids. How long can you survive?</div>
+    <div class="game-wrap">
+      <div class="score-bar">
+        <span>⏱ Time: <span class="score-val" id="gameTime">0</span>s</span>
+        <span>🏆 Best: <span class="score-val" id="bestTime">0</span>s</span>
+      </div>
+      <canvas id="gameCanvas" width="560" height="370"></canvas>
+      <div style="display:flex;gap:12px;flex-wrap:wrap;justify-content:center;">
+        <button class="btn btn-green" id="startBtn">🚀 Start Game</button>
+        <button class="btn btn-orange" id="resetBtn">🔄 Reset</button>
+      </div>
+      <div class="game-hint">Move mouse (or finger on mobile) to dodge the asteroids!</div>
+    </div>
+  </section>
+
+  <!-- GAMES DIARY -->
+  <section id="diary-section" class="section">
+    <div class="sec-title">🎮 Games Diary</div>
+    <div class="sec-sub">Track every game you've played, are playing, or want to play!</div>
+    <div class="form-box">
+      <div class="form-title" style="color:var(--pink)">+ Add a Game</div>
+      <div class="frow">
+        <input type="text" id="gameName" placeholder="Game name">
+        <select id="gameGenre">
+          <option value="racing">🚗 Racing</option>
+          <option value="action">⚔️ Action</option>
+          <option value="space">🚀 Space</option>
+          <option value="puzzle">🧩 Puzzle</option>
+          <option value="adventure">🗺️ Adventure</option>
+          <option value="sports">⚽ Sports</option>
+          <option value="other">🎲 Other</option>
+        </select>
+        <select id="gameStatus">
+          <option value="playing">▶️ Playing</option>
+          <option value="completed">✅ Completed</option>
+          <option value="wishlist">⭐ Wishlist</option>
+          <option value="dropped">❌ Dropped</option>
+        </select>
+      </div>
+      <div class="star-row">
+        <span>Rating:</span>
+        <button class="star-btn" data-s="1">⭐</button>
+        <button class="star-btn" data-s="2">⭐</button>
+        <button class="star-btn" data-s="3">⭐</button>
+        <button class="star-btn" data-s="4">⭐</button>
+        <button class="star-btn" data-s="5">⭐</button>
+      </div>
+      <div class="frow"><textarea id="gameReview" placeholder="My thoughts..."></textarea></div>
+      <button class="btn btn-green" id="addGameBtn">✚ Add Game</button>
+    </div>
+    <div class="games-grid" id="gamesGrid"></div>
+    <div class="empty" id="gamesEmpty" style="display:none"><div class="empty-ico">🎮</div>No games yet! Add one above.</div>
+  </section>
+
+  <!-- DREAM GARAGE -->
+  <section id="garage-section" class="section">
+    <div class="sec-title">🚗 Dream Garage</div>
+    <div class="sec-sub">Legendary hypercars + your own personal favourites!</div>
+    <div class="gtabs">
+      <button class="gtab active" data-gtab="iconic">⚡ Iconic Cars</button>
+      <button class="gtab" data-gtab="mine">❤️ My Favourites</button>
+    </div>
+    <div class="cars-grid" id="iconicGrid"></div>
+    <div id="mineCarsWrap" style="display:none">
+      <div class="form-box">
+        <div class="form-title" style="color:var(--yellow)">+ Add to My Garage</div>
+        <div class="frow">
+          <input type="text" id="carName" placeholder="Car name (e.g. Ferrari F40)">
+          <input type="text" id="carMake" placeholder="Brand">
+          <input type="text" id="carSpeed" placeholder="Top speed">
         </div>
-      </div>
-      <div id="carsContent" style="display:none">
-        <p>Add car: image, name, note, optional link. Saved locally.</p>
-        <div class="grid">
-          <div><label for="carFile">Car image</label><input id="carFile" type="file" accept="image/*" /></div>
-          <div><label for="carName">Name</label><input id="carName" type="text" /></div>
-          <div><label for="carNote">Note</label><input id="carNote" type="text" /></div>
-          <div><label for="carLink">Link</label><input id="carLink" type="url" /></div>
+        <div class="frow">
+          <input type="text" id="carNote" placeholder="Why do you love this car?">
+          <select id="carEmoji">
+            <option value="🏎️">🏎️ Race Car</option>
+            <option value="🚗">🚗 Red Car</option>
+            <option value="🚙">🚙 SUV</option>
+            <option value="⚡">⚡ Electric</option>
+            <option value="🔥">🔥 Hot Rod</option>
+            <option value="💛">💛 Yellow</option>
+            <option value="🖤">🖤 Black</option>
+            <option value="🤍">🤍 White</option>
+          </select>
         </div>
-        <div class="actions">
-          <button id="saveCar" class="small">Save Car</button>
-          <button id="doneCars" class="small">Done</button>
-        </div>
-        <div id="carsList" class="projects-list" aria-live="polite"></div>
+        <button class="btn btn-yellow" id="addCarBtn">✚ Add Car</button>
+      </div>
+      <div class="cars-grid" id="myCarsGrid"></div>
+      <div class="empty" id="garageEmpty"><div class="empty-ico">🏁</div>Your garage is empty! Add a car above.</div>
+    </div>
+  </section>
+
+  <!-- PIANO -->
+  <section id="piano-section" class="section">
+    <div class="sec-title">🎹 Play-Along Piano</div>
+    <div class="sec-sub">Click keys, tap on mobile, or use keyboard shortcuts to play!</div>
+    <div class="piano-wrap">
+      <div class="piano-info">
+        <span>🎵 Playing: <span class="hi" id="pianoNote">—</span></span>
+        <span>🎼 Chord: <span class="hi" id="pianoChord">—</span></span>
+      </div>
+      <div class="keyboard-outer">
+        <div class="keyboard" id="keyboard"></div>
+      </div>
+      <div class="chord-row" id="chordRow"></div>
+      <div class="piano-hint">
+        Keyboard: <strong>A S D F G H J K L</strong> = white keys &nbsp;|&nbsp; <strong>W E T Y U</strong> = black keys
       </div>
     </div>
-  </div>
+  </section>
 
-  <!-- Car Lightbox -->
-  <div id="carLightbox" class="modal" style="display:none" role="dialog" aria-modal="true">
-    <div class="panel" style="max-width:820px">
-      <button id="closeLightbox" class="small" style="float:right">Close</button>
-      <div id="lightboxContent" style="text-align:center"></div>
-    </div>
-  </div>
-
-  <!-- Message Modal -->
-  <div id="messageModal" class="modal" style="display:none" role="alertdialog" aria-modal="true" aria-labelledby="messageTitle">
-    <div class="panel" style="max-width:400px; text-align:center;">
-      <h4 id="messageTitle" style="margin-top:0">Notice</h4>
-      <p id="messageText"></p>
-      <div id="messageActions" class="actions" style="justify-content:center">
-        <button id="messageOK" class="small">OK</button>
+  <!-- SONG JOURNAL -->
+  <section id="lyrics-section" class="section">
+    <div class="sec-title">🎵 Song Journal</div>
+    <div class="sec-sub">Songs you love, songs you're learning — keep them all here!</div>
+    <div class="form-box">
+      <div class="form-title" style="color:var(--green)">+ Add a Song</div>
+      <div class="frow">
+        <input type="text" id="lyricTitle" placeholder="Song title">
+        <input type="text" id="lyricArtist" placeholder="Artist / Band">
+        <select id="lyricStatus">
+          <option value="learning">📖 Learning</option>
+          <option value="know">✅ Know It!</option>
+          <option value="love">❤️ All-time Fave</option>
+        </select>
       </div>
+      <div class="frow"><textarea id="lyricText" placeholder="Paste favourite lines or the full lyrics here..."></textarea></div>
+      <button class="btn btn-teal" id="addLyricBtn">✚ Add Song</button>
+    </div>
+    <div class="lyrics-grid" id="lyricsGrid"></div>
+    <div class="empty" id="lyricsEmpty" style="display:none"><div class="empty-ico">🎤</div>No songs yet! Add your first one above.</div>
+  </section>
+
+  <!-- Lyric expand modal -->
+  <div class="overlay" id="lyricModal">
+    <div class="modal" style="max-width:540px">
+      <button class="modal-close" id="lmClose">✕</button>
+      <div class="lm-title" id="lmTitle"></div>
+      <div class="lm-artist" id="lmArtist"></div>
+      <div class="lm-body" id="lmBody"></div>
     </div>
   </div>
 
-  <!-- Confirmation Modal -->
-  <div id="confirmModal" class="modal" style="display:none" role="dialog" aria-modal="true" aria-labelledby="confirmTitle">
-    <div class="panel" style="max-width:400px; text-align:center;">
-      <h4 id="confirmTitle" style="margin-top:0">Confirm Action</h4>
-      <p id="confirmText"></p>
-      <div id="confirmActions" class="actions" style="justify-content:center">
-        <button id="confirmYes" class="small" style="background-color:#c0392b; color:white;">Yes, Delete</button>
-        <button id="confirmNo" class="small">Cancel</button>
+  <!-- PRACTICE LOG -->
+  <section id="praclog-section" class="section">
+    <div class="sec-title">🎤 Practice Log</div>
+    <div class="sec-sub">Track every session. Watch yourself get better!</div>
+    <div class="pstats">
+      <div class="pstat"><div class="pstat-val" id="stTotal">0</div><div class="pstat-lbl">Total Sessions</div></div>
+      <div class="pstat"><div class="pstat-val" id="stMins">0</div><div class="pstat-lbl">Total Minutes</div></div>
+      <div class="pstat"><div class="pstat-val" id="stStreak">0🔥</div><div class="pstat-lbl">Day Streak</div></div>
+      <div class="pstat"><div class="pstat-val" id="stBest">0</div><div class="pstat-lbl">Best Session (min)</div></div>
+    </div>
+    <div style="font-family:'Fredoka One',cursive;font-size:.95rem;color:rgba(255,255,255,.45);margin-bottom:7px;">Last 14 days</div>
+    <div class="streak-bar" id="streakBar"></div>
+    <div class="form-box">
+      <div class="form-title" style="color:var(--pink)">+ Log a Session</div>
+      <div class="frow">
+        <select id="plogType">
+          <option value="🎹">🎹 Piano</option>
+          <option value="🎤">🎤 Singing</option>
+          <option value="🎹🎤">🎹🎤 Both</option>
+        </select>
+        <input type="text" id="plogWhat" placeholder="What did you practise?">
+        <input type="number" id="plogMins" placeholder="Minutes" min="1" style="max-width:100px">
       </div>
+      <div class="frow"><input type="text" id="plogMood" placeholder="How did it feel? 😊"></div>
+      <button class="btn btn-purple" id="addPlogBtn">✚ Log Session</button>
     </div>
-  </div>
+    <div class="plog-list" id="plogList"></div>
+    <div class="empty" id="plogEmpty" style="display:none"><div class="empty-ico">🎼</div>No sessions yet. Start practising!</div>
+  </section>
 
-  <!-- Inline JS: focused, minimal -->
-  <script>
-  /* ---------- Music fade ---------- */
-  const bg = document.getElementById('bgMusic');
-  const musicBtn = document.getElementById('musicToggle');
-  let musicPlaying = false, fadeTimer;
-  function fadeVolume(from,to,ms,cb){ clearInterval(fadeTimer); const steps=20, step=ms/steps; let i=0; bg.volume=Math.max(0,Math.min(1,from)); fadeTimer=setInterval(()=>{ i++; bg.volume = from + (to-from)*(i/steps); if(i>=steps){ clearInterval(fadeTimer); if(cb) cb(); } }, step); }
-  document.body.addEventListener('click', function once(){ document.body.removeEventListener('click', once); bg.volume=0; bg.play().catch(()=>{}); fadeVolume(0,0.35,1200); musicPlaying=true; musicBtn.textContent='🔈 Music On'; musicBtn.setAttribute('aria-pressed','true'); }, {once:true});
-  musicBtn.addEventListener('click', ()=>{ if(musicPlaying){ fadeVolume(bg.volume,0,800,()=>bg.pause()); musicBtn.textContent='🔇 Music Off'; musicBtn.setAttribute('aria-pressed','false'); } else { bg.currentTime = bg.currentTime || 0; bg.play().catch(()=>{}); fadeVolume(0,0.35,1000); musicBtn.textContent='🔈 Music On'; musicBtn.setAttribute('aria-pressed','true'); } musicPlaying = !musicPlaying; });
+</div><!-- end .container -->
 
-  /* ---------- Custom Modals (Replacing alert/confirm) ---------- */
-  const messageModal = document.getElementById('messageModal');
-  const messageText = document.getElementById('messageText');
-  const messageOK = document.getElementById('messageOK');
-
-  function showMessage(title, message) {
-    document.getElementById('messageTitle').textContent = title;
-    messageText.textContent = message;
-    messageModal.style.display = 'flex';
-    messageOK.onclick = () => messageModal.style.display = 'none';
-  }
-
-  const confirmModal = document.getElementById('confirmModal');
-  const confirmText = document.getElementById('confirmText');
-  const confirmYes = document.getElementById('confirmYes');
-  const confirmNo = document.getElementById('confirmNo');
-  let confirmCallback = null;
-
-  function showConfirm(message, callback) {
-    confirmText.textContent = message;
-    confirmCallback = callback;
-    confirmModal.style.display = 'flex';
-  }
-
-  confirmYes.addEventListener('click', () => {
-    confirmModal.style.display = 'none';
-    if (confirmCallback) confirmCallback(true);
+<script>
+// ===================== NAV =====================
+const navBtns = document.querySelectorAll('.nav-btn');
+const sections = document.querySelectorAll('.section');
+navBtns.forEach(btn => {
+  btn.addEventListener('click', () => {
+    navBtns.forEach(b => b.classList.remove('active'));
+    sections.forEach(s => s.classList.remove('active'));
+    btn.classList.add('active');
+    const sec = document.getElementById(btn.dataset.tab + '-section');
+    if (sec) sec.classList.add('active');
+    if (btn.dataset.tab === 'garage') setTimeout(animateSpeedBars, 300);
+    if (btn.dataset.tab === 'praclog') renderPlog();
   });
+});
 
-  confirmNo.addEventListener('click', () => {
-    confirmModal.style.display = 'none';
-    if (confirmCallback) confirmCallback(false);
+// ===================== PLANETS =====================
+const planets = [
+  { name:'Mercury', emoji:'⚫', tag:'Closest to the Sun',
+    facts:[{l:'🌡️ Temp',v:'430°C day, -180°C night — extreme!'},{l:'📅 Year',v:'Only 88 Earth days — it zooms!'},{l:'🌙 Moons',v:'None at all!'},{l:'🔭 Fact',v:'Venus is actually hotter despite being further away!'}]},
+  { name:'Venus', emoji:'🟡', tag:"Earth's evil twin",
+    facts:[{l:'🌡️ Temp',v:'465°C — hot enough to melt lead!'},{l:'🔄 Spin',v:'Venus spins backwards!'},{l:'📅 Day',v:'A Venus day is longer than its whole year!'},{l:'🔭 Fact',v:'It rains sulphuric acid on Venus!'}]},
+  { name:'Earth', emoji:'🌍', tag:'Our home!',
+    facts:[{l:'💧 Water',v:'71% of the surface is ocean.'},{l:'🌙 Moons',v:'1 moon — causes our tides.'},{l:'🛡️ Shield',v:'Magnetic field protects us from solar wind.'},{l:'🔭 Fact',v:'Earth is the densest planet in the solar system!'}]},
+  { name:'Mars', emoji:'🔴', tag:'The Red Planet',
+    facts:[{l:'🏔️ Mountain',v:'Olympus Mons is 3× taller than Everest!'},{l:'🌙 Moons',v:'2 tiny moons: Phobos and Deimos.'},{l:'🌡️ Temp',v:'Average -60°C — cold and dusty.'},{l:'🔭 Fact',v:'A Martian day is just 37 mins longer than ours.'}]},
+  { name:'Jupiter', emoji:'🟠', tag:'King of planets',
+    facts:[{l:'📏 Size',v:'1,300 Earths could fit inside!'},{l:'🌀 Storm',v:'The Great Red Spot is bigger than Earth and 350+ years old.'},{l:'🌙 Moons',v:'95+ moons — Europa may have life!'},{l:'🔭 Fact',v:'Jupiter acts as a comet shield for Earth!'}]},
+  { name:'Saturn', emoji:'🪐', tag:'The Ringed Wonder',
+    facts:[{l:'💍 Rings',v:'Made of ice & rock, 282,000 km wide!'},{l:'🌊 Density',v:'Saturn could float on water!'},{l:'🌙 Moons',v:'146 moons — Titan has a thick atmosphere.'},{l:'🔭 Fact',v:'Winds reach 1,800 km/h — fastest in the solar system!'}]},
+  { name:'Uranus', emoji:'🔵', tag:'The Tilted Giant',
+    facts:[{l:'🔄 Tilt',v:"Rotates on its side — basically rolling!"},{l:'🌡️ Temp',v:'Coldest atmosphere: -224°C.'},{l:'🌙 Moons',v:'28 moons, all named after Shakespeare characters!'},{l:'🔭 Fact',v:'Uranus has 13 dark, hard-to-see rings.'}]},
+  { name:'Neptune', emoji:'🔷', tag:'The Windy World',
+    facts:[{l:'💨 Wind',v:'2,100 km/h — fastest in the solar system!'},{l:'📅 Year',v:'1 Neptune year = 165 Earth years.'},{l:'🌙 Moons',v:'16 moons. Triton orbits backwards!'},{l:'🔭 Fact',v:"It rains diamonds inside Neptune's atmosphere!"}]},
+];
+
+const planetGrid = document.getElementById('planetGrid');
+planets.forEach(p => {
+  const c = document.createElement('div');
+  c.className = 'planet-card';
+  c.innerHTML = `<span class="planet-emoji">${p.emoji}</span><div class="planet-name">${p.name}</div><div class="planet-tag">${p.tag}</div>`;
+  c.addEventListener('click', () => {
+    document.getElementById('pmEmoji').textContent = p.emoji;
+    document.getElementById('pmName').textContent = p.name;
+    document.getElementById('pmFacts').innerHTML = p.facts.map(f=>`<li><span class="fact-lbl">${f.l}:</span>${f.v}</li>`).join('');
+    document.getElementById('planetModal').classList.add('open');
   });
+  planetGrid.appendChild(c);
+});
+document.getElementById('pmClose').addEventListener('click', () => document.getElementById('planetModal').classList.remove('open'));
+document.getElementById('planetModal').addEventListener('click', e => { if(e.target===document.getElementById('planetModal')) document.getElementById('planetModal').classList.remove('open'); });
 
-  /* ---------- Projects (lightweight local) ---------- */
-  (function(){
-    const PIN='1234';
-    const projectsBtn=document.getElementById('projectsBtn');
-    const projectsModal=document.getElementById('projectsModal');
-    const pinGate=document.getElementById('pinGate');
-    const projectsContent=document.getElementById('projectsContent');
-    const parentPinInput=document.getElementById('parentPin');
-    const saveFileBtn=document.getElementById('saveFile');
-    const saveLinkBtn=document.getElementById('saveLink');
-    const closePanel=document.getElementById('closePanel');
-    const fileInput=document.getElementById('fileInput');
-    const linkInput=document.getElementById('linkInput');
-    const projectsList=document.getElementById('projectsList');
+// ===================== ARCADE =====================
+const canvas = document.getElementById('gameCanvas');
+const ctx = canvas.getContext('2d');
+let gameRunning=false, rocketX=280, rocketY=300, asteroids=[], score=0, bestScore=0;
+let animId, scoreInt, lastNow=0, mouseX=280, mouseY=300;
 
-    function open(){ projectsModal.style.display='flex'; parentPinInput.focus(); }
-    function close(){ projectsModal.style.display='none'; }
-    projectsBtn.addEventListener('click', open);
-    document.getElementById('pinClose').addEventListener('click', close);
-    closePanel.addEventListener('click', close);
+canvas.addEventListener('mousemove', e => { const r=canvas.getBoundingClientRect(),sx=canvas.width/r.width,sy=canvas.height/r.height; mouseX=(e.clientX-r.left)*sx; mouseY=(e.clientY-r.top)*sy; });
+canvas.addEventListener('touchmove', e => { e.preventDefault(); const r=canvas.getBoundingClientRect(),sx=canvas.width/r.width,sy=canvas.height/r.height; mouseX=(e.touches[0].clientX-r.left)*sx; mouseY=(e.touches[0].clientY-r.top)*sy; },{passive:false});
 
-    document.getElementById('pinSubmit').addEventListener('click', ()=> {
-      if(parentPinInput.value===PIN){ pinGate.style.display='none'; projectsContent.style.display='block'; load(); } else { showMessage('Error', 'Incorrect Parent PIN. Please try again.'); parentPinInput.focus(); }
-    });
-
-    function get(){ try{return JSON.parse(localStorage.getItem('devagneya_projects')||'[]')}catch(e){return[]} }
-    function set(v){ localStorage.setItem('devagneya_projects', JSON.stringify(v)) }
-
-    saveFileBtn.addEventListener('click', ()=> {
-      const f=fileInput.files[0]; if(!f){ showMessage('Missing File', 'Please choose a file to upload.'); return; } const r=new FileReader();
-      r.onload=function(e){ const data=e.target.result; const proj={id:Date.now(),kind:'file',name:f.name,mime:f.type,data}; const list=get(); list.unshift(proj); set(list); fileInput.value=''; load(); };
-      r.readAsDataURL(f);
-    });
-
-    saveLinkBtn.addEventListener('click', ()=> {
-      const url = linkInput.value.trim(); if(!url){ showMessage('Missing URL', 'Please enter a project link URL.'); return; }
-      try{ const u=new URL(url); const proj={id:Date.now(),kind:'link',name:u.hostname+u.pathname,url:u.href}; const list=get(); list.unshift(proj); set(list); linkInput.value=''; load(); }catch(e){ showMessage('Invalid URL', 'The link you entered is not a valid URL.'); }
-    });
-
-    function load(){
-      const list=get(); projectsList.innerHTML=''; if(list.length===0){ projectsList.innerHTML='<div>No projects yet</div>'; return; }
-      list.forEach(p=>{ const item=document.createElement('div'); item.className='project-item'; const thumb=document.createElement('div'); thumb.className='thumb';
-        if(p.kind==='file' && p.mime.startsWith('image/')){ const img=document.createElement('img'); img.src=p.data; img.alt=p.name; thumb.appendChild(img); }
-        else if(p.kind==='file' && p.mime==='application/pdf'){ thumb.innerHTML='<small>PDF</small>'; }
-        else if(p.kind==='link'){ thumb.innerHTML='<small>LINK</small>'; }
-        const meta=document.createElement('div'); meta.className='meta'; const title=document.createElement('strong'); title.textContent=p.name||p.url; const sub=document.createElement('small'); sub.textContent=p.kind==='link'?p.url:p.mime||''; meta.appendChild(title); meta.appendChild(sub);
-        const actions=document.createElement('div'); actions.className='project-actions';
-        if(p.kind==='link'){ const open=document.createElement('button'); open.className='small'; open.textContent='Open'; open.addEventListener('click', ()=>window.open(p.url,'_blank')); actions.appendChild(open); }
-        else if(p.kind==='file'){ const open=document.createElement('button'); open.className='small'; open.textContent='Open'; open.addEventListener('click', ()=>{ const w=window.open(); if(w){ w.document.write(`<title>${p.name}</title>`); if(p.mime.startsWith('image/')) w.document.write(`<img src="${p.data}" style="max-width:100%;">`); else w.document.write(`<iframe src="${p.data}" style="width:100%;height:100vh;border:none"></iframe>`); w.document.close(); } else { showMessage('Popup Blocked', 'Please allow popups in your browser to preview the file.'); } }); actions.appendChild(open); }
-        const del=document.createElement('button'); del.className='small'; del.textContent='Delete'; del.addEventListener('click', ()=>{ showConfirm(`Are you sure you want to permanently delete project: ${p.name}?`, (confirmed) => { if (confirmed) { const rem=get().filter(x=>x.id!==p.id); set(rem); load(); } }); }); actions.appendChild(del);
-        item.appendChild(thumb); item.appendChild(meta); item.appendChild(actions); projectsList.appendChild(item);
-      });
-    }
-    projectsModal.addEventListener('click', (e)=>{ if(e.target===projectsModal) close(); });
-    document.addEventListener('keydown', (e)=>{ if(e.key==='Escape' && projectsModal.style.display==='flex') close(); });
-  })();
-
-  /* ---------- Fav Cars (local) ---------- */
-  (function(){
-    const PIN='1234';
-    const carsBtn=document.getElementById('carsBtn');
-    const carsModal=document.getElementById('carsModal');
-    const carsPinGate=document.getElementById('carsPinGate');
-    const carsContent=document.getElementById('carsContent');
-    const carFile=document.getElementById('carFile');
-    const carName=document.getElementById('carName');
-    const carNote=document.getElementById('carNote');
-    const carLink=document.getElementById('carLink');
-    const saveCar=document.getElementById('saveCar');
-    const doneCars=document.getElementById('doneCars');
-    const carsList=document.getElementById('carsList');
-    const carLightbox=document.getElementById('carLightbox');
-    const lightboxContent=document.getElementById('lightboxContent');
-
-    function open(){ carsModal.style.display='flex'; carsPinGate.querySelector('input').focus(); }
-    function close(){ carsModal.style.display='none'; }
-    carsBtn.addEventListener('click', open);
-    document.getElementById('carsPinClose').addEventListener('click', close);
-    doneCars.addEventListener('click', close);
-
-    document.getElementById('carsPinSubmit').addEventListener('click', ()=>{
-      const v=document.getElementById('carsPin').value;
-      if(v===PIN){ carsPinGate.style.display='none'; carsContent.style.display='block'; loadCars(); } else { showMessage('Error', 'Incorrect Parent PIN. Please try again.'); document.getElementById('carsPin').focus(); }
-    });
-
-    function get(){ try{return JSON.parse(localStorage.getItem('fav_cars')||'[]')}catch(e){return[]} }
-    function set(v){ localStorage.setItem('fav_cars', JSON.stringify(v)) }
-
-    saveCar.addEventListener('click', ()=>{
-      const f=carFile.files[0]; const name=carName.value.trim()||'Untitled'; const note=carNote.value.trim(); const link=carLink.value.trim();
-      if(!f){ showMessage('Missing Image', 'Please choose an image for the car.'); return; } const r=new FileReader();
-      r.onload=function(e){ const data=e.target.result; const car={id:Date.now(),name, note, link, data}; const list=get(); list.unshift(car); set(list); carFile.value=''; carName.value=''; carNote.value=''; carLink.value=''; loadCars(); };
-      r.readAsDataURL(f);
-    });
-
-    function loadCars(){ const list=get(); carsList.innerHTML=''; if(!list.length){ carsList.innerHTML='<div>No favourite cars yet.</div>'; return; } list.forEach(c=>{ const item=document.createElement('div'); item.className='project-item car-item'; const thumb=document.createElement('div'); thumb.className='thumb'; const img=document.createElement('img'); img.src=c.data; img.alt=c.name; thumb.appendChild(img); const meta=document.createElement('div'); meta.className='meta car-meta'; const title=document.createElement('strong'); title.textContent=c.name; const s=document.createElement('small'); s.textContent=c.note||''; meta.appendChild(title); meta.appendChild(s); const actions=document.createElement('div'); actions.className='project-actions'; const view=document.createElement('button'); view.className='small'; view.textContent='View'; view.addEventListener('click', ()=>openLightbox(c)); actions.appendChild(view); if(c.link){ const go=document.createElement('button'); go.className='small'; go.textContent='Open'; go.addEventListener('click', ()=>window.open(c.link,'_blank')); actions.appendChild(go); } const del=document.createElement('button'); del.className='small'; del.textContent='Delete'; del.addEventListener('click', ()=>{ showConfirm(`Are you sure you want to permanently delete car: ${c.name}?`, (confirmed) => { if (confirmed) { const rem=get().filter(x=>x.id!==c.id); set(rem); loadCars(); } }); }); actions.appendChild(del); item.appendChild(thumb); item.appendChild(meta); item.appendChild(actions); carsList.appendChild(item); }); }
-
-    function openLightbox(car){ lightboxContent.innerHTML=''; const h=document.createElement('h3'); h.textContent=car.name; const img=document.createElement('img'); img.src=car.data; img.style.maxWidth='100%'; const p=document.createElement('p'); p.textContent=car.note||''; lightboxContent.appendChild(h); lightboxContent.appendChild(img); lightboxContent.appendChild(p); if(car.link){ const a=document.createElement('a'); a.href=car.link; a.target='_blank'; a.className='car-link'; a.textContent='Open link'; lightboxContent.appendChild(a);} carLightbox.style.display='flex'; }
-
-    document.getElementById('closeLightbox').addEventListener('click', ()=> carLightbox.style.display='none');
-    carLightbox.addEventListener('click', (e)=>{ if(e.target===carLightbox) carLightbox.style.display='none'; });
-    document.addEventListener('keydown', (e)=>{ if(e.key==='Escape'){ carLightbox.style.display='none'; carsModal.style.display='none'; } });
-  })();
-
-  /* ---------- NEW: Home video "Click-to-Load" logic ---------- */
-  (function(){
-    const vidId = 'YMTpdIZYGdg';
-    const videoBlock = document.getElementById('videoBlock');
-    const playBtn = document.getElementById('videoPlayBtn');
-    
-    // 1. Find and set the thumbnail for the background
-    const candidates=[
-      `https://img.youtube.com/vi/${vidId}/maxresdefault.jpg`,
-      `https://img.youtube.com/vi/${vidId}/hqdefault.jpg`,
-      `https://img.youtube.com/vi/${vidId}/sddefault.jpg`,
-      `https://img.youtube.com/vi/${vidId}/mqdefault.jpg`
-    ];
-    const localFallback = 'poster-fallback.jpg'; // A local fallback just in case
-
-    async function findWorkingThumbnail(urls){
-      for(const u of urls){
-        try{
-          const res = await fetch(u, { method:'GET', cache:'no-store' });
-          if(res.ok){
-            const blob = await res.blob();
-            if(blob.size > 2000) return URL.createObjectURL(blob); // Found a good thumbnail
-          }
-        }catch(e){
-          // console.warn('Thumbnail fetch failed:', u);
-        }
-      }
-      return null; // No thumbnail found
-    }
-
-    (async function applyThumbnail(){
-      const url = await findWorkingThumbnail(candidates);
-      if (url) {
-        videoBlock.style.backgroundImage = `url(${url})`;
-      } else {
-        videoBlock.style.backgroundImage = `url(${localFallback})`; // Use local fallback
-      }
-    })();
-
-    // 2. Click-to-load
-    function loadVideo() {
-      // Clear the block (remove play button)
-      videoBlock.innerHTML = ''; 
-      
-      // Create and add the iframe
-      const iframe = document.createElement('iframe');
-      iframe.src = `https://www.youtube.com/embed/${vidId}?enablejsapi=1&rel=0&modestbranding=1&autoplay=1`;
-      iframe.title = "GreenCityProject";
-      iframe.allow = "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture";
-      iframe.allowFullscreen = true;
-      videoBlock.appendChild(iframe);
-    }
-    
-    playBtn.addEventListener('click', loadVideo);
-    videoBlock.addEventListener('keydown', (e) => {
-      if (e.key === 'Enter' || e.key === ' ') {
-        loadVideo();
-      }
-    });
-
-  })();
-
-  /* ---------- Generic modal helpers (updated to include new modals) ---------- */
-  document.addEventListener('click', (e) => {
-    document.querySelectorAll('.modal').forEach(m => { if (m.style.display==='flex' && e.target===m) m.style.display='none'; });
+function startGame() {
+  rocketX=280;rocketY=300;asteroids=[];score=0;gameRunning=true;
+  document.getElementById('gameTime').textContent='0';
+  lastNow=performance.now();
+  cancelAnimationFrame(animId); clearInterval(scoreInt);
+  scoreInt=setInterval(()=>{if(gameRunning){score++;document.getElementById('gameTime').textContent=score;}},1000);
+  spawnRock(); gameLoop(performance.now());
+}
+function spawnRock() {
+  if(!gameRunning) return;
+  asteroids.push({x:Math.random()*canvas.width, y:-30, size:18+Math.random()*20, speed:2+Math.random()*3+score*.04, rot:Math.random()*6.28, rs:(Math.random()-.5)*.1});
+  setTimeout(spawnRock, Math.max(400,1300-score*18));
+}
+function gameLoop(now) {
+  if(!gameRunning) return;
+  const dt=(now-lastNow)/16.67; lastNow=now;
+  rocketX+=(mouseX-rocketX)*.18*dt;
+  rocketY+=(mouseY-rocketY)*.18*dt;
+  asteroids.forEach(a=>{a.y+=a.speed*dt;a.rot+=a.rs*dt;});
+  asteroids=asteroids.filter(a=>a.y<canvas.height+60);
+  for(const a of asteroids){const dx=rocketX-a.x,dy=rocketY-a.y;if(Math.sqrt(dx*dx+dy*dy)<a.size*.65+11){endGame();return;}}
+  drawGame(); animId=requestAnimationFrame(gameLoop);
+}
+function drawGame() {
+  ctx.fillStyle='#080818'; ctx.fillRect(0,0,canvas.width,canvas.height);
+  // stars
+  ctx.fillStyle='rgba(255,255,255,.5)';
+  for(let i=0;i<55;i++){ctx.beginPath();ctx.arc((i*139+score*2)%canvas.width,(i*71+score*3)%canvas.height,.9,0,6.28);ctx.fill();}
+  // asteroids
+  asteroids.forEach(a=>{
+    ctx.save();ctx.translate(a.x,a.y);ctx.rotate(a.rot);
+    ctx.fillStyle='#6a5a4a';ctx.strokeStyle='#907060';ctx.lineWidth=1.5;
+    ctx.beginPath();
+    for(let i=0;i<8;i++){const ang=i/8*6.28,r=a.size*(.8+Math.sin(i*2.5)*.2);i===0?ctx.moveTo(Math.cos(ang)*r,Math.sin(ang)*r):ctx.lineTo(Math.cos(ang)*r,Math.sin(ang)*r);}
+    ctx.closePath();ctx.fill();ctx.stroke();ctx.restore();
   });
-  document.addEventListener('keydown', (e) => { 
-    if (e.key==='Escape'){
-      document.querySelectorAll('.modal').forEach(m => { m.style.display='none'; });
+  // rocket
+  ctx.save();ctx.translate(rocketX,rocketY);
+  const fl=.8+Math.random()*.4;
+  const g=ctx.createRadialGradient(0,16,2,0,22,14*fl);
+  g.addColorStop(0,'#FFD93D');g.addColorStop(.5,'#FF6B35');g.addColorStop(1,'transparent');
+  ctx.fillStyle=g;ctx.beginPath();ctx.ellipse(0,20,8,14*fl,0,0,6.28);ctx.fill();
+  ctx.fillStyle='#4ECDC4';ctx.beginPath();ctx.moveTo(0,-22);ctx.lineTo(12,14);ctx.lineTo(-12,14);ctx.closePath();ctx.fill();
+  ctx.fillStyle='#FFD93D';ctx.beginPath();ctx.arc(0,-3,5,0,6.28);ctx.fill();
+  ctx.restore();
+}
+function endGame() {
+  gameRunning=false; clearInterval(scoreInt);
+  if(score>bestScore){bestScore=score;document.getElementById('bestTime').textContent=bestScore;}
+  ctx.fillStyle='rgba(0,0,0,.65)';ctx.fillRect(0,0,canvas.width,canvas.height);
+  ctx.textAlign='center';
+  ctx.fillStyle='#FF4D8B';ctx.font="bold 34px 'Fredoka One',cursive";ctx.fillText('💥 Game Over!',canvas.width/2,canvas.height/2-28);
+  ctx.fillStyle='#fff';ctx.font="21px 'Fredoka One',cursive";ctx.fillText(`You survived ${score} seconds!`,canvas.width/2,canvas.height/2+14);
+  if(score===bestScore&&score>0){ctx.fillStyle='#FFD93D';ctx.fillText('🏆 New best!',canvas.width/2,canvas.height/2+46);}
+}
+document.getElementById('startBtn').addEventListener('click', startGame);
+document.getElementById('resetBtn').addEventListener('click', ()=>{
+  gameRunning=false;clearInterval(scoreInt);cancelAnimationFrame(animId);asteroids=[];score=0;
+  document.getElementById('gameTime').textContent='0';
+  ctx.fillStyle='#080818';ctx.fillRect(0,0,canvas.width,canvas.height);
+  ctx.fillStyle='rgba(255,255,255,.3)';ctx.font="20px 'Fredoka One',cursive";ctx.textAlign='center';
+  ctx.fillText('Press Start to play! 🚀',canvas.width/2,canvas.height/2);
+});
+// initial canvas
+ctx.fillStyle='#080818';ctx.fillRect(0,0,canvas.width,canvas.height);
+ctx.fillStyle='rgba(255,255,255,.3)';ctx.font="20px 'Fredoka One',cursive";ctx.textAlign='center';
+ctx.fillText('Press Start to play! 🚀',canvas.width/2,canvas.height/2);
+
+// ===================== GAMES DIARY =====================
+let games = JSON.parse(localStorage.getItem('dev_games')||'[]');
+let gRating=3;
+document.querySelectorAll('.star-btn').forEach(b=>{
+  b.addEventListener('click',()=>{
+    gRating=parseInt(b.dataset.s);
+    document.querySelectorAll('.star-btn').forEach(x=>x.classList.toggle('lit',parseInt(x.dataset.s)<=gRating));
+  });
+});
+function saveGames(){localStorage.setItem('dev_games',JSON.stringify(games));}
+const genreLabel=g=>({racing:'🚗 Racing',action:'⚔️ Action',space:'🚀 Space',puzzle:'🧩 Puzzle',adventure:'🗺️ Adventure',sports:'⚽ Sports',other:'🎲 Other'}[g]||g);
+const statusLabel=s=>({playing:'▶️ Playing',completed:'✅ Completed',wishlist:'⭐ Wishlist',dropped:'❌ Dropped'}[s]||s);
+function renderGames(){
+  const grid=document.getElementById('gamesGrid'), empty=document.getElementById('gamesEmpty');
+  if(!games.length){grid.innerHTML='';empty.style.display='block';return;}
+  empty.style.display='none';
+  grid.innerHTML=games.map((g,i)=>`
+    <div class="game-card">
+      <button class="gc-del" onclick="delGame(${i})">✕</button>
+      <span class="gc-genre genre-${g.genre}">${genreLabel(g.genre)}</span>
+      <div class="gc-name">${g.name}</div>
+      <div class="gc-stars">${'⭐'.repeat(g.rating)}${'☆'.repeat(5-g.rating)}</div>
+      <span class="gc-status status-${g.status}">${statusLabel(g.status)}</span>
+      ${g.review?`<div class="gc-review">"${g.review}"</div>`:''}
+    </div>`).join('');
+}
+document.getElementById('addGameBtn').addEventListener('click',()=>{
+  const name=document.getElementById('gameName').value.trim();
+  if(!name){document.getElementById('gameName').focus();return;}
+  games.unshift({name,genre:document.getElementById('gameGenre').value,status:document.getElementById('gameStatus').value,rating:gRating,review:document.getElementById('gameReview').value.trim()});
+  saveGames();renderGames();
+  document.getElementById('gameName').value='';document.getElementById('gameReview').value='';
+});
+function delGame(i){games.splice(i,1);saveGames();renderGames();}
+if(!games.length){
+  games=[
+    {name:'Rocket League',genre:'sports',status:'playing',rating:5,review:"Cars + football = perfection!"},
+    {name:'Kerbal Space Program',genre:'space',status:'completed',rating:4,review:"Taught me so much about orbits!"}
+  ];saveGames();
+}
+renderGames();
+
+// ===================== DREAM GARAGE =====================
+const iconicCars=[
+  {make:'Bugatti',name:'Veyron Super Sport',emoji:'🏎️',color:'linear-gradient(135deg,#1a1a2e,#16213e)',stats:['1200 HP','431 km/h','W16 Engine'],spd:100,note:"Once the world's fastest car. It has 16 cylinders!"},
+  {make:'Lamborghini',name:'Aventador SVJ',emoji:'🔥',color:'linear-gradient(135deg,#7f1d1d,#991b1b)',stats:['770 HP','350 km/h','V12 Engine'],spd:81,note:'The V12 roar sounds like a lion waking up!'},
+  {make:'Ferrari',name:'SF90 Stradale',emoji:'🚗',color:'linear-gradient(135deg,#881a1a,#b91c1c)',stats:['1000 HP','340 km/h','Hybrid V8'],spd:79,note:"Ferrari's first hybrid supercar — electric + petrol!"},
+  {make:'Koenigsegg',name:'Jesko Absolut',emoji:'⚡',color:'linear-gradient(135deg,#1c1917,#292524)',stats:['1600 HP','330+ km/h','V8 Twin Turbo'],spd:95,note:'Designed to break 300 mph. Absolutely bonkers!'},
+  {make:'McLaren',name:'P1',emoji:'💛',color:'linear-gradient(135deg,#713f12,#92400e)',stats:['903 HP','350 km/h','Hybrid V8'],spd:81,note:"Built to be the best driver's car on road and track."},
+  {make:'Rimac',name:'Nevera',emoji:'💙',color:'linear-gradient(135deg,#1e3a5f,#1d4ed8)',stats:['1914 HP','412 km/h','Full Electric'],spd:96,note:'Fastest accelerating production car ever built!'},
+  {make:'Ford',name:'GT40',emoji:'🖤',color:'linear-gradient(135deg,#111827,#1f2937)',stats:['485 HP','322 km/h','V8 Engine'],spd:75,note:"Beat Ferrari at Le Mans 4 years in a row. Legend!"},
+  {make:'Porsche',name:'911 GT3 RS',emoji:'🤍',color:'linear-gradient(135deg,#1c1917,#3f3f46)',stats:['525 HP','296 km/h','Flat-6 NA'],spd:69,note:'Pure, precise, and absolutely thrilling to drive.'},
+];
+
+function buildCarCard(car, isDeletable, idx) {
+  return `
+    <div class="car-card">
+      <div class="car-banner" style="background:${car.color}">
+        <span style="position:relative;z-index:1;font-size:3.8rem">${car.emoji}</span>
+      </div>
+      <div class="car-body">
+        <div style="display:flex;justify-content:space-between;align-items:start">
+          <div><div class="car-make">${car.make}</div><div class="car-name">${car.name}</div></div>
+          ${isDeletable?`<button class="car-del" onclick="delMyCar(${idx})">✕</button>`:''}
+        </div>
+        <div class="car-stats">${car.stats.map(s=>`<span class="car-stat">${s}</span>`).join('')}</div>
+        ${!isDeletable?`<div class="spd-lbl">Speed index</div><div class="spd-bg"><div class="spd-fill" data-pct="${car.spd}"></div></div>`:''}
+        ${car.note?`<div class="car-note" style="margin-top:9px">${car.note}</div>`:''}
+      </div>
+    </div>`;
+}
+
+const iconicGrid=document.getElementById('iconicGrid');
+iconicCars.forEach(c=>{ iconicGrid.innerHTML+=buildCarCard(c,false,0); });
+
+function animateSpeedBars(){
+  document.querySelectorAll('.spd-fill').forEach(b=>setTimeout(()=>{b.style.width=b.dataset.pct+'%';},200));
+}
+
+document.querySelectorAll('.gtab').forEach(tab=>{
+  tab.addEventListener('click',()=>{
+    document.querySelectorAll('.gtab').forEach(t=>t.classList.remove('active'));
+    tab.classList.add('active');
+    const which=tab.dataset.gtab;
+    document.getElementById('iconicGrid').style.display=which==='iconic'?'grid':'none';
+    document.getElementById('mineCarsWrap').style.display=which==='mine'?'block':'none';
+    if(which==='iconic') animateSpeedBars();
+    if(which==='mine') renderMyCars();
+  });
+});
+
+let myCars=JSON.parse(localStorage.getItem('dev_cars')||'[]');
+function saveMyCars(){localStorage.setItem('dev_cars',JSON.stringify(myCars));}
+function renderMyCars(){
+  const grid=document.getElementById('myCarsGrid'), empty=document.getElementById('garageEmpty');
+  if(!myCars.length){grid.innerHTML='';empty.style.display='block';return;}
+  empty.style.display='none';
+  grid.innerHTML=myCars.map((c,i)=>buildCarCard({...c,color:'linear-gradient(135deg,#1a1a2e,#16213e)',stats:c.speed?[`🏁 ${c.speed}`]:[],spd:0,note:c.note},true,i)).join('');
+}
+document.getElementById('addCarBtn').addEventListener('click',()=>{
+  const name=document.getElementById('carName').value.trim();
+  if(!name){document.getElementById('carName').focus();return;}
+  myCars.unshift({name,make:document.getElementById('carMake').value.trim(),speed:document.getElementById('carSpeed').value.trim(),note:document.getElementById('carNote').value.trim(),emoji:document.getElementById('carEmoji').value});
+  saveMyCars();renderMyCars();
+  ['carName','carMake','carSpeed','carNote'].forEach(id=>document.getElementById(id).value='');
+});
+function delMyCar(i){myCars.splice(i,1);saveMyCars();renderMyCars();}
+
+// ===================== PIANO =====================
+const AC = window.AudioContext||window.webkitAudioContext;
+let ac=null;
+function getAC(){if(!ac)ac=new AC();return ac;}
+function playNote(freq,dur=1.3){
+  const c=getAC(),o=c.createOscillator(),g=c.createGain();
+  o.connect(g);g.connect(c.destination);
+  o.type='triangle';o.frequency.setValueAtTime(freq,c.currentTime);
+  g.gain.setValueAtTime(0.45,c.currentTime);
+  g.gain.exponentialRampToValueAtTime(0.001,c.currentTime+dur);
+  o.start();o.stop(c.currentTime+dur);
+}
+
+// Notes definition: white key width=44, gap between whites=0 (flush)
+// Black key positions: offset from left edge of keyboard (6px padding)
+const notes=[
+  {n:'C4', f:261.63,type:'w',kb:'a'},
+  {n:'C#4',f:277.18,type:'b',kb:'w'},
+  {n:'D4', f:293.66,type:'w',kb:'s'},
+  {n:'D#4',f:311.13,type:'b',kb:'e'},
+  {n:'E4', f:329.63,type:'w',kb:'d'},
+  {n:'F4', f:349.23,type:'w',kb:'f'},
+  {n:'F#4',f:369.99,type:'b',kb:'t'},
+  {n:'G4', f:392.00,type:'w',kb:'g'},
+  {n:'G#4',f:415.30,type:'b',kb:'y'},
+  {n:'A4', f:440.00,type:'w',kb:'h'},
+  {n:'A#4',f:466.16,type:'b',kb:'u'},
+  {n:'B4', f:493.88,type:'w',kb:'j'},
+  {n:'C5', f:523.25,type:'w',kb:'k'},
+  {n:'C#5',f:554.37,type:'b',kb:'i'},
+  {n:'D5', f:587.33,type:'w',kb:'l'},
+  {n:'D#5',f:622.25,type:'b',kb:'o'},
+  {n:'E5', f:659.25,type:'w',kb:';'},
+];
+
+const WW=44; // white key width
+const BW=28; // black key width
+// compute x positions
+let wx=6; // start with padding
+const keyEls={};
+const kb=document.getElementById('keyboard');
+
+// First pass: assign x to white keys
+const whiteNotes=notes.filter(n=>n.type==='w');
+const blackNotes=notes.filter(n=>n.type==='b');
+
+// Map note index to white key index
+let wIdx=0;
+const noteWIdx={};
+notes.forEach((n,i)=>{ if(n.type==='w'){noteWIdx[i]=wIdx;wIdx++;} });
+
+// Set keyboard height for whites
+kb.style.height='163px';
+
+// Build white keys first
+whiteNotes.forEach((n,wi)=>{
+  const el=document.createElement('div');
+  el.className='wkey';
+  el.textContent=n.n.replace(/\d/,'');
+  const press=()=>{
+    playNote(n.f);
+    document.getElementById('pianoNote').textContent=n.n;
+    el.classList.add('pressed');setTimeout(()=>el.classList.remove('pressed'),180);
+    spawnNote(el);
+  };
+  el.addEventListener('mousedown',press);
+  el.addEventListener('touchstart',e=>{e.preventDefault();press();},{passive:false});
+  kb.appendChild(el);
+  keyEls[n.kb]={el,press};
+});
+
+// Build black keys with absolute positioning
+// We need to know left offset of each black key relative to keyboard
+// Black key sits between two whites. Pattern: C#=after C, D#=after D, F#=after F, G#=after G, A#=after A
+// White key i has left = 6 + i*44
+function getBlackLeft(noteName) {
+  // Map black key to its white key index (the one to its left)
+  const map={'C#4':0,'D#4':1,'F#4':3,'G#4':4,'A#4':5,'C#5':7,'D#5':8};
+  // octave-independent: C#=0 D#=1 F#=3 G#=4 A#=5 per octave
+  const wKeys=['C4','D4','E4','F4','G4','A4','B4','C5','D5','E5'];
+  const leftWhiteIdx=map[noteName];
+  if(leftWhiteIdx===undefined) return null;
+  return 6 + leftWhiteIdx*WW + WW - BW/2;
+}
+
+blackNotes.forEach(n=>{
+  const el=document.createElement('div');
+  el.className='bkey';
+  const left=getBlackLeft(n.n);
+  if(left===null) return;
+  el.style.left=left+'px';
+  const press=()=>{
+    playNote(n.f);
+    document.getElementById('pianoNote').textContent=n.n;
+    el.classList.add('pressed');setTimeout(()=>el.classList.remove('pressed'),180);
+    spawnNote(el);
+  };
+  el.addEventListener('mousedown',press);
+  el.addEventListener('touchstart',e=>{e.preventDefault();press();},{passive:false});
+  kb.appendChild(el);
+  keyEls[n.kb]={el,press};
+});
+
+document.addEventListener('keydown',e=>{
+  if(e.repeat||e.target.tagName==='INPUT'||e.target.tagName==='TEXTAREA') return;
+  const k=keyEls[e.key.toLowerCase()];
+  if(k) k.press();
+});
+
+function spawnNote(el){
+  const emojis=['🎵','🎶','♪','♫'];
+  const r=el.getBoundingClientRect();
+  const d=document.createElement('div');
+  d.className='note-pop';
+  d.textContent=emojis[Math.floor(Math.random()*emojis.length)];
+  d.style.left=(r.left+r.width/2-10)+'px';
+  d.style.top=(r.top-8)+'px';
+  document.body.appendChild(d);
+  setTimeout(()=>d.remove(),1100);
+}
+
+// Chord buttons
+const CHORDS={
+  'C Maj':[261.63,329.63,392.00],
+  'G Maj':[392.00,493.88,587.33],
+  'A min':[440.00,523.25,261.63],
+  'F Maj':[349.23,440.00,523.25],
+  'D Maj':[293.66,369.99,440.00],
+  'E min':[329.63,392.00,493.88],
+};
+const chordRow=document.getElementById('chordRow');
+Object.entries(CHORDS).forEach(([name,freqs])=>{
+  const btn=document.createElement('button');
+  btn.className='chord-btn';btn.textContent=name;
+  btn.addEventListener('click',()=>{
+    freqs.forEach((f,i)=>setTimeout(()=>playNote(f,1.4),i*55));
+    document.getElementById('pianoChord').textContent=name;
+  });
+  chordRow.appendChild(btn);
+});
+
+// ===================== SONG JOURNAL =====================
+let lyrics=JSON.parse(localStorage.getItem('dev_lyrics')||'[]');
+function saveLyrics(){localStorage.setItem('dev_lyrics',JSON.stringify(lyrics));}
+const lStatusLabel=s=>({learning:'📖 Learning',know:'✅ Know It!',love:'❤️ All-time Fave'}[s]||s);
+function renderLyrics(){
+  const grid=document.getElementById('lyricsGrid'),empty=document.getElementById('lyricsEmpty');
+  if(!lyrics.length){grid.innerHTML='';empty.style.display='block';return;}
+  empty.style.display='none';
+  grid.innerHTML=lyrics.map((l,i)=>`
+    <div class="lyric-card" onclick="openLyric(${i})">
+      <button class="lc-del" onclick="event.stopPropagation();delLyric(${i})">✕</button>
+      <div class="lc-title">${l.title}</div>
+      <div class="lc-artist">🎤 ${l.artist||'Unknown'}</div>
+      <span class="lc-status ls-${l.status}">${lStatusLabel(l.status)}</span>
+      ${l.text?`<div class="lc-preview">${l.text.slice(0,90)}${l.text.length>90?'…':''}</div>`:''}
+    </div>`).join('');
+}
+function openLyric(i){
+  const l=lyrics[i];
+  document.getElementById('lmTitle').textContent=l.title;
+  document.getElementById('lmArtist').textContent='🎤 '+(l.artist||'Unknown');
+  document.getElementById('lmBody').textContent=l.text||'(No lyrics added yet)';
+  document.getElementById('lyricModal').classList.add('open');
+}
+function delLyric(i){lyrics.splice(i,1);saveLyrics();renderLyrics();}
+document.getElementById('lmClose').addEventListener('click',()=>document.getElementById('lyricModal').classList.remove('open'));
+document.getElementById('lyricModal').addEventListener('click',e=>{if(e.target===document.getElementById('lyricModal'))document.getElementById('lyricModal').classList.remove('open');});
+document.getElementById('addLyricBtn').addEventListener('click',()=>{
+  const title=document.getElementById('lyricTitle').value.trim();
+  if(!title){document.getElementById('lyricTitle').focus();return;}
+  lyrics.unshift({title,artist:document.getElementById('lyricArtist').value.trim(),status:document.getElementById('lyricStatus').value,text:document.getElementById('lyricText').value.trim()});
+  saveLyrics();renderLyrics();
+  ['lyricTitle','lyricArtist','lyricText'].forEach(id=>document.getElementById(id).value='');
+});
+if(!lyrics.length){
+  lyrics=[
+    {title:'Bohemian Rhapsody',artist:'Queen',status:'love',text:"Is this the real life?\nIs this just fantasy?\nCaught in a landslide,\nNo escape from reality..."},
+    {title:'Someone Like You',artist:'Adele',status:'learning',text:"I heard that you're settled down,\nThat you found a girl and you're married now..."},
+  ];saveLyrics();
+}
+renderLyrics();
+
+// ===================== PRACTICE LOG =====================
+let plog=JSON.parse(localStorage.getItem('dev_plog')||'[]');
+function savePlog(){localStorage.setItem('dev_plog',JSON.stringify(plog));}
+function renderPlog(){
+  const list=document.getElementById('plogList'),empty=document.getElementById('plogEmpty');
+  const totalMins=plog.reduce((a,e)=>a+e.mins,0);
+  const best=plog.reduce((a,e)=>Math.max(a,e.mins),0);
+  document.getElementById('stTotal').textContent=plog.length;
+  document.getElementById('stMins').textContent=totalMins;
+  document.getElementById('stBest').textContent=best;
+  // streak
+  const days={};
+  plog.forEach(e=>days[e.date]=true);
+  let streak=0;
+  for(let i=0;i<30;i++){const d=new Date();d.setDate(d.getDate()-i);if(days[d.toDateString()])streak++;else if(i>0)break;}
+  document.getElementById('stStreak').textContent=streak+'🔥';
+  // streak bar
+  const bar=document.getElementById('streakBar');bar.innerHTML='';
+  for(let i=13;i>=0;i--){const d=new Date();d.setDate(d.getDate()-i);const div=document.createElement('div');div.className='sday '+(days[d.toDateString()]?'done':'none');div.textContent=d.getDate();bar.appendChild(div);}
+  // entries
+  if(!plog.length){list.innerHTML='';empty.style.display='block';return;}
+  empty.style.display='none';
+  list.innerHTML=plog.map((e,i)=>`
+    <div class="plog-entry">
+      <div class="pl-icon">${e.type}</div>
+      <div class="pl-info">
+        <div class="pl-title">${e.what||'Practice session'}</div>
+        <div class="pl-meta">${e.mood?'"'+e.mood+'" · ':''}${e.date}</div>
+      </div>
+      <div class="pl-mins">${e.mins}m</div>
+      <button class="pl-del" onclick="delPlog(${i})">✕</button>
+    </div>`).join('');
+}
+function delPlog(i){plog.splice(i,1);savePlog();renderPlog();}
+document.getElementById('addPlogBtn').addEventListener('click',()=>{
+  const mins=parseInt(document.getElementById('plogMins').value);
+  if(!mins||mins<1){document.getElementById('plogMins').focus();return;}
+  plog.unshift({type:document.getElementById('plogType').value,what:document.getElementById('plogWhat').value.trim(),mins,mood:document.getElementById('plogMood').value.trim(),date:new Date().toDateString()});
+  savePlog();renderPlog();
+  ['plogWhat','plogMins','plogMood'].forEach(id=>document.getElementById(id).value='');
+});
+renderPlog();
+
+// ===================== MUSIC TOGGLE =====================
+(function(){
+  const btn = document.getElementById('musicToggle');
+  const audio = document.getElementById('bgMusic');
+  let playing = false;
+  btn.addEventListener('click', async () => {
+    if (!playing) {
+      try {
+        audio.volume = 0.45;
+        await audio.play();
+        playing = true;
+        btn.textContent = '🔊';
+        btn.classList.add('playing');
+        btn.title = 'Music on — click to pause';
+      } catch(e) { btn.textContent = '🎵'; }
+    } else {
+      audio.pause();
+      playing = false;
+      btn.textContent = '🎵';
+      btn.classList.remove('playing');
+      btn.title = 'Click to play music';
     }
   });
-  </script>
+})();
+</script>
 </body>
-
 </html>
-
