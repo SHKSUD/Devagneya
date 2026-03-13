@@ -6,355 +6,323 @@
 <title>Devagneya's World</title>
 <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
 <style>
-:root {
-  --yellow:#FFD93D; --orange:#FF6B35; --pink:#FF4D8B;
-  --blue:#4ECDC4; --purple:#A855F7; --green:#6BCB77;
-  --dark:#1a1a2e; --card:rgba(255,255,255,0.08);
-}
+:root{--y:#FFD93D;--o:#FF6B35;--p:#FF4D8B;--b:#4ECDC4;--v:#A855F7;--g:#6BCB77;--dk:#1a1a2e;--c:rgba(255,255,255,.08);}
 *{margin:0;padding:0;box-sizing:border-box;}
-body{font-family:'Nunito',sans-serif;background:var(--dark);color:#fff;min-height:100vh;overflow-x:hidden;}
-
-/* Parallax cloud layer from clouds-layer.png */
-.clouds-bg{
-  position:fixed;inset:0;
-  width:200%;height:100%;
-  background-image:url('clouds-layer.png');
-  background-repeat:repeat-x;
-  background-size:cover;
-  opacity:0.13;
-  z-index:0;
-  pointer-events:none;
-  animation:moveClouds 60s linear infinite;
-}
+body{font-family:'Nunito',sans-serif;background:var(--dk);color:#fff;min-height:100vh;overflow-x:hidden;}
+.clouds-bg{position:fixed;inset:0;width:200%;height:100%;background-image:url('clouds-layer.png');background-repeat:repeat-x;background-size:cover;opacity:.1;z-index:0;pointer-events:none;animation:moveClouds 60s linear infinite;}
 @keyframes moveClouds{from{transform:translateX(0)}to{transform:translateX(-50%)}}
-
-/* Subtle star dots on top of clouds */
-body::before{
-  content:'';position:fixed;inset:0;pointer-events:none;z-index:0;opacity:.25;
-  background-image:
-    radial-gradient(1px 1px at 10% 20%,white,transparent),
-    radial-gradient(1px 1px at 30% 50%,white,transparent),
-    radial-gradient(1.5px 1.5px at 50% 10%,white,transparent),
-    radial-gradient(1px 1px at 70% 70%,white,transparent),
-    radial-gradient(1px 1px at 85% 30%,white,transparent),
-    radial-gradient(1px 1px at 20% 80%,white,transparent),
-    radial-gradient(1px 1px at 60% 40%,white,transparent),
-    radial-gradient(1.5px 1.5px at 90% 60%,white,transparent),
-    radial-gradient(1px 1px at 40% 90%,white,transparent),
-    radial-gradient(1px 1px at 75% 15%,white,transparent);
-}
+body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:0;opacity:.18;background-image:radial-gradient(1px 1px at 15% 25%,#fff,transparent),radial-gradient(1px 1px at 35% 55%,#fff,transparent),radial-gradient(1.5px 1.5px at 55% 15%,#fff,transparent),radial-gradient(1px 1px at 75% 75%,#fff,transparent),radial-gradient(1px 1px at 88% 35%,#fff,transparent),radial-gradient(1px 1px at 22% 82%,#fff,transparent),radial-gradient(1px 1px at 65% 45%,#fff,transparent),radial-gradient(1.5px 1.5px at 92% 65%,#fff,transparent);}
 .container{max-width:980px;margin:0 auto;padding:20px;position:relative;z-index:1;}
 
-/* Music toggle button — matches original site style */
-#musicToggle{
-  position:fixed;bottom:24px;right:24px;z-index:100;
-  width:50px;height:50px;border-radius:50%;
-  background:rgba(255,255,255,0.15);
-  border:2px solid rgba(255,255,255,0.3);
-  backdrop-filter:blur(10px);
-  cursor:pointer;font-size:1.4rem;
-  display:flex;align-items:center;justify-content:center;
-  transition:background .2s,transform .2s;
-  box-shadow:0 4px 20px rgba(0,0,0,0.4);
-}
-#musicToggle:hover{background:rgba(255,255,255,0.25);transform:scale(1.1);}
+/* FIXED BUTTONS */
+#musicToggle,#settingsBtn{position:fixed;bottom:24px;width:50px;height:50px;border-radius:50%;border:2px solid rgba(255,255,255,.2);backdrop-filter:blur(10px);cursor:pointer;font-size:1.3rem;display:flex;align-items:center;justify-content:center;transition:all .2s;box-shadow:0 4px 20px rgba(0,0,0,.4);z-index:100;}
+#musicToggle{right:24px;background:rgba(168,85,247,.2);}
+#settingsBtn{right:82px;background:rgba(78,205,196,.2);}
+#musicToggle:hover,#settingsBtn:hover{transform:scale(1.1);}
 #musicToggle.playing{animation:pulse 2s ease-in-out infinite;}
-@keyframes pulse{0%,100%{box-shadow:0 4px 20px rgba(168,85,247,0.4)}50%{box-shadow:0 4px 28px rgba(168,85,247,0.8)}}
+@keyframes pulse{0%,100%{box-shadow:0 0 20px rgba(168,85,247,.4)}50%{box-shadow:0 0 32px rgba(168,85,247,.9)}}
+
+/* SETTINGS PANEL */
+.sp{position:fixed;bottom:82px;right:20px;z-index:200;background:linear-gradient(135deg,#1a1a3e,#0f3460);border:2px solid rgba(255,255,255,.15);border-radius:20px;padding:20px;width:310px;display:none;box-shadow:0 8px 40px rgba(0,0,0,.6);backdrop-filter:blur(12px);}
+.sp.open{display:block;animation:popIn .25s ease;}
+.sp-title{font-family:'Fredoka One',cursive;font-size:1.05rem;margin-bottom:12px;color:var(--b);}
+.sp-row{display:flex;gap:8px;margin-bottom:10px;}
+.sp-row input{font-family:'Nunito',sans-serif;background:rgba(255,255,255,.06);border:2px solid rgba(255,255,255,.15);border-radius:10px;color:#fff;padding:8px 12px;font-size:.83rem;flex:1;outline:none;transition:border-color .2s;}
+.sp-row input:focus{border-color:var(--b);}
+.sp-row input::placeholder{color:rgba(255,255,255,.3);}
+.sp-note{font-size:.73rem;color:rgba(255,255,255,.38);line-height:1.4;margin-top:8px;}
 
 /* HEADER */
-.page-header{text-align:center;padding:36px 0 28px;}
-.page-header h1{
-  font-family:'Fredoka One',cursive;font-size:clamp(2rem,5vw,3rem);
-  background:linear-gradient(135deg,#FFD93D,#FF6B35,#FF4D8B,#A855F7,#4ECDC4);
-  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:6px;
-}
-.page-header p{color:rgba(255,255,255,.45);font-size:.95rem;}
+.page-header{text-align:center;padding:32px 0 22px;}
+.page-header h1{font-family:'Fredoka One',cursive;font-size:clamp(1.8rem,5vw,2.8rem);background:linear-gradient(135deg,#FFD93D,#FF6B35,#FF4D8B,#A855F7,#4ECDC4);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:5px;}
+.page-header p{color:rgba(255,255,255,.4);font-size:.9rem;}
 
 /* NAV */
-.nav{display:flex;gap:10px;justify-content:center;margin-bottom:32px;flex-wrap:wrap;}
-.nav-btn{
-  font-family:'Fredoka One',cursive;font-size:1rem;padding:10px 22px;
-  border:none;border-radius:50px;cursor:pointer;
-  transition:transform .2s,box-shadow .2s;letter-spacing:.4px;white-space:nowrap;
-}
+.nav{display:flex;gap:8px;justify-content:center;margin-bottom:28px;flex-wrap:wrap;}
+.nav-btn{font-family:'Fredoka One',cursive;font-size:.95rem;padding:9px 18px;border:none;border-radius:50px;cursor:pointer;transition:transform .2s,box-shadow .2s;letter-spacing:.3px;white-space:nowrap;}
 .nav-btn:hover{transform:translateY(-3px);box-shadow:0 8px 20px rgba(0,0,0,.4);}
 .nav-btn.active{transform:translateY(-3px);box-shadow:0 8px 24px rgba(0,0,0,.5);}
 .nav-btn[data-tab="planets"]{background:linear-gradient(135deg,#4ECDC4,#A855F7);color:#fff;}
-.nav-btn[data-tab="arcade"]{background:linear-gradient(135deg,#FF6B35,#FFD93D);color:var(--dark);}
+.nav-btn[data-tab="arcade"]{background:linear-gradient(135deg,#FF6B35,#FFD93D);color:var(--dk);}
 .nav-btn[data-tab="diary"]{background:linear-gradient(135deg,#FF4D8B,#A855F7);color:#fff;}
-.nav-btn[data-tab="garage"]{background:linear-gradient(135deg,#FFD93D,#FF6B35);color:var(--dark);}
+.nav-btn[data-tab="garage"]{background:linear-gradient(135deg,#FFD93D,#FF6B35);color:var(--dk);}
 .nav-btn[data-tab="piano"]{background:linear-gradient(135deg,#A855F7,#FF4D8B);color:#fff;}
-.nav-btn[data-tab="lyrics"]{background:linear-gradient(135deg,#6BCB77,#4ECDC4);color:var(--dark);}
-.nav-btn[data-tab="praclog"]{background:linear-gradient(135deg,#FF4D8B,#FF6B35);color:#fff;}
+.nav-btn[data-tab="songs"]{background:linear-gradient(135deg,#6BCB77,#4ECDC4);color:var(--dk);}
+.nav-btn[data-tab="singing"]{background:linear-gradient(135deg,#FF4D8B,#FF6B35);color:#fff;}
+.nav-btn[data-tab="praclog"]{background:linear-gradient(135deg,#A855F7,#4ECDC4);color:#fff;}
+.nav-btn[data-tab="study"]{background:linear-gradient(135deg,#4ECDC4,#6BCB77);color:var(--dk);}
 
 /* SECTIONS */
 .section{display:none;animation:fadeIn .35s ease;}
 .section.active{display:block;}
 @keyframes fadeIn{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:translateY(0)}}
-.sec-title{font-family:'Fredoka One',cursive;font-size:2.2rem;text-align:center;margin-bottom:6px;}
-.sec-sub{text-align:center;color:rgba(255,255,255,.55);font-size:.95rem;margin-bottom:28px;}
-
-/* CARDS / SHARED */
-.card{background:var(--card);border-radius:20px;border:2px solid rgba(255,255,255,.08);backdrop-filter:blur(10px);}
-.btn{font-family:'Fredoka One',cursive;font-size:.95rem;padding:9px 24px;border:none;border-radius:50px;cursor:pointer;transition:transform .15s;}
-.btn:hover{transform:scale(1.05);}
-.btn-green{background:var(--green);color:var(--dark);}
-.btn-orange{background:var(--orange);color:#fff;}
-.btn-purple{background:var(--purple);color:#fff;}
-.btn-teal{background:var(--blue);color:var(--dark);}
-.btn-yellow{background:var(--yellow);color:var(--dark);}
-
-/* FORM ROWS */
-.frow{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:10px;}
-.frow input,.frow select,.frow textarea{
-  font-family:'Nunito',sans-serif;background:rgba(255,255,255,.06);
-  border:2px solid rgba(255,255,255,.12);border-radius:12px;color:#fff;
-  padding:9px 13px;font-size:.9rem;outline:none;flex:1;min-width:130px;
-  transition:border-color .2s;
-}
-.frow input:focus,.frow select:focus,.frow textarea:focus{border-color:var(--purple);}
-.frow input::placeholder,.frow textarea::placeholder{color:rgba(255,255,255,.3);}
-.frow select option{background:#1a1a2e;}
-.frow textarea{resize:vertical;min-height:75px;}
-.form-box{background:var(--card);border:2px solid rgba(255,255,255,.1);border-radius:20px;padding:20px;margin-bottom:24px;backdrop-filter:blur(10px);}
-.form-title{font-family:'Fredoka One',cursive;font-size:1.15rem;margin-bottom:14px;}
-
-/* MODAL */
-.overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.75);z-index:200;
-  align-items:center;justify-content:center;padding:20px;backdrop-filter:blur(4px);}
-.overlay.open{display:flex;}
-.modal{background:linear-gradient(135deg,#1a1a3e,#0f3460);border-radius:24px;
-  border:2px solid rgba(255,255,255,.15);padding:32px;max-width:500px;width:100%;
-  position:relative;animation:popIn .3s cubic-bezier(.34,1.56,.64,1);}
 @keyframes popIn{from{transform:scale(.85);opacity:0}to{transform:scale(1);opacity:1}}
-.modal-close{position:absolute;top:14px;right:18px;font-size:1.4rem;background:none;border:none;color:#fff;cursor:pointer;opacity:.5;line-height:1;}
-.modal-close:hover{opacity:1;}
+.sec-title{font-family:'Fredoka One',cursive;font-size:2.1rem;text-align:center;margin-bottom:6px;}
+.sec-sub{text-align:center;color:rgba(255,255,255,.5);font-size:.92rem;margin-bottom:26px;}
 
-/* EMPTY STATE */
-.empty{text-align:center;padding:44px 20px;color:rgba(255,255,255,.3);}
+/* SHARED */
+.card{background:var(--c);border-radius:18px;border:2px solid rgba(255,255,255,.08);backdrop-filter:blur(10px);}
+.btn{font-family:'Fredoka One',cursive;font-size:.92rem;padding:9px 22px;border:none;border-radius:50px;cursor:pointer;transition:transform .15s,opacity .15s;display:inline-flex;align-items:center;gap:6px;}
+.btn:hover{transform:scale(1.05);}
+.btn:disabled{opacity:.5;cursor:not-allowed;transform:none;}
+.btn-green{background:var(--g);color:var(--dk);}
+.btn-orange{background:var(--o);color:#fff;}
+.btn-purple{background:var(--v);color:#fff;}
+.btn-teal{background:var(--b);color:var(--dk);}
+.btn-yellow{background:var(--y);color:var(--dk);}
+.btn-pink{background:var(--p);color:#fff;}
+.frow{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:10px;}
+.frow input,.frow select,.frow textarea{font-family:'Nunito',sans-serif;background:rgba(255,255,255,.06);border:2px solid rgba(255,255,255,.12);border-radius:12px;color:#fff;padding:9px 13px;font-size:.88rem;outline:none;flex:1;min-width:120px;transition:border-color .2s;}
+.frow input:focus,.frow select:focus,.frow textarea:focus{border-color:var(--v);}
+.frow input::placeholder,.frow textarea::placeholder{color:rgba(255,255,255,.28);}
+.frow select option{background:#1a1a2e;}
+.frow textarea{resize:vertical;min-height:70px;}
+.form-box{background:var(--c);border:2px solid rgba(255,255,255,.1);border-radius:18px;padding:20px;margin-bottom:22px;backdrop-filter:blur(10px);}
+.form-title{font-family:'Fredoka One',cursive;font-size:1.1rem;margin-bottom:12px;}
+.overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.75);z-index:200;align-items:center;justify-content:center;padding:20px;backdrop-filter:blur(4px);}
+.overlay.open{display:flex;}
+.modal{background:linear-gradient(135deg,#1a1a3e,#0f3460);border-radius:22px;border:2px solid rgba(255,255,255,.15);padding:28px;max-width:500px;width:100%;position:relative;animation:popIn .3s cubic-bezier(.34,1.56,.64,1);}
+.modal-close{position:absolute;top:12px;right:16px;font-size:1.35rem;background:none;border:none;color:#fff;cursor:pointer;opacity:.5;line-height:1;}
+.modal-close:hover{opacity:1;}
+.empty{text-align:center;padding:40px 20px;color:rgba(255,255,255,.28);}
 .empty-ico{font-size:3rem;margin-bottom:10px;}
 
-/* ======================================
-   PLANET EXPLORER
-====================================== */
-.planet-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:18px;}
-.planet-card{
-  background:var(--card);border-radius:22px;border:2px solid rgba(255,255,255,.1);
-  padding:22px 14px;text-align:center;cursor:pointer;
-  transition:transform .2s,border-color .2s;backdrop-filter:blur(10px);
-}
+/* PLANET EXPLORER */
+.planet-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(185px,1fr));gap:16px;}
+.planet-card{background:var(--c);border-radius:20px;border:2px solid rgba(255,255,255,.1);padding:20px 14px;text-align:center;cursor:pointer;transition:transform .2s,border-color .2s;backdrop-filter:blur(10px);}
 .planet-card:hover{transform:translateY(-6px);border-color:rgba(255,255,255,.3);}
-.planet-emoji{font-size:3.8rem;display:block;margin-bottom:10px;animation:float 3s ease-in-out infinite;}
+.planet-emoji{font-size:3.5rem;display:block;margin-bottom:9px;animation:float 3s ease-in-out infinite;}
 @keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
-.planet-card:nth-child(2) .planet-emoji{animation-delay:.3s}
-.planet-card:nth-child(3) .planet-emoji{animation-delay:.6s}
-.planet-card:nth-child(4) .planet-emoji{animation-delay:.9s}
-.planet-card:nth-child(5) .planet-emoji{animation-delay:1.2s}
-.planet-card:nth-child(6) .planet-emoji{animation-delay:1.5s}
-.planet-card:nth-child(7) .planet-emoji{animation-delay:1.8s}
-.planet-card:nth-child(8) .planet-emoji{animation-delay:2.1s}
-.planet-name{font-family:'Fredoka One',cursive;font-size:1.25rem;margin-bottom:3px;}
-.planet-tag{font-size:.78rem;color:rgba(255,255,255,.5);}
-.fact-list{list-style:none;display:flex;flex-direction:column;gap:9px;}
-.fact-list li{background:rgba(255,255,255,.07);border-radius:10px;padding:9px 13px;font-size:.88rem;line-height:1.5;}
-.fact-lbl{font-weight:800;color:var(--yellow);margin-right:5px;}
-.modal-ico{font-size:4.5rem;display:block;text-align:center;margin-bottom:14px;}
-.modal-name{font-family:'Fredoka One',cursive;font-size:1.9rem;text-align:center;margin-bottom:18px;}
+.planet-card:nth-child(2) .planet-emoji{animation-delay:.3s}.planet-card:nth-child(3) .planet-emoji{animation-delay:.6s}
+.planet-card:nth-child(4) .planet-emoji{animation-delay:.9s}.planet-card:nth-child(5) .planet-emoji{animation-delay:1.2s}
+.planet-card:nth-child(6) .planet-emoji{animation-delay:1.5s}.planet-card:nth-child(7) .planet-emoji{animation-delay:1.8s}.planet-card:nth-child(8) .planet-emoji{animation-delay:2.1s}
+.planet-name{font-family:'Fredoka One',cursive;font-size:1.2rem;margin-bottom:3px;}
+.planet-tag{font-size:.75rem;color:rgba(255,255,255,.48);}
+.fact-list{list-style:none;display:flex;flex-direction:column;gap:8px;}
+.fact-list li{background:rgba(255,255,255,.07);border-radius:10px;padding:8px 12px;font-size:.86rem;line-height:1.5;}
+.fact-lbl{font-weight:800;color:var(--y);margin-right:5px;}
+.modal-ico{font-size:4rem;display:block;text-align:center;margin-bottom:12px;}
+.modal-name{font-family:'Fredoka One',cursive;font-size:1.8rem;text-align:center;margin-bottom:16px;}
 
-/* ======================================
-   ARCADE
-====================================== */
-.game-wrap{display:flex;flex-direction:column;align-items:center;gap:16px;}
-.score-bar{
-  display:flex;gap:28px;font-family:'Fredoka One',cursive;font-size:1.25rem;
-  background:var(--card);padding:10px 28px;border-radius:50px;border:2px solid rgba(255,255,255,.1);
-}
-.score-val{color:var(--yellow);}
-#gameCanvas{border-radius:18px;border:3px solid rgba(255,255,255,.18);box-shadow:0 0 40px rgba(78,205,196,.25);display:block;max-width:100%;cursor:none;}
-.game-hint{font-size:.83rem;color:rgba(255,255,255,.45);text-align:center;}
+/* ARCADE */
+.game-wrap{display:flex;flex-direction:column;align-items:center;gap:14px;}
+.score-bar{display:flex;gap:24px;font-family:'Fredoka One',cursive;font-size:1.2rem;background:var(--c);padding:9px 26px;border-radius:50px;border:2px solid rgba(255,255,255,.1);}
+.score-val{color:var(--y);}
+#gameCanvas{border-radius:16px;border:3px solid rgba(255,255,255,.18);box-shadow:0 0 36px rgba(78,205,196,.2);display:block;max-width:100%;cursor:none;}
 
-/* ======================================
-   GAMES DIARY
-====================================== */
-.games-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:14px;}
-.game-card{background:var(--card);border-radius:18px;border:2px solid rgba(255,255,255,.08);padding:18px;position:relative;backdrop-filter:blur(10px);transition:transform .2s;}
+/* GAMES DIARY */
+.games-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(225px,1fr));gap:13px;}
+.game-card{background:var(--c);border-radius:17px;border:2px solid rgba(255,255,255,.08);padding:17px;position:relative;backdrop-filter:blur(10px);transition:transform .2s;}
 .game-card:hover{transform:translateY(-4px);}
-.gc-genre{font-size:.72rem;font-weight:800;text-transform:uppercase;letter-spacing:1px;padding:3px 10px;border-radius:50px;display:inline-block;margin-bottom:8px;}
-.gc-name{font-family:'Fredoka One',cursive;font-size:1.2rem;margin-bottom:5px;}
-.gc-stars{font-size:1rem;margin-bottom:6px;}
-.gc-status{font-size:.72rem;font-weight:700;padding:2px 9px;border-radius:50px;display:inline-block;margin-bottom:7px;}
-.gc-review{font-size:.82rem;color:rgba(255,255,255,.55);line-height:1.5;}
-.gc-del{position:absolute;top:11px;right:13px;background:none;border:none;color:rgba(255,255,255,.2);font-size:.95rem;cursor:pointer;transition:color .2s;}
-.gc-del:hover{color:var(--pink);}
-.genre-racing{background:rgba(255,107,53,.2);color:#FF6B35;}
-.genre-action{background:rgba(255,77,139,.2);color:#FF4D8B;}
-.genre-space{background:rgba(78,205,196,.2);color:#4ECDC4;}
-.genre-puzzle{background:rgba(168,85,247,.2);color:#A855F7;}
-.genre-adventure{background:rgba(107,203,119,.2);color:#6BCB77;}
-.genre-sports{background:rgba(255,217,61,.2);color:#FFD93D;}
-.genre-other{background:rgba(255,255,255,.1);color:rgba(255,255,255,.7);}
-.status-playing{background:rgba(107,203,119,.2);color:var(--green);}
-.status-completed{background:rgba(78,205,196,.2);color:var(--blue);}
-.status-wishlist{background:rgba(255,217,61,.2);color:var(--yellow);}
-.status-dropped{background:rgba(255,77,139,.2);color:var(--pink);}
-.star-row{display:flex;gap:4px;align-items:center;margin-bottom:12px;}
-.star-row span{font-family:'Fredoka One',cursive;margin-right:7px;color:rgba(255,255,255,.55);font-size:.88rem;}
-.star-btn{font-size:1.35rem;background:none;border:none;cursor:pointer;opacity:.3;transition:opacity .15s,transform .15s;}
+.gc-genre{font-size:.7rem;font-weight:800;text-transform:uppercase;letter-spacing:1px;padding:2px 9px;border-radius:50px;display:inline-block;margin-bottom:7px;}
+.gc-name{font-family:'Fredoka One',cursive;font-size:1.15rem;margin-bottom:5px;}
+.gc-stars{font-size:.95rem;margin-bottom:5px;}
+.gc-status{font-size:.7rem;font-weight:700;padding:2px 8px;border-radius:50px;display:inline-block;margin-bottom:6px;}
+.gc-review{font-size:.8rem;color:rgba(255,255,255,.52);line-height:1.5;}
+.gc-del{position:absolute;top:10px;right:12px;background:none;border:none;color:rgba(255,255,255,.18);font-size:.9rem;cursor:pointer;transition:color .2s;}
+.gc-del:hover{color:var(--p);}
+.genre-racing{background:rgba(255,107,53,.2);color:#FF6B35;}.genre-action{background:rgba(255,77,139,.2);color:#FF4D8B;}
+.genre-space{background:rgba(78,205,196,.2);color:#4ECDC4;}.genre-puzzle{background:rgba(168,85,247,.2);color:#A855F7;}
+.genre-adventure{background:rgba(107,203,119,.2);color:#6BCB77;}.genre-sports{background:rgba(255,217,61,.2);color:#FFD93D;}
+.genre-other{background:rgba(255,255,255,.1);color:rgba(255,255,255,.65);}
+.status-playing{background:rgba(107,203,119,.2);color:var(--g);}.status-completed{background:rgba(78,205,196,.2);color:var(--b);}
+.status-wishlist{background:rgba(255,217,61,.2);color:var(--y);}.status-dropped{background:rgba(255,77,139,.2);color:var(--p);}
+.star-row{display:flex;gap:4px;align-items:center;margin-bottom:11px;}
+.star-row span{font-family:'Fredoka One',cursive;margin-right:6px;color:rgba(255,255,255,.5);font-size:.85rem;}
+.star-btn{font-size:1.3rem;background:none;border:none;cursor:pointer;opacity:.28;transition:opacity .15s,transform .15s;}
 .star-btn.lit{opacity:1;transform:scale(1.15);}
 
-/* ======================================
-   DREAM GARAGE
-====================================== */
-.gtabs{display:flex;gap:10px;justify-content:center;margin-bottom:26px;flex-wrap:wrap;}
-.gtab{
-  font-family:'Fredoka One',cursive;font-size:.95rem;padding:8px 20px;border-radius:50px;
-  border:2px solid rgba(255,255,255,.15);background:transparent;color:rgba(255,255,255,.55);cursor:pointer;transition:all .2s;
-}
-.gtab.active,.gtab:hover{background:rgba(255,217,61,.12);border-color:var(--yellow);color:var(--yellow);}
-.cars-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:18px;}
-.car-card{background:var(--card);border-radius:22px;border:2px solid rgba(255,255,255,.08);overflow:hidden;cursor:default;transition:transform .2s,border-color .2s;backdrop-filter:blur(10px);}
+/* DREAM GARAGE */
+.gtabs{display:flex;gap:10px;justify-content:center;margin-bottom:24px;flex-wrap:wrap;}
+.gtab{font-family:'Fredoka One',cursive;font-size:.92rem;padding:7px 18px;border-radius:50px;border:2px solid rgba(255,255,255,.14);background:transparent;color:rgba(255,255,255,.52);cursor:pointer;transition:all .2s;}
+.gtab.active,.gtab:hover{background:rgba(255,217,61,.12);border-color:var(--y);color:var(--y);}
+.cars-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:16px;}
+.car-card{background:var(--c);border-radius:20px;border:2px solid rgba(255,255,255,.08);overflow:hidden;transition:transform .2s,border-color .2s;backdrop-filter:blur(10px);}
 .car-card:hover{transform:translateY(-5px);border-color:rgba(255,217,61,.35);}
-.car-banner{height:96px;display:flex;align-items:center;justify-content:center;font-size:4rem;position:relative;}
+.car-banner{height:90px;display:flex;align-items:center;justify-content:center;font-size:3.8rem;position:relative;}
 .car-banner::after{content:'';position:absolute;inset:0;background:linear-gradient(to bottom,transparent 40%,rgba(0,0,0,.5));}
-.car-body{padding:15px 17px 17px;}
-.car-make{font-size:.7rem;font-weight:800;text-transform:uppercase;letter-spacing:1.5px;color:var(--yellow);margin-bottom:2px;}
-.car-name{font-family:'Fredoka One',cursive;font-size:1.2rem;margin-bottom:9px;}
-.car-stats{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:9px;}
-.car-stat{font-size:.75rem;padding:2px 9px;border-radius:50px;background:rgba(255,255,255,.08);color:rgba(255,255,255,.65);}
-.car-note{font-size:.8rem;color:rgba(255,255,255,.48);font-style:italic;line-height:1.45;}
-.spd-lbl{font-size:.68rem;color:rgba(255,255,255,.38);margin:6px 0 3px;}
-.spd-bg{background:rgba(255,255,255,.08);border-radius:50px;height:5px;overflow:hidden;}
-.spd-fill{height:100%;border-radius:50px;background:linear-gradient(90deg,#FFD93D,#FF6B35);transition:width .8s ease;width:0%;}
-.car-del{float:right;background:none;border:none;color:rgba(255,255,255,.18);font-size:.85rem;cursor:pointer;transition:color .2s;margin-left:6px;}
-.car-del:hover{color:var(--pink);}
+.car-body{padding:14px 16px 16px;}
+.car-make{font-size:.68rem;font-weight:800;text-transform:uppercase;letter-spacing:1.5px;color:var(--y);margin-bottom:2px;}
+.car-name{font-family:'Fredoka One',cursive;font-size:1.15rem;margin-bottom:8px;}
+.car-stats{display:flex;gap:5px;flex-wrap:wrap;margin-bottom:8px;}
+.car-stat{font-size:.73rem;padding:2px 8px;border-radius:50px;background:rgba(255,255,255,.07);color:rgba(255,255,255,.62);}
+.car-note{font-size:.78rem;color:rgba(255,255,255,.45);font-style:italic;line-height:1.42;}
+.spd-lbl{font-size:.65rem;color:rgba(255,255,255,.35);margin:5px 0 2px;}
+.spd-bg{background:rgba(255,255,255,.07);border-radius:50px;height:5px;overflow:hidden;}
+.spd-fill{height:100%;border-radius:50px;background:linear-gradient(90deg,var(--y),var(--o));transition:width .8s ease;width:0%;}
+.car-del{float:right;background:none;border:none;color:rgba(255,255,255,.16);font-size:.82rem;cursor:pointer;transition:color .2s;margin-left:5px;}
+.car-del:hover{color:var(--p);}
 
-/* ======================================
-   PIANO
-====================================== */
-.piano-wrap{display:flex;flex-direction:column;align-items:center;gap:18px;}
-.piano-info{display:flex;gap:16px;flex-wrap:wrap;justify-content:center;font-family:'Fredoka One',cursive;font-size:1.05rem;}
-.piano-info span{background:var(--card);padding:7px 18px;border-radius:50px;border:2px solid rgba(255,255,255,.1);}
-.piano-info .hi{color:var(--purple);}
-/* The keyboard container — white keys laid out, black keys absolutely positioned */
-.keyboard-outer{overflow-x:auto;overflow-y:visible;padding-bottom:4px;width:100%;display:flex;justify-content:center;}
-.keyboard{
-  position:relative;
-  display:flex;
-  background:linear-gradient(180deg,#2a1a4a,#1a0a2e);
-  border-radius:0 0 14px 14px;
-  border:3px solid rgba(168,85,247,.4);
-  box-shadow:0 8px 36px rgba(168,85,247,.3);
-  padding:0 6px 6px;
-  user-select:none;
-  touch-action:none;
-  flex-shrink:0;
-}
-.wkey{
-  width:44px;height:154px;
-  background:linear-gradient(180deg,#f0e8ff,#fff);
-  border:1px solid #c0a8e0;
-  border-radius:0 0 9px 9px;
-  cursor:pointer;
-  display:flex;align-items:flex-end;justify-content:center;
-  padding-bottom:7px;
-  font-family:'Fredoka One',cursive;font-size:.68rem;color:#8060b0;
-  box-shadow:0 3px 6px rgba(0,0,0,.3);
-  transition:background .06s,transform .06s;
-  flex-shrink:0;
-  -webkit-tap-highlight-color:transparent;
-}
+/* PIANO */
+.piano-wrap{display:flex;flex-direction:column;align-items:center;gap:16px;}
+.piano-info{display:flex;gap:14px;flex-wrap:wrap;justify-content:center;font-family:'Fredoka One',cursive;font-size:1rem;}
+.piano-info span{background:var(--c);padding:7px 16px;border-radius:50px;border:2px solid rgba(255,255,255,.1);}
+.piano-info .hi{color:var(--v);}
+.keyboard-outer{overflow-x:auto;overflow-y:visible;padding:0 0 8px;width:100%;display:flex;justify-content:center;}
+.keyboard{position:relative;display:flex;background:linear-gradient(180deg,#2a1a4a,#1a0a2e);border-radius:0 0 14px 14px;border:3px solid rgba(168,85,247,.4);box-shadow:0 8px 36px rgba(168,85,247,.3);padding:0 6px 6px;user-select:none;touch-action:none;flex-shrink:0;}
+.wkey{width:52px;height:185px;background:linear-gradient(180deg,#f0e8ff,#fff);border:1px solid #c0a8e0;border-radius:0 0 9px 9px;cursor:pointer;display:flex;align-items:flex-end;justify-content:center;padding-bottom:7px;font-family:'Fredoka One',cursive;font-size:.7rem;color:#7050a0;box-shadow:0 3px 6px rgba(0,0,0,.3);transition:background .06s,transform .06s;flex-shrink:0;-webkit-tap-highlight-color:transparent;}
 .wkey:hover,.wkey.pressed{background:linear-gradient(180deg,#d8b8ff,#c8a0ff);transform:translateY(2px);}
-.bkey{
-  position:absolute;
-  width:28px;height:94px;
-  background:linear-gradient(180deg,#2a0840,#110020);
-  border-radius:0 0 7px 7px;
-  cursor:pointer;
-  display:flex;align-items:flex-end;justify-content:center;
-  padding-bottom:5px;
-  font-family:'Fredoka One',cursive;font-size:.58rem;color:rgba(200,150,255,.6);
-  box-shadow:0 5px 10px rgba(0,0,0,.6);
-  border:1px solid rgba(168,85,247,.25);
-  z-index:2;
-  top:0;
-  transition:background .06s,transform .06s;
-  -webkit-tap-highlight-color:transparent;
-}
+.bkey{position:absolute;width:32px;height:115px;background:linear-gradient(180deg,#2a0840,#110020);border-radius:0 0 7px 7px;cursor:pointer;display:flex;align-items:flex-end;justify-content:center;padding-bottom:5px;font-family:'Fredoka One',cursive;font-size:.58rem;color:rgba(200,150,255,.55);box-shadow:0 5px 10px rgba(0,0,0,.6);border:1px solid rgba(168,85,247,.22);z-index:2;top:0;transition:background .06s,transform .06s;-webkit-tap-highlight-color:transparent;}
 .bkey:hover,.bkey.pressed{background:linear-gradient(180deg,#5520a0,#330060);transform:translateY(2px);}
 .chord-row{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;}
-.chord-btn{
-  font-family:'Fredoka One',cursive;font-size:.88rem;padding:7px 16px;border-radius:50px;
-  border:2px solid rgba(168,85,247,.3);background:rgba(168,85,247,.1);color:var(--purple);
-  cursor:pointer;transition:all .15s;
-}
-.chord-btn:hover{background:rgba(168,85,247,.25);border-color:var(--purple);transform:scale(1.05);}
-.piano-hint{font-size:.8rem;color:rgba(255,255,255,.38);text-align:center;max-width:500px;}
+.chord-btn{font-family:'Fredoka One',cursive;font-size:.85rem;padding:7px 15px;border-radius:50px;border:2px solid rgba(168,85,247,.3);background:rgba(168,85,247,.1);color:var(--v);cursor:pointer;transition:all .15s;}
+.chord-btn:hover{background:rgba(168,85,247,.25);border-color:var(--v);transform:scale(1.05);}
+.piano-hint{font-size:.78rem;color:rgba(255,255,255,.35);text-align:center;max-width:520px;}
 .note-pop{position:fixed;pointer-events:none;font-size:1.5rem;animation:noteFly 1.1s ease-out forwards;z-index:999;}
 @keyframes noteFly{0%{opacity:1;transform:translateY(0) scale(1)}100%{opacity:0;transform:translateY(-70px) scale(1.4)}}
 
-/* ======================================
-   SONG JOURNAL
-====================================== */
-.lyrics-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:14px;}
-.lyric-card{
-  background:var(--card);border-radius:18px;border:2px solid rgba(255,255,255,.08);
-  padding:18px;backdrop-filter:blur(10px);transition:transform .2s;cursor:pointer;position:relative;
-}
+/* SONG JOURNAL */
+.lyrics-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(245px,1fr));gap:13px;}
+.lyric-card{background:var(--c);border-radius:17px;border:2px solid rgba(255,255,255,.08);padding:17px;backdrop-filter:blur(10px);transition:transform .2s;cursor:pointer;position:relative;}
 .lyric-card:hover{transform:translateY(-4px);border-color:rgba(107,203,119,.3);}
-.lc-title{font-family:'Fredoka One',cursive;font-size:1.15rem;margin-bottom:3px;}
-.lc-artist{font-size:.78rem;color:var(--blue);font-weight:700;margin-bottom:9px;}
-.lc-status{font-size:.7rem;font-weight:800;text-transform:uppercase;letter-spacing:1px;padding:2px 9px;border-radius:50px;display:inline-block;margin-bottom:9px;}
-.ls-learning{background:rgba(255,217,61,.2);color:var(--yellow);}
-.ls-know{background:rgba(107,203,119,.2);color:var(--green);}
-.ls-love{background:rgba(255,77,139,.2);color:var(--pink);}
-.lc-preview{font-size:.8rem;color:rgba(255,255,255,.42);font-style:italic;line-height:1.5;white-space:pre-wrap;}
-.lc-del{position:absolute;top:11px;right:13px;background:none;border:none;color:rgba(255,255,255,.2);font-size:.95rem;cursor:pointer;transition:color .2s;}
-.lc-del:hover{color:var(--pink);}
-.lm-title{font-family:'Fredoka One',cursive;font-size:1.75rem;margin-bottom:3px;}
-.lm-artist{color:var(--blue);font-weight:700;margin-bottom:16px;font-size:.9rem;}
-.lm-body{font-size:.92rem;white-space:pre-wrap;line-height:1.85;color:rgba(255,255,255,.83);max-height:340px;overflow-y:auto;}
-.lm-body::-webkit-scrollbar{width:4px;}
-.lm-body::-webkit-scrollbar-thumb{background:rgba(255,255,255,.2);border-radius:4px;}
+.lc-title{font-family:'Fredoka One',cursive;font-size:1.1rem;margin-bottom:3px;}
+.lc-artist{font-size:.76rem;color:var(--b);font-weight:700;margin-bottom:8px;}
+.lc-status{font-size:.68rem;font-weight:800;text-transform:uppercase;letter-spacing:1px;padding:2px 8px;border-radius:50px;display:inline-block;margin-bottom:8px;}
+.ls-learning{background:rgba(255,217,61,.18);color:var(--y);}.ls-know{background:rgba(107,203,119,.18);color:var(--g);}.ls-love{background:rgba(255,77,139,.18);color:var(--p);}
+.lc-preview{font-size:.78rem;color:rgba(255,255,255,.4);font-style:italic;line-height:1.5;white-space:pre-wrap;}
+.lc-del{position:absolute;top:10px;right:12px;background:none;border:none;color:rgba(255,255,255,.18);font-size:.92rem;cursor:pointer;transition:color .2s;}
+.lc-del:hover{color:var(--p);}
+.lm-title{font-family:'Fredoka One',cursive;font-size:1.7rem;margin-bottom:3px;}
+.lm-artist{color:var(--b);font-weight:700;margin-bottom:14px;font-size:.88rem;}
+.lm-body{font-size:.9rem;white-space:pre-wrap;line-height:1.85;color:rgba(255,255,255,.8);max-height:340px;overflow-y:auto;}
+.lm-body::-webkit-scrollbar{width:4px;}.lm-body::-webkit-scrollbar-thumb{background:rgba(255,255,255,.18);border-radius:4px;}
 
-/* ======================================
-   PRACTICE LOG
-====================================== */
-.pstats{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:12px;margin-bottom:24px;}
-.pstat{background:var(--card);border-radius:16px;border:2px solid rgba(255,255,255,.08);padding:16px 14px;text-align:center;backdrop-filter:blur(10px);}
-.pstat-val{font-family:'Fredoka One',cursive;font-size:1.9rem;margin-bottom:3px;}
-.pstat-lbl{font-size:.75rem;color:rgba(255,255,255,.48);}
-.streak-bar{display:flex;gap:5px;flex-wrap:wrap;margin-bottom:22px;}
-.sday{width:28px;height:28px;border-radius:7px;font-size:.63rem;font-weight:800;display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,.38);}
-.sday.done{background:linear-gradient(135deg,#FF4D8B,#A855F7);color:#fff;}
-.sday.none{background:rgba(255,255,255,.07);}
-.plog-list{display:flex;flex-direction:column;gap:10px;}
-.plog-entry{
-  background:var(--card);border-radius:14px;border:2px solid rgba(255,255,255,.07);
-  padding:14px 16px;display:flex;gap:12px;align-items:center;backdrop-filter:blur(10px);
-}
-.pl-icon{font-size:1.9rem;flex-shrink:0;}
+/* SINGING PRACTICE */
+.song-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:14px;margin-bottom:24px;}
+.song-card{background:var(--c);border-radius:18px;border:2px solid rgba(255,255,255,.08);overflow:hidden;cursor:pointer;transition:transform .2s,border-color .2s;backdrop-filter:blur(10px);}
+.song-card:hover{transform:translateY(-5px);border-color:rgba(255,77,139,.35);}
+.song-card.active{border-color:var(--p);box-shadow:0 0 22px rgba(255,77,139,.28);}
+.song-banner{height:76px;display:flex;align-items:center;justify-content:center;font-size:2.4rem;position:relative;}
+.song-body{padding:13px;}
+.song-title{font-family:'Fredoka One',cursive;font-size:1rem;margin-bottom:2px;}
+.song-artist{font-size:.75rem;color:var(--b);font-weight:700;margin-bottom:6px;}
+.song-tags{display:flex;gap:4px;flex-wrap:wrap;}
+.song-tag{font-size:.62rem;font-weight:800;padding:2px 7px;border-radius:50px;background:rgba(255,255,255,.09);color:rgba(255,255,255,.6);}
+.pp{background:var(--c);border:2px solid rgba(255,77,139,.2);border-radius:20px;padding:22px;margin-bottom:22px;display:none;}
+.pp.show{display:block;animation:fadeIn .3s ease;}
+.pp-top{display:flex;gap:18px;flex-wrap:wrap;align-items:flex-start;margin-bottom:18px;}
+.pp-emo{font-size:3.5rem;flex-shrink:0;}
+.pp-info{flex:1;}
+.pp-title{font-family:'Fredoka One',cursive;font-size:1.5rem;margin-bottom:3px;}
+.pp-artist{color:var(--b);font-weight:700;font-size:.85rem;margin-bottom:10px;}
+.pp-stats{display:flex;gap:8px;flex-wrap:wrap;}
+.pp-stat{background:rgba(255,255,255,.07);border-radius:9px;padding:5px 11px;font-size:.8rem;}
+.pp-stat strong{color:var(--y);margin-right:3px;}
+.pp-tips{background:rgba(255,77,139,.07);border:1px solid rgba(255,77,139,.18);border-radius:12px;padding:13px;margin-bottom:16px;}
+.pp-tips-title{font-family:'Fredoka One',cursive;font-size:.92rem;color:var(--p);margin-bottom:7px;}
+.pp-tips ul{list-style:none;display:flex;flex-direction:column;gap:5px;}
+.pp-tips ul li{font-size:.8rem;color:rgba(255,255,255,.68);padding-left:16px;position:relative;line-height:1.5;}
+.pp-tips ul li::before{content:'♪';position:absolute;left:0;color:var(--p);}
+.mic-section{text-align:center;}
+.mic-lbl{font-family:'Fredoka One',cursive;font-size:.92rem;color:rgba(255,255,255,.5);margin-bottom:10px;}
+.mic-bars{display:flex;gap:3px;justify-content:center;align-items:flex-end;height:56px;margin-bottom:13px;}
+.mic-bar{width:9px;background:rgba(255,77,139,.25);border-radius:4px 4px 0 0;transition:height .05s;min-height:3px;}
+.mic-btns{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;}
+.genius-link{display:inline-flex;align-items:center;gap:5px;padding:7px 16px;border-radius:50px;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.18);color:rgba(255,255,255,.65);font-size:.82rem;font-family:'Fredoka One',cursive;text-decoration:none;transition:all .2s;}
+.genius-link:hover{background:rgba(255,255,255,.14);color:#fff;}
+
+/* PRACTICE LOG */
+.pstats{display:grid;grid-template-columns:repeat(auto-fill,minmax(148px,1fr));gap:11px;margin-bottom:22px;}
+.pstat{background:var(--c);border-radius:15px;border:2px solid rgba(255,255,255,.08);padding:15px 13px;text-align:center;backdrop-filter:blur(10px);}
+.pstat-val{font-family:'Fredoka One',cursive;font-size:1.85rem;margin-bottom:2px;}
+.pstat-lbl{font-size:.72rem;color:rgba(255,255,255,.45);}
+.streak-bar{display:flex;gap:4px;flex-wrap:wrap;margin-bottom:20px;}
+.sday{width:27px;height:27px;border-radius:6px;font-size:.6rem;font-weight:800;display:flex;align-items:center;justify-content:center;}
+.sday.done{background:linear-gradient(135deg,var(--p),var(--v));color:#fff;}
+.sday.none{background:rgba(255,255,255,.06);color:rgba(255,255,255,.35);}
+.plog-list{display:flex;flex-direction:column;gap:9px;}
+.plog-entry{background:var(--c);border-radius:13px;border:2px solid rgba(255,255,255,.06);padding:13px 15px;display:flex;gap:11px;align-items:center;backdrop-filter:blur(10px);}
+.pl-icon{font-size:1.8rem;flex-shrink:0;}
 .pl-info{flex:1;min-width:0;}
-.pl-title{font-family:'Fredoka One',cursive;font-size:1rem;margin-bottom:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
-.pl-meta{font-size:.75rem;color:rgba(255,255,255,.42);}
-.pl-mins{font-family:'Fredoka One',cursive;font-size:1.25rem;color:var(--pink);flex-shrink:0;}
-.pl-del{background:none;border:none;color:rgba(255,255,255,.15);font-size:.88rem;cursor:pointer;transition:color .2s;margin-left:6px;flex-shrink:0;}
-.pl-del:hover{color:var(--pink);}
+.pl-title{font-family:'Fredoka One',cursive;font-size:.97rem;margin-bottom:1px;}
+.pl-meta{font-size:.72rem;color:rgba(255,255,255,.4);}
+.pl-mins{font-family:'Fredoka One',cursive;font-size:1.2rem;color:var(--p);flex-shrink:0;}
+.pl-del{background:none;border:none;color:rgba(255,255,255,.13);font-size:.85rem;cursor:pointer;transition:color .2s;margin-left:5px;}
+.pl-del:hover{color:var(--p);}
+
+/* STUDY HUB */
+.study-tabs{display:flex;gap:9px;justify-content:center;margin-bottom:26px;flex-wrap:wrap;}
+.stab{font-family:'Fredoka One',cursive;font-size:.95rem;padding:8px 20px;border-radius:50px;border:2px solid rgba(255,255,255,.14);background:transparent;color:rgba(255,255,255,.52);cursor:pointer;transition:all .2s;}
+.stab.active,.stab:hover{background:rgba(78,205,196,.12);border-color:var(--b);color:var(--b);}
+.study-sub{display:none;}
+.study-sub.active{display:block;animation:fadeIn .3s ease;}
+/* Chat */
+.chat-box{background:rgba(0,0,0,.18);border:2px solid rgba(255,255,255,.07);border-radius:16px;height:360px;overflow-y:auto;padding:14px;margin-bottom:12px;display:flex;flex-direction:column;gap:10px;}
+.chat-box::-webkit-scrollbar{width:4px;}.chat-box::-webkit-scrollbar-thumb{background:rgba(255,255,255,.18);border-radius:4px;}
+.cmsg{max-width:82%;padding:9px 13px;border-radius:13px;font-size:.87rem;line-height:1.55;}
+.cmsg.user{align-self:flex-end;background:linear-gradient(135deg,var(--v),var(--p));border-radius:13px 13px 4px 13px;}
+.cmsg.bot{align-self:flex-start;background:rgba(255,255,255,.09);border:1px solid rgba(255,255,255,.09);border-radius:13px 13px 13px 4px;}
+.cmsg.bot strong{color:var(--b);}
+.cmsg.typing{color:rgba(255,255,255,.45);font-style:italic;}
+.chat-row{display:flex;gap:9px;}
+.chat-row input{font-family:'Nunito',sans-serif;background:rgba(255,255,255,.07);border:2px solid rgba(255,255,255,.11);border-radius:11px;color:#fff;padding:9px 13px;font-size:.9rem;flex:1;outline:none;transition:border-color .2s;}
+.chat-row input:focus{border-color:var(--b);}
+.chat-row input::placeholder{color:rgba(255,255,255,.28);}
+.ai-unavail{text-align:center;padding:36px 20px;color:rgba(255,255,255,.38);}
+.ai-unavail .au-ico{font-size:2.8rem;margin-bottom:10px;}
+/* Quiz */
+.quiz-setup{background:var(--c);border-radius:18px;border:2px solid rgba(255,255,255,.1);padding:20px;margin-bottom:18px;backdrop-filter:blur(10px);}
+.qprogress{display:flex;gap:5px;margin-bottom:18px;}
+.qdot{height:7px;flex:1;border-radius:4px;background:rgba(255,255,255,.14);transition:background .3s;}
+.qdot.done{background:var(--g);}.qdot.curr{background:var(--y);}
+.q-card{background:var(--c);border-radius:18px;border:2px solid rgba(255,255,255,.1);padding:22px;backdrop-filter:blur(10px);}
+.q-num{font-size:.72rem;color:rgba(255,255,255,.38);font-weight:800;text-transform:uppercase;letter-spacing:1px;margin-bottom:7px;}
+.q-text{font-family:'Fredoka One',cursive;font-size:1.15rem;line-height:1.45;margin-bottom:16px;}
+.q-opts{display:flex;flex-direction:column;gap:8px;}
+.q-opt{background:rgba(255,255,255,.05);border:2px solid rgba(255,255,255,.1);border-radius:11px;padding:10px 15px;font-size:.88rem;cursor:pointer;text-align:left;color:#fff;font-family:'Nunito',sans-serif;transition:all .15s;width:100%;}
+.q-opt:hover:not(:disabled){background:rgba(255,255,255,.11);border-color:rgba(255,255,255,.28);}
+.q-opt.correct{background:rgba(107,203,119,.2);border-color:var(--g);color:var(--g);}
+.q-opt.wrong{background:rgba(255,77,139,.2);border-color:var(--p);color:var(--p);}
+.q-opt:disabled{cursor:default;}
+.q-exp{background:rgba(78,205,196,.08);border:1px solid rgba(78,205,196,.2);border-radius:9px;padding:10px 13px;font-size:.82rem;color:rgba(255,255,255,.72);margin-top:10px;line-height:1.5;display:none;}
+.q-exp.show{display:block;}
+.score-card{text-align:center;padding:28px 20px;display:none;}
+.score-card.show{display:block;animation:popIn .4s ease;}
+.score-big{font-family:'Fredoka One',cursive;font-size:3.6rem;margin-bottom:6px;}
+.score-lbl{font-size:1rem;color:rgba(255,255,255,.55);margin-bottom:22px;}
+.code-box{background:rgba(255,217,61,.08);border:2px solid rgba(255,217,61,.28);border-radius:14px;padding:14px;margin:0 auto 18px;max-width:340px;}
+.code-display{font-family:'Fredoka One',cursive;font-size:2rem;color:var(--y);letter-spacing:5px;margin:7px 0;}
+.code-hint{font-size:.76rem;color:rgba(255,255,255,.45);}
+/* Challenge */
+.ch-list{display:flex;flex-direction:column;gap:9px;}
+.ch-row{background:rgba(255,255,255,.05);border-radius:11px;padding:11px 15px;display:flex;align-items:center;gap:11px;}
+.ch-medal{font-size:1.4rem;}
+.ch-info{flex:1;}
+.ch-player{font-family:'Fredoka One',cursive;font-size:.97rem;}
+.ch-meta{font-size:.72rem;color:rgba(255,255,255,.4);}
+.ch-score{font-family:'Fredoka One',cursive;font-size:1.15rem;color:var(--y);}
 </style>
 </head>
 <body>
 
-<!-- Parallax cloud background (clouds-layer.png from original site) -->
 <div class="clouds-bg" aria-hidden="true"></div>
-
-<!-- Background music (Moonlight.mp3 from original site) -->
 <audio id="bgMusic" src="Moonlight.mp3" loop preload="none"></audio>
-<button id="musicToggle" title="Toggle music" aria-label="Toggle background music">🎵</button>
+<button id="musicToggle" title="Toggle music">🎵</button>
+<button id="settingsBtn" title="Parent settings">⚙️</button>
+
+<!-- Settings panel -->
+<div class="sp" id="sp">
+  <div class="sp-title">⚙️ Parent Settings</div>
+  <div id="spPinGate">
+    <div class="sp-row">
+      <input type="password" id="spPin" placeholder="Parent PIN (default: 1234)" maxlength="6">
+      <button class="btn btn-teal" id="spPinBtn" style="padding:7px 13px;">Unlock</button>
+    </div>
+  </div>
+  <div id="spContent" style="display:none">
+    <div class="sp-row">
+      <input type="password" id="spKey" placeholder="Anthropic API Key (sk-ant-...)">
+      <button class="btn btn-purple" id="spSave" style="padding:7px 13px;">Save</button>
+    </div>
+    <button class="btn btn-orange" id="spClear" style="padding:5px 12px;font-size:.82rem;margin-top:4px;">Clear Key</button>
+    <div class="sp-note">🔑 Required for AI Study features. Get yours at console.anthropic.com. Stored only in this browser.</div>
+  </div>
+</div>
 
 <div class="container">
-
   <div class="page-header">
     <h1>🌟 Devagneya's World</h1>
-    <p>Explore • Play • Create • Learn</p>
+    <p>Explore • Play • Create • Learn • Sing</p>
   </div>
 
   <nav class="nav">
@@ -363,18 +331,18 @@ body::before{
     <button class="nav-btn" data-tab="diary">🎮 Games</button>
     <button class="nav-btn" data-tab="garage">🚗 Garage</button>
     <button class="nav-btn" data-tab="piano">🎹 Piano</button>
-    <button class="nav-btn" data-tab="lyrics">🎵 Songs</button>
-    <button class="nav-btn" data-tab="praclog">🎤 Practice</button>
+    <button class="nav-btn" data-tab="songs">🎵 Songs</button>
+    <button class="nav-btn" data-tab="singing">🎤 Singing</button>
+    <button class="nav-btn" data-tab="praclog">📋 Practice</button>
+    <button class="nav-btn" data-tab="study">📚 Study</button>
   </nav>
 
-  <!-- PLANET EXPLORER -->
+  <!-- PLANETS -->
   <section id="planets-section" class="section active">
     <div class="sec-title">🪐 Planet Explorer</div>
     <div class="sec-sub">Tap any planet to discover amazing facts!</div>
     <div class="planet-grid" id="planetGrid"></div>
   </section>
-
-  <!-- Planet modal -->
   <div class="overlay" id="planetModal">
     <div class="modal">
       <button class="modal-close" id="pmClose">✕</button>
@@ -393,12 +361,12 @@ body::before{
         <span>⏱ Time: <span class="score-val" id="gameTime">0</span>s</span>
         <span>🏆 Best: <span class="score-val" id="bestTime">0</span>s</span>
       </div>
-      <canvas id="gameCanvas" width="560" height="370"></canvas>
-      <div style="display:flex;gap:12px;flex-wrap:wrap;justify-content:center;">
-        <button class="btn btn-green" id="startBtn">🚀 Start Game</button>
+      <canvas id="gameCanvas" width="560" height="360"></canvas>
+      <div style="display:flex;gap:11px;flex-wrap:wrap;justify-content:center;">
+        <button class="btn btn-green" id="startBtn">🚀 Start</button>
         <button class="btn btn-orange" id="resetBtn">🔄 Reset</button>
       </div>
-      <div class="game-hint">Move mouse (or finger on mobile) to dodge the asteroids!</div>
+      <div style="font-size:.8rem;color:rgba(255,255,255,.4);text-align:center;">Move mouse or finger to dodge asteroids!</div>
     </div>
   </section>
 
@@ -407,38 +375,30 @@ body::before{
     <div class="sec-title">🎮 Games Diary</div>
     <div class="sec-sub">Track every game you've played, are playing, or want to play!</div>
     <div class="form-box">
-      <div class="form-title" style="color:var(--pink)">+ Add a Game</div>
+      <div class="form-title" style="color:var(--p)">+ Add a Game</div>
       <div class="frow">
         <input type="text" id="gameName" placeholder="Game name">
         <select id="gameGenre">
-          <option value="racing">🚗 Racing</option>
-          <option value="action">⚔️ Action</option>
-          <option value="space">🚀 Space</option>
-          <option value="puzzle">🧩 Puzzle</option>
-          <option value="adventure">🗺️ Adventure</option>
-          <option value="sports">⚽ Sports</option>
+          <option value="racing">🚗 Racing</option><option value="action">⚔️ Action</option>
+          <option value="space">🚀 Space</option><option value="puzzle">🧩 Puzzle</option>
+          <option value="adventure">🗺️ Adventure</option><option value="sports">⚽ Sports</option>
           <option value="other">🎲 Other</option>
         </select>
         <select id="gameStatus">
-          <option value="playing">▶️ Playing</option>
-          <option value="completed">✅ Completed</option>
-          <option value="wishlist">⭐ Wishlist</option>
-          <option value="dropped">❌ Dropped</option>
+          <option value="playing">▶️ Playing</option><option value="completed">✅ Completed</option>
+          <option value="wishlist">⭐ Wishlist</option><option value="dropped">❌ Dropped</option>
         </select>
       </div>
-      <div class="star-row">
-        <span>Rating:</span>
-        <button class="star-btn" data-s="1">⭐</button>
-        <button class="star-btn" data-s="2">⭐</button>
-        <button class="star-btn" data-s="3">⭐</button>
-        <button class="star-btn" data-s="4">⭐</button>
+      <div class="star-row"><span>Rating:</span>
+        <button class="star-btn" data-s="1">⭐</button><button class="star-btn" data-s="2">⭐</button>
+        <button class="star-btn" data-s="3">⭐</button><button class="star-btn" data-s="4">⭐</button>
         <button class="star-btn" data-s="5">⭐</button>
       </div>
       <div class="frow"><textarea id="gameReview" placeholder="My thoughts..."></textarea></div>
       <button class="btn btn-green" id="addGameBtn">✚ Add Game</button>
     </div>
     <div class="games-grid" id="gamesGrid"></div>
-    <div class="empty" id="gamesEmpty" style="display:none"><div class="empty-ico">🎮</div>No games yet! Add one above.</div>
+    <div class="empty" id="gamesEmpty" style="display:none"><div class="empty-ico">🎮</div>No games yet!</div>
   </section>
 
   <!-- DREAM GARAGE -->
@@ -452,74 +412,63 @@ body::before{
     <div class="cars-grid" id="iconicGrid"></div>
     <div id="mineCarsWrap" style="display:none">
       <div class="form-box">
-        <div class="form-title" style="color:var(--yellow)">+ Add to My Garage</div>
+        <div class="form-title" style="color:var(--y)">+ Add to My Garage</div>
         <div class="frow">
-          <input type="text" id="carName" placeholder="Car name (e.g. Ferrari F40)">
+          <input type="text" id="carName" placeholder="Car name">
           <input type="text" id="carMake" placeholder="Brand">
           <input type="text" id="carSpeed" placeholder="Top speed">
         </div>
         <div class="frow">
           <input type="text" id="carNote" placeholder="Why do you love this car?">
           <select id="carEmoji">
-            <option value="🏎️">🏎️ Race Car</option>
-            <option value="🚗">🚗 Red Car</option>
-            <option value="🚙">🚙 SUV</option>
-            <option value="⚡">⚡ Electric</option>
-            <option value="🔥">🔥 Hot Rod</option>
-            <option value="💛">💛 Yellow</option>
-            <option value="🖤">🖤 Black</option>
-            <option value="🤍">🤍 White</option>
+            <option value="🏎️">🏎️ Race</option><option value="🚗">🚗 Red</option>
+            <option value="⚡">⚡ Electric</option><option value="🔥">🔥 Hot Rod</option>
+            <option value="🖤">🖤 Black</option><option value="💛">💛 Yellow</option>
           </select>
         </div>
         <button class="btn btn-yellow" id="addCarBtn">✚ Add Car</button>
       </div>
       <div class="cars-grid" id="myCarsGrid"></div>
-      <div class="empty" id="garageEmpty"><div class="empty-ico">🏁</div>Your garage is empty! Add a car above.</div>
+      <div class="empty" id="garageEmpty"><div class="empty-ico">🏁</div>Your garage is empty!</div>
     </div>
   </section>
 
   <!-- PIANO -->
   <section id="piano-section" class="section">
     <div class="sec-title">🎹 Play-Along Piano</div>
-    <div class="sec-sub">Click keys, tap on mobile, or use keyboard shortcuts to play!</div>
+    <div class="sec-sub">Click keys, tap on mobile, or use keyboard shortcuts!</div>
     <div class="piano-wrap">
       <div class="piano-info">
-        <span>🎵 Playing: <span class="hi" id="pianoNote">—</span></span>
+        <span>🎵 Note: <span class="hi" id="pianoNote">—</span></span>
         <span>🎼 Chord: <span class="hi" id="pianoChord">—</span></span>
       </div>
-      <div class="keyboard-outer">
-        <div class="keyboard" id="keyboard"></div>
-      </div>
+      <div class="keyboard-outer"><div class="keyboard" id="keyboard"></div></div>
       <div class="chord-row" id="chordRow"></div>
-      <div class="piano-hint">
-        Keyboard: <strong>A S D F G H J K L</strong> = white keys &nbsp;|&nbsp; <strong>W E T Y U</strong> = black keys
-      </div>
+      <div class="piano-hint">⌨️ White keys: <strong>Z X C V B N M / A S D F G H J</strong> &nbsp;|&nbsp; Black keys: <strong>W E T Y U / 2 3 5 6 7</strong></div>
     </div>
   </section>
 
   <!-- SONG JOURNAL -->
-  <section id="lyrics-section" class="section">
+  <section id="songs-section" class="section">
     <div class="sec-title">🎵 Song Journal</div>
-    <div class="sec-sub">Songs you love, songs you're learning — keep them all here!</div>
+    <div class="sec-sub">Songs you love, songs you're learning — all in one place!</div>
     <div class="form-box">
-      <div class="form-title" style="color:var(--green)">+ Add a Song</div>
+      <div class="form-title" style="color:var(--g)">+ Add a Song</div>
       <div class="frow">
         <input type="text" id="lyricTitle" placeholder="Song title">
-        <input type="text" id="lyricArtist" placeholder="Artist / Band">
+        <input type="text" id="lyricArtist" placeholder="Artist">
         <select id="lyricStatus">
           <option value="learning">📖 Learning</option>
           <option value="know">✅ Know It!</option>
           <option value="love">❤️ All-time Fave</option>
         </select>
       </div>
-      <div class="frow"><textarea id="lyricText" placeholder="Paste favourite lines or the full lyrics here..."></textarea></div>
+      <div class="frow"><textarea id="lyricText" placeholder="Paste your favourite lines or full lyrics here..."></textarea></div>
       <button class="btn btn-teal" id="addLyricBtn">✚ Add Song</button>
     </div>
     <div class="lyrics-grid" id="lyricsGrid"></div>
-    <div class="empty" id="lyricsEmpty" style="display:none"><div class="empty-ico">🎤</div>No songs yet! Add your first one above.</div>
+    <div class="empty" id="lyricsEmpty" style="display:none"><div class="empty-ico">🎤</div>No songs yet!</div>
   </section>
-
-  <!-- Lyric expand modal -->
   <div class="overlay" id="lyricModal">
     <div class="modal" style="max-width:540px">
       <button class="modal-close" id="lmClose">✕</button>
@@ -529,525 +478,576 @@ body::before{
     </div>
   </div>
 
+  <!-- SINGING PRACTICE -->
+  <section id="singing-section" class="section">
+    <div class="sec-title">🎤 Singing Practice</div>
+    <div class="sec-sub">Pick a song, warm up your voice, and practise with the microphone!</div>
+    <div class="song-grid" id="songGrid"></div>
+    <div class="pp" id="pp">
+      <div class="pp-top">
+        <div class="pp-emo" id="ppEmo"></div>
+        <div class="pp-info">
+          <div class="pp-title" id="ppTitle"></div>
+          <div class="pp-artist" id="ppArtist"></div>
+          <div class="pp-stats" id="ppStats"></div>
+        </div>
+      </div>
+      <div class="pp-tips">
+        <div class="pp-tips-title">🎵 Practice Tips</div>
+        <ul id="ppTips"></ul>
+      </div>
+      <div class="mic-section">
+        <div class="mic-lbl">🎙️ Sing into your microphone and watch the bars!</div>
+        <div class="mic-bars" id="micBars"></div>
+        <div class="mic-btns">
+          <button class="btn btn-pink" id="micStart">🎙️ Start Mic</button>
+          <button class="btn btn-orange" id="micStop" style="display:none;">⏹ Stop</button>
+          <a id="gLink" href="#" target="_blank" class="genius-link" rel="noopener">🔗 Find Lyrics on Genius</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- PRACTICE LOG -->
   <section id="praclog-section" class="section">
-    <div class="sec-title">🎤 Practice Log</div>
-    <div class="sec-sub">Track every session. Watch yourself get better!</div>
+    <div class="sec-title">📋 Practice Log</div>
+    <div class="sec-sub">Track every session. Watch yourself grow!</div>
     <div class="pstats">
-      <div class="pstat"><div class="pstat-val" id="stTotal">0</div><div class="pstat-lbl">Total Sessions</div></div>
+      <div class="pstat"><div class="pstat-val" id="stTotal">0</div><div class="pstat-lbl">Sessions</div></div>
       <div class="pstat"><div class="pstat-val" id="stMins">0</div><div class="pstat-lbl">Total Minutes</div></div>
       <div class="pstat"><div class="pstat-val" id="stStreak">0🔥</div><div class="pstat-lbl">Day Streak</div></div>
-      <div class="pstat"><div class="pstat-val" id="stBest">0</div><div class="pstat-lbl">Best Session (min)</div></div>
+      <div class="pstat"><div class="pstat-val" id="stBest">0</div><div class="pstat-lbl">Best Session</div></div>
     </div>
-    <div style="font-family:'Fredoka One',cursive;font-size:.95rem;color:rgba(255,255,255,.45);margin-bottom:7px;">Last 14 days</div>
+    <div style="font-family:'Fredoka One',cursive;font-size:.9rem;color:rgba(255,255,255,.4);margin-bottom:6px;">Last 14 days</div>
     <div class="streak-bar" id="streakBar"></div>
     <div class="form-box">
-      <div class="form-title" style="color:var(--pink)">+ Log a Session</div>
+      <div class="form-title" style="color:var(--p)">+ Log a Session</div>
       <div class="frow">
-        <select id="plogType">
-          <option value="🎹">🎹 Piano</option>
-          <option value="🎤">🎤 Singing</option>
-          <option value="🎹🎤">🎹🎤 Both</option>
-        </select>
+        <select id="plogType"><option value="🎹">🎹 Piano</option><option value="🎤">🎤 Singing</option><option value="🎹🎤">🎹🎤 Both</option></select>
         <input type="text" id="plogWhat" placeholder="What did you practise?">
-        <input type="number" id="plogMins" placeholder="Minutes" min="1" style="max-width:100px">
+        <input type="number" id="plogMins" placeholder="Mins" min="1" style="max-width:90px;">
       </div>
       <div class="frow"><input type="text" id="plogMood" placeholder="How did it feel? 😊"></div>
       <button class="btn btn-purple" id="addPlogBtn">✚ Log Session</button>
     </div>
     <div class="plog-list" id="plogList"></div>
-    <div class="empty" id="plogEmpty" style="display:none"><div class="empty-ico">🎼</div>No sessions yet. Start practising!</div>
+    <div class="empty" id="plogEmpty" style="display:none"><div class="empty-ico">🎼</div>No sessions yet!</div>
   </section>
 
-</div><!-- end .container -->
+  <!-- STUDY HUB -->
+  <section id="study-section" class="section">
+    <div class="sec-title">📚 Study Hub</div>
+    <div class="sec-sub">Ask Dev-Sir, take an AI quiz, and challenge your friends!</div>
+    <div class="study-tabs">
+      <button class="stab active" data-stab="teacher">🤖 Ask Dev-Sir</button>
+      <button class="stab" data-stab="quiz">🧠 AI Quiz</button>
+      <button class="stab" data-stab="challenge">🏆 Challenge</button>
+    </div>
 
-<script>
-// ===================== NAV =====================
-const navBtns = document.querySelectorAll('.nav-btn');
-const sections = document.querySelectorAll('.section');
-navBtns.forEach(btn => {
-  btn.addEventListener('click', () => {
-    navBtns.forEach(b => b.classList.remove('active'));
-    sections.forEach(s => s.classList.remove('active'));
-    btn.classList.add('active');
-    const sec = document.getElementById(btn.dataset.tab + '-section');
-    if (sec) sec.classList.add('active');
-    if (btn.dataset.tab === 'garage') setTimeout(animateSpeedBars, 300);
-    if (btn.dataset.tab === 'praclog') renderPlog();
-  });
-});
-
-// ===================== PLANETS =====================
-const planets = [
-  { name:'Mercury', emoji:'⚫', tag:'Closest to the Sun',
-    facts:[{l:'🌡️ Temp',v:'430°C day, -180°C night — extreme!'},{l:'📅 Year',v:'Only 88 Earth days — it zooms!'},{l:'🌙 Moons',v:'None at all!'},{l:'🔭 Fact',v:'Venus is actually hotter despite being further away!'}]},
-  { name:'Venus', emoji:'🟡', tag:"Earth's evil twin",
-    facts:[{l:'🌡️ Temp',v:'465°C — hot enough to melt lead!'},{l:'🔄 Spin',v:'Venus spins backwards!'},{l:'📅 Day',v:'A Venus day is longer than its whole year!'},{l:'🔭 Fact',v:'It rains sulphuric acid on Venus!'}]},
-  { name:'Earth', emoji:'🌍', tag:'Our home!',
-    facts:[{l:'💧 Water',v:'71% of the surface is ocean.'},{l:'🌙 Moons',v:'1 moon — causes our tides.'},{l:'🛡️ Shield',v:'Magnetic field protects us from solar wind.'},{l:'🔭 Fact',v:'Earth is the densest planet in the solar system!'}]},
-  { name:'Mars', emoji:'🔴', tag:'The Red Planet',
-    facts:[{l:'🏔️ Mountain',v:'Olympus Mons is 3× taller than Everest!'},{l:'🌙 Moons',v:'2 tiny moons: Phobos and Deimos.'},{l:'🌡️ Temp',v:'Average -60°C — cold and dusty.'},{l:'🔭 Fact',v:'A Martian day is just 37 mins longer than ours.'}]},
-  { name:'Jupiter', emoji:'🟠', tag:'King of planets',
-    facts:[{l:'📏 Size',v:'1,300 Earths could fit inside!'},{l:'🌀 Storm',v:'The Great Red Spot is bigger than Earth and 350+ years old.'},{l:'🌙 Moons',v:'95+ moons — Europa may have life!'},{l:'🔭 Fact',v:'Jupiter acts as a comet shield for Earth!'}]},
-  { name:'Saturn', emoji:'🪐', tag:'The Ringed Wonder',
-    facts:[{l:'💍 Rings',v:'Made of ice & rock, 282,000 km wide!'},{l:'🌊 Density',v:'Saturn could float on water!'},{l:'🌙 Moons',v:'146 moons — Titan has a thick atmosphere.'},{l:'🔭 Fact',v:'Winds reach 1,800 km/h — fastest in the solar system!'}]},
-  { name:'Uranus', emoji:'🔵', tag:'The Tilted Giant',
-    facts:[{l:'🔄 Tilt',v:"Rotates on its side — basically rolling!"},{l:'🌡️ Temp',v:'Coldest atmosphere: -224°C.'},{l:'🌙 Moons',v:'28 moons, all named after Shakespeare characters!'},{l:'🔭 Fact',v:'Uranus has 13 dark, hard-to-see rings.'}]},
-  { name:'Neptune', emoji:'🔷', tag:'The Windy World',
-    facts:[{l:'💨 Wind',v:'2,100 km/h — fastest in the solar system!'},{l:'📅 Year',v:'1 Neptune year = 165 Earth years.'},{l:'🌙 Moons',v:'16 moons. Triton orbits backwards!'},{l:'🔭 Fact',v:"It rains diamonds inside Neptune's atmosphere!"}]},
-];
-
-const planetGrid = document.getElementById('planetGrid');
-planets.forEach(p => {
-  const c = document.createElement('div');
-  c.className = 'planet-card';
-  c.innerHTML = `<span class="planet-emoji">${p.emoji}</span><div class="planet-name">${p.name}</div><div class="planet-tag">${p.tag}</div>`;
-  c.addEventListener('click', () => {
-    document.getElementById('pmEmoji').textContent = p.emoji;
-    document.getElementById('pmName').textContent = p.name;
-    document.getElementById('pmFacts').innerHTML = p.facts.map(f=>`<li><span class="fact-lbl">${f.l}:</span>${f.v}</li>`).join('');
-    document.getElementById('planetModal').classList.add('open');
-  });
-  planetGrid.appendChild(c);
-});
-document.getElementById('pmClose').addEventListener('click', () => document.getElementById('planetModal').classList.remove('open'));
-document.getElementById('planetModal').addEventListener('click', e => { if(e.target===document.getElementById('planetModal')) document.getElementById('planetModal').classList.remove('open'); });
-
-// ===================== ARCADE =====================
-const canvas = document.getElementById('gameCanvas');
-const ctx = canvas.getContext('2d');
-let gameRunning=false, rocketX=280, rocketY=300, asteroids=[], score=0, bestScore=0;
-let animId, scoreInt, lastNow=0, mouseX=280, mouseY=300;
-
-canvas.addEventListener('mousemove', e => { const r=canvas.getBoundingClientRect(),sx=canvas.width/r.width,sy=canvas.height/r.height; mouseX=(e.clientX-r.left)*sx; mouseY=(e.clientY-r.top)*sy; });
-canvas.addEventListener('touchmove', e => { e.preventDefault(); const r=canvas.getBoundingClientRect(),sx=canvas.width/r.width,sy=canvas.height/r.height; mouseX=(e.touches[0].clientX-r.left)*sx; mouseY=(e.touches[0].clientY-r.top)*sy; },{passive:false});
-
-function startGame() {
-  rocketX=280;rocketY=300;asteroids=[];score=0;gameRunning=true;
-  document.getElementById('gameTime').textContent='0';
-  lastNow=performance.now();
-  cancelAnimationFrame(animId); clearInterval(scoreInt);
-  scoreInt=setInterval(()=>{if(gameRunning){score++;document.getElementById('gameTime').textContent=score;}},1000);
-  spawnRock(); gameLoop(performance.now());
-}
-function spawnRock() {
-  if(!gameRunning) return;
-  asteroids.push({x:Math.random()*canvas.width, y:-30, size:18+Math.random()*20, speed:2+Math.random()*3+score*.04, rot:Math.random()*6.28, rs:(Math.random()-.5)*.1});
-  setTimeout(spawnRock, Math.max(400,1300-score*18));
-}
-function gameLoop(now) {
-  if(!gameRunning) return;
-  const dt=(now-lastNow)/16.67; lastNow=now;
-  rocketX+=(mouseX-rocketX)*.18*dt;
-  rocketY+=(mouseY-rocketY)*.18*dt;
-  asteroids.forEach(a=>{a.y+=a.speed*dt;a.rot+=a.rs*dt;});
-  asteroids=asteroids.filter(a=>a.y<canvas.height+60);
-  for(const a of asteroids){const dx=rocketX-a.x,dy=rocketY-a.y;if(Math.sqrt(dx*dx+dy*dy)<a.size*.65+11){endGame();return;}}
-  drawGame(); animId=requestAnimationFrame(gameLoop);
-}
-function drawGame() {
-  ctx.fillStyle='#080818'; ctx.fillRect(0,0,canvas.width,canvas.height);
-  // stars
-  ctx.fillStyle='rgba(255,255,255,.5)';
-  for(let i=0;i<55;i++){ctx.beginPath();ctx.arc((i*139+score*2)%canvas.width,(i*71+score*3)%canvas.height,.9,0,6.28);ctx.fill();}
-  // asteroids
-  asteroids.forEach(a=>{
-    ctx.save();ctx.translate(a.x,a.y);ctx.rotate(a.rot);
-    ctx.fillStyle='#6a5a4a';ctx.strokeStyle='#907060';ctx.lineWidth=1.5;
-    ctx.beginPath();
-    for(let i=0;i<8;i++){const ang=i/8*6.28,r=a.size*(.8+Math.sin(i*2.5)*.2);i===0?ctx.moveTo(Math.cos(ang)*r,Math.sin(ang)*r):ctx.lineTo(Math.cos(ang)*r,Math.sin(ang)*r);}
-    ctx.closePath();ctx.fill();ctx.stroke();ctx.restore();
-  });
-  // rocket
-  ctx.save();ctx.translate(rocketX,rocketY);
-  const fl=.8+Math.random()*.4;
-  const g=ctx.createRadialGradient(0,16,2,0,22,14*fl);
-  g.addColorStop(0,'#FFD93D');g.addColorStop(.5,'#FF6B35');g.addColorStop(1,'transparent');
-  ctx.fillStyle=g;ctx.beginPath();ctx.ellipse(0,20,8,14*fl,0,0,6.28);ctx.fill();
-  ctx.fillStyle='#4ECDC4';ctx.beginPath();ctx.moveTo(0,-22);ctx.lineTo(12,14);ctx.lineTo(-12,14);ctx.closePath();ctx.fill();
-  ctx.fillStyle='#FFD93D';ctx.beginPath();ctx.arc(0,-3,5,0,6.28);ctx.fill();
-  ctx.restore();
-}
-function endGame() {
-  gameRunning=false; clearInterval(scoreInt);
-  if(score>bestScore){bestScore=score;document.getElementById('bestTime').textContent=bestScore;}
-  ctx.fillStyle='rgba(0,0,0,.65)';ctx.fillRect(0,0,canvas.width,canvas.height);
-  ctx.textAlign='center';
-  ctx.fillStyle='#FF4D8B';ctx.font="bold 34px 'Fredoka One',cursive";ctx.fillText('💥 Game Over!',canvas.width/2,canvas.height/2-28);
-  ctx.fillStyle='#fff';ctx.font="21px 'Fredoka One',cursive";ctx.fillText(`You survived ${score} seconds!`,canvas.width/2,canvas.height/2+14);
-  if(score===bestScore&&score>0){ctx.fillStyle='#FFD93D';ctx.fillText('🏆 New best!',canvas.width/2,canvas.height/2+46);}
-}
-document.getElementById('startBtn').addEventListener('click', startGame);
-document.getElementById('resetBtn').addEventListener('click', ()=>{
-  gameRunning=false;clearInterval(scoreInt);cancelAnimationFrame(animId);asteroids=[];score=0;
-  document.getElementById('gameTime').textContent='0';
-  ctx.fillStyle='#080818';ctx.fillRect(0,0,canvas.width,canvas.height);
-  ctx.fillStyle='rgba(255,255,255,.3)';ctx.font="20px 'Fredoka One',cursive";ctx.textAlign='center';
-  ctx.fillText('Press Start to play! 🚀',canvas.width/2,canvas.height/2);
-});
-// initial canvas
-ctx.fillStyle='#080818';ctx.fillRect(0,0,canvas.width,canvas.height);
-ctx.fillStyle='rgba(255,255,255,.3)';ctx.font="20px 'Fredoka One',cursive";ctx.textAlign='center';
-ctx.fillText('Press Start to play! 🚀',canvas.width/2,canvas.height/2);
-
-// ===================== GAMES DIARY =====================
-let games = JSON.parse(localStorage.getItem('dev_games')||'[]');
-let gRating=3;
-document.querySelectorAll('.star-btn').forEach(b=>{
-  b.addEventListener('click',()=>{
-    gRating=parseInt(b.dataset.s);
-    document.querySelectorAll('.star-btn').forEach(x=>x.classList.toggle('lit',parseInt(x.dataset.s)<=gRating));
-  });
-});
-function saveGames(){localStorage.setItem('dev_games',JSON.stringify(games));}
-const genreLabel=g=>({racing:'🚗 Racing',action:'⚔️ Action',space:'🚀 Space',puzzle:'🧩 Puzzle',adventure:'🗺️ Adventure',sports:'⚽ Sports',other:'🎲 Other'}[g]||g);
-const statusLabel=s=>({playing:'▶️ Playing',completed:'✅ Completed',wishlist:'⭐ Wishlist',dropped:'❌ Dropped'}[s]||s);
-function renderGames(){
-  const grid=document.getElementById('gamesGrid'), empty=document.getElementById('gamesEmpty');
-  if(!games.length){grid.innerHTML='';empty.style.display='block';return;}
-  empty.style.display='none';
-  grid.innerHTML=games.map((g,i)=>`
-    <div class="game-card">
-      <button class="gc-del" onclick="delGame(${i})">✕</button>
-      <span class="gc-genre genre-${g.genre}">${genreLabel(g.genre)}</span>
-      <div class="gc-name">${g.name}</div>
-      <div class="gc-stars">${'⭐'.repeat(g.rating)}${'☆'.repeat(5-g.rating)}</div>
-      <span class="gc-status status-${g.status}">${statusLabel(g.status)}</span>
-      ${g.review?`<div class="gc-review">"${g.review}"</div>`:''}
-    </div>`).join('');
-}
-document.getElementById('addGameBtn').addEventListener('click',()=>{
-  const name=document.getElementById('gameName').value.trim();
-  if(!name){document.getElementById('gameName').focus();return;}
-  games.unshift({name,genre:document.getElementById('gameGenre').value,status:document.getElementById('gameStatus').value,rating:gRating,review:document.getElementById('gameReview').value.trim()});
-  saveGames();renderGames();
-  document.getElementById('gameName').value='';document.getElementById('gameReview').value='';
-});
-function delGame(i){games.splice(i,1);saveGames();renderGames();}
-if(!games.length){
-  games=[
-    {name:'Rocket League',genre:'sports',status:'playing',rating:5,review:"Cars + football = perfection!"},
-    {name:'Kerbal Space Program',genre:'space',status:'completed',rating:4,review:"Taught me so much about orbits!"}
-  ];saveGames();
-}
-renderGames();
-
-// ===================== DREAM GARAGE =====================
-const iconicCars=[
-  {make:'Bugatti',name:'Veyron Super Sport',emoji:'🏎️',color:'linear-gradient(135deg,#1a1a2e,#16213e)',stats:['1200 HP','431 km/h','W16 Engine'],spd:100,note:"Once the world's fastest car. It has 16 cylinders!"},
-  {make:'Lamborghini',name:'Aventador SVJ',emoji:'🔥',color:'linear-gradient(135deg,#7f1d1d,#991b1b)',stats:['770 HP','350 km/h','V12 Engine'],spd:81,note:'The V12 roar sounds like a lion waking up!'},
-  {make:'Ferrari',name:'SF90 Stradale',emoji:'🚗',color:'linear-gradient(135deg,#881a1a,#b91c1c)',stats:['1000 HP','340 km/h','Hybrid V8'],spd:79,note:"Ferrari's first hybrid supercar — electric + petrol!"},
-  {make:'Koenigsegg',name:'Jesko Absolut',emoji:'⚡',color:'linear-gradient(135deg,#1c1917,#292524)',stats:['1600 HP','330+ km/h','V8 Twin Turbo'],spd:95,note:'Designed to break 300 mph. Absolutely bonkers!'},
-  {make:'McLaren',name:'P1',emoji:'💛',color:'linear-gradient(135deg,#713f12,#92400e)',stats:['903 HP','350 km/h','Hybrid V8'],spd:81,note:"Built to be the best driver's car on road and track."},
-  {make:'Rimac',name:'Nevera',emoji:'💙',color:'linear-gradient(135deg,#1e3a5f,#1d4ed8)',stats:['1914 HP','412 km/h','Full Electric'],spd:96,note:'Fastest accelerating production car ever built!'},
-  {make:'Ford',name:'GT40',emoji:'🖤',color:'linear-gradient(135deg,#111827,#1f2937)',stats:['485 HP','322 km/h','V8 Engine'],spd:75,note:"Beat Ferrari at Le Mans 4 years in a row. Legend!"},
-  {make:'Porsche',name:'911 GT3 RS',emoji:'🤍',color:'linear-gradient(135deg,#1c1917,#3f3f46)',stats:['525 HP','296 km/h','Flat-6 NA'],spd:69,note:'Pure, precise, and absolutely thrilling to drive.'},
-];
-
-function buildCarCard(car, isDeletable, idx) {
-  return `
-    <div class="car-card">
-      <div class="car-banner" style="background:${car.color}">
-        <span style="position:relative;z-index:1;font-size:3.8rem">${car.emoji}</span>
+    <!-- ASK TEACHER -->
+    <div class="study-sub active" id="stab-teacher">
+      <div class="ai-unavail" id="teacherUnavail" style="display:none">
+        <div class="au-ico">🤖</div>
+        AI features need setup — ask a parent to add the API key via the ⚙️ button!
       </div>
-      <div class="car-body">
-        <div style="display:flex;justify-content:space-between;align-items:start">
-          <div><div class="car-make">${car.make}</div><div class="car-name">${car.name}</div></div>
-          ${isDeletable?`<button class="car-del" onclick="delMyCar(${idx})">✕</button>`:''}
+      <div id="teacherArea" style="display:none">
+        <div class="chat-box" id="chatBox">
+          <div class="cmsg bot"><strong>Dev-Sir 🤖:</strong> Namaste Devagneya! I'm Dev-Sir, your AI teacher. Ask me anything — Maths, Science, English, Hindi, space, cars, music — whatever you're curious about! 🚀📚</div>
         </div>
-        <div class="car-stats">${car.stats.map(s=>`<span class="car-stat">${s}</span>`).join('')}</div>
-        ${!isDeletable?`<div class="spd-lbl">Speed index</div><div class="spd-bg"><div class="spd-fill" data-pct="${car.spd}"></div></div>`:''}
-        ${car.note?`<div class="car-note" style="margin-top:9px">${car.note}</div>`:''}
+        <div class="chat-row">
+          <input type="text" id="chatInput" placeholder="Ask Dev-Sir anything...">
+          <button class="btn btn-purple" id="chatSend">Ask 🚀</button>
+        </div>
       </div>
-    </div>`;
-}
+    </div>
 
-const iconicGrid=document.getElementById('iconicGrid');
-iconicCars.forEach(c=>{ iconicGrid.innerHTML+=buildCarCard(c,false,0); });
+    <!-- QUIZ -->
+    <div class="study-sub" id="stab-quiz">
+      <div class="ai-unavail" id="quizUnavail" style="display:none">
+        <div class="au-ico">🧠</div>
+        AI features need setup — ask a parent to add the API key via the ⚙️ button!
+      </div>
+      <div id="quizArea">
+        <div class="quiz-setup" id="quizSetup">
+          <div class="form-title" style="color:var(--y)">📚 What do you want to study today?</div>
+          <div class="frow">
+            <select id="quizSubject">
+              <option value="">-- Pick a Subject --</option>
+              <option value="maths">📐 Maths (Math-Magic)</option>
+              <option value="evs">🌿 EVS (Looking Around)</option>
+              <option value="english">📖 English (Marigold)</option>
+              <option value="hindi">📚 Hindi (Rimjhim)</option>
+            </select>
+            <select id="quizTopic"><option value="">-- Pick a Topic --</option></select>
+            <input type="number" id="qCount" min="3" max="10" value="5" style="max-width:85px;" title="Number of questions">
+          </div>
+          <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap;">
+            <button class="btn btn-yellow" id="genQuizBtn">✨ Generate Quiz!</button>
+            <span style="font-size:.78rem;color:rgba(255,255,255,.38)">Fresh AI questions every time!</span>
+          </div>
+        </div>
+        <div id="quizQWrap" style="display:none">
+          <div class="qprogress" id="qprogress"></div>
+          <div class="q-card">
+            <div class="q-num" id="qNum"></div>
+            <div class="q-text" id="qText"></div>
+            <div class="q-opts" id="qOpts"></div>
+            <div class="q-exp" id="qExp"></div>
+            <div style="margin-top:12px;text-align:right;">
+              <button class="btn btn-teal" id="qNext" style="display:none;">Next →</button>
+            </div>
+          </div>
+        </div>
+        <div class="score-card" id="scoreCard">
+          <div class="score-big" id="scoreBig"></div>
+          <div class="score-lbl" id="scoreLbl"></div>
+          <div class="code-box">
+            <div style="font-size:.83rem;font-weight:700;margin-bottom:3px;">🏆 Challenge Code</div>
+            <div class="code-display" id="codeDisplay"></div>
+            <div class="code-hint">Share with a friend — they enter it in the Challenge tab!</div>
+            <button class="btn btn-yellow" id="copyCodeBtn" style="margin-top:9px;">📋 Copy Code</button>
+          </div>
+          <button class="btn btn-purple" id="retryBtn">🔄 New Quiz</button>
+        </div>
+      </div>
+    </div>
 
-function animateSpeedBars(){
-  document.querySelectorAll('.spd-fill').forEach(b=>setTimeout(()=>{b.style.width=b.dataset.pct+'%';},200));
-}
+    <!-- CHALLENGE -->
+    <div class="study-sub" id="stab-challenge">
+      <div class="form-box">
+        <div class="form-title" style="color:var(--y)">🏆 Accept a Challenge</div>
+        <div class="frow">
+          <input type="text" id="codeInput" placeholder="Enter code (e.g. MA-04)" maxlength="8" style="text-transform:uppercase;letter-spacing:2px;font-family:'Fredoka One',cursive;font-size:1.1rem;">
+          <input type="text" id="challengerName" placeholder="Your name">
+          <button class="btn btn-yellow" id="acceptBtn">⚡ Accept!</button>
+        </div>
+        <div id="chInfo" style="display:none;margin-top:12px;background:rgba(255,217,61,.07);border:1px solid rgba(255,217,61,.2);border-radius:10px;padding:12px;font-size:.87rem;line-height:1.5;"></div>
+      </div>
+      <div style="font-family:'Fredoka One',cursive;font-size:.92rem;color:rgba(255,255,255,.38);margin-bottom:8px;">Recent Results</div>
+      <div class="ch-list" id="chList"></div>
+      <div class="empty" id="chEmpty" style="display:none"><div class="empty-ico">🏁</div>No challenges yet!</div>
+    </div>
+  </section>
 
-document.querySelectorAll('.gtab').forEach(tab=>{
-  tab.addEventListener('click',()=>{
-    document.querySelectorAll('.gtab').forEach(t=>t.classList.remove('active'));
-    tab.classList.add('active');
-    const which=tab.dataset.gtab;
-    document.getElementById('iconicGrid').style.display=which==='iconic'?'grid':'none';
-    document.getElementById('mineCarsWrap').style.display=which==='mine'?'block':'none';
-    if(which==='iconic') animateSpeedBars();
-    if(which==='mine') renderMyCars();
-  });
-});
-
-let myCars=JSON.parse(localStorage.getItem('dev_cars')||'[]');
-function saveMyCars(){localStorage.setItem('dev_cars',JSON.stringify(myCars));}
-function renderMyCars(){
-  const grid=document.getElementById('myCarsGrid'), empty=document.getElementById('garageEmpty');
-  if(!myCars.length){grid.innerHTML='';empty.style.display='block';return;}
-  empty.style.display='none';
-  grid.innerHTML=myCars.map((c,i)=>buildCarCard({...c,color:'linear-gradient(135deg,#1a1a2e,#16213e)',stats:c.speed?[`🏁 ${c.speed}`]:[],spd:0,note:c.note},true,i)).join('');
-}
-document.getElementById('addCarBtn').addEventListener('click',()=>{
-  const name=document.getElementById('carName').value.trim();
-  if(!name){document.getElementById('carName').focus();return;}
-  myCars.unshift({name,make:document.getElementById('carMake').value.trim(),speed:document.getElementById('carSpeed').value.trim(),note:document.getElementById('carNote').value.trim(),emoji:document.getElementById('carEmoji').value});
-  saveMyCars();renderMyCars();
-  ['carName','carMake','carSpeed','carNote'].forEach(id=>document.getElementById(id).value='');
-});
-function delMyCar(i){myCars.splice(i,1);saveMyCars();renderMyCars();}
-
-// ===================== PIANO =====================
-const AC = window.AudioContext||window.webkitAudioContext;
-let ac=null;
-function getAC(){if(!ac)ac=new AC();return ac;}
-function playNote(freq,dur=1.3){
-  const c=getAC(),o=c.createOscillator(),g=c.createGain();
-  o.connect(g);g.connect(c.destination);
-  o.type='triangle';o.frequency.setValueAtTime(freq,c.currentTime);
-  g.gain.setValueAtTime(0.45,c.currentTime);
-  g.gain.exponentialRampToValueAtTime(0.001,c.currentTime+dur);
-  o.start();o.stop(c.currentTime+dur);
-}
-
-// Notes definition: white key width=44, gap between whites=0 (flush)
-// Black key positions: offset from left edge of keyboard (6px padding)
-const notes=[
-  {n:'C4', f:261.63,type:'w',kb:'a'},
-  {n:'C#4',f:277.18,type:'b',kb:'w'},
-  {n:'D4', f:293.66,type:'w',kb:'s'},
-  {n:'D#4',f:311.13,type:'b',kb:'e'},
-  {n:'E4', f:329.63,type:'w',kb:'d'},
-  {n:'F4', f:349.23,type:'w',kb:'f'},
-  {n:'F#4',f:369.99,type:'b',kb:'t'},
-  {n:'G4', f:392.00,type:'w',kb:'g'},
-  {n:'G#4',f:415.30,type:'b',kb:'y'},
-  {n:'A4', f:440.00,type:'w',kb:'h'},
-  {n:'A#4',f:466.16,type:'b',kb:'u'},
-  {n:'B4', f:493.88,type:'w',kb:'j'},
-  {n:'C5', f:523.25,type:'w',kb:'k'},
-  {n:'C#5',f:554.37,type:'b',kb:'i'},
-  {n:'D5', f:587.33,type:'w',kb:'l'},
-  {n:'D#5',f:622.25,type:'b',kb:'o'},
-  {n:'E5', f:659.25,type:'w',kb:';'},
-];
-
-const WW=44; // white key width
-const BW=28; // black key width
-// compute x positions
-let wx=6; // start with padding
-const keyEls={};
-const kb=document.getElementById('keyboard');
-
-// First pass: assign x to white keys
-const whiteNotes=notes.filter(n=>n.type==='w');
-const blackNotes=notes.filter(n=>n.type==='b');
-
-// Map note index to white key index
-let wIdx=0;
-const noteWIdx={};
-notes.forEach((n,i)=>{ if(n.type==='w'){noteWIdx[i]=wIdx;wIdx++;} });
-
-// Set keyboard height for whites
-kb.style.height='163px';
-
-// Build white keys first
-whiteNotes.forEach((n,wi)=>{
-  const el=document.createElement('div');
-  el.className='wkey';
-  el.textContent=n.n.replace(/\d/,'');
-  const press=()=>{
-    playNote(n.f);
-    document.getElementById('pianoNote').textContent=n.n;
-    el.classList.add('pressed');setTimeout(()=>el.classList.remove('pressed'),180);
-    spawnNote(el);
-  };
-  el.addEventListener('mousedown',press);
-  el.addEventListener('touchstart',e=>{e.preventDefault();press();},{passive:false});
-  kb.appendChild(el);
-  keyEls[n.kb]={el,press};
-});
-
-// Build black keys with absolute positioning
-// We need to know left offset of each black key relative to keyboard
-// Black key sits between two whites. Pattern: C#=after C, D#=after D, F#=after F, G#=after G, A#=after A
-// White key i has left = 6 + i*44
-function getBlackLeft(noteName) {
-  // Map black key to its white key index (the one to its left)
-  const map={'C#4':0,'D#4':1,'F#4':3,'G#4':4,'A#4':5,'C#5':7,'D#5':8};
-  // octave-independent: C#=0 D#=1 F#=3 G#=4 A#=5 per octave
-  const wKeys=['C4','D4','E4','F4','G4','A4','B4','C5','D5','E5'];
-  const leftWhiteIdx=map[noteName];
-  if(leftWhiteIdx===undefined) return null;
-  return 6 + leftWhiteIdx*WW + WW - BW/2;
-}
-
-blackNotes.forEach(n=>{
-  const el=document.createElement('div');
-  el.className='bkey';
-  const left=getBlackLeft(n.n);
-  if(left===null) return;
-  el.style.left=left+'px';
-  const press=()=>{
-    playNote(n.f);
-    document.getElementById('pianoNote').textContent=n.n;
-    el.classList.add('pressed');setTimeout(()=>el.classList.remove('pressed'),180);
-    spawnNote(el);
-  };
-  el.addEventListener('mousedown',press);
-  el.addEventListener('touchstart',e=>{e.preventDefault();press();},{passive:false});
-  kb.appendChild(el);
-  keyEls[n.kb]={el,press};
-});
-
-document.addEventListener('keydown',e=>{
-  if(e.repeat||e.target.tagName==='INPUT'||e.target.tagName==='TEXTAREA') return;
-  const k=keyEls[e.key.toLowerCase()];
-  if(k) k.press();
-});
-
-function spawnNote(el){
-  const emojis=['🎵','🎶','♪','♫'];
-  const r=el.getBoundingClientRect();
-  const d=document.createElement('div');
-  d.className='note-pop';
-  d.textContent=emojis[Math.floor(Math.random()*emojis.length)];
-  d.style.left=(r.left+r.width/2-10)+'px';
-  d.style.top=(r.top-8)+'px';
-  document.body.appendChild(d);
-  setTimeout(()=>d.remove(),1100);
-}
-
-// Chord buttons
-const CHORDS={
-  'C Maj':[261.63,329.63,392.00],
-  'G Maj':[392.00,493.88,587.33],
-  'A min':[440.00,523.25,261.63],
-  'F Maj':[349.23,440.00,523.25],
-  'D Maj':[293.66,369.99,440.00],
-  'E min':[329.63,392.00,493.88],
-};
-const chordRow=document.getElementById('chordRow');
-Object.entries(CHORDS).forEach(([name,freqs])=>{
-  const btn=document.createElement('button');
-  btn.className='chord-btn';btn.textContent=name;
+</div><!-- /container -->
+<script>
+// ===== NAV =====
+const navBtns=document.querySelectorAll('.nav-btn');
+const sections=document.querySelectorAll('.section');
+navBtns.forEach(btn=>{
   btn.addEventListener('click',()=>{
-    freqs.forEach((f,i)=>setTimeout(()=>playNote(f,1.4),i*55));
-    document.getElementById('pianoChord').textContent=name;
+    navBtns.forEach(b=>b.classList.remove('active'));
+    sections.forEach(s=>s.classList.remove('active'));
+    btn.classList.add('active');
+    const sec=document.getElementById(btn.dataset.tab+'-section');
+    if(sec) sec.classList.add('active');
+    const t=btn.dataset.tab;
+    if(t==='garage') setTimeout(animateSpeedBars,300);
+    if(t==='praclog') renderPlog();
+    if(t==='study') checkAI();
   });
-  chordRow.appendChild(btn);
 });
 
-// ===================== SONG JOURNAL =====================
-let lyrics=JSON.parse(localStorage.getItem('dev_lyrics')||'[]');
-function saveLyrics(){localStorage.setItem('dev_lyrics',JSON.stringify(lyrics));}
-const lStatusLabel=s=>({learning:'📖 Learning',know:'✅ Know It!',love:'❤️ All-time Fave'}[s]||s);
-function renderLyrics(){
-  const grid=document.getElementById('lyricsGrid'),empty=document.getElementById('lyricsEmpty');
-  if(!lyrics.length){grid.innerHTML='';empty.style.display='block';return;}
-  empty.style.display='none';
-  grid.innerHTML=lyrics.map((l,i)=>`
-    <div class="lyric-card" onclick="openLyric(${i})">
-      <button class="lc-del" onclick="event.stopPropagation();delLyric(${i})">✕</button>
-      <div class="lc-title">${l.title}</div>
-      <div class="lc-artist">🎤 ${l.artist||'Unknown'}</div>
-      <span class="lc-status ls-${l.status}">${lStatusLabel(l.status)}</span>
-      ${l.text?`<div class="lc-preview">${l.text.slice(0,90)}${l.text.length>90?'…':''}</div>`:''}
-    </div>`).join('');
-}
-function openLyric(i){
-  const l=lyrics[i];
-  document.getElementById('lmTitle').textContent=l.title;
-  document.getElementById('lmArtist').textContent='🎤 '+(l.artist||'Unknown');
-  document.getElementById('lmBody').textContent=l.text||'(No lyrics added yet)';
-  document.getElementById('lyricModal').classList.add('open');
-}
-function delLyric(i){lyrics.splice(i,1);saveLyrics();renderLyrics();}
-document.getElementById('lmClose').addEventListener('click',()=>document.getElementById('lyricModal').classList.remove('open'));
-document.getElementById('lyricModal').addEventListener('click',e=>{if(e.target===document.getElementById('lyricModal'))document.getElementById('lyricModal').classList.remove('open');});
-document.getElementById('addLyricBtn').addEventListener('click',()=>{
-  const title=document.getElementById('lyricTitle').value.trim();
-  if(!title){document.getElementById('lyricTitle').focus();return;}
-  lyrics.unshift({title,artist:document.getElementById('lyricArtist').value.trim(),status:document.getElementById('lyricStatus').value,text:document.getElementById('lyricText').value.trim()});
-  saveLyrics();renderLyrics();
-  ['lyricTitle','lyricArtist','lyricText'].forEach(id=>document.getElementById(id).value='');
-});
-if(!lyrics.length){
-  lyrics=[
-    {title:'Bohemian Rhapsody',artist:'Queen',status:'love',text:"Is this the real life?\nIs this just fantasy?\nCaught in a landslide,\nNo escape from reality..."},
-    {title:'Someone Like You',artist:'Adele',status:'learning',text:"I heard that you're settled down,\nThat you found a girl and you're married now..."},
-  ];saveLyrics();
-}
-renderLyrics();
-
-// ===================== PRACTICE LOG =====================
-let plog=JSON.parse(localStorage.getItem('dev_plog')||'[]');
-function savePlog(){localStorage.setItem('dev_plog',JSON.stringify(plog));}
-function renderPlog(){
-  const list=document.getElementById('plogList'),empty=document.getElementById('plogEmpty');
-  const totalMins=plog.reduce((a,e)=>a+e.mins,0);
-  const best=plog.reduce((a,e)=>Math.max(a,e.mins),0);
-  document.getElementById('stTotal').textContent=plog.length;
-  document.getElementById('stMins').textContent=totalMins;
-  document.getElementById('stBest').textContent=best;
-  // streak
-  const days={};
-  plog.forEach(e=>days[e.date]=true);
-  let streak=0;
-  for(let i=0;i<30;i++){const d=new Date();d.setDate(d.getDate()-i);if(days[d.toDateString()])streak++;else if(i>0)break;}
-  document.getElementById('stStreak').textContent=streak+'🔥';
-  // streak bar
-  const bar=document.getElementById('streakBar');bar.innerHTML='';
-  for(let i=13;i>=0;i--){const d=new Date();d.setDate(d.getDate()-i);const div=document.createElement('div');div.className='sday '+(days[d.toDateString()]?'done':'none');div.textContent=d.getDate();bar.appendChild(div);}
-  // entries
-  if(!plog.length){list.innerHTML='';empty.style.display='block';return;}
-  empty.style.display='none';
-  list.innerHTML=plog.map((e,i)=>`
-    <div class="plog-entry">
-      <div class="pl-icon">${e.type}</div>
-      <div class="pl-info">
-        <div class="pl-title">${e.what||'Practice session'}</div>
-        <div class="pl-meta">${e.mood?'"'+e.mood+'" · ':''}${e.date}</div>
-      </div>
-      <div class="pl-mins">${e.mins}m</div>
-      <button class="pl-del" onclick="delPlog(${i})">✕</button>
-    </div>`).join('');
-}
-function delPlog(i){plog.splice(i,1);savePlog();renderPlog();}
-document.getElementById('addPlogBtn').addEventListener('click',()=>{
-  const mins=parseInt(document.getElementById('plogMins').value);
-  if(!mins||mins<1){document.getElementById('plogMins').focus();return;}
-  plog.unshift({type:document.getElementById('plogType').value,what:document.getElementById('plogWhat').value.trim(),mins,mood:document.getElementById('plogMood').value.trim(),date:new Date().toDateString()});
-  savePlog();renderPlog();
-  ['plogWhat','plogMins','plogMood'].forEach(id=>document.getElementById(id).value='');
-});
-renderPlog();
-
-// ===================== MUSIC TOGGLE =====================
+// ===== SETTINGS =====
 (function(){
-  const btn = document.getElementById('musicToggle');
-  const audio = document.getElementById('bgMusic');
-  let playing = false;
-  btn.addEventListener('click', async () => {
-    if (!playing) {
-      try {
-        audio.volume = 0.45;
-        await audio.play();
-        playing = true;
-        btn.textContent = '🔊';
-        btn.classList.add('playing');
-        btn.title = 'Music on — click to pause';
-      } catch(e) { btn.textContent = '🎵'; }
-    } else {
-      audio.pause();
-      playing = false;
-      btn.textContent = '🎵';
-      btn.classList.remove('playing');
-      btn.title = 'Click to play music';
-    }
+  const btn=document.getElementById('settingsBtn'),panel=document.getElementById('sp');
+  const gate=document.getElementById('spPinGate'),content=document.getElementById('spContent');
+  btn.addEventListener('click',()=>{
+    panel.classList.toggle('open');
+    if(!panel.classList.contains('open')){gate.style.display='block';content.style.display='none';document.getElementById('spPin').value='';}
+  });
+  document.getElementById('spPinBtn').addEventListener('click',()=>{
+    if(document.getElementById('spPin').value==='1234'){gate.style.display='none';content.style.display='block';}
+    else{document.getElementById('spPin').style.borderColor='var(--p)';setTimeout(()=>document.getElementById('spPin').style.borderColor='',900);}
+  });
+  document.getElementById('spSave').addEventListener('click',()=>{
+    const v=document.getElementById('spKey').value.trim();
+    if(v.startsWith('sk-')){localStorage.setItem('dev_key',v);panel.classList.remove('open');checkAI();}
+    else{document.getElementById('spKey').style.borderColor='var(--p)';setTimeout(()=>document.getElementById('spKey').style.borderColor='',900);}
+  });
+  document.getElementById('spClear').addEventListener('click',()=>{localStorage.removeItem('dev_key');document.getElementById('spKey').value='';checkAI();});
+  document.addEventListener('click',e=>{if(!panel.contains(e.target)&&e.target!==btn)panel.classList.remove('open');});
+})();
+
+function getKey(){return localStorage.getItem('dev_key')||'';}
+function checkAI(){
+  const has=!!getKey();
+  const el=(id,show)=>{const e=document.getElementById(id);if(e)e.style.display=show?'block':'none';};
+  el('teacherUnavail',!has);el('teacherArea',has);
+  el('quizUnavail',!has);el('quizArea',has);
+}
+checkAI();
+
+async function callClaude(messages,system,maxTok=1400){
+  const k=getKey();if(!k)throw new Error('no-key');
+  const body={model:'claude-sonnet-4-20250514',max_tokens:maxTok,messages};
+  if(system) body.system=system;
+  const r=await fetch('https://api.anthropic.com/v1/messages',{
+    method:'POST',
+    headers:{'Content-Type':'application/json','x-api-key':k,'anthropic-version':'2023-06-01','anthropic-dangerous-direct-browser-access':'true'},
+    body:JSON.stringify(body)
+  });
+  if(!r.ok){const e=await r.json();throw new Error(e.error?.message||'API error');}
+  const d=await r.json();
+  return d.content.map(b=>b.text||'').join('');
+}
+
+// ===== MUSIC =====
+(function(){
+  const btn=document.getElementById('musicToggle'),audio=document.getElementById('bgMusic');
+  let on=false;
+  btn.addEventListener('click',async()=>{
+    if(!on){try{audio.volume=.42;await audio.play();on=true;btn.textContent='🔊';btn.classList.add('playing');btn.title='Click to pause';}catch(e){}}
+    else{audio.pause();on=false;btn.textContent='🎵';btn.classList.remove('playing');btn.title='Click for music';}
   });
 })();
+
+// ===== PLANETS =====
+const PLANETS=[
+  {name:'Mercury',emoji:'⚫',tag:'Closest to the Sun',facts:[{l:'🌡️ Temp',v:'430°C day, -180°C night!'},{l:'📅 Year',v:'Just 88 Earth days!'},{l:'🌙 Moons',v:'None at all!'},{l:'🔭 Fact',v:'Venus is hotter even though further away!'}]},
+  {name:'Venus',emoji:'🟡',tag:"Earth's evil twin",facts:[{l:'🌡️ Temp',v:'465°C — melts lead!'},{l:'🔄 Spin',v:'Rotates backwards!'},{l:'📅 Day',v:'A Venus day is longer than its year!'},{l:'🔭 Fact',v:'It rains sulphuric acid on Venus!'}]},
+  {name:'Earth',emoji:'🌍',tag:'Our home!',facts:[{l:'💧 Water',v:'71% ocean surface.'},{l:'🌙 Moons',v:'1 moon — causes tides.'},{l:'🛡️ Shield',v:'Magnetic field protects us!'},{l:'🔭 Fact',v:'Densest planet in the solar system!'}]},
+  {name:'Mars',emoji:'🔴',tag:'The Red Planet',facts:[{l:'🏔️ Mountain',v:'Olympus Mons is 3× taller than Everest!'},{l:'🌙 Moons',v:'2 tiny moons: Phobos & Deimos.'},{l:'🌡️ Temp',v:'Average -60°C — very cold!'},{l:'🔭 Fact',v:'A Martian day is 37 mins longer than ours.'}]},
+  {name:'Jupiter',emoji:'🟠',tag:'King of planets',facts:[{l:'📏 Size',v:'1,300 Earths could fit inside!'},{l:'🌀 Storm',v:'Great Red Spot — 350+ year old storm!'},{l:'🌙 Moons',v:'95+ moons! Europa may have life.'},{l:'🔭 Fact',v:'Pulls in dangerous comets to protect Earth!'}]},
+  {name:'Saturn',emoji:'🪐',tag:'The Ringed Wonder',facts:[{l:'💍 Rings',v:'282,000 km wide rings of ice & rock!'},{l:'🌊 Density',v:'Could float on water!'},{l:'🌙 Moons',v:'146 moons — most in solar system!'},{l:'🔭 Fact',v:'Winds reach 1,800 km/h!'}]},
+  {name:'Uranus',emoji:'🔵',tag:'The Tilted Giant',facts:[{l:'🔄 Tilt',v:'Rotates on its side!'},{l:'🌡️ Temp',v:'Coldest atmosphere: -224°C.'},{l:'🌙 Moons',v:'28 moons — all Shakespeare names!'},{l:'🔭 Fact',v:'Has 13 dark rings.'}]},
+  {name:'Neptune',emoji:'🔷',tag:'The Windy World',facts:[{l:'💨 Wind',v:'2,100 km/h — fastest in solar system!'},{l:'📅 Year',v:'1 Neptune year = 165 Earth years.'},{l:'🌙 Moons',v:'16 moons; Triton orbits backwards!'},{l:'🔭 Fact',v:'It rains diamonds inside Neptune!'}]},
+];
+const pGrid=document.getElementById('planetGrid');
+PLANETS.forEach(p=>{
+  const c=document.createElement('div');c.className='planet-card';
+  c.innerHTML=`<span class="planet-emoji">${p.emoji}</span><div class="planet-name">${p.name}</div><div class="planet-tag">${p.tag}</div>`;
+  c.addEventListener('click',()=>{
+    document.getElementById('pmEmoji').textContent=p.emoji;
+    document.getElementById('pmName').textContent=p.name;
+    document.getElementById('pmFacts').innerHTML=p.facts.map(f=>`<li><span class="fact-lbl">${f.l}:</span>${f.v}</li>`).join('');
+    document.getElementById('planetModal').classList.add('open');
+  });
+  pGrid.appendChild(c);
+});
+document.getElementById('pmClose').addEventListener('click',()=>document.getElementById('planetModal').classList.remove('open'));
+document.getElementById('planetModal').addEventListener('click',e=>{if(e.target===document.getElementById('planetModal'))document.getElementById('planetModal').classList.remove('open');});
+
+// ===== ARCADE =====
+const canvas=document.getElementById('gameCanvas'),ctx=canvas.getContext('2d');
+let gameOn=false,rx=280,ry=270,rocks=[],sc=0,best=0,animId,scInt,lastT=0,mx=280,my=270;
+canvas.addEventListener('mousemove',e=>{const r=canvas.getBoundingClientRect(),sx=canvas.width/r.width,sy=canvas.height/r.height;mx=(e.clientX-r.left)*sx;my=(e.clientY-r.top)*sy;});
+canvas.addEventListener('touchmove',e=>{e.preventDefault();const r=canvas.getBoundingClientRect(),sx=canvas.width/r.width,sy=canvas.height/r.height;mx=(e.touches[0].clientX-r.left)*sx;my=(e.touches[0].clientY-r.top)*sy;},{passive:false});
+function startGame(){rx=280;ry=270;rocks=[];sc=0;gameOn=true;document.getElementById('gameTime').textContent='0';lastT=performance.now();cancelAnimationFrame(animId);clearInterval(scInt);scInt=setInterval(()=>{if(gameOn){sc++;document.getElementById('gameTime').textContent=sc;}},1000);spawnR();loop(performance.now());}
+function spawnR(){if(!gameOn)return;rocks.push({x:Math.random()*canvas.width,y:-30,sz:18+Math.random()*20,sp:2+Math.random()*3+sc*.04,rot:Math.random()*6.28,rs:(Math.random()-.5)*.1});setTimeout(spawnR,Math.max(380,1300-sc*18));}
+function loop(now){if(!gameOn)return;const dt=(now-lastT)/16.67;lastT=now;rx+=(mx-rx)*.18*dt;ry+=(my-ry)*.18*dt;rocks.forEach(r=>{r.y+=r.sp*dt;r.rot+=r.rs*dt;});rocks=rocks.filter(r=>r.y<canvas.height+60);for(const r of rocks){const dx=rx-r.x,dy=ry-r.y;if(Math.sqrt(dx*dx+dy*dy)<r.sz*.65+11){endGame();return;}}drawGame();animId=requestAnimationFrame(loop);}
+function drawGame(){ctx.fillStyle='#080818';ctx.fillRect(0,0,canvas.width,canvas.height);ctx.fillStyle='rgba(255,255,255,.45)';for(let i=0;i<50;i++){ctx.beginPath();ctx.arc((i*139+sc*2)%canvas.width,(i*71+sc*3)%canvas.height,.9,0,6.28);ctx.fill();}rocks.forEach(r=>{ctx.save();ctx.translate(r.x,r.y);ctx.rotate(r.rot);ctx.fillStyle='#6a5a4a';ctx.strokeStyle='#907060';ctx.lineWidth=1.5;ctx.beginPath();for(let i=0;i<8;i++){const a=i/8*6.28,rd=r.sz*(.8+Math.sin(i*2.5)*.2);i===0?ctx.moveTo(Math.cos(a)*rd,Math.sin(a)*rd):ctx.lineTo(Math.cos(a)*rd,Math.sin(a)*rd);}ctx.closePath();ctx.fill();ctx.stroke();ctx.restore();});ctx.save();ctx.translate(rx,ry);const fl=.8+Math.random()*.4,g=ctx.createRadialGradient(0,16,2,0,22,14*fl);g.addColorStop(0,'#FFD93D');g.addColorStop(.5,'#FF6B35');g.addColorStop(1,'transparent');ctx.fillStyle=g;ctx.beginPath();ctx.ellipse(0,20,8,14*fl,0,0,6.28);ctx.fill();ctx.fillStyle='#4ECDC4';ctx.beginPath();ctx.moveTo(0,-22);ctx.lineTo(12,14);ctx.lineTo(-12,14);ctx.closePath();ctx.fill();ctx.fillStyle='#FFD93D';ctx.beginPath();ctx.arc(0,-3,5,0,6.28);ctx.fill();ctx.restore();}
+function endGame(){gameOn=false;clearInterval(scInt);if(sc>best){best=sc;document.getElementById('bestTime').textContent=best;}ctx.fillStyle='rgba(0,0,0,.65)';ctx.fillRect(0,0,canvas.width,canvas.height);ctx.textAlign='center';ctx.fillStyle='#FF4D8B';ctx.font="bold 32px 'Fredoka One',cursive";ctx.fillText('💥 Game Over!',canvas.width/2,canvas.height/2-26);ctx.fillStyle='#fff';ctx.font="20px 'Fredoka One',cursive";ctx.fillText(`You survived ${sc} seconds!`,canvas.width/2,canvas.height/2+12);if(sc===best&&sc>0){ctx.fillStyle='#FFD93D';ctx.fillText('🏆 New best!',canvas.width/2,canvas.height/2+42);}}
+document.getElementById('startBtn').addEventListener('click',startGame);
+document.getElementById('resetBtn').addEventListener('click',()=>{gameOn=false;clearInterval(scInt);cancelAnimationFrame(animId);rocks=[];sc=0;document.getElementById('gameTime').textContent='0';ctx.fillStyle='#080818';ctx.fillRect(0,0,canvas.width,canvas.height);ctx.fillStyle='rgba(255,255,255,.3)';ctx.font="18px 'Fredoka One',cursive";ctx.textAlign='center';ctx.fillText('Press Start 🚀',canvas.width/2,canvas.height/2);});
+ctx.fillStyle='#080818';ctx.fillRect(0,0,canvas.width,canvas.height);ctx.fillStyle='rgba(255,255,255,.3)';ctx.font="18px 'Fredoka One',cursive";ctx.textAlign='center';ctx.fillText('Press Start 🚀',canvas.width/2,canvas.height/2);
+
+// ===== GAMES DIARY =====
+let games=JSON.parse(localStorage.getItem('dev_games')||'[]');
+let gR=3;
+document.querySelectorAll('.star-btn').forEach(b=>b.addEventListener('click',()=>{gR=parseInt(b.dataset.s);document.querySelectorAll('.star-btn').forEach(x=>x.classList.toggle('lit',parseInt(x.dataset.s)<=gR));}));
+const GL=g=>({racing:'🚗 Racing',action:'⚔️ Action',space:'🚀 Space',puzzle:'🧩 Puzzle',adventure:'🗺️ Adventure',sports:'⚽ Sports',other:'🎲 Other'}[g]||g);
+const SL=s=>({playing:'▶️ Playing',completed:'✅ Done',wishlist:'⭐ Wishlist',dropped:'❌ Dropped'}[s]||s);
+function saveG(){localStorage.setItem('dev_games',JSON.stringify(games));}
+function renderG(){const g=document.getElementById('gamesGrid'),e=document.getElementById('gamesEmpty');if(!games.length){g.innerHTML='';e.style.display='block';return;}e.style.display='none';g.innerHTML=games.map((x,i)=>`<div class="game-card"><button class="gc-del" onclick="delG(${i})">✕</button><span class="gc-genre genre-${x.genre}">${GL(x.genre)}</span><div class="gc-name">${x.name}</div><div class="gc-stars">${'⭐'.repeat(x.rating)}${'☆'.repeat(5-x.rating)}</div><span class="gc-status status-${x.status}">${SL(x.status)}</span>${x.review?`<div class="gc-review">"${x.review}"</div>`:''}</div>`).join('');}
+document.getElementById('addGameBtn').addEventListener('click',()=>{const n=document.getElementById('gameName').value.trim();if(!n){document.getElementById('gameName').focus();return;}games.unshift({name:n,genre:document.getElementById('gameGenre').value,status:document.getElementById('gameStatus').value,rating:gR,review:document.getElementById('gameReview').value.trim()});saveG();renderG();document.getElementById('gameName').value='';document.getElementById('gameReview').value='';});
+function delG(i){games.splice(i,1);saveG();renderG();}
+if(!games.length){games=[{name:'Rocket League',genre:'sports',status:'playing',rating:5,review:'Cars + football = perfect!'},{name:'Kerbal Space Program',genre:'space',status:'completed',rating:4,review:'Taught me about orbits!'}];saveG();}
+renderG();
+
+// ===== DREAM GARAGE =====
+const ICARS=[
+  {make:'Bugatti',name:'Veyron Super Sport',emoji:'🏎️',color:'linear-gradient(135deg,#1a1a2e,#16213e)',stats:['1200 HP','431 km/h','W16'],spd:100,note:"Once the world's fastest — 16 cylinders!"},
+  {make:'Lamborghini',name:'Aventador SVJ',emoji:'🔥',color:'linear-gradient(135deg,#7f1d1d,#991b1b)',stats:['770 HP','350 km/h','V12'],spd:81,note:'The V12 roar sounds like a lion!'},
+  {make:'Ferrari',name:'SF90 Stradale',emoji:'🚗',color:'linear-gradient(135deg,#881a1a,#b91c1c)',stats:['1000 HP','340 km/h','Hybrid V8'],spd:79,note:"Ferrari's first hybrid supercar!"},
+  {make:'Koenigsegg',name:'Jesko Absolut',emoji:'⚡',color:'linear-gradient(135deg,#1c1917,#292524)',stats:['1600 HP','330+ km/h','V8 Turbo'],spd:95,note:'Built to break 300 mph — totally bonkers!'},
+  {make:'McLaren',name:'P1',emoji:'💛',color:'linear-gradient(135deg,#713f12,#92400e)',stats:['903 HP','350 km/h','Hybrid V8'],spd:81,note:"Best driver's car on road and track."},
+  {make:'Rimac',name:'Nevera',emoji:'💙',color:'linear-gradient(135deg,#1e3a5f,#1d4ed8)',stats:['1914 HP','412 km/h','Full Electric'],spd:96,note:'Fastest-accelerating production car ever!'},
+  {make:'Ford',name:'GT40',emoji:'🖤',color:'linear-gradient(135deg,#111827,#1f2937)',stats:['485 HP','322 km/h','V8'],spd:75,note:"Beat Ferrari at Le Mans 4 years in a row!"},
+  {make:'Porsche',name:'911 GT3 RS',emoji:'🤍',color:'linear-gradient(135deg,#1c1917,#3f3f46)',stats:['525 HP','296 km/h','Flat-6'],spd:69,note:'Pure, precise, absolutely thrilling.'},
+];
+function buildCar(c,del,idx){return`<div class="car-card"><div class="car-banner" style="background:${c.color}"><span style="position:relative;z-index:1;font-size:3.6rem">${c.emoji}</span></div><div class="car-body"><div style="display:flex;justify-content:space-between;align-items:start"><div><div class="car-make">${c.make}</div><div class="car-name">${c.name}</div></div>${del?`<button class="car-del" onclick="delC(${idx})">✕</button>`:''}</div><div class="car-stats">${c.stats.map(s=>`<span class="car-stat">${s}</span>`).join('')}</div>${!del?`<div class="spd-lbl">Speed index</div><div class="spd-bg"><div class="spd-fill" data-pct="${c.spd}"></div></div>`:''}<div class="car-note" style="margin-top:8px">${c.note||''}</div></div></div>`;}
+const igrid=document.getElementById('iconicGrid');
+ICARS.forEach(c=>{igrid.innerHTML+=buildCar(c,false,0);});
+function animateSpeedBars(){document.querySelectorAll('.spd-fill').forEach(b=>setTimeout(()=>{b.style.width=b.dataset.pct+'%';},200));}
+document.querySelectorAll('.gtab').forEach(tab=>{tab.addEventListener('click',()=>{document.querySelectorAll('.gtab').forEach(t=>t.classList.remove('active'));tab.classList.add('active');const w=tab.dataset.gtab;document.getElementById('iconicGrid').style.display=w==='iconic'?'grid':'none';document.getElementById('mineCarsWrap').style.display=w==='mine'?'block':'none';if(w==='iconic')animateSpeedBars();if(w==='mine')renderMyCars();});});
+let myCars=JSON.parse(localStorage.getItem('dev_cars')||'[]');
+function saveC(){localStorage.setItem('dev_cars',JSON.stringify(myCars));}
+function renderMyCars(){const g=document.getElementById('myCarsGrid'),e=document.getElementById('garageEmpty');if(!myCars.length){g.innerHTML='';e.style.display='block';return;}e.style.display='none';g.innerHTML=myCars.map((c,i)=>buildCar({...c,color:'linear-gradient(135deg,#1a1a2e,#16213e)',stats:c.speed?[`🏁 ${c.speed}`]:[],spd:0,note:c.note},true,i)).join('');}
+document.getElementById('addCarBtn').addEventListener('click',()=>{const n=document.getElementById('carName').value.trim();if(!n){document.getElementById('carName').focus();return;}myCars.unshift({name:n,make:document.getElementById('carMake').value.trim(),speed:document.getElementById('carSpeed').value.trim(),note:document.getElementById('carNote').value.trim(),emoji:document.getElementById('carEmoji').value});saveC();renderMyCars();['carName','carMake','carSpeed','carNote'].forEach(id=>document.getElementById(id).value='');});
+function delC(i){myCars.splice(i,1);saveC();renderMyCars();}
+
+// ===== PIANO (2 OCTAVES) =====
+const AC2=window.AudioContext||window.webkitAudioContext;let ac=null;
+function getAC(){if(!ac)ac=new AC2();return ac;}
+function playNote(f,d=1.3){const c=getAC(),o=c.createOscillator(),g=c.createGain();o.connect(g);g.connect(c.destination);o.type='triangle';o.frequency.setValueAtTime(f,c.currentTime);g.gain.setValueAtTime(.44,c.currentTime);g.gain.exponentialRampToValueAtTime(.001,c.currentTime+d);o.start();o.stop(c.currentTime+d);}
+// 2 octaves: C3-B4 (14 white keys, 10 black keys)
+const NOTES=[
+  {n:'C3',f:130.81,t:'w',k:'z'},{n:'C#3',f:138.59,t:'b',k:'s'},
+  {n:'D3',f:146.83,t:'w',k:'x'},{n:'D#3',f:155.56,t:'b',k:'d'},
+  {n:'E3',f:164.81,t:'w',k:'c'},{n:'F3',f:174.61,t:'w',k:'v'},
+  {n:'F#3',f:185.00,t:'b',k:'g'},{n:'G3',f:196.00,t:'w',k:'b'},
+  {n:'G#3',f:207.65,t:'b',k:'h'},{n:'A3',f:220.00,t:'w',k:'n'},
+  {n:'A#3',f:233.08,t:'b',k:'j'},{n:'B3',f:246.94,t:'w',k:'m'},
+  {n:'C4',f:261.63,t:'w',k:'a'},{n:'C#4',f:277.18,t:'b',k:'w'},
+  {n:'D4',f:293.66,t:'w',k:'S'},{n:'D#4',f:311.13,t:'b',k:'e'},
+  {n:'E4',f:329.63,t:'w',k:'D'},{n:'F4',f:349.23,t:'w',k:'f'},
+  {n:'F#4',f:369.99,t:'b',k:'t'},{n:'G4',f:392.00,t:'w',k:'g2'},
+  {n:'G#4',f:415.30,t:'b',k:'y'},{n:'A4',f:440.00,t:'w',k:'h2'},
+  {n:'A#4',f:466.16,t:'b',k:'u'},{n:'B4',f:493.88,t:'w',k:'J'},
+];
+const WW=52,BW=32,PAD=6;
+const kb=document.getElementById('keyboard');
+const kmap={};
+// Build white keys
+const whites=NOTES.filter(n=>n.t==='w');
+kb.style.height='194px';
+whites.forEach(n=>{
+  const el=document.createElement('div');el.className='wkey';el.textContent=n.n.replace(/[#\d]/g,'');
+  const press=()=>{playNote(n.f);document.getElementById('pianoNote').textContent=n.n;el.classList.add('pressed');setTimeout(()=>el.classList.remove('pressed'),180);spawnNP(el);};
+  el.addEventListener('mousedown',press);el.addEventListener('touchstart',e=>{e.preventDefault();press();},{passive:false});
+  kb.appendChild(el);if(n.k)kmap[n.k]={el,press};
+});
+// Black key positions: left = PAD + whiteIndex*WW + WW - BW/2
+// Map: note name → white key index to its left
+const BK_POS={'C#3':0,'D#3':1,'F#3':3,'G#3':4,'A#3':5,'C#4':7,'D#4':8,'F#4':10,'G#4':11,'A#4':12};
+NOTES.filter(n=>n.t==='b').forEach(n=>{
+  const wi=BK_POS[n.n];if(wi===undefined)return;
+  const el=document.createElement('div');el.className='bkey';
+  el.style.left=(PAD+wi*WW+WW-BW/2)+'px';
+  const press=()=>{playNote(n.f);document.getElementById('pianoNote').textContent=n.n;el.classList.add('pressed');setTimeout(()=>el.classList.remove('pressed'),180);spawnNP(el);};
+  el.addEventListener('mousedown',press);el.addEventListener('touchstart',e=>{e.preventDefault();press();},{passive:false});
+  kb.appendChild(el);if(n.k)kmap[n.k]={el,press};
+});
+document.addEventListener('keydown',e=>{if(e.repeat||e.target.tagName==='INPUT'||e.target.tagName==='TEXTAREA')return;const k=kmap[e.key];if(k)k.press();});
+function spawnNP(el){const emjs=['🎵','🎶','♪','♫'];const r=el.getBoundingClientRect();const d=document.createElement('div');d.className='note-pop';d.textContent=emjs[Math.floor(Math.random()*emjs.length)];d.style.left=(r.left+r.width/2-10)+'px';d.style.top=(r.top-8)+'px';document.body.appendChild(d);setTimeout(()=>d.remove(),1100);}
+// Chords
+const CHORDS={'C Maj':[261.63,329.63,392.00],'G Maj':[392.00,493.88,587.33],'A min':[440.00,523.25,261.63],'F Maj':[349.23,440.00,523.25],'D Maj':[293.66,369.99,440.00],'E min':[329.63,392.00,493.88]};
+const cr=document.getElementById('chordRow');
+Object.entries(CHORDS).forEach(([name,freqs])=>{const b=document.createElement('button');b.className='chord-btn';b.textContent=name;b.addEventListener('click',()=>{freqs.forEach((f,i)=>setTimeout(()=>playNote(f,1.4),i*55));document.getElementById('pianoChord').textContent=name;});cr.appendChild(b);});
+
+// ===== SONG JOURNAL =====
+let lyrics=JSON.parse(localStorage.getItem('dev_lyrics')||'[]');
+function saveL(){localStorage.setItem('dev_lyrics',JSON.stringify(lyrics));}
+const LSL=s=>({learning:'📖 Learning',know:'✅ Know It!',love:'❤️ All-time Fave'}[s]||s);
+function renderL(){const g=document.getElementById('lyricsGrid'),e=document.getElementById('lyricsEmpty');if(!lyrics.length){g.innerHTML='';e.style.display='block';return;}e.style.display='none';g.innerHTML=lyrics.map((l,i)=>`<div class="lyric-card" onclick="openL(${i})"><button class="lc-del" onclick="event.stopPropagation();delL(${i})">✕</button><div class="lc-title">${l.title}</div><div class="lc-artist">🎤 ${l.artist||'Unknown'}</div><span class="lc-status ls-${l.status}">${LSL(l.status)}</span>${l.text?`<div class="lc-preview">${l.text.slice(0,88)}${l.text.length>88?'…':''}</div>`:''}</div>`).join('');}
+function openL(i){const l=lyrics[i];document.getElementById('lmTitle').textContent=l.title;document.getElementById('lmArtist').textContent='🎤 '+(l.artist||'Unknown');document.getElementById('lmBody').textContent=l.text||'(no lyrics added yet)';document.getElementById('lyricModal').classList.add('open');}
+function delL(i){lyrics.splice(i,1);saveL();renderL();}
+document.getElementById('lmClose').addEventListener('click',()=>document.getElementById('lyricModal').classList.remove('open'));
+document.getElementById('lyricModal').addEventListener('click',e=>{if(e.target===document.getElementById('lyricModal'))document.getElementById('lyricModal').classList.remove('open');});
+document.getElementById('addLyricBtn').addEventListener('click',()=>{const t=document.getElementById('lyricTitle').value.trim();if(!t){document.getElementById('lyricTitle').focus();return;}lyrics.unshift({title:t,artist:document.getElementById('lyricArtist').value.trim(),status:document.getElementById('lyricStatus').value,text:document.getElementById('lyricText').value.trim()});saveL();renderL();['lyricTitle','lyricArtist','lyricText'].forEach(id=>document.getElementById(id).value='');});
+if(!lyrics.length){lyrics=[{title:'Bohemian Rhapsody',artist:'Queen',status:'love',text:'Is this the real life?\nIs this just fantasy?...'},{title:'Someone Like You',artist:'Adele',status:'learning',text:'I heard that you\'re settled down...\nThat you found a girl and you\'re married now...'}];saveL();}
+renderL();
+
+// ===== SINGING PRACTICE =====
+const SONGS=[
+  {title:'Skyfall',artist:'Adele',year:2012,type:'Bond: Skyfall',key:'D minor',bpm:70,range:'Mezzo-Soprano',diff:'⭐⭐⭐⭐',emoji:'🎬',color:'linear-gradient(135deg,#1a0a2e,#3d0050)',genius:'https://genius.com/Adele-skyfall-lyrics',tips:['Start very softly — power builds slowly into the chorus','Hold the word "Skyfall" — deep breath before it','Use chest voice for the lower verse notes','Final chorus: push from your belly for power']},
+  {title:"Writing's on the Wall",artist:'Sam Smith',year:2015,type:'Bond: Spectre',key:'B minor',bpm:63,range:'Tenor / High Baritone',diff:'⭐⭐⭐⭐⭐',emoji:'👁️',color:'linear-gradient(135deg,#0a1a0a,#1a3000)',genius:'https://genius.com/Sam-smith-writings-on-the-wall-lyrics',tips:["Reaches very high notes — use falsetto, don't strain","Sing verses very quietly and clearly","The chorus swells — match emotion not just notes",'Sam Smith uses lots of breath — practice long exhales']},
+  {title:'No Time to Die',artist:'Billie Eilish',year:2021,type:'Bond: No Time to Die',key:'A minor',bpm:60,range:'Mezzo-Soprano',diff:'⭐⭐⭐',emoji:'⏳',color:'linear-gradient(135deg,#0a1a2e,#001a30)',genius:'https://genius.com/Billie-eilish-no-time-to-die-lyrics',tips:['Very slow and breathy — perfect for breath control','Billie sings quiet and intimate — less is more','The key change near the end — mentally prepare before it','Focus on emotion not volume — feel every word']},
+  {title:'Imagine',artist:'John Lennon',year:1971,type:'Classic',key:'C major',bpm:75,range:'Baritone / Tenor',diff:'⭐⭐',emoji:'☮️',color:'linear-gradient(135deg,#1a1a0a,#2e2a00)',genius:'https://genius.com/John-lennon-imagine-lyrics',tips:['Simple melody — great for learning pitch control','Each verse is similar — make each one feel different','The message is peaceful — let that calm your voice','Great first song to learn fully from start to finish']},
+  {title:'My Neighbour Totoro',artist:'Azumi Inoue',year:1988,type:'Ghibli: Totoro',key:'F major',bpm:120,range:'Any',diff:'⭐⭐',emoji:'🌳',color:'linear-gradient(135deg,#0a2e0a,#003318)',genius:'https://genius.com/Joe-hisaishi-my-neighbor-totoro-lyrics',tips:['Bright and joyful — let your voice smile!','The melody bounces — feel rhythm in your body','Perfect for light head-voice singing practice','Sing it like telling a story to a young friend']},
+  {title:'Always With Me',artist:'Youmi Kimura',year:2001,type:'Ghibli: Spirited Away',key:'E major',bpm:72,range:'Soprano / Mezzo',diff:'⭐⭐⭐',emoji:'🌊',color:'linear-gradient(135deg,#0a1a2e,#001838)',genius:'https://genius.com/Youmi-kimura-always-with-me-lyrics',tips:['One of the most beautiful melodies ever written','Long flowing phrases — practice not running out of breath','High notes are gentle not forced — rise like water','Picture the Spirited Away images as you sing']},
+  {title:'Princess Mononoke',artist:'Yoshikazu Mera',year:1997,type:'Ghibli: Mononoke',key:'D minor',bpm:80,range:'Tenor / Soprano',diff:'⭐⭐⭐⭐',emoji:'🐺',color:'linear-gradient(135deg,#1a0a00,#2e1500)',genius:'https://genius.com/Joe-hisaishi-the-princess-mononoke-lyrics',tips:['Ancient epic feeling — sing with gravitas and space','Wide melody — practice jumping between notes cleanly','Use dynamics (loud/soft) to tell the story','Even humming this is great pitch accuracy practice']},
+];
+const sg=document.getElementById('songGrid');
+SONGS.forEach((s,i)=>{
+  const c=document.createElement('div');c.className='song-card';
+  c.innerHTML=`<div class="song-banner" style="background:${s.color}"><span style="position:relative;z-index:1">${s.emoji}</span></div><div class="song-body"><div class="song-title">${s.title}</div><div class="song-artist">${s.artist} • ${s.year}</div><div class="song-tags"><span class="song-tag">${s.type}</span><span class="song-tag">${s.key}</span><span class="song-tag">${s.bpm} BPM</span><span class="song-tag">${s.diff}</span></div></div>`;
+  c.addEventListener('click',()=>openSong(s,c));
+  sg.appendChild(c);
+});
+// Mic bars
+const mbEl=document.getElementById('micBars');
+for(let i=0;i<22;i++){const b=document.createElement('div');b.className='mic-bar';mbEl.appendChild(b);}
+let micStr=null,micAnim=null;
+function openSong(s,card){
+  document.querySelectorAll('.song-card').forEach(c=>c.classList.remove('active'));
+  card.classList.add('active');
+  document.getElementById('ppEmo').textContent=s.emoji;
+  document.getElementById('ppTitle').textContent=s.title;
+  document.getElementById('ppArtist').textContent=`${s.artist} • ${s.type} • ${s.year}`;
+  document.getElementById('ppStats').innerHTML=`<span class="pp-stat"><strong>Key:</strong>${s.key}</span><span class="pp-stat"><strong>BPM:</strong>${s.bpm}</span><span class="pp-stat"><strong>Range:</strong>${s.range}</span><span class="pp-stat"><strong>Level:</strong>${s.diff}</span>`;
+  document.getElementById('ppTips').innerHTML=s.tips.map(t=>`<li>${t}</li>`).join('');
+  document.getElementById('gLink').href=s.genius;
+  document.getElementById('gLink').textContent=`🔗 "${s.title}" Lyrics on Genius`;
+  const pp=document.getElementById('pp');pp.classList.add('show');pp.scrollIntoView({behavior:'smooth',block:'nearest'});
+  stopMic();
+}
+document.getElementById('micStart').addEventListener('click',startMic);
+document.getElementById('micStop').addEventListener('click',stopMic);
+async function startMic(){
+  try{
+    micStr=await navigator.mediaDevices.getUserMedia({audio:true,video:false});
+    const actx=new(window.AudioContext||window.webkitAudioContext)();
+    const src=actx.createMediaStreamSource(micStr);
+    const an=actx.createAnalyser();an.fftSize=64;src.connect(an);
+    const data=new Uint8Array(an.frequencyBinCount);
+    const bars=mbEl.querySelectorAll('.mic-bar');
+    document.getElementById('micStart').style.display='none';document.getElementById('micStop').style.display='inline-flex';
+    function draw(){micAnim=requestAnimationFrame(draw);an.getByteFrequencyData(data);bars.forEach((b,i)=>{const p=data[i]/255;b.style.height=(p*52+3)+'px';b.style.background=`rgba(${Math.round(255*p)},${Math.round(107+100*(1-p))},139,.85)`;});}
+    draw();
+  }catch(e){alert('Please allow microphone access in your browser!');}
+}
+function stopMic(){if(micStr){micStr.getTracks().forEach(t=>t.stop());micStr=null;}if(micAnim){cancelAnimationFrame(micAnim);micAnim=null;}document.getElementById('micStart').style.display='inline-flex';document.getElementById('micStop').style.display='none';mbEl.querySelectorAll('.mic-bar').forEach(b=>{b.style.height='3px';b.style.background='rgba(255,77,139,.25)';});}
+
+// ===== PRACTICE LOG =====
+let plog=JSON.parse(localStorage.getItem('dev_plog')||'[]');
+function saveP(){localStorage.setItem('dev_plog',JSON.stringify(plog));}
+function renderPlog(){
+  const list=document.getElementById('plogList'),empty=document.getElementById('plogEmpty');
+  const tm=plog.reduce((a,e)=>a+e.mins,0),best2=plog.reduce((a,e)=>Math.max(a,e.mins),0);
+  document.getElementById('stTotal').textContent=plog.length;document.getElementById('stMins').textContent=tm;document.getElementById('stBest').textContent=best2;
+  const days={};plog.forEach(e=>days[e.date]=true);let str=0;for(let i=0;i<30;i++){const d=new Date();d.setDate(d.getDate()-i);if(days[d.toDateString()])str++;else if(i>0)break;}
+  document.getElementById('stStreak').textContent=str+'🔥';
+  const bar=document.getElementById('streakBar');bar.innerHTML='';
+  for(let i=13;i>=0;i--){const d=new Date();d.setDate(d.getDate()-i);const div=document.createElement('div');div.className='sday '+(days[d.toDateString()]?'done':'none');div.textContent=d.getDate();bar.appendChild(div);}
+  if(!plog.length){list.innerHTML='';empty.style.display='block';return;}empty.style.display='none';
+  list.innerHTML=plog.map((e,i)=>`<div class="plog-entry"><div class="pl-icon">${e.type}</div><div class="pl-info"><div class="pl-title">${e.what||'Practice session'}</div><div class="pl-meta">${e.mood?'"'+e.mood+'" · ':''}${e.date}</div></div><div class="pl-mins">${e.mins}m</div><button class="pl-del" onclick="delP(${i})">✕</button></div>`).join('');
+}
+function delP(i){plog.splice(i,1);saveP();renderPlog();}
+document.getElementById('addPlogBtn').addEventListener('click',()=>{const m=parseInt(document.getElementById('plogMins').value);if(!m||m<1){document.getElementById('plogMins').focus();return;}plog.unshift({type:document.getElementById('plogType').value,what:document.getElementById('plogWhat').value.trim(),mins:m,mood:document.getElementById('plogMood').value.trim(),date:new Date().toDateString()});saveP();renderPlog();['plogWhat','plogMins','plogMood'].forEach(id=>document.getElementById(id).value='');});
+renderPlog();
+
+// ===== STUDY HUB =====
+document.querySelectorAll('.stab').forEach(tab=>{
+  tab.addEventListener('click',()=>{
+    document.querySelectorAll('.stab').forEach(t=>t.classList.remove('active'));
+    document.querySelectorAll('.study-sub').forEach(s=>s.classList.remove('active'));
+    tab.classList.add('active');
+    const sub=document.getElementById('stab-'+tab.dataset.stab);
+    if(sub)sub.classList.add('active');
+    if(tab.dataset.stab==='challenge')renderChallenges();
+  });
+});
+// Quiz topics
+const QTOPICS={
+  maths:['The Fish Tale','Shapes and Angles','How Many Squares','Parts and Wholes (Fractions)','Does It Look the Same','Be My Multiple I\'ll Be Your Factor','Can You See the Pattern','Mapping Your Way','Boxes and Sketches','Tenths and Hundredths (Decimals)','Area and Its Boundary','Smart Charts (Data Handling)','Ways to Multiply and Divide','How Big? How Heavy?'],
+  evs:['Super Senses','A Snake Charmer\'s Story','From Tasting to Digesting','Mangoes Round the Year','Seeds and Seeds','Every Drop Counts','Experiments with Water','A Treat for Mosquitoes','Up You Go!','Walls Tell Stories','Sunita in Space','What If It Finishes?','A Seed Tells a Farmer\'s Story','When the Earth Shook!','Blow Hot Blow Cold','Who Will Do This Work?','Across the Wall','No Place for Us?','A Ball Going Up','Whose Forests?'],
+  english:['Ice-Cream Man','Wonderful Waste!','Teamwork','My Shadow','Robinson Crusoe','Rip Van Winkle','The Lazy Frog','Tansen','The Little Bully','Who Will be Ningthou?','Topsy-Turvy Land','Gulliver\'s Travels'],
+  hindi:['Raakh Ki Rassi','Phool Phool Rang Rang','Khumba Khele Holi','Padhaku Ki Cycle','Jahan Chakki Phirti Hai','Chacha Ki Chitthi','Ramdhani Nagar Se','Bahut Hua']
+};
+const SCODES={maths:'MA',evs:'EV',english:'EN',hindi:'HI'};
+const SLABEL={maths:'Class 5 Maths',evs:'Class 5 EVS',english:'Class 5 English',hindi:'Class 5 Hindi'};
+document.getElementById('quizSubject').addEventListener('change',function(){
+  const ts=QTOPICS[this.value]||[];const sel=document.getElementById('quizTopic');
+  sel.innerHTML='<option value="">-- Pick a Topic --</option>';
+  ts.forEach((t,i)=>{const o=document.createElement('option');o.value=i;o.textContent=t;sel.appendChild(o);});
+});
+let cq={qs:[],cur:0,score:0,subj:'',topic:'',tidx:0};
+document.getElementById('genQuizBtn').addEventListener('click',async()=>{
+  const subj=document.getElementById('quizSubject').value;
+  const tidx=document.getElementById('quizTopic').value;
+  const n=parseInt(document.getElementById('qCount').value)||5;
+  if(!subj||tidx===''){alert('Please pick a subject and topic!');return;}
+  const topicName=QTOPICS[subj][tidx];
+  const btn=document.getElementById('genQuizBtn');btn.textContent='✨ Generating...';btn.disabled=true;
+  try{
+    const prompt=`Generate exactly ${n} multiple choice questions for a bright 10-year-old Indian student about "${topicName}" from ${SLABEL[subj]} (NCERT curriculum). Make questions interesting and clear. Each must have exactly 4 options labeled A, B, C, D. Return ONLY valid JSON with zero markdown or backticks. Format: {"questions":[{"q":"question","opts":["A. option","B. option","C. option","D. option"],"ans":"A","exp":"Short explanation why A is correct (1-2 sentences)"}]}`;
+    const raw=await callClaude([{role:'user',content:prompt}],'You are a Class 5 NCERT quiz generator for India. Return only raw valid JSON.',1800);
+    const clean=raw.replace(/```json|```/g,'').trim();
+    const data=JSON.parse(clean);
+    cq={qs:data.questions,cur:0,score:0,subj,topic:topicName,tidx:parseInt(tidx)};
+    startQ();
+  }catch(e){alert('Could not generate quiz: '+(e.message==='no-key'?'Please set your API key in ⚙️ Settings first!':e.message||'Please try again.'));}
+  btn.textContent='✨ Generate Quiz!';btn.disabled=false;
+});
+function startQ(){
+  document.getElementById('quizSetup').style.display='none';
+  document.getElementById('quizQWrap').style.display='block';
+  document.getElementById('scoreCard').classList.remove('show');
+  buildProg();showQ(0);
+}
+function buildProg(){const b=document.getElementById('qprogress');b.innerHTML=cq.qs.map((_,i)=>`<div class="qdot" id="qd${i}"></div>`).join('');updateProg();}
+function updateProg(){cq.qs.forEach((_,i)=>{const d=document.getElementById('qd'+i);if(!d)return;d.className='qdot'+(i<cq.cur?' done':i===cq.cur?' curr':'');});}
+function showQ(idx){
+  cq.cur=idx;updateProg();
+  const q=cq.qs[idx],t=cq.qs.length;
+  document.getElementById('qNum').textContent=`Q${idx+1} of ${t} — ${cq.topic}`;
+  document.getElementById('qText').textContent=q.q;
+  document.getElementById('qExp').className='q-exp';document.getElementById('qExp').textContent='';
+  document.getElementById('qNext').style.display='none';
+  const opts=document.getElementById('qOpts');opts.innerHTML='';
+  q.opts.forEach(opt=>{const b=document.createElement('button');b.className='q-opt';b.textContent=opt;b.addEventListener('click',()=>ansQ(opt,q,b));opts.appendChild(b);});
+}
+function ansQ(chosen,q,btnEl){
+  const letter=chosen.charAt(0),correct=letter===q.ans;
+  if(correct)cq.score++;
+  document.querySelectorAll('.q-opt').forEach(b=>{b.disabled=true;if(b.textContent.charAt(0)===q.ans)b.classList.add('correct');else if(b===btnEl&&!correct)b.classList.add('wrong');});
+  const exp=document.getElementById('qExp');exp.textContent=q.exp;exp.classList.add('show');
+  const nxt=document.getElementById('qNext');const last=cq.cur===cq.qs.length-1;nxt.textContent=last?'See Results 🎉':'Next →';nxt.style.display='inline-flex';nxt.onclick=()=>{if(last)showScore();else showQ(cq.cur+1);};
+}
+function showScore(){
+  document.getElementById('quizQWrap').style.display='none';
+  const sc=document.getElementById('scoreCard');sc.classList.add('show');
+  const s=cq.score,t=cq.qs.length,pct=Math.round(s/t*100);
+  const em=pct>=80?'🏆':pct>=60?'😊':pct>=40?'📚':'💪';
+  document.getElementById('scoreBig').textContent=`${em} ${s}/${t}`;
+  const msgs=['Keep going — you\'re learning! 💪','Good effort — review it once more!','Well done, you know this! 😊','Excellent — you\'re a star! 🌟'];
+  document.getElementById('scoreLbl').textContent=msgs[pct>=80?3:pct>=60?2:pct>=40?1:0];
+  const code=SCODES[cq.subj]+'-'+String(cq.tidx).padStart(2,'0');
+  document.getElementById('codeDisplay').textContent=code;
+  const h=JSON.parse(localStorage.getItem('dev_ch')||'[]');
+  h.unshift({code,topic:cq.topic,score:s,total:t,date:new Date().toDateString(),player:'Devagneya'});
+  localStorage.setItem('dev_ch',JSON.stringify(h.slice(0,30)));
+  renderChallenges();
+}
+document.getElementById('copyCodeBtn').addEventListener('click',()=>{
+  navigator.clipboard.writeText(document.getElementById('codeDisplay').textContent).then(()=>{document.getElementById('copyCodeBtn').textContent='✅ Copied!';setTimeout(()=>document.getElementById('copyCodeBtn').textContent='📋 Copy Code',2000);});
+});
+document.getElementById('retryBtn').addEventListener('click',()=>{document.getElementById('scoreCard').classList.remove('show');document.getElementById('quizSetup').style.display='block';document.getElementById('quizQWrap').style.display='none';});
+
+// Challenge tab
+const SFROMCODE={MA:'maths',EV:'evs',EN:'english',HI:'hindi'};
+document.getElementById('acceptBtn').addEventListener('click',async()=>{
+  const code=document.getElementById('codeInput').value.trim().toUpperCase();
+  const name=document.getElementById('challengerName').value.trim()||'Friend';
+  if(!code||!code.includes('-')){alert('Please enter a valid code like MA-04');return;}
+  const [sc2,ti]=code.split('-');const subj=SFROMCODE[sc2];const tidx=parseInt(ti);
+  if(!subj||isNaN(tidx)||tidx>=(QTOPICS[subj]||[]).length){alert('Invalid code — check you typed it correctly!');return;}
+  const topicName=QTOPICS[subj][tidx];
+  const hist=JSON.parse(localStorage.getItem('dev_ch')||'[]');
+  const orig=hist.find(h=>h.code===code&&h.player==='Devagneya');
+  const info=document.getElementById('chInfo');info.style.display='block';
+  info.innerHTML=orig?`🏆 Devagneya scored <strong>${orig.score}/${orig.total}</strong> on <strong>${topicName}</strong>. Can you beat it, ${name}? Generating your quiz...`:`📝 Quiz on <strong>${topicName}</strong>. Generating...`;
+  const n=orig?orig.total:5;
+  try{
+    const prompt=`Generate exactly ${n} MCQs for a 10-year-old Indian student about "${topicName}" from ${SLABEL[subj]} (NCERT). Return ONLY valid JSON: {"questions":[{"q":"...","opts":["A. ...","B. ...","C. ...","D. ..."],"ans":"A","exp":"..."}]}`;
+    const raw=await callClaude([{role:'user',content:prompt}],'Return only raw JSON.',1800);
+    const data=JSON.parse(raw.replace(/```json|```/g,'').trim());
+    cq={qs:data.questions,cur:0,score:0,subj,topic:topicName,tidx};
+    // switch to quiz sub-tab
+    document.querySelectorAll('.stab').forEach(t=>t.classList.remove('active'));
+    document.querySelectorAll('.study-sub').forEach(s=>s.classList.remove('active'));
+    document.querySelector('[data-stab="quiz"]').classList.add('active');
+    document.getElementById('stab-quiz').classList.add('active');
+    document.getElementById('quizSetup').style.display='none';
+    startQ();
+    // after quiz, override showScore to save challenger result
+    const origShowScore=showScore;
+    window._afterQ=function(){const cs=cq.score,ct=cq.qs.length;const h2=JSON.parse(localStorage.getItem('dev_ch')||'[]');h2.unshift({code,topic:topicName,score:cs,total:ct,date:new Date().toDateString(),player:name,vsScore:orig?orig.score:null,vsTotal:orig?orig.total:ct});localStorage.setItem('dev_ch',JSON.stringify(h2.slice(0,30)));renderChallenges();};
+  }catch(e){info.innerHTML=`❌ Error: ${e.message==='no-key'?'Set API key in ⚙️ Settings first!':e.message}`;}
+});
+
+function renderChallenges(){
+  const list=JSON.parse(localStorage.getItem('dev_ch')||'[]');
+  const el=document.getElementById('chList'),empty=document.getElementById('chEmpty');
+  if(!list.length){el.innerHTML='';empty.style.display='block';return;}empty.style.display='none';
+  el.innerHTML=list.map(h=>{const pct=Math.round(h.score/h.total*100);const m=pct>=80?'🏆':pct>=60?'😊':'📚';const vs=h.vsScore!=null?` · beat ${h.vsScore}/${h.vsTotal}?`:'';return`<div class="ch-row"><div class="ch-medal">${m}</div><div class="ch-info"><div class="ch-player">${h.player}</div><div class="ch-meta">${h.topic} · ${h.code} · ${h.date}${vs}</div></div><div class="ch-score">${h.score}/${h.total}</div></div>`;}).join('');
+}
+
+// ===== ASK TEACHER =====
+let chatH=[];
+const TSYS=`You are Dev-Sir, a warm and encouraging AI teacher for Devagneya — a bright, curious 10-year-old student in Class 5 in India (NCERT curriculum). He loves cars, space, games, piano and singing. Explain things simply with relatable examples from everyday Indian life. Use occasional emojis. Keep answers short and clear (3-5 sentences) unless more detail is needed. Be positive and make learning feel exciting!`;
+document.getElementById('chatSend').addEventListener('click',sendChat);
+document.getElementById('chatInput').addEventListener('keydown',e=>{if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();sendChat();}});
+async function sendChat(){
+  const inp=document.getElementById('chatInput'),msg=inp.value.trim();if(!msg)return;
+  inp.value='';addMsg('user',msg);chatH.push({role:'user',content:msg});
+  const t=addMsg('bot','<span style="opacity:.5;font-style:italic">Dev-Sir is thinking...</span>');
+  try{const reply=await callClaude(chatH,TSYS,900);t.remove();chatH.push({role:'assistant',content:reply});addMsg('bot',`<strong>Dev-Sir 🤖:</strong> ${reply.replace(/\n/g,'<br>')}`);}
+  catch(e){t.remove();addMsg('bot',`<strong>Dev-Sir 🤖:</strong> ${e.message==='no-key'?'Ask a parent to set up the API key in ⚙️ Settings!':'Oops, please try again!'}`);}
+}
+function addMsg(role,html){const b=document.getElementById('chatBox');const d=document.createElement('div');d.className='cmsg '+role;d.innerHTML=html;b.appendChild(d);b.scrollTop=b.scrollHeight;return d;}
 </script>
 </body>
 </html>
