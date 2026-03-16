@@ -51,6 +51,98 @@ body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:0;opa
 .nav-btn[data-tab="singing"]{background:linear-gradient(135deg,#FF4D8B,#FF6B35);color:#fff;}
 .nav-btn[data-tab="praclog"]{background:linear-gradient(135deg,#A855F7,#4ECDC4);color:#fff;}
 .nav-btn[data-tab="study"]{background:linear-gradient(135deg,#4ECDC4,#6BCB77);color:var(--dk);}
+.nav-btn[data-tab="dad"]{background:linear-gradient(135deg,#A855F7,#FF4D8B);color:#fff;}
+.nav-btn[data-tab="dad"]{background:linear-gradient(135deg,#F59E0B,#EF4444);color:#fff;}
+
+/* ===== PARENT PIN GATE ===== */
+.dad-gate{text-align:center;padding:60px 20px;max-width:360px;margin:0 auto;}
+.dad-gate-ico{font-size:4rem;margin-bottom:16px;}
+.dad-gate-title{font-family:'Fredoka One',cursive;font-size:1.6rem;margin-bottom:8px;color:#F59E0B;}
+.dad-gate-sub{color:rgba(255,255,255,.45);font-size:.88rem;margin-bottom:24px;}
+.dad-gate-row{display:flex;gap:10px;justify-content:center;}
+.dad-gate-row input{font-family:'Nunito',sans-serif;background:rgba(255,255,255,.07);border:2px solid rgba(255,255,255,.15);border-radius:12px;color:#fff;padding:10px 16px;font-size:1.1rem;outline:none;width:160px;text-align:center;letter-spacing:4px;transition:border-color .2s;}
+.dad-gate-row input:focus{border-color:#F59E0B;}
+
+/* ===== PARENT DASHBOARD ===== */
+.dad-board{display:none;}
+.dad-board.unlocked{display:block;animation:fadeIn .35s ease;}
+.dad-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:24px;flex-wrap:wrap;gap:12px;}
+.dad-title{font-family:'Fredoka One',cursive;font-size:1.8rem;color:#F59E0B;}
+.dad-logout{font-family:'Fredoka One',cursive;font-size:.82rem;padding:6px 14px;border-radius:50px;border:2px solid rgba(245,158,11,.3);background:transparent;color:rgba(245,158,11,.7);cursor:pointer;transition:all .2s;}
+.dad-logout:hover{background:rgba(245,158,11,.1);color:#F59E0B;}
+
+/* Sub-tabs */
+.dad-tabs{display:flex;gap:9px;margin-bottom:26px;flex-wrap:wrap;}
+.dtab{font-family:'Fredoka One',cursive;font-size:.92rem;padding:8px 18px;border-radius:50px;border:2px solid rgba(245,158,11,.2);background:transparent;color:rgba(245,158,11,.5);cursor:pointer;transition:all .2s;}
+.dtab.active,.dtab:hover{background:rgba(245,158,11,.12);border-color:#F59E0B;color:#F59E0B;}
+.dad-sub{display:none;}
+.dad-sub.active{display:block;animation:fadeIn .3s ease;}
+
+/* Stat cards */
+.dad-stats{display:grid;grid-template-columns:repeat(auto-fill,minmax(155px,1fr));gap:12px;margin-bottom:24px;}
+.dad-stat{background:rgba(245,158,11,.07);border:2px solid rgba(245,158,11,.18);border-radius:16px;padding:16px 14px;text-align:center;}
+.ds-val{font-family:'Fredoka One',cursive;font-size:2rem;color:#F59E0B;margin-bottom:3px;}
+.ds-lbl{font-size:.72rem;color:rgba(255,255,255,.45);text-transform:uppercase;letter-spacing:.8px;}
+
+/* Weak areas */
+.weak-list{display:flex;flex-direction:column;gap:10px;margin-bottom:24px;}
+.weak-row{background:var(--c);border-radius:13px;border:2px solid rgba(255,255,255,.07);padding:13px 16px;display:flex;align-items:center;gap:12px;}
+.weak-bar-wrap{flex:1;background:rgba(255,255,255,.07);border-radius:50px;height:7px;overflow:hidden;}
+.weak-bar{height:100%;border-radius:50px;transition:width .8s ease;}
+.weak-topic{font-family:'Fredoka One',cursive;font-size:.95rem;min-width:0;flex:1;}
+.weak-pct{font-family:'Fredoka One',cursive;font-size:.9rem;white-space:nowrap;}
+.weak-attempts{font-size:.72rem;color:rgba(255,255,255,.38);margin-top:1px;}
+
+/* Topics timeline */
+.topic-timeline{display:flex;flex-direction:column;gap:8px;margin-bottom:20px;}
+.tl-row{background:var(--c);border-radius:12px;padding:11px 15px;display:flex;align-items:center;gap:12px;border:2px solid rgba(255,255,255,.06);}
+.tl-date{font-size:.72rem;color:rgba(255,255,255,.35);white-space:nowrap;min-width:75px;}
+.tl-topic{font-family:'Fredoka One',cursive;font-size:.92rem;flex:1;}
+.tl-score{font-family:'Fredoka One',cursive;font-size:1rem;}
+
+/* Homework */
+.hw-list{display:flex;flex-direction:column;gap:8px;margin-bottom:20px;}
+.hw-row{background:var(--c);border-radius:12px;padding:12px 15px;display:flex;align-items:center;gap:12px;border:2px solid rgba(255,255,255,.06);transition:opacity .2s;}
+.hw-row.done{opacity:.45;}
+.hw-check{width:22px;height:22px;border-radius:6px;border:2px solid rgba(245,158,11,.4);background:transparent;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:.85rem;transition:all .15s;flex-shrink:0;}
+.hw-check.ticked{background:#F59E0B;border-color:#F59E0B;}
+.hw-text{flex:1;font-size:.88rem;}
+.hw-text.done-text{text-decoration:line-through;color:rgba(255,255,255,.35);}
+.hw-subj{font-size:.68rem;font-weight:800;padding:2px 7px;border-radius:50px;background:rgba(245,158,11,.15);color:#F59E0B;white-space:nowrap;}
+.hw-due{font-size:.7rem;color:rgba(255,255,255,.35);white-space:nowrap;}
+.hw-del{background:none;border:none;color:rgba(255,255,255,.14);font-size:.85rem;cursor:pointer;transition:color .2s;}
+.hw-del:hover{color:var(--p);}
+
+/* Comments */
+.comment-list{display:flex;flex-direction:column;gap:12px;margin-bottom:20px;}
+.comment-card{background:rgba(245,158,11,.06);border:2px solid rgba(245,158,11,.18);border-radius:14px;padding:14px 16px;}
+.cc-meta{font-size:.72rem;color:rgba(255,255,255,.38);margin-bottom:6px;}
+.cc-quiz{font-family:'Fredoka One',cursive;font-size:.92rem;color:#F59E0B;margin-bottom:4px;}
+.cc-text{font-size:.88rem;line-height:1.55;color:rgba(255,255,255,.82);}
+.cc-seen{font-size:.68rem;color:rgba(107,203,119,.7);margin-top:5px;}
+.cc-del{float:right;background:none;border:none;color:rgba(255,255,255,.14);font-size:.82rem;cursor:pointer;transition:color .2s;}
+.cc-del:hover{color:var(--p);}
+
+/* Weekly target */
+.target-card{background:rgba(245,158,11,.08);border:2px solid rgba(245,158,11,.25);border-radius:16px;padding:18px;margin-bottom:20px;}
+.target-set{display:flex;gap:10px;flex-wrap:wrap;align-items:flex-end;}
+.target-set select,.target-set input{font-family:'Nunito',sans-serif;background:rgba(255,255,255,.06);border:2px solid rgba(245,158,11,.2);border-radius:10px;color:#fff;padding:8px 12px;font-size:.85rem;outline:none;flex:1;min-width:110px;}
+.target-set select option{background:#1a1a2e;}
+.target-set input::placeholder{color:rgba(255,255,255,.28);}
+.target-display{margin-top:14px;padding:14px;background:rgba(245,158,11,.06);border-radius:12px;display:none;}
+.td-label{font-size:.72rem;color:rgba(255,255,255,.38);text-transform:uppercase;letter-spacing:.8px;margin-bottom:6px;}
+.td-target{font-family:'Fredoka One',cursive;font-size:1.3rem;color:#F59E0B;}
+.td-progress{margin-top:10px;}
+.td-bar-bg{background:rgba(255,255,255,.07);border-radius:50px;height:8px;margin-top:5px;overflow:hidden;}
+.td-bar-fill{height:100%;border-radius:50px;background:linear-gradient(90deg,#F59E0B,#EF4444);transition:width .8s ease;}
+
+/* Dad's message banner (shown to Devagneya) */
+.dad-msg-banner{background:linear-gradient(135deg,rgba(245,158,11,.12),rgba(239,68,68,.08));border:2px solid rgba(245,158,11,.28);border-radius:16px;padding:14px 18px;margin-bottom:20px;display:none;animation:fadeIn .4s ease;}
+.dmb-top{display:flex;align-items:center;gap:10px;margin-bottom:5px;}
+.dmb-ico{font-size:1.4rem;}
+.dmb-who{font-family:'Fredoka One',cursive;font-size:.95rem;color:#F59E0B;}
+.dmb-text{font-size:.9rem;line-height:1.55;color:rgba(255,255,255,.85);}
+.dmb-new{font-size:.68rem;background:#F59E0B;color:var(--dk);padding:2px 7px;border-radius:50px;font-weight:800;margin-left:auto;}
 
 /* SECTIONS */
 .section{display:none;animation:fadeIn .35s ease;}
@@ -291,6 +383,223 @@ body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:0;opa
 .ch-player{font-family:'Fredoka One',cursive;font-size:.97rem;}
 .ch-meta{font-size:.72rem;color:rgba(255,255,255,.4);}
 .ch-score{font-family:'Fredoka One',cursive;font-size:1.15rem;color:var(--y);}
+
+/* ====== DAD'S BOARD ====== */
+.dad-gate{text-align:center;padding:60px 20px;}
+.dad-gate-ico{font-size:4rem;margin-bottom:16px;}
+.dad-gate-title{font-family:'Fredoka One',cursive;font-size:1.6rem;margin-bottom:8px;color:var(--b);}
+.dad-gate-sub{font-size:.88rem;color:rgba(255,255,255,.4);margin-bottom:24px;}
+.dad-gate-row{display:flex;gap:10px;justify-content:center;max-width:340px;margin:0 auto;}
+.dad-gate-row input{font-family:'Nunito',sans-serif;background:rgba(255,255,255,.07);border:2px solid rgba(255,255,255,.15);border-radius:12px;color:#fff;padding:10px 16px;font-size:1.1rem;letter-spacing:6px;text-align:center;flex:1;outline:none;transition:border-color .2s;}
+.dad-gate-row input:focus{border-color:var(--b);}
+
+.dad-board{display:none;}
+.dad-board.open{display:block;animation:fadeIn .3s ease;}
+.dad-dtabs{display:flex;gap:8px;justify-content:center;margin-bottom:24px;flex-wrap:wrap;}
+.dtab{font-family:'Fredoka One',cursive;font-size:.95rem;padding:8px 18px;border-radius:50px;border:2px solid rgba(255,255,255,.14);background:transparent;color:rgba(255,255,255,.5);cursor:pointer;transition:all .2s;}
+.dtab.active,.dtab:hover{background:rgba(255,217,61,.12);border-color:var(--y);color:var(--y);}
+.dtab-sub{display:none;}
+.dtab-sub.active{display:block;animation:fadeIn .3s ease;}
+
+/* Dashboard cards */
+.dad-kpis{display:grid;grid-template-columns:repeat(auto-fill,minmax(155px,1fr));gap:12px;margin-bottom:24px;}
+.dkpi{background:var(--c);border-radius:16px;border:2px solid rgba(255,255,255,.08);padding:16px 14px;text-align:center;backdrop-filter:blur(10px);}
+.dkpi-val{font-family:'Fredoka One',cursive;font-size:2rem;margin-bottom:3px;}
+.dkpi-lbl{font-size:.72rem;color:rgba(255,255,255,.42);line-height:1.3;}
+
+/* Score history table */
+.score-table{width:100%;border-collapse:collapse;font-size:.84rem;margin-bottom:22px;}
+.score-table th{text-align:left;padding:8px 12px;color:rgba(255,255,255,.38);font-size:.72rem;text-transform:uppercase;letter-spacing:1px;border-bottom:1px solid rgba(255,255,255,.07);}
+.score-table td{padding:9px 12px;border-bottom:1px solid rgba(255,255,255,.05);vertical-align:middle;}
+.score-table tr:hover td{background:rgba(255,255,255,.04);}
+.pct-bar{height:6px;background:rgba(255,255,255,.08);border-radius:3px;overflow:hidden;min-width:60px;}
+.pct-fill{height:100%;border-radius:3px;transition:width .6s ease;}
+.comment-btn{font-family:'Fredoka One',cursive;font-size:.72rem;padding:3px 10px;border-radius:50px;border:1px solid rgba(255,255,255,.2);background:transparent;color:rgba(255,255,255,.55);cursor:pointer;transition:all .15s;white-space:nowrap;}
+.comment-btn:hover{border-color:var(--y);color:var(--y);}
+.comment-btn.has-comment{border-color:var(--g);color:var(--g);}
+
+/* Weak areas */
+.weak-list{display:flex;flex-direction:column;gap:9px;margin-bottom:22px;}
+.weak-row{background:rgba(255,77,139,.07);border:1px solid rgba(255,77,139,.18);border-radius:12px;padding:12px 16px;display:flex;align-items:center;gap:12px;}
+.weak-ico{font-size:1.6rem;flex-shrink:0;}
+.weak-info{flex:1;}
+.weak-topic{font-family:'Fredoka One',cursive;font-size:.97rem;margin-bottom:2px;}
+.weak-meta{font-size:.75rem;color:rgba(255,255,255,.42);}
+.weak-avg{font-family:'Fredoka One',cursive;font-size:1.2rem;color:var(--p);}
+
+/* Weekly target */
+.target-current{background:linear-gradient(135deg,rgba(255,217,61,.1),rgba(255,107,53,.08));border:2px solid rgba(255,217,61,.25);border-radius:18px;padding:20px;margin-bottom:20px;}
+.target-lbl{font-size:.72rem;font-weight:800;text-transform:uppercase;letter-spacing:1px;color:var(--y);margin-bottom:6px;}
+.target-topic{font-family:'Fredoka One',cursive;font-size:1.4rem;margin-bottom:4px;}
+.target-meta{font-size:.83rem;color:rgba(255,255,255,.5);}
+.target-progress{margin-top:12px;}
+.tp-bar{height:10px;background:rgba(255,255,255,.1);border-radius:5px;overflow:hidden;margin-top:6px;}
+.tp-fill{height:100%;border-radius:5px;background:linear-gradient(90deg,var(--y),var(--g));transition:width .8s ease;}
+.no-target{text-align:center;padding:28px;color:rgba(255,255,255,.3);font-size:.9rem;}
+
+/* Homework */
+.hw-list{display:flex;flex-direction:column;gap:9px;margin-bottom:16px;}
+.hw-row{background:var(--c);border-radius:12px;border:2px solid rgba(255,255,255,.07);padding:12px 16px;display:flex;align-items:center;gap:12px;transition:opacity .2s;}
+.hw-row.done-row{opacity:.5;}
+.hw-check{width:22px;height:22px;border-radius:6px;border:2px solid rgba(255,255,255,.25);background:transparent;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:.9rem;flex-shrink:0;transition:all .2s;}
+.hw-check.checked{background:var(--g);border-color:var(--g);}
+.hw-text{flex:1;font-size:.88rem;line-height:1.4;}
+.hw-text.strikethrough{text-decoration:line-through;color:rgba(255,255,255,.38);}
+.hw-subject{font-size:.68rem;font-weight:800;padding:2px 7px;border-radius:50px;background:rgba(78,205,196,.15);color:var(--b);margin-right:6px;}
+.hw-due{font-size:.72rem;color:rgba(255,255,255,.35);}
+.hw-del{background:none;border:none;color:rgba(255,255,255,.15);font-size:.85rem;cursor:pointer;transition:color .2s;flex-shrink:0;}
+.hw-del:hover{color:var(--p);}
+
+/* Comment modal */
+.comment-modal-body{display:flex;flex-direction:column;gap:12px;}
+.comment-modal-ctx{background:rgba(255,255,255,.06);border-radius:10px;padding:12px;font-size:.85rem;line-height:1.5;color:rgba(255,255,255,.7);}
+.comment-modal-ctx strong{color:var(--y);}
+.cm-existing{font-size:.82rem;color:rgba(255,255,255,.55);border-left:3px solid var(--b);padding-left:10px;line-height:1.5;font-style:italic;}
+
+/* Report */
+.report-week{background:var(--c);border-radius:18px;border:2px solid rgba(255,255,255,.1);padding:20px;margin-bottom:16px;backdrop-filter:blur(10px);}
+.rw-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px;flex-wrap:wrap;gap:8px;}
+.rw-title{font-family:'Fredoka One',cursive;font-size:1.1rem;}
+.rw-grade{font-family:'Fredoka One',cursive;font-size:1.4rem;}
+.rw-subjects{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:8px;margin-bottom:12px;}
+.rw-subj{background:rgba(255,255,255,.05);border-radius:10px;padding:9px 12px;}
+.rw-subj-name{font-size:.72rem;font-weight:800;color:rgba(255,255,255,.45);text-transform:uppercase;letter-spacing:.8px;margin-bottom:3px;}
+.rw-subj-score{font-family:'Fredoka One',cursive;font-size:1.1rem;}
+.rw-note{font-size:.8rem;color:rgba(255,255,255,.42);font-style:italic;border-top:1px solid rgba(255,255,255,.07);padding-top:10px;margin-top:4px;}
+
+
+/* ═══════════════ STUDY BOARD ═══════════════ */
+
+/* XP Bar */
+.sb-xp-bar{display:flex;align-items:center;gap:14px;background:linear-gradient(135deg,rgba(168,85,247,.15),rgba(78,205,196,.1));border:2px solid rgba(168,85,247,.25);border-radius:18px;padding:14px 18px;margin-bottom:20px;flex-wrap:wrap;}
+.sb-xp-left{display:flex;align-items:center;gap:10px;}
+.sb-avatar{font-size:2rem;width:48px;height:48px;display:flex;align-items:center;justify-content:center;background:rgba(168,85,247,.2);border-radius:50%;border:2px solid rgba(168,85,247,.4);}
+.sb-name{font-family:'Fredoka One',cursive;font-size:1.1rem;}
+.sb-level{font-size:.75rem;color:var(--v);font-weight:700;}
+.sb-xp-center{flex:1;min-width:160px;}
+.sb-xp-track{height:10px;background:rgba(255,255,255,.1);border-radius:5px;overflow:hidden;margin-bottom:4px;}
+.sb-xp-fill{height:100%;border-radius:5px;background:linear-gradient(90deg,var(--v),var(--b));transition:width .6s ease;width:0%;}
+.sb-xp-nums{font-size:.72rem;color:rgba(255,255,255,.45);text-align:center;}
+.sb-streak-pill{font-family:'Fredoka One',cursive;font-size:1.1rem;background:rgba(255,107,53,.2);border:2px solid rgba(255,107,53,.3);border-radius:50px;padding:5px 14px;color:var(--o);}
+
+/* Study Board Nav */
+.sb-nav{display:flex;gap:7px;margin-bottom:24px;flex-wrap:wrap;justify-content:center;}
+.sb-nav-btn{font-family:'Fredoka One',cursive;font-size:.88rem;padding:8px 16px;border-radius:50px;border:2px solid rgba(255,255,255,.12);background:transparent;color:rgba(255,255,255,.5);cursor:pointer;transition:all .2s;white-space:nowrap;}
+.sb-nav-btn:hover{background:rgba(255,255,255,.07);color:#fff;}
+.sb-nav-btn.active{background:linear-gradient(135deg,var(--v),var(--b));border-color:transparent;color:#fff;box-shadow:0 4px 16px rgba(168,85,247,.35);}
+
+/* Pages */
+.sb-page{display:none;}
+.sb-page.active{display:block;animation:fadeIn .3s ease;}
+.sb-section-title{font-family:'Fredoka One',cursive;font-size:1rem;color:rgba(255,255,255,.4);margin-bottom:12px;text-transform:uppercase;letter-spacing:.8px;}
+
+/* Mission row */
+.sb-mission-row{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:12px;margin-bottom:24px;}
+.sb-mission-card{border-radius:16px;padding:16px 18px;}
+.sm-target{background:linear-gradient(135deg,rgba(255,217,61,.12),rgba(255,107,53,.08));border:2px solid rgba(255,217,61,.25);}
+.sm-hw{background:linear-gradient(135deg,rgba(78,205,196,.1),rgba(107,203,119,.08));border:2px solid rgba(78,205,196,.22);}
+.sm-title{font-family:'Fredoka One',cursine;font-family:'Fredoka One',cursive;font-size:.85rem;margin-bottom:6px;}
+.sm-topic{font-family:'Fredoka One',cursive;font-size:1.15rem;margin-bottom:4px;}
+.sm-meta{font-size:.78rem;color:rgba(255,255,255,.5);}
+.sm-progress{margin-top:10px;}
+.sm-pb{height:7px;background:rgba(255,255,255,.1);border-radius:4px;overflow:hidden;margin-top:4px;}
+.sm-pfill{height:100%;border-radius:4px;background:linear-gradient(90deg,var(--y),var(--g));transition:width .6s ease;}
+.sm-hw-list{display:flex;flex-direction:column;gap:5px;margin-top:8px;}
+.sm-hw-item{font-size:.82rem;padding:4px 0;border-bottom:1px solid rgba(255,255,255,.05);display:flex;align-items:center;gap:7px;}
+.sm-hw-done{text-decoration:line-through;color:rgba(255,255,255,.3);}
+.sm-hw-check{width:18px;height:18px;border-radius:5px;border:2px solid rgba(255,255,255,.2);background:transparent;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:.7rem;flex-shrink:0;transition:all .18s;}
+.sm-hw-check.checked{background:var(--g);border-color:var(--g);}
+
+/* Subject rings */
+.sb-subjects-row{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:8px;}
+@media(max-width:480px){.sb-subjects-row{grid-template-columns:repeat(2,1fr);}}
+.sb-subj-card{background:var(--c);border-radius:18px;border:2px solid rgba(255,255,255,.08);padding:18px 12px;text-align:center;cursor:pointer;transition:transform .2s,border-color .2s;backdrop-filter:blur(10px);}
+.sb-subj-card:hover{transform:translateY(-5px);border-color:rgba(168,85,247,.35);}
+.sb-subj-ring-wrap{position:relative;width:64px;height:64px;margin:0 auto 10px;}
+.sb-ring{width:64px;height:64px;transform:rotate(-90deg);}
+.sb-ring-bg{fill:none;stroke:rgba(255,255,255,.08);stroke-width:6;}
+.sb-ring-fill{fill:none;stroke:var(--v);stroke-width:6;stroke-linecap:round;transition:stroke-dasharray .8s ease;}
+.sb-subj-emoji{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:1.6rem;}
+.sb-subj-name{font-family:'Fredoka One',cursive;font-size:.95rem;margin-bottom:2px;}
+.sb-subj-pct{font-size:.72rem;color:var(--v);font-weight:800;}
+
+/* Badges */
+.sb-badges-row{display:flex;gap:10px;flex-wrap:wrap;}
+.sb-badge{display:flex;flex-direction:column;align-items:center;gap:4px;background:var(--c);border-radius:14px;border:2px solid rgba(255,255,255,.08);padding:12px 14px;min-width:80px;text-align:center;transition:transform .2s;}
+.sb-badge:hover{transform:scale(1.05);}
+.sb-badge-ico{font-size:1.8rem;}
+.sb-badge-name{font-size:.65rem;font-weight:800;color:rgba(255,255,255,.5);text-transform:uppercase;letter-spacing:.5px;}
+.sb-badge.locked{opacity:.3;filter:grayscale(1);}
+.sb-badge.unlocked{border-color:rgba(255,217,61,.35);}
+
+/* Recent list */
+.sb-recent-list{display:flex;flex-direction:column;gap:8px;}
+.sb-recent-row{background:var(--c);border-radius:12px;padding:11px 15px;display:flex;align-items:center;gap:12px;border:2px solid rgba(255,255,255,.06);}
+.sb-recent-ico{font-size:1.5rem;}
+.sb-recent-info{flex:1;}
+.sb-recent-topic{font-family:'Fredoka One',cursive;font-size:.93rem;margin-bottom:1px;}
+.sb-recent-meta{font-size:.72rem;color:rgba(255,255,255,.4);}
+.sb-recent-score{font-family:'Fredoka One',cursive;font-size:1.1rem;}
+.sb-dad-note{font-size:.72rem;font-style:italic;color:rgba(255,217,61,.7);margin-top:2px;}
+
+/* Subject zone tabs */
+.sb-subj-tabs{display:flex;gap:8px;margin-bottom:20px;flex-wrap:wrap;justify-content:center;}
+.sb-stab{font-family:'Fredoka One',cursive;font-size:.9rem;padding:7px 17px;border-radius:50px;border:2px solid rgba(255,255,255,.12);background:transparent;color:rgba(255,255,255,.5);cursor:pointer;transition:all .2s;}
+.sb-stab.active,.sb-stab:hover{border-color:rgba(255,255,255,.3);color:#fff;background:rgba(255,255,255,.07);}
+
+/* Topic list */
+.sb-topic-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:10px;}
+.sb-topic-card{background:var(--c);border-radius:14px;border:2px solid rgba(255,255,255,.07);padding:14px 16px;display:flex;align-items:center;gap:12px;cursor:pointer;transition:all .18s;backdrop-filter:blur(10px);}
+.sb-topic-card:hover{border-color:rgba(168,85,247,.35);transform:translateY(-2px);}
+.sb-topic-card.has-score{border-left:4px solid var(--g);}
+.sb-topic-card.has-score.low-score{border-left-color:var(--p);}
+.sb-topic-num{font-family:'Fredoka One',cursive;font-size:.75rem;width:26px;height:26px;border-radius:50%;background:rgba(255,255,255,.08);display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.sb-topic-info{flex:1;min-width:0;}
+.sb-topic-name{font-family:'Fredoka One',cursive;font-size:.9rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.sb-topic-meta{font-size:.7rem;color:rgba(255,255,255,.38);margin-top:1px;}
+.sb-topic-score{font-family:'Fredoka One',cursive;font-size:.95rem;flex-shrink:0;}
+.sb-topic-start{font-size:.75rem;font-family:'Fredoka One',cursive;padding:4px 10px;border-radius:50px;background:linear-gradient(135deg,var(--v),var(--b));border:none;color:#fff;cursor:pointer;white-space:nowrap;transition:transform .15s;}
+.sb-topic-start:hover{transform:scale(1.05);}
+
+/* Quiz Arena */
+.qa-setup-card{background:var(--c);border-radius:22px;border:2px solid rgba(168,85,247,.2);padding:28px;max-width:480px;margin:0 auto;backdrop-filter:blur(10px);}
+.qa-setup-title{font-family:'Fredoka One',cursive;font-size:1.8rem;text-align:center;margin-bottom:6px;}
+.qa-setup-sub{text-align:center;color:rgba(255,255,255,.45);font-size:.88rem;margin-bottom:22px;}
+.qa-top-bar{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;flex-wrap:wrap;gap:8px;}
+.qa-combo{font-family:'Fredoka One',cursive;font-size:1.2rem;background:rgba(255,107,53,.15);border:2px solid rgba(255,107,53,.25);border-radius:50px;padding:4px 14px;color:var(--o);transition:all .2s;}
+.qa-combo.hot{background:rgba(255,107,53,.35);border-color:var(--o);animation:comboPulse .4s ease;}
+@keyframes comboPulse{0%{transform:scale(1)}50%{transform:scale(1.2)}100%{transform:scale(1)}}
+.qa-xp-earned{font-family:'Fredoka One',cursive;font-size:1.1rem;color:var(--y);}
+.qa-qcount{font-size:.82rem;color:rgba(255,255,255,.4);font-weight:800;}
+.qa-result-card{background:var(--c);border-radius:22px;border:2px solid rgba(255,255,255,.1);padding:32px 24px;text-align:center;backdrop-filter:blur(10px);}
+.qa-result-trophy{font-size:4.5rem;margin-bottom:10px;}
+.qa-result-score{font-family:'Fredoka One',cursive;font-size:3.2rem;margin-bottom:6px;}
+.qa-result-msg{font-size:1rem;color:rgba(255,255,255,.6);margin-bottom:18px;}
+.qa-xp-banner{background:linear-gradient(135deg,rgba(255,217,61,.15),rgba(168,85,247,.1));border:2px solid rgba(255,217,61,.25);border-radius:14px;padding:12px 20px;margin:0 auto 18px;max-width:300px;font-family:'Fredoka One',cursive;font-size:1.3rem;color:var(--y);}
+
+/* XP float animation */
+.xp-float{position:fixed;pointer-events:none;font-family:'Fredoka One',cursive;font-size:1.1rem;color:var(--y);animation:xpFly 1.2s ease-out forwards;z-index:999;text-shadow:0 0 10px rgba(255,217,61,.6);}
+@keyframes xpFly{0%{opacity:1;transform:translateY(0) scale(1)}100%{opacity:0;transform:translateY(-80px) scale(1.3)}}
+.correct-flash{animation:correctFlash .3s ease;}
+@keyframes correctFlash{0%{background:rgba(107,203,119,.0)}50%{background:rgba(107,203,119,.15)}100%{background:rgba(107,203,119,.0)}}
+
+/* Dev-Sir */
+.sb-devsir-header{display:flex;align-items:center;gap:14px;margin-bottom:18px;background:linear-gradient(135deg,rgba(168,85,247,.12),rgba(78,205,196,.08));border:2px solid rgba(168,85,247,.2);border-radius:16px;padding:14px 18px;}
+.sb-devsir-avatar{font-size:2.5rem;width:54px;height:54px;display:flex;align-items:center;justify-content:center;background:rgba(168,85,247,.2);border-radius:50%;border:2px solid rgba(168,85,247,.35);}
+.sb-devsir-name{font-family:'Fredoka One',cursive;font-size:1.2rem;margin-bottom:2px;}
+.sb-devsir-sub{font-size:.78rem;color:rgba(255,255,255,.45);}
+.sb-chips{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px;}
+.sb-chip{font-family:'Nunito',sans-serif;font-size:.8rem;font-weight:700;padding:6px 13px;border-radius:50px;border:2px solid rgba(168,85,247,.25);background:rgba(168,85,247,.08);color:rgba(255,255,255,.65);cursor:pointer;transition:all .15s;}
+.sb-chip:hover{border-color:var(--v);color:#fff;background:rgba(168,85,247,.18);}
+
+/* Challenge */
+.sb-ch-row{background:var(--c);border-radius:12px;padding:11px 15px;display:flex;align-items:center;gap:11px;margin-bottom:8px;border:2px solid rgba(255,255,255,.06);}
+.sb-ch-medal{font-size:1.4rem;}
+.sb-ch-info{flex:1;}
+.sb-ch-player{font-family:'Fredoka One',cursive;font-size:.95rem;}
+.sb-ch-meta{font-size:.72rem;color:rgba(255,255,255,.4);}
+.sb-ch-score{font-family:'Fredoka One',cursive;font-size:1.15rem;color:var(--y);}
+
 </style>
 </head>
 <body>
@@ -335,6 +644,7 @@ body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:0;opa
     <button class="nav-btn" data-tab="singing">🎤 Singing</button>
     <button class="nav-btn" data-tab="praclog">📋 Practice</button>
     <button class="nav-btn" data-tab="study">📚 Study</button>
+    <button class="nav-btn" data-tab="dad">👨‍👧 Dad's Board</button>
   </nav>
 
   <!-- PLANETS -->
@@ -534,100 +844,393 @@ body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:0;opa
     <div class="empty" id="plogEmpty" style="display:none"><div class="empty-ico">🎼</div>No sessions yet!</div>
   </section>
 
-  <!-- STUDY HUB -->
+  <!-- ═══════════════ STUDY BOARD ═══════════════ -->
   <section id="study-section" class="section">
-    <div class="sec-title">📚 Study Hub</div>
-    <div class="sec-sub">Ask Dev-Sir, take an AI quiz, and challenge your friends!</div>
-    <div class="study-tabs">
-      <button class="stab active" data-stab="teacher">🤖 Ask Dev-Sir</button>
-      <button class="stab" data-stab="quiz">🧠 AI Quiz</button>
-      <button class="stab" data-stab="challenge">🏆 Challenge</button>
+
+    <!-- XP Header bar -->
+    <div class="sb-xp-bar" id="sbXpBar">
+      <div class="sb-xp-left">
+        <div class="sb-avatar" id="sbAvatar">🧑‍🎓</div>
+        <div class="sb-identity">
+          <div class="sb-name">Devagneya</div>
+          <div class="sb-level" id="sbLevelLabel">Level 1 · Learner</div>
+        </div>
+      </div>
+      <div class="sb-xp-center">
+        <div class="sb-xp-track">
+          <div class="sb-xp-fill" id="sbXpFill"></div>
+        </div>
+        <div class="sb-xp-nums" id="sbXpNums">0 / 100 XP</div>
+      </div>
+      <div class="sb-xp-right">
+        <div class="sb-streak-pill" id="sbStreakPill">🔥 0</div>
+      </div>
     </div>
 
-    <!-- ASK TEACHER -->
-    <div class="study-sub active" id="stab-teacher">
-      <div class="ai-unavail" id="teacherUnavail" style="display:none">
-        <div class="au-ico">🤖</div>
-        AI features need setup — ask a parent to add the API key via the ⚙️ button!
+    <!-- Study Board Nav -->
+    <div class="sb-nav" id="sbNav">
+      <button class="sb-nav-btn active" data-sbpage="home">🏠 Home</button>
+      <button class="sb-nav-btn" data-sbpage="subjects">📚 Subjects</button>
+      <button class="sb-nav-btn" data-sbpage="quiz">🧠 Quiz Arena</button>
+      <button class="sb-nav-btn" data-sbpage="teacher">🤖 Dev-Sir</button>
+      <button class="sb-nav-btn" data-sbpage="challenge">🏆 Challenge</button>
+    </div>
+
+    <!-- ── HOME ────────────────────────────────────────────────── -->
+    <div class="sb-page active" id="sbpage-home">
+
+      <!-- Mission + Homework row -->
+      <div class="sb-mission-row" id="sbMissionRow"></div>
+
+      <!-- Subject progress rings -->
+      <div class="sb-section-title">📖 Your Subjects</div>
+      <div class="sb-subjects-row" id="sbSubjectsRow">
+        <div class="sb-subj-card" data-subj="maths" onclick="goSubject('maths')">
+          <div class="sb-subj-ring-wrap">
+            <svg class="sb-ring" viewBox="0 0 64 64">
+              <circle class="sb-ring-bg" cx="32" cy="32" r="26"/>
+              <circle class="sb-ring-fill" id="ring-maths" cx="32" cy="32" r="26" stroke-dasharray="0 163"/>
+            </svg>
+            <div class="sb-subj-emoji">📐</div>
+          </div>
+          <div class="sb-subj-name">Maths</div>
+          <div class="sb-subj-pct" id="pct-maths">0%</div>
+        </div>
+        <div class="sb-subj-card" data-subj="evs" onclick="goSubject('evs')">
+          <div class="sb-subj-ring-wrap">
+            <svg class="sb-ring" viewBox="0 0 64 64">
+              <circle class="sb-ring-bg" cx="32" cy="32" r="26"/>
+              <circle class="sb-ring-fill" id="ring-evs" cx="32" cy="32" r="26" stroke-dasharray="0 163" stroke="#6BCB77"/>
+            </svg>
+            <div class="sb-subj-emoji">🌿</div>
+          </div>
+          <div class="sb-subj-name">EVS</div>
+          <div class="sb-subj-pct" id="pct-evs">0%</div>
+        </div>
+        <div class="sb-subj-card" data-subj="english" onclick="goSubject('english')">
+          <div class="sb-subj-ring-wrap">
+            <svg class="sb-ring" viewBox="0 0 64 64">
+              <circle class="sb-ring-bg" cx="32" cy="32" r="26"/>
+              <circle class="sb-ring-fill" id="ring-english" cx="32" cy="32" r="26" stroke-dasharray="0 163" stroke="#4ECDC4"/>
+            </svg>
+            <div class="sb-subj-emoji">📖</div>
+          </div>
+          <div class="sb-subj-name">English</div>
+          <div class="sb-subj-pct" id="pct-english">0%</div>
+        </div>
+        <div class="sb-subj-card" data-subj="hindi" onclick="goSubject('hindi')">
+          <div class="sb-subj-ring-wrap">
+            <svg class="sb-ring" viewBox="0 0 64 64">
+              <circle class="sb-ring-bg" cx="32" cy="32" r="26"/>
+              <circle class="sb-ring-fill" id="ring-hindi" cx="32" cy="32" r="26" stroke-dasharray="0 163" stroke="#FF6B35"/>
+            </svg>
+            <div class="sb-subj-emoji">📚</div>
+          </div>
+          <div class="sb-subj-name">Hindi</div>
+          <div class="sb-subj-pct" id="pct-hindi">0%</div>
+        </div>
       </div>
-      <div id="teacherArea" style="display:none">
-        <div class="chat-box" id="chatBox">
-          <div class="cmsg bot"><strong>Dev-Sir 🤖:</strong> Namaste Devagneya! I'm Dev-Sir, your AI teacher. Ask me anything — Maths, Science, English, Hindi, space, cars, music — whatever you're curious about! 🚀📚</div>
+
+      <!-- Badges -->
+      <div class="sb-section-title" style="margin-top:24px">🏅 Badges Earned</div>
+      <div class="sb-badges-row" id="sbBadgesRow"></div>
+
+      <!-- Recent scores -->
+      <div class="sb-section-title" style="margin-top:24px">📊 Recent Quizzes</div>
+      <div class="sb-recent-list" id="sbRecentList"></div>
+
+    </div>
+
+    <!-- ── SUBJECTS ──────────────────────────────────────────────── -->
+    <div class="sb-page" id="sbpage-subjects">
+      <div class="sb-subj-tabs">
+        <button class="sb-stab active" data-subj="maths">📐 Maths</button>
+        <button class="sb-stab" data-subj="evs">🌿 EVS</button>
+        <button class="sb-stab" data-subj="english">📖 English</button>
+        <button class="sb-stab" data-subj="hindi">📚 Hindi</button>
+      </div>
+      <div id="subjectTopicArea"></div>
+    </div>
+
+    <!-- ── QUIZ ARENA ─────────────────────────────────────────────── -->
+    <div class="sb-page" id="sbpage-quiz">
+
+      <!-- Setup screen -->
+      <div id="qaSetup">
+        <div class="qa-setup-card">
+          <div class="qa-setup-title">🧠 Quiz Arena</div>
+          <div class="qa-setup-sub">Pick your subject, choose a topic, and test yourself!</div>
+          <div class="frow" style="margin-bottom:12px;">
+            <select id="qaSubject">
+              <option value="">-- Subject --</option>
+              <option value="maths">📐 Maths</option>
+              <option value="evs">🌿 EVS</option>
+              <option value="english">📖 English</option>
+              <option value="hindi">📚 Hindi</option>
+            </select>
+            <select id="qaTopic"><option value="">-- Topic --</option></select>
+          </div>
+          <div class="frow" style="margin-bottom:16px;">
+            <select id="qaDifficulty">
+              <option value="easy">😊 Easy (3 questions)</option>
+              <option value="medium" selected>🎯 Medium (5 questions)</option>
+              <option value="hard">🔥 Hard (8 questions)</option>
+            </select>
+          </div>
+          <button class="btn btn-yellow" id="qaStartBtn" style="width:100%;justify-content:center;font-size:1.1rem;padding:12px;">⚡ Start Quiz!</button>
+          <div id="qaAiMsg" style="display:none;text-align:center;margin-top:12px;font-size:.8rem;color:rgba(255,255,255,.35)">Generating fresh questions with AI...</div>
+          <div id="qaNoKey" style="display:none;margin-top:14px;background:rgba(255,77,139,.08);border:1px solid rgba(255,77,139,.2);border-radius:10px;padding:12px;font-size:.83rem;text-align:center;color:rgba(255,255,255,.6)">
+            🔑 AI features need the API key — ask Dad to set it up in ⚙️ Settings
+          </div>
+        </div>
+      </div>
+
+      <!-- Quiz in-progress -->
+      <div id="qaPlaying" style="display:none;">
+        <!-- XP combo bar -->
+        <div class="qa-top-bar">
+          <div class="qa-combo" id="qaCombo">🔥 x1</div>
+          <div class="qa-xp-earned" id="qaXpEarned">+0 XP</div>
+          <div class="qa-qcount" id="qaQCount">Q1/5</div>
+        </div>
+        <div class="qprogress" id="qaProgress"></div>
+        <div class="q-card" id="qaCard">
+          <div class="q-num" id="qaNum"></div>
+          <div class="q-text" id="qaText"></div>
+          <div class="q-opts" id="qaOpts"></div>
+          <div class="q-exp" id="qaExp"></div>
+          <div style="margin-top:14px;text-align:right">
+            <button class="btn btn-teal" id="qaNext" style="display:none">Next →</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Result screen -->
+      <div id="qaResult" style="display:none">
+        <div class="qa-result-card">
+          <div class="qa-result-trophy" id="qaResultTrophy"></div>
+          <div class="qa-result-score" id="qaResultScore"></div>
+          <div class="qa-result-msg" id="qaResultMsg"></div>
+          <div class="qa-xp-banner" id="qaXpBanner"></div>
+          <!-- Dad's comment if any -->
+          <div id="qaParentComment" style="display:none"></div>
+          <!-- Challenge code -->
+          <div class="code-box" style="margin:18px auto;max-width:340px;">
+            <div style="font-size:.82rem;font-weight:700;margin-bottom:3px;">🏆 Challenge Code — share with friends!</div>
+            <div class="code-display" id="qaCodeDisplay"></div>
+            <button class="btn btn-yellow" id="qaCopyBtn" style="margin-top:8px;">📋 Copy Code</button>
+          </div>
+          <div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap;">
+            <button class="btn btn-purple" id="qaRetryBtn">🔄 Try Again</button>
+            <button class="btn btn-teal" id="qaNewTopicBtn">📚 New Topic</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── ASK DEV-SIR ─────────────────────────────────────────────── -->
+    <div class="sb-page" id="sbpage-teacher">
+      <div class="sb-devsir-header">
+        <div class="sb-devsir-avatar">🤖</div>
+        <div>
+          <div class="sb-devsir-name">Dev-Sir</div>
+          <div class="sb-devsir-sub">Your AI teacher — ask me anything!</div>
+        </div>
+      </div>
+      <!-- Quick chips -->
+      <div class="sb-chips" id="sbChips">
+        <button class="sb-chip" onclick="chipAsk(this)">What is a fraction?</button>
+        <button class="sb-chip" onclick="chipAsk(this)">Explain photosynthesis simply</button>
+        <button class="sb-chip" onclick="chipAsk(this)">How do rockets fly?</button>
+        <button class="sb-chip" onclick="chipAsk(this)">What is the water cycle?</button>
+        <button class="sb-chip" onclick="chipAsk(this)">Tell me about black holes</button>
+        <button class="sb-chip" onclick="chipAsk(this)">How to multiply decimals?</button>
+        <button class="sb-chip" onclick="chipAsk(this)">What causes earthquakes?</button>
+        <button class="sb-chip" onclick="chipAsk(this)">Tell me a fun Maths fact</button>
+      </div>
+      <div id="sbTeacherNoKey" style="display:none;text-align:center;padding:28px;color:rgba(255,255,255,.38);">
+        <div style="font-size:2.5rem;margin-bottom:8px">🔑</div>Ask Dad to set the API key in ⚙️ Settings to unlock Dev-Sir!
+      </div>
+      <div id="sbTeacherArea" style="display:none">
+        <div class="chat-box" id="sbChatBox">
+          <div class="cmsg bot"><strong>Dev-Sir 🤖:</strong> Namaste Devagneya! 👋 I'm Dev-Sir. Ask me anything — Maths, Science, English, Hindi, space, cars — whatever you're curious about today! 🚀</div>
         </div>
         <div class="chat-row">
-          <input type="text" id="chatInput" placeholder="Ask Dev-Sir anything...">
-          <button class="btn btn-purple" id="chatSend">Ask 🚀</button>
+          <input type="text" id="sbChatInput" placeholder="Ask Dev-Sir anything...">
+          <button class="btn btn-purple" id="sbChatSend">Ask 🚀</button>
         </div>
       </div>
     </div>
 
-    <!-- QUIZ -->
-    <div class="study-sub" id="stab-quiz">
-      <div class="ai-unavail" id="quizUnavail" style="display:none">
-        <div class="au-ico">🧠</div>
-        AI features need setup — ask a parent to add the API key via the ⚙️ button!
-      </div>
-      <div id="quizArea">
-        <div class="quiz-setup" id="quizSetup">
-          <div class="form-title" style="color:var(--y)">📚 What do you want to study today?</div>
-          <div class="frow">
-            <select id="quizSubject">
-              <option value="">-- Pick a Subject --</option>
-              <option value="maths">📐 Maths (Math-Magic)</option>
-              <option value="evs">🌿 EVS (Looking Around)</option>
-              <option value="english">📖 English (Marigold)</option>
-              <option value="hindi">📚 Hindi (Rimjhim)</option>
-            </select>
-            <select id="quizTopic"><option value="">-- Pick a Topic --</option></select>
-            <input type="number" id="qCount" min="3" max="10" value="5" style="max-width:85px;" title="Number of questions">
-          </div>
-          <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap;">
-            <button class="btn btn-yellow" id="genQuizBtn">✨ Generate Quiz!</button>
-            <span style="font-size:.78rem;color:rgba(255,255,255,.38)">Fresh AI questions every time!</span>
-          </div>
-        </div>
-        <div id="quizQWrap" style="display:none">
-          <div class="qprogress" id="qprogress"></div>
-          <div class="q-card">
-            <div class="q-num" id="qNum"></div>
-            <div class="q-text" id="qText"></div>
-            <div class="q-opts" id="qOpts"></div>
-            <div class="q-exp" id="qExp"></div>
-            <div style="margin-top:12px;text-align:right;">
-              <button class="btn btn-teal" id="qNext" style="display:none;">Next →</button>
-            </div>
-          </div>
-        </div>
-        <div class="score-card" id="scoreCard">
-          <div class="score-big" id="scoreBig"></div>
-          <div class="score-lbl" id="scoreLbl"></div>
-          <div class="code-box">
-            <div style="font-size:.83rem;font-weight:700;margin-bottom:3px;">🏆 Challenge Code</div>
-            <div class="code-display" id="codeDisplay"></div>
-            <div class="code-hint">Share with a friend — they enter it in the Challenge tab!</div>
-            <button class="btn btn-yellow" id="copyCodeBtn" style="margin-top:9px;">📋 Copy Code</button>
-          </div>
-          <button class="btn btn-purple" id="retryBtn">🔄 New Quiz</button>
-        </div>
-      </div>
-    </div>
-
-    <!-- CHALLENGE -->
-    <div class="study-sub" id="stab-challenge">
-      <div class="form-box">
-        <div class="form-title" style="color:var(--y)">🏆 Accept a Challenge</div>
+    <!-- ── CHALLENGE ──────────────────────────────────────────────── -->
+    <div class="sb-page" id="sbpage-challenge">
+      <div class="form-box" style="margin-bottom:20px">
+        <div class="form-title" style="color:var(--y)">⚡ Accept a Challenge</div>
         <div class="frow">
-          <input type="text" id="codeInput" placeholder="Enter code (e.g. MA-04)" maxlength="8" style="text-transform:uppercase;letter-spacing:2px;font-family:'Fredoka One',cursive;font-size:1.1rem;">
-          <input type="text" id="challengerName" placeholder="Your name">
-          <button class="btn btn-yellow" id="acceptBtn">⚡ Accept!</button>
+          <input type="text" id="sbCodeInput" placeholder="Enter code (e.g. MA-04)" maxlength="8"
+            style="text-transform:uppercase;letter-spacing:3px;font-family:'Fredoka One',cursive;font-size:1.1rem;">
+          <input type="text" id="sbChallengerName" placeholder="Your name">
+          <button class="btn btn-yellow" id="sbAcceptBtn">⚡ Go!</button>
         </div>
-        <div id="chInfo" style="display:none;margin-top:12px;background:rgba(255,217,61,.07);border:1px solid rgba(255,217,61,.2);border-radius:10px;padding:12px;font-size:.87rem;line-height:1.5;"></div>
+        <div id="sbChInfo" style="display:none;margin-top:10px;background:rgba(255,217,61,.07);border:1px solid rgba(255,217,61,.18);border-radius:10px;padding:11px;font-size:.85rem;line-height:1.5;"></div>
       </div>
-      <div style="font-family:'Fredoka One',cursive;font-size:.92rem;color:rgba(255,255,255,.38);margin-bottom:8px;">Recent Results</div>
-      <div class="ch-list" id="chList"></div>
-      <div class="empty" id="chEmpty" style="display:none"><div class="empty-ico">🏁</div>No challenges yet!</div>
+      <div style="font-family:'Fredoka One',cursive;font-size:1rem;color:rgba(255,255,255,.38);margin-bottom:10px;">🏁 Leaderboard</div>
+      <div id="sbChList"></div>
+      <div class="empty" id="sbChEmpty" style="display:none"><div class="empty-ico">🏆</div>No challenges yet — take a quiz and share your code!</div>
     </div>
+
   </section>
+</section>
+
+
+  <!-- DAD'S BOARD -->
+  <section id="dad-section" class="section">
+
+    <!-- PIN Gate -->
+    <div class="dad-gate" id="dadGate">
+      <div class="dad-gate-ico">🔐</div>
+      <div class="dad-gate-title">Parent Dashboard</div>
+      <div class="dad-gate-sub">Enter your PIN to access Devagneya's study tracker</div>
+      <div class="dad-gate-row">
+        <input type="password" id="dadPin" placeholder="••••" maxlength="6" inputmode="numeric">
+        <button class="btn btn-teal" id="dadUnlock">Unlock</button>
+      </div>
+      <div style="margin-top:10px;font-size:.75rem;color:rgba(255,255,255,.25)">Default PIN: 1234 · Change it in ⚙️ Settings</div>
+    </div>
+
+    <!-- Board (hidden until PIN) -->
+    <div class="dad-board" id="dadBoard">
+
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;flex-wrap:wrap;gap:10px;">
+        <div style="font-family:'Fredoka One',cursive;font-size:1.6rem;">👨‍👧 Dad's Study Board</div>
+        <button class="btn btn-orange" id="dadLock" style="font-size:.8rem;padding:6px 14px;">🔒 Lock</button>
+      </div>
+
+      <!-- Sub-tabs -->
+      <div class="dad-dtabs">
+        <button class="dtab active" data-dtab="overview">📊 Overview</button>
+        <button class="dtab" data-dtab="scores">📈 All Scores</button>
+        <button class="dtab" data-dtab="target">🎯 Weekly Target</button>
+        <button class="dtab" data-dtab="homework">📋 Homework</button>
+        <button class="dtab" data-dtab="report">📄 Report</button>
+      </div>
+
+      <!-- OVERVIEW -->
+      <div class="dtab-sub active" id="dtab-overview">
+        <div class="dad-kpis" id="dadKpis"></div>
+        <div style="font-family:'Fredoka One',cursive;font-size:1rem;color:rgba(255,255,255,.4);margin-bottom:10px;">⚠️ Needs Attention</div>
+        <div class="weak-list" id="weakList"></div>
+        <div class="empty" id="weakEmpty" style="display:none"><div class="empty-ico">🌟</div>No weak areas yet — keep quizzing!</div>
+        <div style="font-family:'Fredoka One',cursive;font-size:1rem;color:rgba(255,255,255,.4);margin:16px 0 10px;">📅 Recent Activity</div>
+        <div id="recentActivity"></div>
+      </div>
+
+      <!-- ALL SCORES -->
+      <div class="dtab-sub" id="dtab-scores">
+        <div style="display:flex;gap:10px;flex-wrap:wrap;margin-bottom:16px;align-items:center;">
+          <select id="filterSubj" style="font-family:'Nunito',sans-serif;background:rgba(255,255,255,.07);border:2px solid rgba(255,255,255,.12);border-radius:10px;color:#fff;padding:7px 12px;font-size:.85rem;outline:none;">
+            <option value="">All Subjects</option>
+            <option value="maths">📐 Maths</option>
+            <option value="evs">🌿 EVS</option>
+            <option value="english">📖 English</option>
+            <option value="hindi">📚 Hindi</option>
+          </select>
+          <span style="font-size:.8rem;color:rgba(255,255,255,.35)" id="scoreCount"></span>
+        </div>
+        <table class="score-table" id="scoreTable">
+          <thead><tr>
+            <th>Date</th><th>Subject</th><th>Topic</th><th>Score</th><th>%</th><th>Dad's Note</th>
+          </tr></thead>
+          <tbody id="scoreTbody"></tbody>
+        </table>
+        <div class="empty" id="scoresEmpty" style="display:none"><div class="empty-ico">📊</div>No quiz scores yet — take some quizzes!</div>
+      </div>
+
+      <!-- WEEKLY TARGET -->
+      <div class="dtab-sub" id="dtab-target">
+        <div class="target-current" id="targetDisplay">
+          <div class="no-target">No target set yet.<br>Set one below 👇</div>
+        </div>
+        <div class="form-box">
+          <div class="form-title" style="color:var(--y)">🎯 Set This Week's Target</div>
+          <div class="frow">
+            <select id="tSubject">
+              <option value="">-- Subject --</option>
+              <option value="maths">📐 Maths</option>
+              <option value="evs">🌿 EVS</option>
+              <option value="english">📖 English</option>
+              <option value="hindi">📚 Hindi</option>
+            </select>
+            <select id="tTopic"><option value="">-- Topic --</option></select>
+          </div>
+          <div class="frow">
+            <input type="number" id="tGoal" min="1" max="10" value="7" placeholder="Target score (e.g. 7)" style="max-width:180px;">
+            <input type="number" id="tQuestions" min="3" max="10" value="8" placeholder="Out of (e.g. 10)" style="max-width:180px;">
+          </div>
+          <div class="frow">
+            <input type="text" id="tNote" placeholder="A message for Devagneya (optional)">
+          </div>
+          <button class="btn btn-yellow" id="setTargetBtn">🎯 Set Target</button>
+        </div>
+      </div>
+
+      <!-- HOMEWORK -->
+      <div class="dtab-sub" id="dtab-homework">
+        <div class="form-box">
+          <div class="form-title" style="color:var(--b)">📋 Assign a Task</div>
+          <div class="frow">
+            <input type="text" id="hwText" placeholder="e.g. Revise Chapter 4 Fractions">
+            <select id="hwSubject">
+              <option value="maths">📐 Maths</option>
+              <option value="evs">🌿 EVS</option>
+              <option value="english">📖 English</option>
+              <option value="hindi">📚 Hindi</option>
+              <option value="piano">🎹 Piano</option>
+              <option value="general">📌 General</option>
+            </select>
+          </div>
+          <div class="frow">
+            <input type="text" id="hwDue" placeholder="Due (e.g. By Friday)">
+          </div>
+          <button class="btn btn-teal" id="addHwBtn">✚ Assign Task</button>
+        </div>
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;flex-wrap:wrap;gap:8px;">
+          <span style="font-family:'Fredoka One',cursive;font-size:.95rem;color:rgba(255,255,255,.4)">Pending Tasks</span>
+          <button class="btn btn-orange" id="clearDoneBtn" style="font-size:.75rem;padding:4px 12px;">Clear Completed</button>
+        </div>
+        <div class="hw-list" id="hwList"></div>
+        <div class="empty" id="hwEmpty" style="display:none"><div class="empty-ico">✅</div>No tasks assigned yet!</div>
+      </div>
+
+      <!-- REPORT -->
+      <div class="dtab-sub" id="dtab-report">
+        <div style="display:flex;gap:10px;justify-content:space-between;align-items:center;margin-bottom:18px;flex-wrap:wrap;">
+          <div style="font-family:'Fredoka One',cursive;font-size:1.1rem;color:rgba(255,255,255,.6)">Auto-generated from quiz history</div>
+          <button class="btn btn-purple" id="printReport" style="font-size:.82rem;padding:6px 14px;">🖨️ Print / Save PDF</button>
+        </div>
+        <div id="reportCards"></div>
+        <div class="empty" id="reportEmpty" style="display:none"><div class="empty-ico">📄</div>No report data yet!</div>
+      </div>
+
+    </div><!-- /dad-board -->
+  </section>
+
+  <!-- Comment Modal -->
+  <div class="overlay" id="commentModal">
+    <div class="modal" style="max-width:480px;">
+      <button class="modal-close" id="cmClose">✕</button>
+      <div class="form-title" style="color:var(--y);margin-bottom:14px;">💬 Dad's Note</div>
+      <div class="comment-modal-body">
+        <div class="comment-modal-ctx" id="cmCtx"></div>
+        <div id="cmExisting" style="display:none" class="cm-existing"></div>
+        <div class="frow"><textarea id="cmText" placeholder="Write a note for Devagneya about this quiz..." style="min-height:90px;width:100%;flex:unset;"></textarea></div>
+        <div style="display:flex;gap:10px;">
+          <button class="btn btn-yellow" id="cmSave">💾 Save Note</button>
+          <button class="btn btn-orange" id="cmDelete" style="display:none;">🗑 Remove Note</button>
+        </div>
+      </div>
+    </div>
+  </div>
 
 </div><!-- /container -->
 <script>
@@ -909,145 +1512,954 @@ document.getElementById('addPlogBtn').addEventListener('click',()=>{const m=pars
 renderPlog();
 
 // ===== STUDY HUB =====
-document.querySelectorAll('.stab').forEach(tab=>{
-  tab.addEventListener('click',()=>{
-    document.querySelectorAll('.stab').forEach(t=>t.classList.remove('active'));
-    document.querySelectorAll('.study-sub').forEach(s=>s.classList.remove('active'));
-    tab.classList.add('active');
-    const sub=document.getElementById('stab-'+tab.dataset.stab);
-    if(sub)sub.classList.add('active');
-    if(tab.dataset.stab==='challenge')renderChallenges();
+
+
+// ════════════════════════════════════════════════════════
+//   STUDY BOARD
+// ════════════════════════════════════════════════════════
+
+const SBTOPICS = {
+  maths:['The Fish Tale','Shapes and Angles','How Many Squares','Parts and Wholes','Does It Look the Same','Be My Multiple I\'ll Be Your Factor','Can You See the Pattern','Mapping Your Way','Boxes and Sketches','Tenths and Hundredths','Area and Its Boundary','Smart Charts','Ways to Multiply and Divide','How Big? How Heavy?'],
+  evs:['Super Senses','A Snake Charmer\'s Story','From Tasting to Digesting','Mangoes Round the Year','Seeds and Seeds','Every Drop Counts','Experiments with Water','A Treat for Mosquitoes','Up You Go!','Walls Tell Stories','Sunita in Space','What If It Finishes?','A Seed Tells a Farmer\'s Story','When the Earth Shook!','Blow Hot Blow Cold','Who Will Do This Work?','Across the Wall','No Place for Us?','A Ball Going Up','Whose Forests?'],
+  english:['Ice-Cream Man','Wonderful Waste!','Teamwork','My Shadow','Robinson Crusoe','Rip Van Winkle','The Lazy Frog','Tansen','The Little Bully','Who Will be Ningthou?','Topsy-Turvy Land','Gulliver\'s Travels'],
+  hindi:['Raakh Ki Rassi','Phool Phool Rang Rang','Khumba Khele Holi','Padhaku Ki Cycle','Jahan Chakki Phirti Hai','Chacha Ki Chitthi','Ramdhani Nagar Se','Bahut Hua']
+};
+const SBSCODES = {maths:'MA',evs:'EV',english:'EN',hindi:'HI'};
+const SBFROMCODE = {MA:'maths',EV:'evs',EN:'english',HI:'hindi'};
+const SBSLABEL = {maths:'Class 5 Maths',evs:'Class 5 EVS',english:'Class 5 English',hindi:'Class 5 Hindi'};
+const SBSNAME = {maths:'Maths',evs:'EVS',english:'English',hindi:'Hindi'};
+const SBSCOLOR = {maths:'#A855F7',evs:'#6BCB77',english:'#4ECDC4',hindi:'#FF6B35'};
+
+// ── XP / Level system ────────────────────────────────────────────────────────
+const XP_LEVELS = [{min:0,max:100,label:'Learner',avatar:'🧑‍🎓'},{min:100,max:250,label:'Explorer',avatar:'🔭'},{min:250,max:500,label:'Scholar',avatar:'📖'},{min:500,max:900,label:'Genius',avatar:'🧠'},{min:900,max:99999,label:'Champion',avatar:'🏆'}];
+function getXP(){ return parseInt(localStorage.getItem('dev_xp')||'0'); }
+function addXP(amt){
+  const old = getXP(); const neo = old + amt;
+  localStorage.setItem('dev_xp', neo);
+  const oldLvl = xpLevel(old), newLvl = xpLevel(neo);
+  renderXpBar();
+  if(newLvl > oldLvl) showLevelUp(XP_LEVELS[newLvl]);
+  return amt;
+}
+function xpLevel(xp){ for(let i=XP_LEVELS.length-1;i>=0;i--) if(xp>=XP_LEVELS[i].min) return i; return 0; }
+function renderXpBar(){
+  const xp = getXP(), lvl = XP_LEVELS[xpLevel(xp)];
+  const range = lvl.max - lvl.min, progress = xp - lvl.min;
+  const pct = Math.min(100, Math.round(progress/range*100));
+  const el = document.getElementById('sbXpFill'); if(el) el.style.width = pct+'%';
+  const n = document.getElementById('sbXpNums'); if(n) n.textContent = `${xp} XP · Level ${xpLevel(xp)+1}`;
+  const ll = document.getElementById('sbLevelLabel'); if(ll) ll.textContent = `Level ${xpLevel(xp)+1} · ${lvl.label}`;
+  const av = document.getElementById('sbAvatar'); if(av) av.textContent = lvl.avatar;
+  // Streak
+  const plog = JSON.parse(localStorage.getItem('dev_plog')||'[]');
+  const qhist = getStudyHistory();
+  const days = {}; plog.forEach(e=>days[e.date]=true); qhist.forEach(h=>days[h.date]=true);
+  let streak = 0; for(let i=0;i<30;i++){const d=new Date();d.setDate(d.getDate()-i);if(days[d.toDateString()])streak++;else if(i>0)break;}
+  const sp = document.getElementById('sbStreakPill'); if(sp) sp.textContent = '🔥 '+streak;
+}
+function showLevelUp(lvl){
+  const el = document.createElement('div');
+  el.style.cssText='position:fixed;inset:0;background:rgba(0,0,0,.75);z-index:500;display:flex;align-items:center;justify-content:center;animation:fadeIn .3s ease';
+  el.innerHTML=`<div style="background:linear-gradient(135deg,#1a1a3e,#0f3460);border:3px solid var(--y);border-radius:24px;padding:40px 32px;text-align:center;animation:popIn .4s cubic-bezier(.34,1.56,.64,1)">
+    <div style="font-size:4rem;margin-bottom:10px">${lvl.avatar}</div>
+    <div style="font-family:'Fredoka One',cursive;font-size:2rem;color:var(--y);margin-bottom:6px">LEVEL UP! 🎉</div>
+    <div style="font-size:1.1rem;color:rgba(255,255,255,.7)">You are now a <strong style="color:var(--b)">${lvl.label}</strong>!</div>
+    <button onclick="this.parentElement.parentElement.remove()" style="margin-top:20px;font-family:'Fredoka One',cursive;font-size:1rem;padding:10px 28px;border-radius:50px;background:linear-gradient(135deg,var(--y),var(--o));border:none;color:var(--dk);cursor:pointer">Awesome! ✨</button>
+  </div>`;
+  document.body.appendChild(el);
+}
+
+// ── History helpers ───────────────────────────────────────────────────────────
+function getStudyHistory(){ return JSON.parse(localStorage.getItem('dev_ch')||'[]').filter(h=>h.player==='Devagneya'); }
+function getTopicBest(){
+  const h = getStudyHistory(), map = {};
+  h.forEach(e=>{ const k=e.subj+':'+e.topic; if(!map[k]||e.score/e.total>map[k].score/map[k].total) map[k]={score:e.score,total:e.total,date:e.date,attempts:(map[k]?.attempts||0)+1}; });
+  return map;
+}
+function getComments(){ return JSON.parse(localStorage.getItem('dev_comments')||'{}'); }
+function getTarget(){ return JSON.parse(localStorage.getItem('dev_target')||'null'); }
+function getHw(){ return JSON.parse(localStorage.getItem('dev_hw')||'[]'); }
+function saveHwFromKid(hw){ localStorage.setItem('dev_hw',JSON.stringify(hw)); }
+
+// ── Board Nav ────────────────────────────────────────────────────────────────
+document.querySelectorAll('.sb-nav-btn').forEach(btn=>{
+  btn.addEventListener('click',()=>{
+    document.querySelectorAll('.sb-nav-btn').forEach(b=>b.classList.remove('active'));
+    document.querySelectorAll('.sb-page').forEach(p=>p.classList.remove('active'));
+    btn.classList.add('active');
+    const pg = document.getElementById('sbpage-'+btn.dataset.sbpage);
+    if(pg) pg.classList.add('active');
+    if(btn.dataset.sbpage==='home') renderSbHome();
+    if(btn.dataset.sbpage==='subjects') renderSubjects('maths');
+    if(btn.dataset.sbpage==='quiz'){ checkSbAI(); populateQaSubjects(); }
+    if(btn.dataset.sbpage==='teacher') checkSbAI();
+    if(btn.dataset.sbpage==='challenge') renderSbChallenges();
   });
 });
-// Quiz topics
-const QTOPICS={
+
+// Switch to study tab → init home
+document.querySelector('[data-tab="study"]').addEventListener('click',()=>{
+  setTimeout(()=>{
+    renderXpBar();
+    renderSbHome();
+    checkSbAI();
+    checkBadges();
+  }, 60);
+});
+window.checkAI = function(){
+  const has = !!getKey();
+  ['teacherUnavail','quizUnavail'].forEach(id=>{const el=document.getElementById(id);if(el)el.style.display=has?'none':'block';});
+  ['teacherArea','quizArea'].forEach(id=>{const el=document.getElementById(id);if(el)el.style.display=has?'block':'none';});
+  checkSbAI();
+};
+function checkSbAI(){
+  const has = !!getKey();
+  const noKey = document.getElementById('sbTeacherNoKey');
+  const area = document.getElementById('sbTeacherArea');
+  const qaNoKey = document.getElementById('qaNoKey');
+  const qaStart = document.getElementById('qaStartBtn');
+  if(noKey) noKey.style.display = has?'none':'block';
+  if(area) area.style.display = has?'block':'none';
+  if(qaNoKey) qaNoKey.style.display = has?'none':'block';
+  if(qaStart) qaStart.style.opacity = has?'1':'0.4';
+}
+
+// ── HOME ──────────────────────────────────────────────────────────────────────
+function renderSbHome(){
+  renderXpBar();
+  renderMissionRow();
+  renderSubjectRings();
+  renderBadgesRow();
+  renderRecentList();
+}
+
+function renderMissionRow(){
+  const cont = document.getElementById('sbMissionRow');
+  if(!cont) return;
+  const target = getTarget();
+  const hw = getHw().filter(t=>!t.done);
+  let cards = '';
+
+  // Target card
+  if(target){
+    const hist = getStudyHistory().filter(h=>h.topic===target.topic);
+    const best = hist.length ? Math.max(...hist.map(h=>h.score)) : 0;
+    const pct = Math.min(100, Math.round(best/target.goal*100));
+    const achieved = best >= target.goal;
+    cards += `<div class="sb-mission-card sm-target">
+      <div class="sm-title" style="color:var(--y)">🎯 Dad's Target This Week</div>
+      <div class="sm-topic">${target.topic}</div>
+      <div class="sm-meta">${SBSNAME[target.subj]} · Score ${target.goal}/${target.questions||10} or better</div>
+      ${target.note?`<div style="font-size:.78rem;color:rgba(255,217,61,.7);font-style:italic;margin-top:4px">"${target.note}"</div>`:''}
+      <div class="sm-progress">
+        <div style="font-size:.75rem;color:rgba(255,255,255,.45)">Best: <strong style="color:${achieved?'var(--g)':'var(--y)'}">${best}/${target.questions||10}</strong> ${achieved?'✅ Done! 🎉':''}</div>
+        <div class="sm-pb"><div class="sm-pfill" style="width:${pct}%"></div></div>
+      </div>
+    </div>`;
+  }
+
+  // Homework card
+  if(hw.length){
+    const allHw = getHw();
+    cards += `<div class="sb-mission-card sm-hw">
+      <div class="sm-title" style="color:var(--b)">📋 Dad's Tasks (${hw.length} pending)</div>
+      <div class="sm-hw-list">${allHw.slice(0,4).map((t,i)=>`
+        <div class="sm-hw-item">
+          <div class="sm-hw-check ${t.done?'checked':''}" onclick="kidToggleHw(${i})">${t.done?'✓':''}</div>
+          <span class="${t.done?'sm-hw-done':''}" style="font-size:.82rem">${t.text}</span>
+        </div>`).join('')}
+      </div>
+      ${allHw.length>4?`<div style="font-size:.72rem;color:rgba(255,255,255,.3);margin-top:4px">+${allHw.length-4} more</div>`:''}
+    </div>`;
+  }
+
+  if(!target && !hw.length){
+    cards = `<div class="sb-mission-card" style="background:rgba(255,255,255,.04);border:2px dashed rgba(255,255,255,.1);text-align:center;color:rgba(255,255,255,.35);font-size:.88rem;padding:24px">
+      No mission set yet — Dad will add one soon! 😊
+    </div>`;
+  }
+  cont.innerHTML = cards;
+}
+
+window.kidToggleHw = function(i){
+  const hw = getHw(); hw[i].done = !hw[i].done; saveHwFromKid(hw); renderMissionRow();
+};
+
+function renderSubjectRings(){
+  const best = getTopicBest();
+  ['maths','evs','english','hindi'].forEach(s=>{
+    const topics = SBTOPICS[s]; const total = topics.length;
+    const attempted = topics.filter(t=>best[s+':'+t]).length;
+    const avgPct = attempted ? Math.round(topics.reduce((a,t)=>a+(best[s+':'+t]?best[s+':'+t].score/best[s+':'+t].total*100:0),0)/total) : 0;
+    const circumference = 2*Math.PI*26; // r=26
+    const dash = (avgPct/100)*circumference;
+    const ringEl = document.getElementById('ring-'+s);
+    const pctEl = document.getElementById('pct-'+s);
+    if(ringEl) setTimeout(()=>ringEl.style.strokeDasharray=`${dash} ${circumference}`,300);
+    if(pctEl) pctEl.textContent = attempted ? `${avgPct}% avg · ${attempted}/${total}` : 'Not started yet';
+  });
+}
+
+// ── BADGES ───────────────────────────────────────────────────────────────────
+const BADGE_DEFS = [
+  {id:'first_quiz',name:'First Quiz',ico:'🎉',check:h=>h.length>=1},
+  {id:'perfect',name:'Perfect!',ico:'💯',check:h=>h.some(e=>e.score===e.total&&e.total>=5)},
+  {id:'streak3',name:'3-Day Run',ico:'🔥',check:()=>{
+    const days={}; getStudyHistory().forEach(e=>days[e.date]=true);
+    let s=0; for(let i=0;i<30;i++){const d=new Date();d.setDate(d.getDate()-i);if(days[d.toDateString()])s++;else if(i>0)break;} return s>=3;}},
+  {id:'maths_master',name:'Maths Ace',ico:'📐',check:h=>h.filter(e=>e.subj==='maths').length>=5},
+  {id:'evs_master',name:'EVS Star',ico:'🌿',check:h=>h.filter(e=>e.subj==='evs').length>=5},
+  {id:'xp100',name:'100 XP',ico:'⚡',check:()=>getXP()>=100},
+  {id:'xp500',name:'500 XP',ico:'🌟',check:()=>getXP()>=500},
+  {id:'quiz10',name:'10 Quizzes',ico:'🧠',check:h=>h.length>=10},
+  {id:'challenger',name:'Challenger',ico:'🏆',check:()=>JSON.parse(localStorage.getItem('dev_ch')||'[]').filter(h=>h.player!=='Devagneya').length>=1},
+];
+function checkBadges(){
+  const h = getStudyHistory();
+  const earned = JSON.parse(localStorage.getItem('dev_badges')||'[]');
+  BADGE_DEFS.forEach(b=>{
+    if(!earned.includes(b.id) && b.check(h)){ earned.push(b.id); localStorage.setItem('dev_badges',JSON.stringify(earned)); }
+  });
+}
+function renderBadgesRow(){
+  const earned = JSON.parse(localStorage.getItem('dev_badges')||'[]');
+  const row = document.getElementById('sbBadgesRow');
+  if(!row) return;
+  row.innerHTML = BADGE_DEFS.map(b=>`
+    <div class="sb-badge ${earned.includes(b.id)?'unlocked':'locked'}" title="${b.name}">
+      <div class="sb-badge-ico">${b.ico}</div>
+      <div class="sb-badge-name">${b.name}</div>
+    </div>`).join('');
+}
+
+function renderRecentList(){
+  const hist = getStudyHistory().slice(0,6);
+  const comments = getComments();
+  const el = document.getElementById('sbRecentList');
+  if(!el) return;
+  if(!hist.length){ el.innerHTML='<div style="color:rgba(255,255,255,.3);font-size:.85rem;padding:16px 0;text-align:center">Take your first quiz to see results here!</div>'; return; }
+  el.innerHTML = hist.map((h,i)=>{
+    const pct = Math.round(h.score/h.total*100);
+    const color = pct>=80?'var(--g)':pct>=60?'var(--y)':pct>=40?'var(--o)':'var(--p)';
+    const emoji = pct>=80?'🏆':pct>=60?'😊':pct>=40?'📚':'💪';
+    // Check for dad comment
+    const allComments = Object.entries(comments);
+    const dadNote = allComments.find(([k])=>k.includes(h.topic));
+    return `<div class="sb-recent-row">
+      <div class="sb-recent-ico">${emoji}</div>
+      <div class="sb-recent-info">
+        <div class="sb-recent-topic">${h.topic}</div>
+        <div class="sb-recent-meta">${SBSNAME[h.subj||'']||''} · ${h.date}</div>
+        ${dadNote?`<div class="sb-dad-note">💬 Dad: "${dadNote[1]}"</div>`:''}
+      </div>
+      <div class="sb-recent-score" style="color:${color}">${h.score}/${h.total}</div>
+    </div>`;
+  }).join('');
+}
+
+// ── SUBJECTS PAGE ─────────────────────────────────────────────────────────────
+document.querySelectorAll('.sb-stab').forEach(tab=>{
+  tab.addEventListener('click',()=>{
+    document.querySelectorAll('.sb-stab').forEach(t=>t.classList.remove('active'));
+    tab.classList.add('active');
+    renderSubjects(tab.dataset.subj);
+  });
+});
+window.goSubject = function(subj){
+  // switch to subjects page
+  document.querySelectorAll('.sb-nav-btn').forEach(b=>b.classList.remove('active'));
+  document.querySelectorAll('.sb-page').forEach(p=>p.classList.remove('active'));
+  document.querySelector('[data-sbpage="subjects"]').classList.add('active');
+  document.getElementById('sbpage-subjects').classList.add('active');
+  document.querySelectorAll('.sb-stab').forEach(t=>t.classList.toggle('active',t.dataset.subj===subj));
+  renderSubjects(subj);
+};
+
+function renderSubjects(subj){
+  const topics = SBTOPICS[subj];
+  const best = getTopicBest();
+  const color = SBSCOLOR[subj];
+  const area = document.getElementById('subjectTopicArea');
+  if(!area) return;
+  const attempted = topics.filter(t=>best[subj+':'+t]);
+  const avgPct = attempted.length ? Math.round(attempted.reduce((a,t)=>a+(best[subj+':'+t].score/best[subj+':'+t].total*100),0)/attempted.length) : 0;
+
+  area.innerHTML = `
+    <div style="background:linear-gradient(135deg,${color}22,${color}11);border:2px solid ${color}44;border-radius:16px;padding:16px 20px;margin-bottom:20px;display:flex;align-items:center;gap:16px;flex-wrap:wrap;">
+      <div style="font-size:2.5rem">${{maths:'📐',evs:'🌿',english:'📖',hindi:'📚'}[subj]}</div>
+      <div style="flex:1">
+        <div style="font-family:'Fredoka One',cursive;font-size:1.3rem">${SBSNAME[subj]}</div>
+        <div style="font-size:.8rem;color:rgba(255,255,255,.5)">${attempted.length}/${topics.length} topics attempted${attempted.length?' · '+avgPct+'% average':''}</div>
+      </div>
+    </div>
+    <div class="sb-topic-grid">${topics.map((t,i)=>{
+      const b = best[subj+':'+t];
+      const pct = b ? Math.round(b.score/b.total*100) : null;
+      const scoreColor = pct>=80?'var(--g)':pct>=60?'var(--y)':pct>=40?'var(--o)':'var(--p)';
+      return `<div class="sb-topic-card ${b?(pct>=60?'has-score':'has-score low-score'):''}" >
+        <div class="sb-topic-num" style="color:${color}">${i+1}</div>
+        <div class="sb-topic-info">
+          <div class="sb-topic-name" title="${t}">${t}</div>
+          <div class="sb-topic-meta">${b?`${b.attempts||1} attempt${b.attempts>1?'s':''}`:' Not tried yet'}</div>
+        </div>
+        ${b?`<div class="sb-topic-score" style="color:${scoreColor}">${pct}%</div>`:''}
+        <button class="sb-topic-start" onclick="quickStartQuiz('${subj}','${t.replace(/'/g,"\\'")}')">▶ Quiz</button>
+      </div>`;
+    }).join('')}</div>`;
+}
+
+// ── QUIZ ARENA ────────────────────────────────────────────────────────────────
+function populateQaSubjects(){
+  const subj = document.getElementById('qaSubject');
+  if(!subj) return;
+}
+document.getElementById('qaSubject')?.addEventListener('change', function(){
+  const topics = SBTOPICS[this.value]||[];
+  const sel = document.getElementById('qaTopic');
+  sel.innerHTML = '<option value="">-- Topic --</option>';
+  topics.forEach(t=>{ const o=document.createElement('option');o.value=t;o.textContent=t;sel.appendChild(o); });
+});
+
+window.quickStartQuiz = function(subj, topic){
+  // switch to quiz arena and pre-fill
+  document.querySelectorAll('.sb-nav-btn').forEach(b=>b.classList.remove('active'));
+  document.querySelectorAll('.sb-page').forEach(p=>p.classList.remove('active'));
+  document.querySelector('[data-sbpage="quiz"]').classList.add('active');
+  document.getElementById('sbpage-quiz').classList.add('active');
+  const subjSel = document.getElementById('qaSubject');
+  subjSel.value = subj;
+  subjSel.dispatchEvent(new Event('change'));
+  setTimeout(()=>{ document.getElementById('qaTopic').value = topic; }, 50);
+  document.getElementById('qaSetup').style.display='block';
+  document.getElementById('qaPlaying').style.display='none';
+  document.getElementById('qaResult').style.display='none';
+  checkSbAI();
+};
+
+document.getElementById('qaStartBtn')?.addEventListener('click', async()=>{
+  if(!getKey()){ return; }
+  const subj = document.getElementById('qaSubject').value;
+  const topic = document.getElementById('qaTopic').value;
+  const diff = document.getElementById('qaDifficulty').value;
+  if(!subj||!topic){ alert('Please pick a subject and topic!'); return; }
+  const nMap = {easy:3,medium:5,hard:8};
+  const n = nMap[diff]||5;
+  const btn = document.getElementById('qaStartBtn');
+  const msg = document.getElementById('qaAiMsg');
+  btn.disabled=true; btn.textContent='Generating...'; msg.style.display='block';
+  try{
+    const prompt = `Generate exactly ${n} multiple choice questions for a bright 10-year-old Indian student about "${topic}" from ${SBSLABEL[subj]} (NCERT Class 5). Make questions interesting — mix easy, medium, tricky. Each has exactly 4 options labelled A,B,C,D. Return ONLY raw valid JSON, no markdown: {"questions":[{"q":"question","opts":["A. ...","B. ...","C. ...","D. ..."],"ans":"A","exp":"Brief fun explanation in 1-2 sentences"}]}`;
+    const raw = await callClaude([{role:'user',content:prompt}],'You are a Class 5 NCERT quiz generator. Return only raw JSON.',1800);
+    const data = JSON.parse(raw.replace(/```json|```/g,'').trim());
+    sbQuiz = {qs:data.questions, cur:0, score:0, subj, topic, combo:0, xpEarned:0};
+    startSbQuiz();
+  } catch(e){ alert('Could not generate quiz: '+(e.message||'Please try again.')); }
+  btn.disabled=false; btn.textContent='⚡ Start Quiz!'; msg.style.display='none';
+});
+
+let sbQuiz = null;
+function startSbQuiz(){
+  document.getElementById('qaSetup').style.display='none';
+  document.getElementById('qaPlaying').style.display='block';
+  document.getElementById('qaResult').style.display='none';
+  buildSbProgress();
+  showSbQ(0);
+}
+function buildSbProgress(){
+  const bar = document.getElementById('qaProgress');
+  bar.innerHTML = sbQuiz.qs.map((_,i)=>`<div class="qdot" id="sbqd${i}"></div>`).join('');
+  updateSbProgress();
+}
+function updateSbProgress(){
+  sbQuiz.qs.forEach((_,i)=>{
+    const d=document.getElementById('sbqd'+i); if(!d)return;
+    d.className='qdot'+(i<sbQuiz.cur?' done':i===sbQuiz.cur?' curr':'');
+  });
+  const comboEl = document.getElementById('qaCombo');
+  const mult = sbQuiz.combo>=5?2:sbQuiz.combo>=3?1.5:1;
+  comboEl.textContent = `🔥 x${mult%1===0?mult:mult.toFixed(1)}`;
+  comboEl.classList.toggle('hot', sbQuiz.combo>=3);
+  document.getElementById('qaXpEarned').textContent = `+${sbQuiz.xpEarned} XP`;
+  document.getElementById('qaQCount').textContent = `Q${sbQuiz.cur+1}/${sbQuiz.qs.length}`;
+}
+function showSbQ(idx){
+  sbQuiz.cur = idx; updateSbProgress();
+  const q = sbQuiz.qs[idx];
+  document.getElementById('qaNum').textContent = `Q${idx+1} of ${sbQuiz.qs.length} — ${sbQuiz.topic}`;
+  document.getElementById('qaText').textContent = q.q;
+  document.getElementById('qaExp').className='q-exp'; document.getElementById('qaExp').textContent='';
+  document.getElementById('qaNext').style.display='none';
+  const opts = document.getElementById('qaOpts'); opts.innerHTML='';
+  q.opts.forEach(opt=>{
+    const b=document.createElement('button'); b.className='q-opt'; b.textContent=opt;
+    b.addEventListener('click',()=>ansSbQ(opt,q,b));
+    opts.appendChild(b);
+  });
+}
+function ansSbQ(chosen,q,btnEl){
+  const letter=chosen.charAt(0), correct=letter===q.ans;
+  if(correct){
+    sbQuiz.score++;
+    sbQuiz.combo++;
+    const mult = sbQuiz.combo>=5?2:sbQuiz.combo>=3?1.5:1;
+    const xp = Math.round(10*mult);
+    sbQuiz.xpEarned += xp;
+    // Float XP
+    const rect=btnEl.getBoundingClientRect();
+    const xpEl=document.createElement('div');xpEl.className='xp-float';
+    xpEl.textContent=`+${xp} XP${sbQuiz.combo>=3?' 🔥':''}`;
+    xpEl.style.left=(rect.left+rect.width/2-30)+'px';xpEl.style.top=(rect.top-10)+'px';
+    document.body.appendChild(xpEl); setTimeout(()=>xpEl.remove(),1200);
+    document.getElementById('qaCard').classList.add('correct-flash');
+    setTimeout(()=>document.getElementById('qaCard').classList.remove('correct-flash'),300);
+  } else {
+    sbQuiz.combo=0;
+  }
+  document.querySelectorAll('.q-opt').forEach(b=>{
+    b.disabled=true;
+    if(b.textContent.charAt(0)===q.ans) b.classList.add('correct');
+    else if(b===btnEl&&!correct) b.classList.add('wrong');
+  });
+  const exp=document.getElementById('qaExp'); exp.textContent=q.exp; exp.classList.add('show');
+  const nxt=document.getElementById('qaNext');
+  const last=sbQuiz.cur===sbQuiz.qs.length-1;
+  nxt.textContent=last?'See Results 🎉':'Next →'; nxt.style.display='inline-flex';
+  nxt.onclick=()=>{ if(last)showSbResult(); else showSbQ(sbQuiz.cur+1); };
+  updateSbProgress();
+}
+
+function showSbResult(){
+  document.getElementById('qaPlaying').style.display='none';
+  document.getElementById('qaResult').style.display='block';
+  const s=sbQuiz.score, t=sbQuiz.qs.length, pct=Math.round(s/t*100);
+  const trophies=['😤','📚','😊','🌟','🏆'];
+  const ti = pct>=90?4:pct>=75?3:pct>=60?2:pct>=40?1:0;
+  document.getElementById('qaResultTrophy').textContent = trophies[ti];
+  document.getElementById('qaResultScore').textContent = `${s} / ${t}`;
+  const msgs=['Keep going — every try makes you stronger! 💪','Good effort! One more try and you\'ll nail it.','Well done! You\'re getting really good at this! 😊','Excellent work! You\'re a star student 🌟','PERFECT! You totally crushed it! 🏆'];
+  document.getElementById('qaResultMsg').textContent = msgs[ti];
+  // Award XP
+  const totalXp = sbQuiz.xpEarned + (pct===100?50:pct>=80?20:pct>=60?10:5);
+  addXP(totalXp);
+  document.getElementById('qaXpBanner').textContent = `✨ You earned ${totalXp} XP this quiz!`;
+  // Challenge code
+  const code = SBSCODES[sbQuiz.subj]+'-'+String(SBTOPICS[sbQuiz.subj].indexOf(sbQuiz.topic)).padStart(2,'0');
+  document.getElementById('qaCodeDisplay').textContent = code;
+  // Save to history
+  const h2 = JSON.parse(localStorage.getItem('dev_ch')||'[]');
+  h2.unshift({code,topic:sbQuiz.topic,score:s,total:t,date:new Date().toDateString(),player:'Devagneya',subj:sbQuiz.subj});
+  localStorage.setItem('dev_ch',JSON.stringify(h2.slice(0,40)));
+  // Check for dad note
+  const comments = getComments();
+  const match = Object.entries(comments).find(([k])=>k.includes(sbQuiz.topic));
+  const pcEl = document.getElementById('qaParentComment');
+  if(match){
+    pcEl.style.display='block';
+    pcEl.style.cssText='display:block;background:rgba(255,217,61,.08);border:2px solid rgba(255,217,61,.22);border-radius:12px;padding:12px 16px;margin:0 auto 14px;max-width:360px;font-size:.85rem;';
+    pcEl.innerHTML=`<div style="font-family:'Fredoka One',cursive;font-size:.88rem;color:var(--y);margin-bottom:4px">💬 Dad's Note</div><div style="color:rgba(255,255,255,.75);font-style:italic">"${match[1]}"</div>`;
+  } else { pcEl.style.display='none'; }
+  // Badges + rings update
+  checkBadges();
+  renderSbHome();
+  renderXpBar();
+}
+document.getElementById('qaCopyBtn')?.addEventListener('click',()=>{
+  navigator.clipboard.writeText(document.getElementById('qaCodeDisplay').textContent)
+    .then(()=>{ document.getElementById('qaCopyBtn').textContent='✅ Copied!'; setTimeout(()=>document.getElementById('qaCopyBtn').textContent='📋 Copy Code',2000); });
+});
+document.getElementById('qaRetryBtn')?.addEventListener('click',()=>{
+  sbQuiz.cur=0; sbQuiz.score=0; sbQuiz.combo=0; sbQuiz.xpEarned=0;
+  startSbQuiz();
+});
+document.getElementById('qaNewTopicBtn')?.addEventListener('click',()=>{
+  document.getElementById('qaSetup').style.display='block';
+  document.getElementById('qaPlaying').style.display='none';
+  document.getElementById('qaResult').style.display='none';
+});
+
+// ── ASK DEV-SIR ───────────────────────────────────────────────────────────────
+let sbChatH = [];
+const SB_TSYS = `You are Dev-Sir, a warm and encouraging AI teacher for Devagneya — a bright, curious 10-year-old student in Class 5 in India. He loves cars, space, games, piano and singing. Explain things simply with fun examples from everyday Indian life. Use occasional emojis. Keep answers short and clear — 3-5 sentences unless more is needed. Be positive and make learning feel exciting! When explaining concepts, try to connect them to things he loves (cars, space, games).`;
+
+window.chipAsk = function(el){ const inp=document.getElementById('sbChatInput'); if(inp){inp.value=el.textContent;} sbSendChat(); };
+document.getElementById('sbChatSend')?.addEventListener('click', sbSendChat);
+document.getElementById('sbChatInput')?.addEventListener('keydown', e=>{ if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();sbSendChat();} });
+
+async function sbSendChat(){
+  const inp=document.getElementById('sbChatInput'); const msg=inp?.value.trim(); if(!msg)return;
+  inp.value='';
+  sbAddMsg('user',msg); sbChatH.push({role:'user',content:msg});
+  const t=sbAddMsg('bot','<span style="opacity:.45;font-style:italic">Dev-Sir is thinking...</span>');
+  try{
+    const reply=await callClaude(sbChatH,SB_TSYS,900);
+    t.remove(); sbChatH.push({role:'assistant',content:reply});
+    sbAddMsg('bot',`<strong>Dev-Sir 🤖:</strong> ${reply.replace(/\n/g,'<br>')}`);
+  }catch(e){
+    t.remove(); sbAddMsg('bot',`<strong>Dev-Sir 🤖:</strong> ${e.message==='no-key'?'Ask Dad to set the API key in ⚙️ Settings!':'Oops, please try again!'}`);
+  }
+}
+function sbAddMsg(role,html){
+  const box=document.getElementById('sbChatBox'); if(!box)return;
+  const d=document.createElement('div'); d.className='cmsg '+role; d.innerHTML=html;
+  box.appendChild(d); box.scrollTop=box.scrollHeight; return d;
+}
+
+// ── CHALLENGE ────────────────────────────────────────────────────────────────
+document.getElementById('sbAcceptBtn')?.addEventListener('click',async()=>{
+  const code=document.getElementById('sbCodeInput').value.trim().toUpperCase();
+  const name=document.getElementById('sbChallengerName').value.trim()||'Friend';
+  if(!code||!code.includes('-')){ alert('Please enter a valid code like MA-04'); return; }
+  const [sc2,ti]=code.split('-'); const subj=SBFROMCODE[sc2]; const tidx=parseInt(ti);
+  if(!subj||isNaN(tidx)||tidx>=(SBTOPICS[subj]||[]).length){ alert('Invalid code!'); return; }
+  const topicName=SBTOPICS[subj][tidx];
+  const hist=JSON.parse(localStorage.getItem('dev_ch')||'[]');
+  const orig=hist.find(h=>h.code===code&&h.player==='Devagneya');
+  const info=document.getElementById('sbChInfo'); info.style.display='block';
+  info.innerHTML=orig?`🏆 Devagneya scored <strong>${orig.score}/${orig.total}</strong> on <strong>${topicName}</strong>. Can you beat it, ${name}?`:`📝 Quiz on <strong>${topicName}</strong>. Generating...`;
+  try{
+    const n=orig?orig.total:5;
+    const prompt=`Generate exactly ${n} MCQs for a 10-year-old Indian student about "${topicName}" from ${SBSLABEL[subj]}. Return ONLY raw JSON: {"questions":[{"q":"...","opts":["A. ...","B. ...","C. ...","D. ..."],"ans":"A","exp":"..."}]}`;
+    const raw=await callClaude([{role:'user',content:prompt}],'Return only raw JSON.',1800);
+    const data=JSON.parse(raw.replace(/```json|```/g,'').trim());
+    sbQuiz={qs:data.questions,cur:0,score:0,subj,topic:topicName,combo:0,xpEarned:0};
+    document.querySelectorAll('.sb-nav-btn').forEach(b=>b.classList.remove('active'));
+    document.querySelectorAll('.sb-page').forEach(p=>p.classList.remove('active'));
+    document.querySelector('[data-sbpage="quiz"]').classList.add('active');
+    document.getElementById('sbpage-quiz').classList.add('active');
+    startSbQuiz();
+  }catch(e){ info.innerHTML=`❌ Error: ${e.message==='no-key'?'Set API key in ⚙️ Settings!':e.message}`; }
+});
+
+function renderSbChallenges(){
+  const list=JSON.parse(localStorage.getItem('dev_ch')||'[]');
+  const el=document.getElementById('sbChList'), empty=document.getElementById('sbChEmpty');
+  if(!list.length){el.innerHTML='';empty.style.display='block';return;}
+  empty.style.display='none';
+  el.innerHTML=list.map(h=>{
+    const pct=Math.round(h.score/h.total*100);
+    const m=pct>=80?'🏆':pct>=60?'😊':'📚';
+    const vs=h.vsScore!=null?` · vs ${h.vsScore}/${h.vsTotal}`:'';
+    return `<div class="sb-ch-row"><div class="sb-ch-medal">${m}</div><div class="sb-ch-info"><div class="sb-ch-player">${h.player}</div><div class="sb-ch-meta">${h.topic} · ${h.code} · ${h.date}${vs}</div></div><div class="sb-ch-score">${h.score}/${h.total}</div></div>`;
+  }).join('');
+}
+
+// Init on load
+renderXpBar();
+checkBadges();
+
+// ============================== DAD'S BOARD ==============================
+(function(){
+
+const PIN = '1234';
+const gate = document.getElementById('dadGate');
+const board = document.getElementById('dadBoard');
+const pinInp = document.getElementById('dadPin');
+let dadUnlocked = false;
+
+function unlock(){
+  gate.style.display = 'none';
+  board.classList.add('open');
+  dadUnlocked = true;
+  refreshDadBoard();
+}
+function lock(){
+  gate.style.display = 'block';
+  board.classList.remove('open');
+  dadUnlocked = false;
+  pinInp.value = '';
+}
+document.getElementById('dadUnlock').addEventListener('click', ()=>{
+  if(pinInp.value === PIN) unlock();
+  else { pinInp.style.borderColor='var(--p)'; setTimeout(()=>pinInp.style.borderColor='',900); pinInp.value=''; }
+});
+pinInp.addEventListener('keydown', e=>{ if(e.key==='Enter') document.getElementById('dadUnlock').click(); });
+document.getElementById('dadLock').addEventListener('click', lock);
+
+// Nav to dad tab triggers gate reset
+document.querySelector('[data-tab="dad"]').addEventListener('click', ()=>{
+  if(!dadUnlocked){ gate.style.display='block'; board.classList.remove('open'); }
+});
+
+// Sub-tabs
+document.querySelectorAll('.dtab').forEach(tab=>{
+  tab.addEventListener('click', ()=>{
+    document.querySelectorAll('.dtab').forEach(t=>t.classList.remove('active'));
+    document.querySelectorAll('.dtab-sub').forEach(s=>s.classList.remove('active'));
+    tab.classList.add('active');
+    const sub = document.getElementById('dtab-'+tab.dataset.dtab);
+    if(sub) sub.classList.add('active');
+    if(tab.dataset.dtab==='overview') renderOverview();
+    if(tab.dataset.dtab==='scores') renderScores();
+    if(tab.dataset.dtab==='target'){ renderTarget(); loadTargetTopics(); }
+    if(tab.dataset.dtab==='homework') renderHw();
+    if(tab.dataset.dtab==='report') renderReport();
+  });
+});
+
+// ── HELPERS ──────────────────────────────────────────────────────────────
+function getHistory(){ return JSON.parse(localStorage.getItem('dev_ch')||'[]').filter(h=>h.player==='Devagneya'); }
+function getPlog(){ return JSON.parse(localStorage.getItem('dev_plog')||'[]'); }
+function getHw(){ return JSON.parse(localStorage.getItem('dev_hw')||'[]'); }
+function saveHw(hw){ localStorage.setItem('dev_hw', JSON.stringify(hw)); }
+function getComments(){ return JSON.parse(localStorage.getItem('dev_comments')||'{}'); }
+function saveComments(c){ localStorage.setItem('dev_comments', JSON.stringify(c)); }
+function getTarget(){ return JSON.parse(localStorage.getItem('dev_target')||'null'); }
+function saveTarget(t){ localStorage.setItem('dev_target', JSON.stringify(t)); }
+
+const SNAME = {maths:'Maths', evs:'EVS', english:'English', hindi:'Hindi'};
+const SCODE = {MA:'maths', EV:'evs', EN:'english', HI:'hindi'};
+function subjFromCode(code){ return SCODE[code.split('-')[0]]||''; }
+function pctColor(p){ return p>=80?'#6BCB77':p>=60?'#FFD93D':p>=40?'#FF6B35':'#FF4D8B'; }
+
+// ── OVERVIEW ─────────────────────────────────────────────────────────────
+function renderOverview(){
+  const hist = getHistory();
+  const plog = getPlog();
+  const hw = getHw();
+
+  // KPIs
+  const totalQ = hist.length;
+  const avgPct = totalQ ? Math.round(hist.reduce((a,h)=>a+(h.score/h.total*100),0)/totalQ) : 0;
+  const hwDone = hw.filter(t=>t.done).length;
+  const plogDays = {}; plog.forEach(e=>plogDays[e.date]=true);
+  let streak=0; for(let i=0;i<30;i++){const d=new Date();d.setDate(d.getDate()-i);if(plogDays[d.toDateString()])streak++;else if(i>0)break;}
+  const thisWeek = hist.filter(h=>{const d=new Date(h.date);const now=new Date();const diff=(now-d)/(1000*60*60*24);return diff<=7;});
+
+  document.getElementById('dadKpis').innerHTML = `
+    <div class="dkpi"><div class="dkpi-val" style="color:var(--b)">${totalQ}</div><div class="dkpi-lbl">Total Quizzes Taken</div></div>
+    <div class="dkpi"><div class="dkpi-val" style="color:${pctColor(avgPct)}">${avgPct}%</div><div class="dkpi-lbl">Average Score (all time)</div></div>
+    <div class="dkpi"><div class="dkpi-val" style="color:var(--p)">${streak}🔥</div><div class="dkpi-lbl">Practice Streak</div></div>
+    <div class="dkpi"><div class="dkpi-val" style="color:var(--y)">${thisWeek.length}</div><div class="dkpi-lbl">Quizzes This Week</div></div>
+    <div class="dkpi"><div class="dkpi-val" style="color:var(--g)">${hwDone}/${hw.length}</div><div class="dkpi-lbl">Tasks Done</div></div>
+  `;
+
+  // Weak areas: topics where avg < 60%
+  const topicMap = {};
+  hist.forEach(h=>{
+    const k = h.code+':'+h.topic;
+    if(!topicMap[k]) topicMap[k]={topic:h.topic,code:h.code,attempts:[],subj:subjFromCode(h.code)};
+    topicMap[k].attempts.push(Math.round(h.score/h.total*100));
+  });
+  const weak = Object.values(topicMap)
+    .map(t=>({...t, avg:Math.round(t.attempts.reduce((a,b)=>a+b,0)/t.attempts.length)}))
+    .filter(t=>t.avg<60&&t.attempts.length>=1)
+    .sort((a,b)=>a.avg-b.avg).slice(0,4);
+  const wl = document.getElementById('weakList'), we = document.getElementById('weakEmpty');
+  if(!weak.length){ wl.innerHTML=''; we.style.display='block'; }
+  else { we.style.display='none'; wl.innerHTML=weak.map(w=>`
+    <div class="weak-row">
+      <div class="weak-ico">${{maths:'📐',evs:'🌿',english:'📖',hindi:'📚'}[w.subj]||'📚'}</div>
+      <div class="weak-info">
+        <div class="weak-topic">${w.topic}</div>
+        <div class="weak-meta">${SNAME[w.subj]||w.subj} · ${w.attempts.length} attempt${w.attempts.length>1?'s':''}</div>
+      </div>
+      <div class="weak-avg">${w.avg}%</div>
+    </div>`).join(''); }
+
+  // Recent activity (last 5 combined)
+  const events = [];
+  hist.slice(0,5).forEach(h=>events.push({date:h.date,txt:`📊 Quiz: ${h.topic} — ${h.score}/${h.total}`,type:'quiz'}));
+  plog.slice(0,3).forEach(p=>events.push({date:p.date,txt:`${p.type} Practice: ${p.what||'Session'} (${p.mins}m)`,type:'plog'}));
+  events.sort((a,b)=>new Date(b.date)-new Date(a.date));
+  document.getElementById('recentActivity').innerHTML = events.slice(0,6).map(e=>`
+    <div style="display:flex;gap:11px;align-items:center;padding:9px 0;border-bottom:1px solid rgba(255,255,255,.05);">
+      <span style="font-size:.75rem;color:rgba(255,255,255,.32);min-width:90px">${e.date}</span>
+      <span style="font-size:.84rem">${e.txt}</span>
+    </div>`).join('') || '<div style="color:rgba(255,255,255,.3);font-size:.85rem;padding:16px 0">No activity yet</div>';
+}
+
+// ── ALL SCORES ────────────────────────────────────────────────────────────
+let currentComment = null; // {idx, code, topic, score, total, date}
+
+function renderScores(){
+  const filterVal = document.getElementById('filterSubj').value;
+  let hist = getHistory();
+  if(filterVal) hist = hist.filter(h=>subjFromCode(h.code)===filterVal);
+  const comments = getComments();
+  document.getElementById('scoreCount').textContent = `${hist.length} result${hist.length!==1?'s':''}`;
+  const tbody = document.getElementById('scoreTbody');
+  const empty = document.getElementById('scoresEmpty');
+  if(!hist.length){ tbody.innerHTML=''; empty.style.display='block'; return; }
+  empty.style.display='none';
+  tbody.innerHTML = hist.map((h,i)=>{
+    const pct = Math.round(h.score/h.total*100);
+    const commentKey = h.code+':'+h.date+':'+i;
+    const hasComment = !!comments[commentKey];
+    return `<tr>
+      <td style="color:rgba(255,255,255,.45);font-size:.78rem">${h.date}</td>
+      <td><span style="font-size:.72rem;font-weight:800;color:var(--b)">${SNAME[subjFromCode(h.code)]||h.code}</span></td>
+      <td style="max-width:160px;font-size:.82rem">${h.topic}</td>
+      <td><strong style="color:${pctColor(pct)}">${h.score}/${h.total}</strong></td>
+      <td>
+        <div class="pct-bar" style="min-width:55px"><div class="pct-fill" style="width:${pct}%;background:${pctColor(pct)}"></div></div>
+        <span style="font-size:.72rem;color:rgba(255,255,255,.45)">${pct}%</span>
+      </td>
+      <td><button class="comment-btn ${hasComment?'has-comment':''}" onclick="openComment(${i},'${commentKey}')">${hasComment?'✏️ Edit Note':'+ Add Note'}</button></td>
+    </tr>`;
+  }).join('');
+}
+
+document.getElementById('filterSubj').addEventListener('change', renderScores);
+
+window.openComment = function(idx, key){
+  const hist = getHistory();
+  const h = hist[idx];
+  if(!h) return;
+  const pct = Math.round(h.score/h.total*100);
+  currentComment = {key};
+  document.getElementById('cmCtx').innerHTML = `<strong>${h.topic}</strong> — ${SNAME[subjFromCode(h.code)]||''}<br>Score: <strong style="color:${pctColor(pct)}">${h.score}/${h.total} (${pct}%)</strong> · ${h.date}`;
+  const comments = getComments();
+  const existing = comments[key]||'';
+  document.getElementById('cmText').value = existing;
+  const exEl = document.getElementById('cmExisting');
+  if(existing){ exEl.style.display='block'; exEl.textContent='"'+existing+'"'; }
+  else { exEl.style.display='none'; }
+  document.getElementById('cmDelete').style.display = existing?'inline-flex':'none';
+  document.getElementById('commentModal').classList.add('open');
+};
+
+document.getElementById('cmClose').addEventListener('click', ()=>document.getElementById('commentModal').classList.remove('open'));
+document.getElementById('commentModal').addEventListener('click', e=>{ if(e.target===document.getElementById('commentModal')) document.getElementById('commentModal').classList.remove('open'); });
+document.getElementById('cmSave').addEventListener('click', ()=>{
+  if(!currentComment) return;
+  const txt = document.getElementById('cmText').value.trim();
+  if(!txt) return;
+  const c = getComments(); c[currentComment.key]=txt; saveComments(c);
+  document.getElementById('commentModal').classList.remove('open');
+  renderScores();
+  // Also store in quiz history for Devagneya to see
+  const allH = JSON.parse(localStorage.getItem('dev_ch')||'[]');
+  // We mark by key
+  localStorage.setItem('dev_ch', JSON.stringify(allH));
+});
+document.getElementById('cmDelete').addEventListener('click', ()=>{
+  if(!currentComment) return;
+  const c = getComments(); delete c[currentComment.key]; saveComments(c);
+  document.getElementById('commentModal').classList.remove('open');
+  renderScores();
+});
+
+// ── WEEKLY TARGET ─────────────────────────────────────────────────────────
+const QTOPICS_DAD = {
   maths:['The Fish Tale','Shapes and Angles','How Many Squares','Parts and Wholes (Fractions)','Does It Look the Same','Be My Multiple I\'ll Be Your Factor','Can You See the Pattern','Mapping Your Way','Boxes and Sketches','Tenths and Hundredths (Decimals)','Area and Its Boundary','Smart Charts (Data Handling)','Ways to Multiply and Divide','How Big? How Heavy?'],
   evs:['Super Senses','A Snake Charmer\'s Story','From Tasting to Digesting','Mangoes Round the Year','Seeds and Seeds','Every Drop Counts','Experiments with Water','A Treat for Mosquitoes','Up You Go!','Walls Tell Stories','Sunita in Space','What If It Finishes?','A Seed Tells a Farmer\'s Story','When the Earth Shook!','Blow Hot Blow Cold','Who Will Do This Work?','Across the Wall','No Place for Us?','A Ball Going Up','Whose Forests?'],
   english:['Ice-Cream Man','Wonderful Waste!','Teamwork','My Shadow','Robinson Crusoe','Rip Van Winkle','The Lazy Frog','Tansen','The Little Bully','Who Will be Ningthou?','Topsy-Turvy Land','Gulliver\'s Travels'],
   hindi:['Raakh Ki Rassi','Phool Phool Rang Rang','Khumba Khele Holi','Padhaku Ki Cycle','Jahan Chakki Phirti Hai','Chacha Ki Chitthi','Ramdhani Nagar Se','Bahut Hua']
 };
-const SCODES={maths:'MA',evs:'EV',english:'EN',hindi:'HI'};
-const SLABEL={maths:'Class 5 Maths',evs:'Class 5 EVS',english:'Class 5 English',hindi:'Class 5 Hindi'};
-document.getElementById('quizSubject').addEventListener('change',function(){
-  const ts=QTOPICS[this.value]||[];const sel=document.getElementById('quizTopic');
-  sel.innerHTML='<option value="">-- Pick a Topic --</option>';
-  ts.forEach((t,i)=>{const o=document.createElement('option');o.value=i;o.textContent=t;sel.appendChild(o);});
-});
-let cq={qs:[],cur:0,score:0,subj:'',topic:'',tidx:0};
-document.getElementById('genQuizBtn').addEventListener('click',async()=>{
-  const subj=document.getElementById('quizSubject').value;
-  const tidx=document.getElementById('quizTopic').value;
-  const n=parseInt(document.getElementById('qCount').value)||5;
-  if(!subj||tidx===''){alert('Please pick a subject and topic!');return;}
-  const topicName=QTOPICS[subj][tidx];
-  const btn=document.getElementById('genQuizBtn');btn.textContent='✨ Generating...';btn.disabled=true;
-  try{
-    const prompt=`Generate exactly ${n} multiple choice questions for a bright 10-year-old Indian student about "${topicName}" from ${SLABEL[subj]} (NCERT curriculum). Make questions interesting and clear. Each must have exactly 4 options labeled A, B, C, D. Return ONLY valid JSON with zero markdown or backticks. Format: {"questions":[{"q":"question","opts":["A. option","B. option","C. option","D. option"],"ans":"A","exp":"Short explanation why A is correct (1-2 sentences)"}]}`;
-    const raw=await callClaude([{role:'user',content:prompt}],'You are a Class 5 NCERT quiz generator for India. Return only raw valid JSON.',1800);
-    const clean=raw.replace(/```json|```/g,'').trim();
-    const data=JSON.parse(clean);
-    cq={qs:data.questions,cur:0,score:0,subj,topic:topicName,tidx:parseInt(tidx)};
-    startQ();
-  }catch(e){alert('Could not generate quiz: '+(e.message==='no-key'?'Please set your API key in ⚙️ Settings first!':e.message||'Please try again.'));}
-  btn.textContent='✨ Generate Quiz!';btn.disabled=false;
-});
-function startQ(){
-  document.getElementById('quizSetup').style.display='none';
-  document.getElementById('quizQWrap').style.display='block';
-  document.getElementById('scoreCard').classList.remove('show');
-  buildProg();showQ(0);
-}
-function buildProg(){const b=document.getElementById('qprogress');b.innerHTML=cq.qs.map((_,i)=>`<div class="qdot" id="qd${i}"></div>`).join('');updateProg();}
-function updateProg(){cq.qs.forEach((_,i)=>{const d=document.getElementById('qd'+i);if(!d)return;d.className='qdot'+(i<cq.cur?' done':i===cq.cur?' curr':'');});}
-function showQ(idx){
-  cq.cur=idx;updateProg();
-  const q=cq.qs[idx],t=cq.qs.length;
-  document.getElementById('qNum').textContent=`Q${idx+1} of ${t} — ${cq.topic}`;
-  document.getElementById('qText').textContent=q.q;
-  document.getElementById('qExp').className='q-exp';document.getElementById('qExp').textContent='';
-  document.getElementById('qNext').style.display='none';
-  const opts=document.getElementById('qOpts');opts.innerHTML='';
-  q.opts.forEach(opt=>{const b=document.createElement('button');b.className='q-opt';b.textContent=opt;b.addEventListener('click',()=>ansQ(opt,q,b));opts.appendChild(b);});
-}
-function ansQ(chosen,q,btnEl){
-  const letter=chosen.charAt(0),correct=letter===q.ans;
-  if(correct)cq.score++;
-  document.querySelectorAll('.q-opt').forEach(b=>{b.disabled=true;if(b.textContent.charAt(0)===q.ans)b.classList.add('correct');else if(b===btnEl&&!correct)b.classList.add('wrong');});
-  const exp=document.getElementById('qExp');exp.textContent=q.exp;exp.classList.add('show');
-  const nxt=document.getElementById('qNext');const last=cq.cur===cq.qs.length-1;nxt.textContent=last?'See Results 🎉':'Next →';nxt.style.display='inline-flex';nxt.onclick=()=>{if(last)showScore();else showQ(cq.cur+1);};
-}
-function showScore(){
-  document.getElementById('quizQWrap').style.display='none';
-  const sc=document.getElementById('scoreCard');sc.classList.add('show');
-  const s=cq.score,t=cq.qs.length,pct=Math.round(s/t*100);
-  const em=pct>=80?'🏆':pct>=60?'😊':pct>=40?'📚':'💪';
-  document.getElementById('scoreBig').textContent=`${em} ${s}/${t}`;
-  const msgs=['Keep going — you\'re learning! 💪','Good effort — review it once more!','Well done, you know this! 😊','Excellent — you\'re a star! 🌟'];
-  document.getElementById('scoreLbl').textContent=msgs[pct>=80?3:pct>=60?2:pct>=40?1:0];
-  const code=SCODES[cq.subj]+'-'+String(cq.tidx).padStart(2,'0');
-  document.getElementById('codeDisplay').textContent=code;
-  const h=JSON.parse(localStorage.getItem('dev_ch')||'[]');
-  h.unshift({code,topic:cq.topic,score:s,total:t,date:new Date().toDateString(),player:'Devagneya'});
-  localStorage.setItem('dev_ch',JSON.stringify(h.slice(0,30)));
-  renderChallenges();
-}
-document.getElementById('copyCodeBtn').addEventListener('click',()=>{
-  navigator.clipboard.writeText(document.getElementById('codeDisplay').textContent).then(()=>{document.getElementById('copyCodeBtn').textContent='✅ Copied!';setTimeout(()=>document.getElementById('copyCodeBtn').textContent='📋 Copy Code',2000);});
-});
-document.getElementById('retryBtn').addEventListener('click',()=>{document.getElementById('scoreCard').classList.remove('show');document.getElementById('quizSetup').style.display='block';document.getElementById('quizQWrap').style.display='none';});
 
-// Challenge tab
-const SFROMCODE={MA:'maths',EV:'evs',EN:'english',HI:'hindi'};
-document.getElementById('acceptBtn').addEventListener('click',async()=>{
-  const code=document.getElementById('codeInput').value.trim().toUpperCase();
-  const name=document.getElementById('challengerName').value.trim()||'Friend';
-  if(!code||!code.includes('-')){alert('Please enter a valid code like MA-04');return;}
-  const [sc2,ti]=code.split('-');const subj=SFROMCODE[sc2];const tidx=parseInt(ti);
-  if(!subj||isNaN(tidx)||tidx>=(QTOPICS[subj]||[]).length){alert('Invalid code — check you typed it correctly!');return;}
-  const topicName=QTOPICS[subj][tidx];
-  const hist=JSON.parse(localStorage.getItem('dev_ch')||'[]');
-  const orig=hist.find(h=>h.code===code&&h.player==='Devagneya');
-  const info=document.getElementById('chInfo');info.style.display='block';
-  info.innerHTML=orig?`🏆 Devagneya scored <strong>${orig.score}/${orig.total}</strong> on <strong>${topicName}</strong>. Can you beat it, ${name}? Generating your quiz...`:`📝 Quiz on <strong>${topicName}</strong>. Generating...`;
-  const n=orig?orig.total:5;
-  try{
-    const prompt=`Generate exactly ${n} MCQs for a 10-year-old Indian student about "${topicName}" from ${SLABEL[subj]} (NCERT). Return ONLY valid JSON: {"questions":[{"q":"...","opts":["A. ...","B. ...","C. ...","D. ..."],"ans":"A","exp":"..."}]}`;
-    const raw=await callClaude([{role:'user',content:prompt}],'Return only raw JSON.',1800);
-    const data=JSON.parse(raw.replace(/```json|```/g,'').trim());
-    cq={qs:data.questions,cur:0,score:0,subj,topic:topicName,tidx};
-    // switch to quiz sub-tab
-    document.querySelectorAll('.stab').forEach(t=>t.classList.remove('active'));
-    document.querySelectorAll('.study-sub').forEach(s=>s.classList.remove('active'));
-    document.querySelector('[data-stab="quiz"]').classList.add('active');
-    document.getElementById('stab-quiz').classList.add('active');
-    document.getElementById('quizSetup').style.display='none';
-    startQ();
-    // after quiz, override showScore to save challenger result
-    const origShowScore=showScore;
-    window._afterQ=function(){const cs=cq.score,ct=cq.qs.length;const h2=JSON.parse(localStorage.getItem('dev_ch')||'[]');h2.unshift({code,topic:topicName,score:cs,total:ct,date:new Date().toDateString(),player:name,vsScore:orig?orig.score:null,vsTotal:orig?orig.total:ct});localStorage.setItem('dev_ch',JSON.stringify(h2.slice(0,30)));renderChallenges();};
-  }catch(e){info.innerHTML=`❌ Error: ${e.message==='no-key'?'Set API key in ⚙️ Settings first!':e.message}`;}
+function loadTargetTopics(){
+  const subj = document.getElementById('tSubject').value;
+  const topics = QTOPICS_DAD[subj]||[];
+  const sel = document.getElementById('tTopic');
+  sel.innerHTML='<option value="">-- Topic --</option>';
+  topics.forEach((t,i)=>{ const o=document.createElement('option');o.value=t;o.textContent=t;sel.appendChild(o); });
+}
+document.getElementById('tSubject').addEventListener('change', loadTargetTopics);
+
+document.getElementById('setTargetBtn').addEventListener('click', ()=>{
+  const subj = document.getElementById('tSubject').value;
+  const topic = document.getElementById('tTopic').value;
+  const goal = parseInt(document.getElementById('tGoal').value)||7;
+  const questions = parseInt(document.getElementById('tQuestions').value)||10;
+  const note = document.getElementById('tNote').value.trim();
+  if(!subj||!topic){ alert('Please pick a subject and topic!'); return; }
+  const target = {subj, topic, goal, questions, note, set: new Date().toDateString()};
+  saveTarget(target);
+  renderTarget();
+  // Switch to overview
+  document.querySelectorAll('.dtab').forEach(t=>t.classList.remove('active'));
+  document.querySelectorAll('.dtab-sub').forEach(s=>s.classList.remove('active'));
+  document.querySelector('[data-dtab="overview"]').classList.add('active');
+  document.getElementById('dtab-overview').classList.add('active');
+  renderOverview();
 });
 
-function renderChallenges(){
-  const list=JSON.parse(localStorage.getItem('dev_ch')||'[]');
-  const el=document.getElementById('chList'),empty=document.getElementById('chEmpty');
-  if(!list.length){el.innerHTML='';empty.style.display='block';return;}empty.style.display='none';
-  el.innerHTML=list.map(h=>{const pct=Math.round(h.score/h.total*100);const m=pct>=80?'🏆':pct>=60?'😊':'📚';const vs=h.vsScore!=null?` · beat ${h.vsScore}/${h.vsTotal}?`:'';return`<div class="ch-row"><div class="ch-medal">${m}</div><div class="ch-info"><div class="ch-player">${h.player}</div><div class="ch-meta">${h.topic} · ${h.code} · ${h.date}${vs}</div></div><div class="ch-score">${h.score}/${h.total}</div></div>`;}).join('');
+function renderTarget(){
+  const t = getTarget();
+  const el = document.getElementById('targetDisplay');
+  if(!t){ el.innerHTML='<div class="no-target">No target set yet.<br>Set one below 👇</div>'; return; }
+  // Check progress: how many times has he attempted this topic and beaten the target?
+  const hist = getHistory();
+  const attempts = hist.filter(h=>h.topic===t.topic);
+  const best = attempts.length ? Math.max(...attempts.map(h=>h.score)) : 0;
+  const pct = Math.min(100, Math.round(best/t.goal*100));
+  const achieved = best >= t.goal;
+  el.innerHTML = `
+    <div class="target-lbl">🎯 This Week's Target</div>
+    <div class="target-topic">${t.topic}</div>
+    <div class="target-meta">${SNAME[t.subj]} · Score ${t.goal}/${t.questions} or better · Set ${t.set}</div>
+    ${t.note?`<div style="margin-top:8px;font-size:.84rem;color:var(--y);font-style:italic">"${t.note}"</div>`:''}
+    <div class="target-progress">
+      <div style="font-size:.78rem;color:rgba(255,255,255,.45)">Best attempt: <strong style="color:${achieved?'var(--g)':'var(--y)'}">${best}/${t.questions}</strong> ${achieved?'✅ TARGET MET! 🎉':''}</div>
+      <div class="tp-bar"><div class="tp-fill" style="width:${pct}%"></div></div>
+    </div>`;
 }
 
-// ===== ASK TEACHER =====
-let chatH=[];
-const TSYS=`You are Dev-Sir, a warm and encouraging AI teacher for Devagneya — a bright, curious 10-year-old student in Class 5 in India (NCERT curriculum). He loves cars, space, games, piano and singing. Explain things simply with relatable examples from everyday Indian life. Use occasional emojis. Keep answers short and clear (3-5 sentences) unless more detail is needed. Be positive and make learning feel exciting!`;
-document.getElementById('chatSend').addEventListener('click',sendChat);
-document.getElementById('chatInput').addEventListener('keydown',e=>{if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();sendChat();}});
-async function sendChat(){
-  const inp=document.getElementById('chatInput'),msg=inp.value.trim();if(!msg)return;
-  inp.value='';addMsg('user',msg);chatH.push({role:'user',content:msg});
-  const t=addMsg('bot','<span style="opacity:.5;font-style:italic">Dev-Sir is thinking...</span>');
-  try{const reply=await callClaude(chatH,TSYS,900);t.remove();chatH.push({role:'assistant',content:reply});addMsg('bot',`<strong>Dev-Sir 🤖:</strong> ${reply.replace(/\n/g,'<br>')}`);}
-  catch(e){t.remove();addMsg('bot',`<strong>Dev-Sir 🤖:</strong> ${e.message==='no-key'?'Ask a parent to set up the API key in ⚙️ Settings!':'Oops, please try again!'}`);}
+// Devagneya sees the target on Study tab — inject a banner
+function injectTargetBanner(){
+  const t = getTarget();
+  let banner = document.getElementById('targetBanner');
+  if(!t){ if(banner) banner.remove(); return; }
+  const hist = getHistory();
+  const best = hist.filter(h=>h.topic===t.topic).reduce((a,h)=>Math.max(a,h.score),0);
+  const achieved = best >= t.goal;
+  if(!banner){
+    banner = document.createElement('div');
+    banner.id = 'targetBanner';
+    banner.style.cssText = 'background:linear-gradient(135deg,rgba(255,217,61,.12),rgba(255,107,53,.08));border:2px solid rgba(255,217,61,.28);border-radius:14px;padding:14px 18px;margin-bottom:18px;display:flex;align-items:center;gap:14px;flex-wrap:wrap;';
+    const studySec = document.getElementById('study-section');
+    if(studySec) studySec.insertBefore(banner, studySec.querySelector('.study-tabs'));
+  }
+  banner.innerHTML = `
+    <div style="font-size:2rem">${achieved?'🏆':'🎯'}</div>
+    <div style="flex:1">
+      <div style="font-family:'Fredoka One',cursive;font-size:1rem;color:var(--y)">Dad's Target This Week</div>
+      <div style="font-size:.85rem;color:rgba(255,255,255,.7)">${t.topic} (${SNAME[t.subj]}) · Goal: ${t.goal}/${t.questions}</div>
+      ${t.note?`<div style="font-size:.78rem;color:rgba(255,255,255,.5);font-style:italic;margin-top:2px">💬 "${t.note}"</div>`:''}
+    </div>
+    <div style="font-family:'Fredoka One',cursive;font-size:1.1rem;color:${achieved?'var(--g)':'rgba(255,255,255,.5)'}">${achieved?'Done! 🎉':'Best: '+best+'/'+t.questions}</div>`;
 }
-function addMsg(role,html){const b=document.getElementById('chatBox');const d=document.createElement('div');d.className='cmsg '+role;d.innerHTML=html;b.appendChild(d);b.scrollTop=b.scrollHeight;return d;}
+// Call on page load and when study tab opens
+injectTargetBanner();
+document.querySelector('[data-tab="study"]').addEventListener('click', ()=>{ setTimeout(injectTargetBanner, 50); checkAI(); });
+
+// ── HOMEWORK ─────────────────────────────────────────────────────────────
+const HWSNAME = {maths:'📐 Maths',evs:'🌿 EVS',english:'📖 English',hindi:'📚 Hindi',piano:'🎹 Piano',general:'📌 General'};
+
+function renderHw(){
+  const hw = getHw();
+  const list = document.getElementById('hwList'), empty = document.getElementById('hwEmpty');
+  if(!hw.length){ list.innerHTML=''; empty.style.display='block'; return; }
+  empty.style.display='none';
+  list.innerHTML = hw.map((t,i)=>`
+    <div class="hw-row ${t.done?'done-row':''}">
+      <div class="hw-check ${t.done?'checked':''}" onclick="toggleHw(${i})">${t.done?'✓':''}</div>
+      <div class="hw-info" style="flex:1">
+        <div style="display:flex;align-items:center;gap:6px;flex-wrap:wrap;margin-bottom:2px;">
+          <span class="hw-subject">${HWSNAME[t.subject]||t.subject}</span>
+          ${t.due?`<span class="hw-due">📅 ${t.due}</span>`:''}
+        </div>
+        <div class="hw-text ${t.done?'strikethrough':''}">${t.text}</div>
+      </div>
+      <button class="hw-del" onclick="delHw(${i})">✕</button>
+    </div>`).join('');
+  // Also update Devagneya's homework banner in Study section
+  injectHwBanner();
+}
+
+window.toggleHw = function(i){ const hw=getHw(); hw[i].done=!hw[i].done; saveHw(hw); renderHw(); };
+window.delHw = function(i){ const hw=getHw(); hw.splice(i,1); saveHw(hw); renderHw(); };
+
+document.getElementById('addHwBtn').addEventListener('click', ()=>{
+  const text = document.getElementById('hwText').value.trim();
+  if(!text){ document.getElementById('hwText').focus(); return; }
+  const hw = getHw();
+  hw.unshift({text, subject: document.getElementById('hwSubject').value, due: document.getElementById('hwDue').value.trim(), done:false, assigned: new Date().toDateString()});
+  saveHw(hw); renderHw();
+  document.getElementById('hwText').value=''; document.getElementById('hwDue').value='';
+});
+
+document.getElementById('clearDoneBtn').addEventListener('click', ()=>{
+  let hw = getHw(); hw = hw.filter(t=>!t.done); saveHw(hw); renderHw();
+});
+
+// Inject homework banner into Study section for Devagneya
+function injectHwBanner(){
+  const hw = getHw().filter(t=>!t.done);
+  let banner = document.getElementById('hwBanner');
+  if(!hw.length){ if(banner) banner.remove(); return; }
+  if(!banner){
+    banner = document.createElement('div');
+    banner.id = 'hwBanner';
+    banner.style.cssText = 'background:rgba(78,205,196,.08);border:2px solid rgba(78,205,196,.2);border-radius:14px;padding:14px 18px;margin-bottom:18px;';
+    const studySec = document.getElementById('study-section');
+    if(studySec){ const tabs=studySec.querySelector('.study-tabs'); studySec.insertBefore(banner, tabs); }
+  }
+  banner.innerHTML = `<div style="font-family:'Fredoka One',cursive;font-size:.97rem;color:var(--b);margin-bottom:9px">📋 Dad's Tasks for You (${hw.length} pending)</div>`
+    + hw.slice(0,3).map(t=>`<div style="font-size:.82rem;padding:4px 0;border-bottom:1px solid rgba(255,255,255,.05);display:flex;gap:8px;align-items:center"><span style="font-size:.72rem;background:rgba(78,205,196,.12);padding:2px 7px;border-radius:50px;color:var(--b)">${HWSNAME[t.subject]||t.subject}</span>${t.text}${t.due?`<span style="font-size:.7rem;color:rgba(255,255,255,.3);margin-left:auto">by ${t.due}</span>`:''}</div>`).join('')
+    + (hw.length>3?`<div style="font-size:.75rem;color:rgba(255,255,255,.3);margin-top:5px">+${hw.length-3} more tasks</div>`:'');
+}
+injectHwBanner();
+
+// ── REPORT ───────────────────────────────────────────────────────────────
+function renderReport(){
+  const hist = getHistory();
+  const el = document.getElementById('reportCards'), empty = document.getElementById('reportEmpty');
+  if(!hist.length){ el.innerHTML=''; empty.style.display='block'; return; }
+  empty.style.display='none';
+
+  // Group by week
+  const weeks = {};
+  hist.forEach(h=>{
+    const d = new Date(h.date); const day=d.getDay();
+    const monday = new Date(d); monday.setDate(d.getDate()-(day===0?6:day-1));
+    const key = monday.toDateString();
+    if(!weeks[key]) weeks[key]={label:key, entries:[]};
+    weeks[key].entries.push(h);
+  });
+
+  el.innerHTML = Object.entries(weeks).slice(0,8).map(([wk,data])=>{
+    const avg = Math.round(data.entries.reduce((a,h)=>a+(h.score/h.total*100),0)/data.entries.length);
+    const grade = avg>=80?'A':avg>=70?'B':avg>=60?'C':'D';
+    const gradeColor = avg>=80?'var(--g)':avg>=70?'var(--y)':avg>=60?'var(--o)':'var(--p)';
+    // By subject
+    const bySubj = {};
+    data.entries.forEach(h=>{ const s=subjFromCode(h.code); if(!bySubj[s]) bySubj[s]={scores:[]}; bySubj[s].scores.push(Math.round(h.score/h.total*100)); });
+    const subjCards = Object.entries(bySubj).map(([s,d2])=>{
+      const avg2 = Math.round(d2.scores.reduce((a,b)=>a+b,0)/d2.scores.length);
+      return `<div class="rw-subj"><div class="rw-subj-name">${SNAME[s]||s}</div><div class="rw-subj-score" style="color:${pctColor(avg2)}">${avg2}%</div></div>`;
+    }).join('');
+    return `<div class="report-week">
+      <div class="rw-header">
+        <div class="rw-title">Week of ${wk}</div>
+        <div class="rw-grade" style="color:${gradeColor}">Grade ${grade} · ${avg}%</div>
+      </div>
+      <div class="rw-subjects">${subjCards}</div>
+      <div class="rw-note">${data.entries.length} quiz${data.entries.length!==1?'zes':''} completed · Topics: ${[...new Set(data.entries.map(h=>h.topic))].join(', ')}</div>
+    </div>`;
+  }).join('');
+}
+
+document.getElementById('printReport').addEventListener('click', ()=>window.print());
+
+// ── MAIN REFRESH ─────────────────────────────────────────────────────────
+function refreshDadBoard(){
+  renderOverview();
+  renderHw();
+  injectTargetBanner();
+  injectHwBanner();
+}
+
+// Also show Dad's comments to Devagneya on score card
+const origShowScore_dad = window.showScore || function(){};
+// Patch: after quiz ends, check if dad left a comment on this topic
+// Devagneya sees a speech bubble if dad commented
+const scoreCardEl = document.getElementById('scoreCard');
+const dadCommentEl = document.createElement('div');
+dadCommentEl.id = 'dadCommentOnScore';
+dadCommentEl.style.cssText = 'display:none;background:rgba(255,217,61,.1);border:2px solid rgba(255,217,61,.25);border-radius:14px;padding:14px 18px;margin:0 auto 18px;max-width:380px;text-align:left;';
+scoreCardEl.insertBefore(dadCommentEl, scoreCardEl.querySelector('#copyCodeBtn')?.closest('.code-box') || scoreCardEl.firstChild);
+
+// Check for dad's note when score shows
+const observer = new MutationObserver(()=>{
+  if(scoreCardEl.classList.contains('show')){
+    const comments = getComments();
+    const keys = Object.keys(comments);
+    // Find most recent comment for current topic
+    const match = keys.find(k=>k.startsWith(window.cq?.topic||'NOMATCH'));
+    const dadCommentOnScore = document.getElementById('dadCommentOnScore');
+    if(match && dadCommentOnScore){
+      dadCommentOnScore.innerHTML = `<div style="font-family:'Fredoka One',cursive;font-size:.9rem;color:var(--y);margin-bottom:5px">💬 Dad's Note</div><div style="font-size:.85rem;color:rgba(255,255,255,.75);font-style:italic">"${comments[match]}"</div>`;
+      dadCommentOnScore.style.display='block';
+    } else if(dadCommentOnScore) {
+      dadCommentOnScore.style.display='none';
+    }
+  }
+});
+observer.observe(scoreCardEl, {attributes:true, attributeFilter:['class']});
+
+})(); // end IIFE
+
 </script>
 </body>
 </html>
