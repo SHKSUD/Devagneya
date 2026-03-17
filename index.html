@@ -620,11 +620,11 @@ body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:0;opa
   </div>
   <div id="spContent" style="display:none">
     <div class="sp-row">
-      <input type="password" id="spKey" placeholder="Anthropic API Key (sk-ant-...)">
+      <input type="password" id="spKey" placeholder="Gemini API Key (AIza...)">
       <button class="btn btn-purple" id="spSave" style="padding:7px 13px;">Save</button>
     </div>
     <button class="btn btn-orange" id="spClear" style="padding:5px 12px;font-size:.82rem;margin-top:4px;">Clear Key</button>
-    <div class="sp-note">🔑 Required for AI Study features. Get yours at console.anthropic.com. Stored only in this browser.</div>
+    <div class="sp-note">🔑 Free Gemini key from <strong>aistudio.google.com</strong> → Get API key. No credit card needed. Stored only in this browser.</div>
   </div>
 </div>
 
@@ -963,10 +963,10 @@ body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:0;opa
           <div class="frow" style="margin-bottom:12px;">
             <select id="qaSubject">
               <option value="">-- Subject --</option>
-              <option value="maths">📐 Maths</option>
-              <option value="evs">🌿 EVS</option>
-              <option value="english">📖 English</option>
-              <option value="hindi">📚 Hindi</option>
+              <option value="maths">📐 Maths · Maths Mela</option>
+              <option value="evs">🌿 EVS · Our Wondrous World</option>
+              <option value="english">📖 English · Santoor</option>
+              <option value="hindi">📚 Hindi · Veena</option>
             </select>
             <select id="qaTopic"><option value="">-- Topic --</option></select>
           </div>
@@ -1156,10 +1156,10 @@ body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:0;opa
           <div class="frow">
             <select id="tSubject">
               <option value="">-- Subject --</option>
-              <option value="maths">📐 Maths</option>
-              <option value="evs">🌿 EVS</option>
-              <option value="english">📖 English</option>
-              <option value="hindi">📚 Hindi</option>
+              <option value="maths">📐 Maths · Maths Mela</option>
+              <option value="evs">🌿 EVS · Our Wondrous World</option>
+              <option value="english">📖 English · Santoor</option>
+              <option value="hindi">📚 Hindi · Veena</option>
             </select>
             <select id="tTopic"><option value="">-- Topic --</option></select>
           </div>
@@ -1265,7 +1265,7 @@ navBtns.forEach(btn=>{
   });
   document.getElementById('spSave').addEventListener('click',()=>{
     const v=document.getElementById('spKey').value.trim();
-    if(v.startsWith('sk-')){localStorage.setItem('dev_key',v);panel.classList.remove('open');checkAI();}
+    if(v.startsWith('AIza')||v.length>20){localStorage.setItem('dev_key',v);panel.classList.remove('open');checkAI();checkSbAI();}
     else{document.getElementById('spKey').style.borderColor='var(--p)';setTimeout(()=>document.getElementById('spKey').style.borderColor='',900);}
   });
   document.getElementById('spClear').addEventListener('click',()=>{localStorage.removeItem('dev_key');document.getElementById('spKey').value='';checkAI();});
@@ -1281,18 +1281,34 @@ function checkAI(){
 }
 checkAI();
 
-async function callClaude(messages,system,maxTok=1400){
-  const k=getKey();if(!k)throw new Error('no-key');
-  const body={model:'claude-sonnet-4-20250514',max_tokens:maxTok,messages};
-  if(system) body.system=system;
-  const r=await fetch('https://api.anthropic.com/v1/messages',{
+// ── Gemini API (google/gemini-1.5-flash) ──────────────────────────────────
+async function callClaude(messages, system='', maxTok=1400){
+  const k = getKey(); if(!k) throw new Error('no-key');
+  // Convert chat history to Gemini format
+  const geminiMsgs = messages.map(m=>({
+    role: m.role==='assistant' ? 'model' : 'user',
+    parts:[{text: m.content}]
+  }));
+  // Prepend system prompt as a user→model exchange (Gemini doesn't have a system field)
+  if(system){
+    geminiMsgs.unshift(
+      {role:'user',  parts:[{text:'[System instruction] '+system}]},
+      {role:'model', parts:[{text:'Understood. I will follow these instructions.'}]}
+    );
+  }
+  const body = {
+    contents: geminiMsgs,
+    generationConfig:{ maxOutputTokens: maxTok, temperature: 0.7 }
+  };
+  const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${k}`;
+  const r = await fetch(url, {
     method:'POST',
-    headers:{'Content-Type':'application/json','x-api-key':k,'anthropic-version':'2023-06-01','anthropic-dangerous-direct-browser-access':'true'},
-    body:JSON.stringify(body)
+    headers:{'Content-Type':'application/json'},
+    body: JSON.stringify(body)
   });
-  if(!r.ok){const e=await r.json();throw new Error(e.error?.message||'API error');}
-  const d=await r.json();
-  return d.content.map(b=>b.text||'').join('');
+  if(!r.ok){ const e=await r.json(); throw new Error(e.error?.message||'Gemini API error'); }
+  const d = await r.json();
+  return d.candidates?.[0]?.content?.parts?.[0]?.text || '';
 }
 
 // ===== MUSIC =====
@@ -1518,15 +1534,37 @@ renderPlog();
 //   STUDY BOARD
 // ════════════════════════════════════════════════════════
 
+// 2025-26 NEW NCERT BOOKS: Maths Mela · Our Wondrous World · Santoor · Veena
 const SBTOPICS = {
-  maths:['The Fish Tale','Shapes and Angles','How Many Squares','Parts and Wholes','Does It Look the Same','Be My Multiple I\'ll Be Your Factor','Can You See the Pattern','Mapping Your Way','Boxes and Sketches','Tenths and Hundredths','Area and Its Boundary','Smart Charts','Ways to Multiply and Divide','How Big? How Heavy?'],
-  evs:['Super Senses','A Snake Charmer\'s Story','From Tasting to Digesting','Mangoes Round the Year','Seeds and Seeds','Every Drop Counts','Experiments with Water','A Treat for Mosquitoes','Up You Go!','Walls Tell Stories','Sunita in Space','What If It Finishes?','A Seed Tells a Farmer\'s Story','When the Earth Shook!','Blow Hot Blow Cold','Who Will Do This Work?','Across the Wall','No Place for Us?','A Ball Going Up','Whose Forests?'],
-  english:['Ice-Cream Man','Wonderful Waste!','Teamwork','My Shadow','Robinson Crusoe','Rip Van Winkle','The Lazy Frog','Tansen','The Little Bully','Who Will be Ningthou?','Topsy-Turvy Land','Gulliver\'s Travels'],
-  hindi:['Raakh Ki Rassi','Phool Phool Rang Rang','Khumba Khele Holi','Padhaku Ki Cycle','Jahan Chakki Phirti Hai','Chacha Ki Chitthi','Ramdhani Nagar Se','Bahut Hua']
+  maths:[
+    'We the Travellers – I','Fractions','Angles as Turns','We the Travellers – II',
+    'Far and Near','The Dairy Farm','Shapes and Patterns','Weight and Capacity',
+    'Coconut Farm','Symmetrical Designs','Grandmother\'s Quilt',
+    'Racing Seconds','Animal Jumps','Maps and Locations','Data Through Pictures'
+  ],
+  evs:[
+    'Water – The Essence of Life','Journey of a River',
+    'The Mystery of Food','Our School — A Happy Place',
+    'Our Vibrant Country','Some Unique Places',
+    'Energy — How Things Work','Clothes — How Things are Made',
+    'Rhythms of Nature','Earth — Our Shared Home'
+  ],
+  english:[
+    'Papa\'s Spectacles','Gone with the Scooter','The Rainbow','The Wise Parrot',
+    'The Frog','What a Tank!','Gilli Danda','The Decision of the Panchayat',
+    'Vocation','Glass Bangles'
+  ],
+  hindi:[
+    'Kiran (किरन)','Nyaay Ki Kursi (न्याय की कुर्सी)','Chand Ka Kurta (चाँद का कुर्ता)',
+    'Saanaken (साँकें)','Sundariya (सुंदरिया)','Chatur Chitrkar (चतुर चित्रकार)',
+    'Mera Bachapan (मेरा बचपन)','Kajiranga Rashtriy Udyan Ki Yatra (काजीरंगा)',
+    'Nyaay (न्याय)','Teen Machhaliyaan (तीन मछलियाँ)',
+    'Hamara Ye Kala Mandir (हमारे ये कलामंदिर)','Ganga Ki Kahani (गंगा की कहानी)'
+  ]
 };
 const SBSCODES = {maths:'MA',evs:'EV',english:'EN',hindi:'HI'};
 const SBFROMCODE = {MA:'maths',EV:'evs',EN:'english',HI:'hindi'};
-const SBSLABEL = {maths:'Class 5 Maths',evs:'Class 5 EVS',english:'Class 5 English',hindi:'Class 5 Hindi'};
+const SBSLABEL = {maths:'Class 5 Maths (Maths Mela, NCERT 2025-26)',evs:'Class 5 EVS (Our Wondrous World, NCERT 2025-26)',english:'Class 5 English (Santoor, NCERT 2025-26)',hindi:'Class 5 Hindi (Veena, NCERT 2025-26)'};
 const SBSNAME = {maths:'Maths',evs:'EVS',english:'English',hindi:'Hindi'};
 const SBSCOLOR = {maths:'#A855F7',evs:'#6BCB77',english:'#4ECDC4',hindi:'#FF6B35'};
 
@@ -1784,11 +1822,13 @@ function renderSubjects(subj){
   const attempted = topics.filter(t=>best[subj+':'+t]);
   const avgPct = attempted.length ? Math.round(attempted.reduce((a,t)=>a+(best[subj+':'+t].score/best[subj+':'+t].total*100),0)/attempted.length) : 0;
 
+  const SBBOOK = {maths:'Maths Mela',evs:'Our Wondrous World',english:'Santoor',hindi:'Veena'};
   area.innerHTML = `
     <div style="background:linear-gradient(135deg,${color}22,${color}11);border:2px solid ${color}44;border-radius:16px;padding:16px 20px;margin-bottom:20px;display:flex;align-items:center;gap:16px;flex-wrap:wrap;">
       <div style="font-size:2.5rem">${{maths:'📐',evs:'🌿',english:'📖',hindi:'📚'}[subj]}</div>
       <div style="flex:1">
         <div style="font-family:'Fredoka One',cursive;font-size:1.3rem">${SBSNAME[subj]}</div>
+        <div style="font-size:.78rem;font-weight:800;color:${color};opacity:.8;margin-bottom:2px">${SBBOOK[subj]} · NCERT 2025-26</div>
         <div style="font-size:.8rem;color:rgba(255,255,255,.5)">${attempted.length}/${topics.length} topics attempted${attempted.length?' · '+avgPct+'% average':''}</div>
       </div>
     </div>
@@ -2240,11 +2280,33 @@ document.getElementById('cmDelete').addEventListener('click', ()=>{
 });
 
 // ── WEEKLY TARGET ─────────────────────────────────────────────────────────
+// Dad's board also uses new 2025-26 books
 const QTOPICS_DAD = {
-  maths:['The Fish Tale','Shapes and Angles','How Many Squares','Parts and Wholes (Fractions)','Does It Look the Same','Be My Multiple I\'ll Be Your Factor','Can You See the Pattern','Mapping Your Way','Boxes and Sketches','Tenths and Hundredths (Decimals)','Area and Its Boundary','Smart Charts (Data Handling)','Ways to Multiply and Divide','How Big? How Heavy?'],
-  evs:['Super Senses','A Snake Charmer\'s Story','From Tasting to Digesting','Mangoes Round the Year','Seeds and Seeds','Every Drop Counts','Experiments with Water','A Treat for Mosquitoes','Up You Go!','Walls Tell Stories','Sunita in Space','What If It Finishes?','A Seed Tells a Farmer\'s Story','When the Earth Shook!','Blow Hot Blow Cold','Who Will Do This Work?','Across the Wall','No Place for Us?','A Ball Going Up','Whose Forests?'],
-  english:['Ice-Cream Man','Wonderful Waste!','Teamwork','My Shadow','Robinson Crusoe','Rip Van Winkle','The Lazy Frog','Tansen','The Little Bully','Who Will be Ningthou?','Topsy-Turvy Land','Gulliver\'s Travels'],
-  hindi:['Raakh Ki Rassi','Phool Phool Rang Rang','Khumba Khele Holi','Padhaku Ki Cycle','Jahan Chakki Phirti Hai','Chacha Ki Chitthi','Ramdhani Nagar Se','Bahut Hua']
+  maths:[
+    'We the Travellers – I','Fractions','Angles as Turns','We the Travellers – II',
+    'Far and Near','The Dairy Farm','Shapes and Patterns','Weight and Capacity',
+    'Coconut Farm','Symmetrical Designs','Grandmother\'s Quilt',
+    'Racing Seconds','Animal Jumps','Maps and Locations','Data Through Pictures'
+  ],
+  evs:[
+    'Water – The Essence of Life','Journey of a River',
+    'The Mystery of Food','Our School — A Happy Place',
+    'Our Vibrant Country','Some Unique Places',
+    'Energy — How Things Work','Clothes — How Things are Made',
+    'Rhythms of Nature','Earth — Our Shared Home'
+  ],
+  english:[
+    'Papa\'s Spectacles','Gone with the Scooter','The Rainbow','The Wise Parrot',
+    'The Frog','What a Tank!','Gilli Danda','The Decision of the Panchayat',
+    'Vocation','Glass Bangles'
+  ],
+  hindi:[
+    'Kiran (किरन)','Nyaay Ki Kursi (न्याय की कुर्सी)','Chand Ka Kurta (चाँद का कुर्ता)',
+    'Saanaken (साँकें)','Sundariya (सुंदरिया)','Chatur Chitrkar (चतुर चित्रकार)',
+    'Mera Bachapan (मेरा बचपन)','Kajiranga Rashtriy Udyan Ki Yatra (काजीरंगा)',
+    'Nyaay (न्याय)','Teen Machhaliyaan (तीन मछलियाँ)',
+    'Hamara Ye Kala Mandir (हमारे ये कलामंदिर)','Ganga Ki Kahani (गंगा की कहानी)'
+  ]
 };
 
 function loadTargetTopics(){
