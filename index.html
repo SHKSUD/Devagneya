@@ -600,6 +600,115 @@ body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:0;opa
 .sb-ch-meta{font-size:.72rem;color:rgba(255,255,255,.4);}
 .sb-ch-score{font-family:'Fredoka One',cursive;font-size:1.15rem;color:var(--y);}
 
+
+/* ── SPACE FLAVOUR on Study Board ── */
+#study-section{position:relative;}
+#study-section::before{
+  content:'';position:absolute;inset:0;pointer-events:none;z-index:0;
+  background:radial-gradient(ellipse 80% 40% at 50% -10%,rgba(168,85,247,.18),transparent),
+             radial-gradient(ellipse 60% 30% at 80% 110%,rgba(78,205,196,.12),transparent);
+  border-radius:24px;
+}
+#study-section > *{position:relative;z-index:1;}
+.sb-xp-bar{background:linear-gradient(135deg,rgba(168,85,247,.18),rgba(30,20,60,.6));border-color:rgba(168,85,247,.3);}
+.sb-nav-btn.active{background:linear-gradient(135deg,#5b21b6,#0e7490);box-shadow:0 4px 18px rgba(91,33,182,.45);}
+/* Subtle star-field overlay on XP bar */
+.sb-xp-bar::after{content:'✦ ✧ ✦ ✧ ✦ ✧';position:absolute;right:16px;top:6px;font-size:.55rem;color:rgba(255,255,255,.12);letter-spacing:4px;pointer-events:none;}
+
+/* ── I AM CURIOUS ── */
+.ic-hero{text-align:center;padding:8px 0 22px;}
+.ic-hero-ico{font-size:3.5rem;animation:float 4s ease-in-out infinite;}
+.ic-hero-title{font-family:'Fredoka One',cursive;font-size:1.7rem;background:linear-gradient(135deg,#a78bfa,#34d399);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:4px;}
+.ic-hero-sub{font-size:.85rem;color:rgba(255,255,255,.45);}
+
+/* Daily wonder card */
+.ic-daily{background:linear-gradient(135deg,rgba(91,33,182,.25),rgba(14,116,144,.18));border:2px solid rgba(167,139,250,.3);border-radius:20px;padding:20px 22px;margin-bottom:22px;position:relative;overflow:hidden;}
+.ic-daily::before{content:'🌌';position:absolute;right:16px;top:12px;font-size:2.2rem;opacity:.25;}
+.ic-daily-lbl{font-size:.7rem;font-weight:800;text-transform:uppercase;letter-spacing:1.5px;color:#a78bfa;margin-bottom:8px;}
+.ic-daily-q{font-family:'Fredoka One',cursive;font-size:1.15rem;line-height:1.45;margin-bottom:14px;}
+.ic-daily-answer{display:none;margin-top:10px;background:rgba(255,255,255,.06);border-radius:12px;padding:13px;font-size:.88rem;line-height:1.6;color:rgba(255,255,255,.82);}
+.ic-daily-answer.show{display:block;animation:fadeIn .4s ease;}
+
+/* Ask input */
+.ic-ask-row{display:flex;gap:9px;margin-bottom:20px;}
+.ic-ask-row input{font-family:'Nunito',sans-serif;background:rgba(255,255,255,.07);border:2px solid rgba(167,139,250,.25);border-radius:14px;color:#fff;padding:11px 16px;font-size:.95rem;flex:1;outline:none;transition:border-color .2s;}
+.ic-ask-row input:focus{border-color:#a78bfa;}
+.ic-ask-row input::placeholder{color:rgba(255,255,255,.28);}
+
+/* Curiosity card collection */
+.ic-cards-title{font-family:'Fredoka One',cursive;font-size:.92rem;color:rgba(255,255,255,.38);text-transform:uppercase;letter-spacing:.8px;margin-bottom:12px;}
+.ic-cards-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:12px;}
+.ic-card{background:var(--c);border-radius:16px;border:2px solid rgba(167,139,250,.15);padding:16px;position:relative;transition:transform .2s,border-color .2s;cursor:pointer;backdrop-filter:blur(10px);}
+.ic-card:hover{transform:translateY(-4px);border-color:rgba(167,139,250,.4);}
+.ic-card-ico{font-size:1.8rem;margin-bottom:8px;}
+.ic-card-q{font-family:'Fredoka One',cursive;font-size:.92rem;line-height:1.4;margin-bottom:6px;}
+.ic-card-preview{font-size:.76rem;color:rgba(255,255,255,.42);line-height:1.5;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;}
+.ic-card-del{position:absolute;top:9px;right:11px;background:none;border:none;color:rgba(255,255,255,.15);font-size:.85rem;cursor:pointer;transition:color .2s;}
+.ic-card-del:hover{color:var(--p);}
+.ic-card-date{font-size:.65rem;color:rgba(255,255,255,.25);margin-top:6px;}
+/* Planted by dad badge */
+.ic-card.planted{border-color:rgba(255,217,61,.3);}
+.ic-planted-badge{font-size:.62rem;font-weight:800;color:var(--y);background:rgba(255,217,61,.12);padding:2px 7px;border-radius:50px;display:inline-block;margin-bottom:6px;}
+
+/* Curiosity answer modal */
+.ic-modal-q{font-family:'Fredoka One',cursive;font-size:1.2rem;line-height:1.4;margin-bottom:14px;color:#a78bfa;}
+.ic-modal-answer{font-size:.9rem;line-height:1.7;color:rgba(255,255,255,.85);}
+.ic-modal-rabbit{margin-top:16px;background:rgba(52,211,153,.08);border:1px solid rgba(52,211,153,.2);border-radius:12px;padding:12px 15px;}
+.ic-modal-rabbit-lbl{font-size:.72rem;font-weight:800;color:#34d399;text-transform:uppercase;letter-spacing:1px;margin-bottom:5px;}
+.ic-modal-rabbit-q{font-size:.88rem;color:rgba(255,255,255,.7);line-height:1.5;}
+
+/* ── STUDY WITH ME ── */
+.swm-hero{text-align:center;padding:6px 0 20px;}
+.swm-hero-ico{font-size:3rem;animation:float 3.5s ease-in-out infinite;}
+.swm-hero-title{font-family:'Fredoka One',cursive;font-size:1.6rem;margin-bottom:4px;}
+.swm-hero-sub{font-size:.85rem;color:rgba(255,255,255,.42);}
+
+.swm-mode-row{display:flex;gap:12px;margin-bottom:24px;flex-wrap:wrap;}
+.swm-mode-btn{flex:1;min-width:160px;background:var(--c);border:2px solid rgba(255,255,255,.1);border-radius:18px;padding:18px 14px;text-align:center;cursor:pointer;transition:all .2s;font-family:'Fredoka One',cursive;}
+.swm-mode-btn:hover{transform:translateY(-4px);}
+.swm-mode-btn.active{border-color:var(--v);background:rgba(168,85,247,.12);box-shadow:0 0 20px rgba(168,85,247,.2);}
+.swm-mode-ico{font-size:2.2rem;margin-bottom:7px;}
+.swm-mode-name{font-size:1rem;margin-bottom:3px;}
+.swm-mode-desc{font-size:.74rem;color:rgba(255,255,255,.45);font-family:'Nunito',sans-serif;font-weight:600;}
+
+.swm-panel{display:none;}
+.swm-panel.active{display:block;animation:fadeIn .3s ease;}
+
+/* Pomodoro */
+.pomo-wrap{display:flex;flex-direction:column;align-items:center;gap:18px;}
+.pomo-rocket-track{width:100%;max-width:340px;height:14px;background:rgba(255,255,255,.08);border-radius:7px;overflow:hidden;position:relative;}
+.pomo-rocket-fill{height:100%;border-radius:7px;background:linear-gradient(90deg,var(--o),var(--y));transition:width 1s linear;width:0%;}
+.pomo-rocket-ico{position:absolute;top:50%;transform:translateY(-50%);font-size:1.2rem;transition:left 1s linear;left:0%;}
+.pomo-clock{font-family:'Fredoka One',cursive;font-size:4.5rem;color:#fff;letter-spacing:2px;line-height:1;}
+.pomo-phase{font-family:'Fredoka One',cursive;font-size:1rem;color:var(--v);margin-top:-4px;}
+.pomo-controls{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;}
+.pomo-preset-row{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;}
+.pomo-preset{font-family:'Fredoka One',cursive;font-size:.8rem;padding:5px 13px;border-radius:50px;border:2px solid rgba(255,255,255,.14);background:transparent;color:rgba(255,255,255,.5);cursor:pointer;transition:all .18s;}
+.pomo-preset:hover,.pomo-preset.active{border-color:var(--v);color:var(--v);background:rgba(168,85,247,.1);}
+.pomo-subject-row{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;}
+.pomo-subj{font-family:'Fredoka One',cursive;font-size:.78rem;padding:4px 12px;border-radius:50px;border:2px solid rgba(255,255,255,.1);background:transparent;color:rgba(255,255,255,.42);cursor:pointer;transition:all .18s;}
+.pomo-subj.sel{border-color:var(--b);color:var(--b);background:rgba(78,205,196,.1);}
+.pomo-log{background:var(--c);border-radius:14px;border:2px solid rgba(255,255,255,.07);padding:14px;width:100%;max-width:400px;}
+.pomo-log-title{font-family:'Fredoka One',cursive;font-size:.88rem;color:rgba(255,255,255,.38);margin-bottom:8px;}
+.pomo-log-list{display:flex;flex-direction:column;gap:5px;max-height:140px;overflow-y:auto;}
+.pomo-log-row{font-size:.8rem;display:flex;gap:8px;align-items:center;padding:4px 0;border-bottom:1px solid rgba(255,255,255,.05);}
+.pomo-log-row:last-child{border:none;}
+
+/* Share / Room */
+.room-create{background:var(--c);border-radius:18px;border:2px solid rgba(255,255,255,.1);padding:22px;margin-bottom:16px;}
+.room-code-display{font-family:'Fredoka One',cursive;font-size:3rem;letter-spacing:8px;color:var(--y);text-align:center;margin:14px 0;text-shadow:0 0 20px rgba(255,217,61,.35);}
+.room-status{text-align:center;font-size:.83rem;color:rgba(255,255,255,.45);margin-bottom:14px;}
+.room-members{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-bottom:14px;}
+.room-member{background:rgba(255,255,255,.08);border-radius:50px;padding:5px 14px;font-size:.82rem;display:flex;align-items:center;gap:6px;}
+.room-member.active{background:rgba(107,203,119,.15);border:1px solid rgba(107,203,119,.3);}
+.room-emoji-bar{display:flex;gap:8px;justify-content:center;margin-top:10px;}
+.room-emoji-btn{font-size:1.5rem;background:none;border:2px solid rgba(255,255,255,.1);border-radius:50%;width:42px;height:42px;cursor:pointer;transition:all .18s;display:flex;align-items:center;justify-content:center;}
+.room-emoji-btn:hover{border-color:rgba(255,255,255,.4);transform:scale(1.2);}
+.room-reactions{min-height:36px;display:flex;gap:6px;flex-wrap:wrap;justify-content:center;margin-top:8px;}
+.room-reaction-pill{font-size:.85rem;background:rgba(255,255,255,.08);border-radius:50px;padding:3px 10px;animation:popIn .3s ease;}
+.room-join-form{background:var(--c);border-radius:18px;border:2px solid rgba(255,255,255,.1);padding:20px;}
+.room-join-title{font-family:'Fredoka One',cursive;font-size:1rem;color:var(--b);margin-bottom:12px;}
+
 </style>
 </head>
 <body>
@@ -873,6 +982,8 @@ body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:0;opa
       <button class="sb-nav-btn" data-sbpage="subjects">📚 Subjects</button>
       <button class="sb-nav-btn" data-sbpage="quiz">🧠 Quiz Arena</button>
       <button class="sb-nav-btn" data-sbpage="teacher">🤖 Dev-Sir</button>
+      <button class="sb-nav-btn" data-sbpage="curious">🔭 I Am Curious</button>
+      <button class="sb-nav-btn" data-sbpage="studywithme">🤝 Study With Me</button>
       <button class="sb-nav-btn" data-sbpage="challenge">🏆 Challenge</button>
     </div>
 
@@ -1062,6 +1173,172 @@ body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:0;opa
       </div>
     </div>
 
+
+    <!-- ── I AM CURIOUS ──────────────────────────────────────────── -->
+    <div class="sb-page" id="sbpage-curious">
+
+      <div class="ic-hero">
+        <div class="ic-hero-ico">🔭</div>
+        <div class="ic-hero-title">I Am Curious</div>
+        <div class="ic-hero-sub">Ask anything. Explore everything. The universe is waiting.</div>
+      </div>
+
+      <!-- Daily wonder (planted by Dad or auto-generated) -->
+      <div class="ic-daily" id="icDailyCard">
+        <div class="ic-daily-lbl">✨ Today's Wonder</div>
+        <div class="ic-daily-q" id="icDailyQ">Loading today's wonder...</div>
+        <div style="display:flex;gap:10px;flex-wrap:wrap;">
+          <button class="btn btn-purple" id="icDailyReveal" style="font-size:.85rem;padding:8px 18px;">🔍 Reveal the Answer</button>
+          <button class="btn btn-teal" id="icDailyNew" style="font-size:.85rem;padding:8px 14px;">✨ New Wonder</button>
+        </div>
+        <div class="ic-daily-answer" id="icDailyAnswer"></div>
+      </div>
+
+      <!-- Ask anything -->
+      <div class="ic-ask-row">
+        <input type="text" id="icAskInput" placeholder="What are you curious about today? 🌌">
+        <button class="btn btn-purple" id="icAskBtn">Explore 🚀</button>
+      </div>
+      <div id="icNoKey" style="display:none;text-align:center;padding:16px;font-size:.82rem;background:rgba(167,139,250,.07);border:1px solid rgba(167,139,250,.2);border-radius:12px;margin-bottom:16px;color:rgba(255,255,255,.55);">
+        🔑 Ask Dad to set the API key in ⚙️ Settings to unlock curiosity mode!
+      </div>
+
+      <!-- Saved curiosity cards -->
+      <div class="ic-cards-title" id="icCardsTitle" style="display:none">🗂️ Your Wonder Collection</div>
+      <div class="ic-cards-grid" id="icCardsGrid"></div>
+      <div class="empty" id="icEmpty" style="display:none">
+        <div class="empty-ico">🌠</div>Ask your first question to start collecting wonders!
+      </div>
+    </div>
+
+    <!-- ── STUDY WITH ME ──────────────────────────────────────────── -->
+    <div class="sb-page" id="sbpage-studywithme">
+
+      <div class="swm-hero">
+        <div class="swm-hero-ico">🚀</div>
+        <div class="swm-hero-title">Study With Me</div>
+        <div class="swm-hero-sub">Focus alone or invite a friend — make studying an adventure!</div>
+      </div>
+
+      <!-- Mode selector -->
+      <div class="swm-mode-row">
+        <div class="swm-mode-btn active" id="swmSoloBtn" onclick="swmSetMode('solo')">
+          <div class="swm-mode-ico">🧑‍🚀</div>
+          <div class="swm-mode-name">Solo Focus</div>
+          <div class="swm-mode-desc">Pomodoro rocket timer<br>Auto-logs sessions</div>
+        </div>
+        <div class="swm-mode-btn" id="swmShareBtn" onclick="swmSetMode('share')">
+          <div class="swm-mode-ico">👨‍👧</div>
+          <div class="swm-mode-name">Study With Dad / Friend</div>
+          <div class="swm-mode-desc">Share a room code<br>Emoji reactions live</div>
+        </div>
+      </div>
+
+      <!-- SOLO PANEL -->
+      <div class="swm-panel active" id="swmPanelSolo">
+        <div class="pomo-wrap">
+
+          <!-- Preset timers -->
+          <div class="pomo-preset-row">
+            <button class="pomo-preset active" data-mins="25" onclick="pomoSetMins(25,this)">🎯 25 min</button>
+            <button class="pomo-preset" data-mins="15" onclick="pomoSetMins(15,this)">⚡ 15 min</button>
+            <button class="pomo-preset" data-mins="45" onclick="pomoSetMins(45,this)">🔥 45 min</button>
+            <button class="pomo-preset" data-mins="5" onclick="pomoSetMins(5,this)">☕ 5 min break</button>
+          </div>
+
+          <!-- Subject tag -->
+          <div class="pomo-subject-row">
+            <button class="pomo-subj sel" data-s="📐 Maths" onclick="pomoSelSubj(this)">📐 Maths</button>
+            <button class="pomo-subj" data-s="🌿 EVS" onclick="pomoSelSubj(this)">🌿 EVS</button>
+            <button class="pomo-subj" data-s="📖 English" onclick="pomoSelSubj(this)">📖 English</button>
+            <button class="pomo-subj" data-s="📚 Hindi" onclick="pomoSelSubj(this)">📚 Hindi</button>
+            <button class="pomo-subj" data-s="🎹 Piano" onclick="pomoSelSubj(this)">🎹 Piano</button>
+          </div>
+
+          <!-- Rocket track -->
+          <div class="pomo-rocket-track" style="position:relative;">
+            <div class="pomo-rocket-fill" id="pomoFill"></div>
+            <span class="pomo-rocket-ico" id="pomoRocket">🚀</span>
+          </div>
+
+          <!-- Big clock -->
+          <div>
+            <div class="pomo-clock" id="pomoClock">25:00</div>
+            <div class="pomo-phase" id="pomoPhase">Ready for launch! 🚀</div>
+          </div>
+
+          <!-- Controls -->
+          <div class="pomo-controls">
+            <button class="btn btn-green" id="pomoStart">🚀 Launch!</button>
+            <button class="btn btn-orange" id="pomoPause" style="display:none">⏸ Pause</button>
+            <button class="btn btn-purple" id="pomoResume" style="display:none">▶ Resume</button>
+            <button class="btn btn-orange" id="pomoReset" style="display:none;font-size:.8rem;padding:7px 14px">↺ Reset</button>
+          </div>
+
+          <!-- Session log -->
+          <div class="pomo-log">
+            <div class="pomo-log-title">📋 Today's Sessions</div>
+            <div class="pomo-log-list" id="pomoLogList"></div>
+            <div style="display:none;font-size:.78rem;color:rgba(255,255,255,.25);text-align:center;padding:8px" id="pomoLogEmpty">No sessions yet today</div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- SHARE PANEL -->
+      <div class="swm-panel" id="swmPanelShare">
+
+        <!-- Create a room -->
+        <div class="room-create">
+          <div class="form-title" style="color:var(--v);margin-bottom:14px">🛸 Start a Study Room</div>
+          <div style="display:flex;gap:10px;flex-wrap:wrap;margin-bottom:14px;">
+            <input type="text" id="roomYourName" placeholder="Your name (e.g. Devagneya)" style="font-family:'Nunito',sans-serif;background:rgba(255,255,255,.07);border:2px solid rgba(255,255,255,.12);border-radius:11px;color:#fff;padding:9px 13px;font-size:.9rem;flex:1;outline:none;">
+            <button class="btn btn-purple" id="createRoomBtn">🛸 Create Room</button>
+          </div>
+          <div id="roomCreated" style="display:none">
+            <div style="font-size:.78rem;color:rgba(255,255,255,.4);text-align:center;margin-bottom:4px">Share this code with your friend!</div>
+            <div class="room-code-display" id="roomCodeDisplay"></div>
+            <div style="display:flex;gap:8px;justify-content:center;margin-bottom:12px;">
+              <button class="btn btn-yellow" id="copyRoomBtn" style="font-size:.8rem;padding:6px 14px;">📋 Copy Code</button>
+            </div>
+            <div class="room-status" id="roomStatus">Waiting for someone to join...</div>
+            <div class="room-members" id="roomMembers"></div>
+            <!-- Shared timer -->
+            <div id="roomTimerWrap" style="text-align:center;margin:12px 0;">
+              <div class="pomo-clock" id="roomClock">25:00</div>
+              <div class="pomo-phase" id="roomPhase">Waiting to start...</div>
+              <div style="display:flex;gap:8px;justify-content:center;margin-top:10px;">
+                <button class="btn btn-green" id="roomStartTimer">🚀 Start Together!</button>
+                <button class="btn btn-orange" id="roomResetTimer" style="display:none;font-size:.8rem;padding:7px 14px;">↺</button>
+              </div>
+            </div>
+            <!-- Emoji reactions -->
+            <div class="room-emoji-bar">
+              <button class="room-emoji-btn" onclick="sendRoomEmoji('👍')">👍</button>
+              <button class="room-emoji-btn" onclick="sendRoomEmoji('🔥')">🔥</button>
+              <button class="room-emoji-btn" onclick="sendRoomEmoji('✅')">✅</button>
+              <button class="room-emoji-btn" onclick="sendRoomEmoji('🤔')">🤔</button>
+              <button class="room-emoji-btn" onclick="sendRoomEmoji('🎉')">🎉</button>
+            </div>
+            <div class="room-reactions" id="roomReactions"></div>
+          </div>
+        </div>
+
+        <!-- Join a room -->
+        <div class="room-join-form">
+          <div class="room-join-title">🔗 Join a Friend's Room</div>
+          <div class="frow">
+            <input type="text" id="joinRoomCode" placeholder="Enter room code" maxlength="6"
+              style="text-transform:uppercase;letter-spacing:3px;font-family:'Fredoka One',cursive;font-size:1.1rem;">
+            <input type="text" id="joinYourName" placeholder="Your name">
+            <button class="btn btn-teal" id="joinRoomBtn">🤝 Join!</button>
+          </div>
+          <div id="joinedRoomInfo" style="display:none;margin-top:12px;"></div>
+        </div>
+
+      </div>
+    </div>
+
     <!-- ── CHALLENGE ──────────────────────────────────────────────── -->
     <div class="sb-page" id="sbpage-challenge">
       <div class="form-box" style="margin-bottom:20px">
@@ -1228,6 +1505,25 @@ body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:0;opa
           <button class="btn btn-yellow" id="cmSave">💾 Save Note</button>
           <button class="btn btn-orange" id="cmDelete" style="display:none;">🗑 Remove Note</button>
         </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- Curiosity answer overlay -->
+  <div class="overlay" id="icModal">
+    <div class="modal" style="max-width:560px;">
+      <button class="modal-close" id="icModalClose">✕</button>
+      <div style="font-size:2rem;margin-bottom:10px" id="icModalIco"></div>
+      <div class="ic-modal-q" id="icModalQ"></div>
+      <div class="ic-modal-answer" id="icModalAnswer"></div>
+      <div class="ic-modal-rabbit" id="icModalRabbit" style="display:none">
+        <div class="ic-modal-rabbit-lbl">🕳️ Rabbit Hole — go deeper!</div>
+        <div class="ic-modal-rabbit-q" id="icModalRabbitQ"></div>
+        <button class="btn btn-purple" id="icRabbitBtn" style="margin-top:10px;font-size:.82rem;padding:7px 16px;">🔭 Explore this too!</button>
+      </div>
+      <div style="display:flex;gap:9px;margin-top:14px;flex-wrap:wrap;">
+        <button class="btn btn-teal" id="icSaveBtn" style="font-size:.82rem;padding:7px 16px;">💾 Save to Collection</button>
       </div>
     </div>
   </div>
@@ -2086,6 +2382,428 @@ function renderSbChallenges(){
 // Init on load
 renderXpBar();
 checkBadges();
+
+
+// ════════════════════════════════════════════════════════
+//   I AM CURIOUS
+// ════════════════════════════════════════════════════════
+(function(){
+
+const SCIENTIST_SYS = `You are Professor Cosmos — an enthusiastic, brilliant scientist who talks to a 10-year-old named Devagneya. He loves cars, space, games, piano and singing. You answer curiosity questions like a storyteller: vivid, fun, full of wow-moments. Keep answers to 4-6 sentences. Always end with one mind-blowing fact. Use emojis naturally. Never be dry or textbook-like.`;
+
+const DAILY_WONDERS = [
+  'Why does the sky turn red and orange at sunset? 🌅',
+  'How does a car engine actually make the wheels spin? 🚗',
+  'What would happen if you fell into a black hole? 🕳️',
+  'Why do we dream when we sleep? 💭',
+  'How do satellites stay up in space without falling? 🛰️',
+  'Why is the ocean salty but rivers are not? 🌊',
+  'How does a piano make different sounds for each key? 🎹',
+  'What is the fastest thing in the universe? ⚡',
+  'How do chameleons change their colour? 🦎',
+  'Why do we get goosebumps when we are scared or cold? 🥶',
+  'How does the internet travel through underwater cables? 🌐',
+  'What makes a rainbow appear in the sky? 🌈',
+  'Why do stars twinkle but planets don\'t? ✨',
+  'How do birds know which way to fly when migrating? 🐦',
+  'What is inside the Earth\'s core? 🌍',
+];
+const WONDERS_EMOJIS = ['🌅','🚗','🕳️','💭','🛰️','🌊','🎹','⚡','🦎','🥶','🌐','🌈','✨','🐦','🌍'];
+
+function getCurious(){ return JSON.parse(localStorage.getItem('dev_curious')||'[]'); }
+function saveCurious(c){ localStorage.setItem('dev_curious',JSON.stringify(c)); }
+
+// Pick daily wonder (day-seeded so same question all day, new tomorrow)
+function getDailyWonder(){
+  // Check if Dad planted one
+  const planted = localStorage.getItem('dev_planted_wonder');
+  const plantedDate = localStorage.getItem('dev_planted_date');
+  if(planted && plantedDate === new Date().toDateString()) return {q:planted, planted:true};
+  const dayIdx = Math.floor(Date.now()/(1000*60*60*24)) % DAILY_WONDERS.length;
+  return {q:DAILY_WONDERS[dayIdx], emoji:WONDERS_EMOJIS[dayIdx], planted:false};
+}
+
+function initCuriousPage(){
+  const w = getDailyWonder();
+  document.getElementById('icDailyQ').textContent = w.q;
+  document.getElementById('icDailyAnswer').classList.remove('show');
+  document.getElementById('icDailyAnswer').textContent = '';
+  renderCuriousCards();
+  // AI availability
+  const has = !!getKey();
+  document.getElementById('icNoKey').style.display = has?'none':'block';
+}
+
+document.getElementById('icDailyReveal')?.addEventListener('click', async()=>{
+  const q = document.getElementById('icDailyQ').textContent;
+  const ansEl = document.getElementById('icDailyAnswer');
+  const btn = document.getElementById('icDailyReveal');
+  if(ansEl.classList.contains('show')){ ansEl.classList.remove('show'); btn.textContent='🔍 Reveal the Answer'; return; }
+  btn.textContent='🌌 Thinking...'; btn.disabled=true;
+  try{
+    const ans = await callClaude([{role:'user',content:q}], SCIENTIST_SYS, 600);
+    ansEl.textContent = ans; ansEl.classList.add('show');
+    btn.textContent='🔼 Hide Answer';
+  } catch(e){ ansEl.textContent='Hmm, I need the API key to answer! Ask Dad to set it up.'; ansEl.classList.add('show'); }
+  btn.disabled=false;
+});
+
+document.getElementById('icDailyNew')?.addEventListener('click',()=>{
+  const dayIdx = Math.floor(Math.random()*DAILY_WONDERS.length);
+  document.getElementById('icDailyQ').textContent = DAILY_WONDERS[dayIdx];
+  document.getElementById('icDailyAnswer').classList.remove('show');
+  document.getElementById('icDailyReveal').textContent='🔍 Reveal the Answer';
+});
+
+// Ask anything
+document.getElementById('icAskBtn')?.addEventListener('click', askCurious);
+document.getElementById('icAskInput')?.addEventListener('keydown',e=>{ if(e.key==='Enter') askCurious(); });
+
+async function askCurious(){
+  const inp = document.getElementById('icAskInput');
+  const q = inp?.value.trim(); if(!q) return;
+  inp.value='';
+  const btn = document.getElementById('icAskBtn');
+  btn.textContent='🌌 Exploring...'; btn.disabled=true;
+  try{
+    // Ask for answer + rabbit hole question in JSON
+    const prompt = `Question: "${q}"\n\nRespond ONLY as raw JSON (no markdown): {"answer":"your 4-6 sentence answer with emojis","emoji":"one relevant emoji","rabbitHole":"one fascinating follow-up question this might lead to"}`;
+    const raw = await callClaude([{role:'user',content:prompt}], SCIENTIST_SYS, 700);
+    const data = JSON.parse(raw.replace(/```json|```/g,'').trim());
+    openCuriousModal(q, data.answer, data.emoji||'🔭', data.rabbitHole||'');
+  } catch(e){
+    openCuriousModal(q, 'I need the API key to explore this! Ask Dad to set it up in ⚙️ Settings.', '🔑', '');
+  }
+  btn.textContent='Explore 🚀'; btn.disabled=false;
+}
+
+let currentCuriousData = null;
+function openCuriousModal(q, answer, emoji, rabbitHole){
+  currentCuriousData = {q, answer, emoji, rabbitHole, date:new Date().toDateString()};
+  document.getElementById('icModalIco').textContent = emoji;
+  document.getElementById('icModalQ').textContent = q;
+  document.getElementById('icModalAnswer').innerHTML = answer.replace(/\n/g,'<br>');
+  const rEl = document.getElementById('icModalRabbit');
+  if(rabbitHole){ rEl.style.display='block'; document.getElementById('icModalRabbitQ').textContent=rabbitHole; }
+  else { rEl.style.display='none'; }
+  document.getElementById('icModal').classList.add('open');
+}
+
+document.getElementById('icModalClose')?.addEventListener('click',()=>document.getElementById('icModal').classList.remove('open'));
+document.getElementById('icModal')?.addEventListener('click',e=>{ if(e.target===document.getElementById('icModal')) document.getElementById('icModal').classList.remove('open'); });
+
+document.getElementById('icSaveBtn')?.addEventListener('click',()=>{
+  if(!currentCuriousData) return;
+  const c = getCurious();
+  c.unshift(currentCuriousData);
+  saveCurious(c.slice(0,50));
+  document.getElementById('icModal').classList.remove('open');
+  renderCuriousCards();
+  document.getElementById('icSaveBtn').textContent='✅ Saved!';
+  setTimeout(()=>document.getElementById('icSaveBtn').textContent='💾 Save to Collection',1500);
+});
+
+document.getElementById('icRabbitBtn')?.addEventListener('click', async()=>{
+  const rq = document.getElementById('icModalRabbitQ').textContent;
+  document.getElementById('icModal').classList.remove('open');
+  document.getElementById('icAskInput').value = rq;
+  askCurious();
+});
+
+function renderCuriousCards(){
+  const cards = getCurious();
+  const grid = document.getElementById('icCardsGrid');
+  const empty = document.getElementById('icEmpty');
+  const title = document.getElementById('icCardsTitle');
+  if(!grid) return;
+  if(!cards.length){ grid.innerHTML=''; empty.style.display='block'; title.style.display='none'; return; }
+  empty.style.display='none'; title.style.display='block';
+  grid.innerHTML = cards.map((c,i)=>`
+    <div class="ic-card ${c.planted?'planted':''}" onclick="openSavedCurious(${i})">
+      <button class="ic-card-del" onclick="event.stopPropagation();delCurious(${i})">✕</button>
+      ${c.planted?'<div class="ic-planted-badge">🌱 Planted by Dad</div>':''}
+      <div class="ic-card-ico">${c.emoji||'🔭'}</div>
+      <div class="ic-card-q">${c.q}</div>
+      <div class="ic-card-preview">${c.answer||''}</div>
+      <div class="ic-card-date">${c.date||''}</div>
+    </div>`).join('');
+}
+
+window.openSavedCurious = function(i){
+  const c = getCurious()[i];
+  if(!c) return;
+  openCuriousModal(c.q, c.answer||'', c.emoji||'🔭', c.rabbitHole||'');
+};
+window.delCurious = function(i){ const c=getCurious(); c.splice(i,1); saveCurious(c); renderCuriousCards(); };
+
+// Nav init
+document.querySelector('[data-sbpage="curious"]')?.addEventListener('click',()=>{ setTimeout(initCuriousPage,50); });
+
+})(); // end I Am Curious IIFE
+
+
+// ════════════════════════════════════════════════════════
+//   STUDY WITH ME
+// ════════════════════════════════════════════════════════
+(function(){
+
+// ── Mode toggle ──────────────────────────────────────────
+window.swmSetMode = function(mode){
+  document.getElementById('swmSoloBtn').classList.toggle('active', mode==='solo');
+  document.getElementById('swmShareBtn').classList.toggle('active', mode==='share');
+  document.getElementById('swmPanelSolo').classList.toggle('active', mode==='solo');
+  document.getElementById('swmPanelShare').classList.toggle('active', mode==='share');
+};
+
+// ── POMODORO ─────────────────────────────────────────────
+let pomoMins=25, pomoSecs=0, pomoTotal=25*60, pomoElapsed=0;
+let pomoInterval=null, pomoRunning=false, pomoSubject='📐 Maths';
+let pomoPhaseName='focus';
+
+window.pomoSetMins = function(m, btn){
+  if(pomoRunning) return;
+  pomoMins=m; pomoSecs=0; pomoTotal=m*60; pomoElapsed=0;
+  document.querySelectorAll('.pomo-preset').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  document.getElementById('pomoClock').textContent = `${String(m).padStart(2,'0')}:00`;
+  document.getElementById('pomoPhase').textContent = m<=5?'☕ Break time!':'Ready for launch! 🚀';
+  document.getElementById('pomoRocket').style.left='0%';
+  document.getElementById('pomoFill').style.width='0%';
+  pomoPhaseName = m<=5?'break':'focus';
+};
+
+window.pomoSelSubj = function(btn){
+  document.querySelectorAll('.pomo-subj').forEach(b=>b.classList.remove('sel'));
+  btn.classList.add('sel');
+  pomoSubject = btn.dataset.s;
+};
+
+function updatePomoClock(){
+  const m=Math.floor(pomoSecs/60), s=pomoSecs%60;
+  document.getElementById('pomoClock').textContent=`${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`;
+  const pct=Math.min(100,(pomoElapsed/pomoTotal)*100);
+  document.getElementById('pomoFill').style.width=pct+'%';
+  document.getElementById('pomoRocket').style.left=Math.min(92,pct)+'%';
+}
+
+document.getElementById('pomoStart')?.addEventListener('click',()=>{
+  pomoSecs=pomoMins*60; pomoElapsed=0; pomoRunning=true;
+  document.getElementById('pomoStart').style.display='none';
+  document.getElementById('pomoPause').style.display='inline-flex';
+  document.getElementById('pomoReset').style.display='inline-flex';
+  document.getElementById('pomoPhase').textContent=pomoPhaseName==='break'?'☕ Break time!':'🚀 Focus mode — go go go!';
+  pomoInterval=setInterval(()=>{
+    pomoSecs--; pomoElapsed++;
+    updatePomoClock();
+    if(pomoSecs<=0){ clearInterval(pomoInterval); pomoRunning=false; pomoComplete(); }
+  },1000);
+});
+
+document.getElementById('pomoPause')?.addEventListener('click',()=>{
+  clearInterval(pomoInterval); pomoRunning=false;
+  document.getElementById('pomoPause').style.display='none';
+  document.getElementById('pomoResume').style.display='inline-flex';
+  document.getElementById('pomoPhase').textContent='⏸ Paused';
+});
+
+document.getElementById('pomoResume')?.addEventListener('click',()=>{
+  pomoRunning=true;
+  document.getElementById('pomoResume').style.display='none';
+  document.getElementById('pomoPause').style.display='inline-flex';
+  document.getElementById('pomoPhase').textContent=pomoPhaseName==='break'?'☕ Break time!':'🚀 Focus mode — go go go!';
+  pomoInterval=setInterval(()=>{
+    pomoSecs--; pomoElapsed++;
+    updatePomoClock();
+    if(pomoSecs<=0){ clearInterval(pomoInterval); pomoRunning=false; pomoComplete(); }
+  },1000);
+});
+
+document.getElementById('pomoReset')?.addEventListener('click',()=>{
+  clearInterval(pomoInterval); pomoRunning=false;
+  pomoSecs=pomoMins*60; pomoElapsed=0;
+  updatePomoClock();
+  document.getElementById('pomoStart').style.display='inline-flex';
+  document.getElementById('pomoPause').style.display='none';
+  document.getElementById('pomoResume').style.display='none';
+  document.getElementById('pomoReset').style.display='none';
+  document.getElementById('pomoPhase').textContent='Ready for launch! 🚀';
+  document.getElementById('pomoRocket').style.left='0%';
+});
+
+function pomoComplete(){
+  const isBreak = pomoPhaseName==='break';
+  document.getElementById('pomoPhase').textContent = isBreak?'☕ Break done! Ready to focus again 🚀':'🎉 Session complete! Take a break!';
+  document.getElementById('pomoFill').style.width='100%';
+  document.getElementById('pomoRocket').style.left='92%';
+  document.getElementById('pomoPause').style.display='none';
+  document.getElementById('pomoStart').style.display='inline-flex';
+  // Log to practice log if focus session
+  if(!isBreak){
+    const plog=JSON.parse(localStorage.getItem('dev_plog')||'[]');
+    const mins=Math.round(pomoTotal/60);
+    plog.unshift({type:'📚',what:`${pomoSubject} – Pomodoro session`,mins,mood:'Focused 🚀',date:new Date().toDateString()});
+    localStorage.setItem('dev_plog',JSON.stringify(plog));
+    // Log to today's pomo sessions
+    const today=localStorage.getItem('dev_pomo_date');
+    const sessions=JSON.parse(localStorage.getItem('dev_pomo_sessions')||'[]');
+    const todaySessions=today===new Date().toDateString()?sessions:[];
+    todaySessions.push({subj:pomoSubject,mins,time:new Date().toLocaleTimeString('en-IN',{hour:'2-digit',minute:'2-digit'})});
+    localStorage.setItem('dev_pomo_date',new Date().toDateString());
+    localStorage.setItem('dev_pomo_sessions',JSON.stringify(todaySessions));
+    renderPomoLog();
+  }
+}
+
+function renderPomoLog(){
+  const today=localStorage.getItem('dev_pomo_date');
+  const sessions=today===new Date().toDateString()?JSON.parse(localStorage.getItem('dev_pomo_sessions')||'[]'):[];
+  const list=document.getElementById('pomoLogList');
+  const empty=document.getElementById('pomoLogEmpty');
+  if(!list) return;
+  if(!sessions.length){ list.innerHTML=''; empty.style.display='block'; return; }
+  empty.style.display='none';
+  const total=sessions.reduce((a,s)=>a+s.mins,0);
+  list.innerHTML=sessions.map(s=>`
+    <div class="pomo-log-row">
+      <span style="font-size:.9rem">${s.subj}</span>
+      <span style="flex:1;color:rgba(255,255,255,.35);font-size:.72rem">${s.time}</span>
+      <span style="color:var(--y);font-family:'Fredoka One',cursive">${s.mins}m</span>
+    </div>`).join('')+`
+    <div class="pomo-log-row" style="border-top:1px solid rgba(255,255,255,.1);margin-top:3px;padding-top:5px;">
+      <span style="color:rgba(255,255,255,.4)">Total today</span>
+      <span style="flex:1"></span>
+      <span style="color:var(--g);font-family:'Fredoka One',cursive">${total}m 🔥</span>
+    </div>`;
+}
+renderPomoLog();
+
+// ── SHARE ROOM (BroadcastChannel) ────────────────────────────────────────
+let myRoomCode='', myRoomName='', roomChannel=null, roomTimerInt=null, roomSecs=25*60;
+const ROOM_KEY=()=>'dev_room_'+myRoomCode;
+
+function genRoomCode(){
+  const chars='ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
+  return Array.from({length:4},()=>chars[Math.floor(Math.random()*chars.length)]).join('');
+}
+
+document.getElementById('createRoomBtn')?.addEventListener('click',()=>{
+  const name=document.getElementById('roomYourName').value.trim()||'Dev';
+  myRoomCode=genRoomCode(); myRoomName=name;
+  document.getElementById('roomCodeDisplay').textContent=myRoomCode;
+  document.getElementById('roomCreated').style.display='block';
+  document.getElementById('createRoomBtn').style.display='none';
+  // BroadcastChannel — works across tabs on same device
+  if(roomChannel) roomChannel.close();
+  roomChannel=new BroadcastChannel('room_'+myRoomCode);
+  roomChannel.onmessage=e=>handleRoomMsg(e.data);
+  // Save room state
+  const state={code:myRoomCode,host:name,members:[{name,active:true}],reactions:[],timer:null,created:Date.now()};
+  localStorage.setItem(ROOM_KEY(),JSON.stringify(state));
+  renderRoom();
+});
+
+document.getElementById('copyRoomBtn')?.addEventListener('click',()=>{
+  navigator.clipboard.writeText(myRoomCode).then(()=>{
+    document.getElementById('copyRoomBtn').textContent='✅ Copied!';
+    setTimeout(()=>document.getElementById('copyRoomBtn').textContent='📋 Copy Code',2000);
+  });
+});
+
+document.getElementById('joinRoomBtn')?.addEventListener('click',()=>{
+  const code=document.getElementById('joinRoomCode').value.trim().toUpperCase();
+  const name=document.getElementById('joinYourName').value.trim()||'Friend';
+  if(!code||code.length<3){ alert('Enter a valid room code!'); return; }
+  myRoomCode=code; myRoomName=name;
+  if(roomChannel) roomChannel.close();
+  roomChannel=new BroadcastChannel('room_'+code);
+  roomChannel.onmessage=e=>handleRoomMsg(e.data);
+  // Send join message
+  roomChannel.postMessage({type:'join',name,time:Date.now()});
+  const info=document.getElementById('joinedRoomInfo');
+  info.style.display='block';
+  info.innerHTML=`<div style="background:rgba(78,205,196,.1);border:1px solid rgba(78,205,196,.2);border-radius:10px;padding:12px;font-size:.86rem">
+    ✅ Joined room <strong style="color:var(--y);letter-spacing:2px">${code}</strong> as <strong>${name}</strong>!<br>
+    <span style="color:rgba(255,255,255,.5);font-size:.78rem">Waiting for host to start the timer...</span>
+  </div>`;
+  document.getElementById('joinRoomBtn').textContent='✅ Joined!';
+});
+
+window.sendRoomEmoji = function(emoji){
+  if(!roomChannel||!myRoomCode) return;
+  roomChannel.postMessage({type:'emoji',emoji,name:myRoomName,time:Date.now()});
+  showRoomReaction(myRoomName,emoji);
+};
+
+function showRoomReaction(name,emoji){
+  const container=document.getElementById('roomReactions');
+  if(!container) return;
+  const pill=document.createElement('div');
+  pill.className='room-reaction-pill';
+  pill.textContent=`${emoji} ${name}`;
+  container.appendChild(pill);
+  setTimeout(()=>pill.remove(),4000);
+}
+
+document.getElementById('roomStartTimer')?.addEventListener('click',()=>{
+  if(roomChannel) roomChannel.postMessage({type:'start_timer',secs:25*60,by:myRoomName});
+  startRoomTimer(25*60);
+  document.getElementById('roomStartTimer').style.display='none';
+  document.getElementById('roomResetTimer').style.display='inline-flex';
+});
+
+document.getElementById('roomResetTimer')?.addEventListener('click',()=>{
+  if(roomTimerInt) clearInterval(roomTimerInt);
+  roomSecs=25*60; updateRoomClock();
+  document.getElementById('roomPhase').textContent='Waiting to start...';
+  document.getElementById('roomStartTimer').style.display='inline-flex';
+  document.getElementById('roomResetTimer').style.display='none';
+});
+
+function startRoomTimer(secs){
+  if(roomTimerInt) clearInterval(roomTimerInt);
+  roomSecs=secs;
+  document.getElementById('roomPhase').textContent='🚀 Studying together!';
+  roomTimerInt=setInterval(()=>{
+    roomSecs--; updateRoomClock();
+    if(roomSecs<=0){
+      clearInterval(roomTimerInt);
+      document.getElementById('roomPhase').textContent='🎉 Session done! Great teamwork!';
+      if(roomChannel) roomChannel.postMessage({type:'done',by:myRoomName});
+    }
+  },1000);
+}
+
+function updateRoomClock(){
+  const m=Math.floor(roomSecs/60),s=roomSecs%60;
+  const el=document.getElementById('roomClock');
+  if(el) el.textContent=`${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`;
+}
+
+function handleRoomMsg(data){
+  if(data.type==='join'){ renderRoom(data.name); showRoomReaction(data.name,'👋'); }
+  if(data.type==='emoji'){ showRoomReaction(data.name,data.emoji); }
+  if(data.type==='start_timer'){ startRoomTimer(data.secs); document.getElementById('roomPhase').textContent='🚀 Studying together!'; }
+  if(data.type==='done'){ document.getElementById('roomPhase').textContent='🎉 Session done! Great teamwork!'; }
+}
+
+function renderRoom(newMember){
+  const status=document.getElementById('roomStatus');
+  const members=document.getElementById('roomMembers');
+  if(!status||!members) return;
+  const state=JSON.parse(localStorage.getItem(ROOM_KEY())||'{}');
+  if(newMember&&state.members){
+    if(!state.members.find(m=>m.name===newMember)) state.members.push({name:newMember,active:true});
+    localStorage.setItem(ROOM_KEY(),JSON.stringify(state));
+  }
+  const mems=state.members||[{name:myRoomName,active:true}];
+  status.textContent=mems.length>1?`${mems.length} people in room 🟢`:'Waiting for someone to join...';
+  members.innerHTML=mems.map(m=>`<div class="room-member active">🟢 ${m.name}</div>`).join('');
+}
+
+// Nav init
+document.querySelector('[data-sbpage="studywithme"]')?.addEventListener('click',()=>{ setTimeout(renderPomoLog,50); });
+
+})(); // end Study With Me IIFE
 
 // ============================== DAD'S BOARD ==============================
 (function(){
