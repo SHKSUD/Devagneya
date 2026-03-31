@@ -52,6 +52,8 @@ body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:0;opa
 .nav-btn[data-tab="praclog"]{background:linear-gradient(135deg,#A855F7,#4ECDC4);color:#fff;}
 .nav-btn[data-tab="study"]{background:linear-gradient(135deg,#4ECDC4,#6BCB77);color:var(--dk);}
 .nav-btn[data-tab="dad"]{background:linear-gradient(135deg,#A855F7,#FF4D8B);color:#fff;}
+.nav-btn[data-tab="stories"]{background:linear-gradient(135deg,#f59e0b,#ef4444);color:#fff;}
+.nav-btn[data-tab="focus"]{background:linear-gradient(135deg,#3b82f6,#8b5cf6);color:#fff;}
 .nav-btn[data-tab="dad"]{background:linear-gradient(135deg,#F59E0B,#EF4444);color:#fff;}
 
 /* ===== PARENT PIN GATE ===== */
@@ -709,6 +711,554 @@ body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:0;opa
 .room-join-form{background:var(--c);border-radius:18px;border:2px solid rgba(255,255,255,.1);padding:20px;}
 .room-join-title{font-family:'Fredoka One',cursive;font-size:1rem;color:var(--b);margin-bottom:12px;}
 
+
+/* ═══════════════ PRACTICE PAPER ═══════════════ */
+.pp-hero{text-align:center;padding:6px 0 20px;}
+.pp-hero-ico{font-size:3rem;animation:float 4s ease-in-out infinite;}
+.pp-hero-title{font-family:'Fredoka One',cursive;font-size:1.65rem;
+  background:linear-gradient(135deg,#fbbf24,#f97316);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:4px;}
+.pp-hero-sub{font-size:.85rem;color:rgba(255,255,255,.42);}
+
+/* Setup card */
+.pp-setup{background:var(--c);border:2px solid rgba(251,191,36,.2);border-radius:20px;
+  padding:22px;margin-bottom:20px;backdrop-filter:blur(10px);}
+.pp-setup-row{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:12px;}
+.pp-setup-row select,.pp-setup-row input{
+  font-family:'Nunito',sans-serif;background:rgba(255,255,255,.07);
+  border:2px solid rgba(255,255,255,.12);border-radius:12px;color:#fff;
+  padding:9px 13px;font-size:.9rem;flex:1;min-width:140px;outline:none;transition:border-color .2s;}
+.pp-setup-row select:focus,.pp-setup-row input:focus{border-color:#fbbf24;}
+.pp-setup-row select option{background:#1a1a2e;}
+.pp-section-pills{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px;}
+.pp-sec-pill{font-family:'Fredoka One',cursive;font-size:.82rem;padding:6px 15px;
+  border-radius:50px;border:2px solid rgba(255,255,255,.12);background:transparent;
+  color:rgba(255,255,255,.48);cursor:pointer;transition:all .18s;}
+.pp-sec-pill:hover{border-color:#fbbf24;color:#fbbf24;}
+.pp-sec-pill.sel{background:rgba(251,191,36,.15);border-color:#fbbf24;color:#fbbf24;}
+.pp-speed-row{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:14px;}
+.pp-speed-lbl{font-size:.8rem;color:rgba(255,255,255,.45);white-space:nowrap;}
+.pp-speed-btn{font-family:'Fredoka One',cursive;font-size:.78rem;padding:4px 13px;
+  border-radius:50px;border:2px solid rgba(255,255,255,.12);background:transparent;
+  color:rgba(255,255,255,.45);cursor:pointer;transition:all .18s;}
+.pp-speed-btn:hover,.pp-speed-btn.sel{border-color:var(--b);color:var(--b);background:rgba(78,205,196,.1);}
+
+/* Generating state */
+.pp-generating{text-align:center;padding:40px 20px;}
+.pp-gen-ico{font-size:3rem;animation:float 1.5s ease-in-out infinite;margin-bottom:12px;}
+.pp-gen-msg{font-family:'Fredoka One',cursive;font-size:1.1rem;color:rgba(255,255,255,.6);}
+.pp-gen-sub{font-size:.8rem;color:rgba(255,255,255,.3);margin-top:6px;}
+
+/* Paper header */
+.pp-paper-header{background:linear-gradient(135deg,rgba(251,191,36,.12),rgba(249,115,22,.08));
+  border:2px solid rgba(251,191,36,.25);border-radius:16px;padding:18px 20px;
+  margin-bottom:22px;text-align:center;}
+.pp-school{font-family:'Fredoka One',cursive;font-size:1.15rem;color:#fbbf24;margin-bottom:2px;}
+.pp-paper-meta{font-size:.82rem;color:rgba(255,255,255,.55);display:flex;
+  gap:16px;justify-content:center;flex-wrap:wrap;margin-top:8px;}
+.pp-paper-meta span{background:rgba(255,255,255,.06);padding:3px 10px;border-radius:50px;}
+
+/* Section block */
+.pp-section-block{margin-bottom:28px;}
+.pp-section-hdr{display:flex;align-items:center;gap:10px;margin-bottom:14px;
+  padding-bottom:8px;border-bottom:2px solid rgba(255,255,255,.08);}
+.pp-section-tag{font-family:'Fredoka One',cursive;font-size:1rem;
+  padding:4px 16px;border-radius:50px;}
+.pp-sec-a{background:rgba(168,85,247,.2);color:#c084fc;}
+.pp-sec-b{background:rgba(78,205,196,.2);color:#4ECDC4;}
+.pp-sec-c{background:rgba(107,203,119,.2);color:#6BCB77;}
+.pp-sec-d{background:rgba(255,107,53,.2);color:#FF6B35;}
+.pp-section-marks{font-size:.78rem;color:rgba(255,255,255,.35);margin-left:auto;}
+
+/* Question card */
+.pp-q{background:rgba(255,255,255,.04);border-radius:14px;
+  border:2px solid rgba(255,255,255,.07);padding:16px 18px;margin-bottom:12px;
+  transition:border-color .2s;}
+.pp-q:hover{border-color:rgba(255,255,255,.14);}
+.pp-q-top{display:flex;gap:10px;align-items:flex-start;}
+.pp-q-num{font-family:'Fredoka One',cursive;font-size:.82rem;color:rgba(255,255,255,.32);
+  min-width:28px;flex-shrink:0;padding-top:1px;}
+.pp-q-text{font-size:.92rem;line-height:1.6;flex:1;}
+.pp-q-marks{font-size:.7rem;color:rgba(255,255,255,.3);flex-shrink:0;
+  background:rgba(255,255,255,.06);padding:2px 8px;border-radius:50px;margin-top:2px;}
+.pp-q-opts{display:flex;flex-direction:column;gap:5px;margin:10px 0 0 28px;}
+.pp-q-opt{font-size:.85rem;color:rgba(255,255,255,.6);padding:3px 0;}
+
+/* Answer reveal area */
+.pp-ans-area{margin-top:12px;margin-left:28px;}
+.pp-ans-btns{display:flex;gap:7px;flex-wrap:wrap;margin-bottom:8px;}
+.pp-reveal-btn{font-family:'Fredoka One',cursive;font-size:.75rem;padding:5px 13px;
+  border-radius:50px;border:2px solid rgba(107,203,119,.3);background:rgba(107,203,119,.08);
+  color:var(--g);cursor:pointer;transition:all .18s;}
+.pp-reveal-btn:hover{background:rgba(107,203,119,.18);border-color:var(--g);}
+.pp-reveal-btn:disabled{opacity:.4;cursor:not-allowed;}
+/* Maths step buttons */
+.pp-hint-btn{border-color:rgba(168,85,247,.3);background:rgba(168,85,247,.08);color:var(--v);}
+.pp-hint-btn:hover{background:rgba(168,85,247,.18);border-color:var(--v);}
+.pp-step1-btn{border-color:rgba(255,217,61,.3);background:rgba(255,217,61,.08);color:var(--y);}
+.pp-step1-btn:hover{background:rgba(255,217,61,.18);border-color:var(--y);}
+.pp-step2-btn{border-color:rgba(255,107,53,.3);background:rgba(255,107,53,.08);color:var(--o);}
+.pp-step2-btn:hover{background:rgba(255,107,53,.18);border-color:var(--o);}
+
+/* Answer box */
+.pp-ans-box{background:rgba(107,203,119,.07);border:1px solid rgba(107,203,119,.2);
+  border-radius:10px;padding:12px 14px;font-size:.87rem;line-height:1.7;
+  color:rgba(255,255,255,.85);min-height:32px;word-break:break-word;white-space:pre-wrap;}
+.pp-hint-box{background:rgba(168,85,247,.07);border:1px solid rgba(168,85,247,.2);
+  border-radius:10px;padding:10px 14px;font-size:.84rem;color:rgba(255,255,255,.78);
+  line-height:1.6;margin-bottom:6px;min-height:28px;white-space:pre-wrap;}
+.pp-step-box{border-radius:10px;padding:10px 14px;font-size:.84rem;
+  line-height:1.6;margin-bottom:6px;min-height:28px;white-space:pre-wrap;}
+.pp-step-box.s1{background:rgba(255,217,61,.07);border:1px solid rgba(255,217,61,.2);color:rgba(255,255,255,.8);}
+.pp-step-box.s2{background:rgba(255,107,53,.07);border:1px solid rgba(255,107,53,.2);color:rgba(255,255,255,.8);}
+/* Cursor blink */
+.pp-cursor{display:inline-block;width:2px;height:1em;background:#6BCB77;
+  vertical-align:text-bottom;animation:blink .7s step-end infinite;margin-left:1px;}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:0}}
+
+/* OR divider */
+.pp-or{text-align:center;color:rgba(255,255,255,.25);font-family:'Fredoka One',cursive;
+  font-size:.85rem;margin:8px 0;letter-spacing:2px;}
+
+/* Action bar */
+.pp-action-bar{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin:20px 0 8px;}
+.pp-no-key{text-align:center;padding:28px;background:rgba(251,191,36,.06);
+  border:1px solid rgba(251,191,36,.2);border-radius:14px;font-size:.85rem;
+  color:rgba(255,255,255,.52);margin-bottom:16px;}
+
+
+/* ── Multi-chapter selector ── */
+.pp-chapter-mode{display:flex;gap:8px;margin-bottom:12px;}
+.pp-cmode-btn{font-family:'Fredoka One',cursive;font-size:.8rem;padding:6px 15px;
+  border-radius:50px;border:2px solid rgba(255,255,255,.12);background:transparent;
+  color:rgba(255,255,255,.45);cursor:pointer;transition:all .18s;}
+.pp-cmode-btn.sel{background:rgba(251,191,36,.15);border-color:#fbbf24;color:#fbbf24;}
+.pp-multi-list{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));
+  gap:7px;max-height:220px;overflow-y:auto;padding:2px;}
+.pp-multi-list::-webkit-scrollbar{width:4px;}
+.pp-multi-list::-webkit-scrollbar-thumb{background:rgba(255,255,255,.18);border-radius:4px;}
+.pp-ch-check{display:flex;align-items:center;gap:8px;background:rgba(255,255,255,.04);
+  border:2px solid rgba(255,255,255,.07);border-radius:9px;padding:7px 10px;
+  cursor:pointer;transition:all .15s;user-select:none;}
+.pp-ch-check:hover{border-color:rgba(251,191,36,.3);}
+.pp-ch-check.sel{background:rgba(251,191,36,.1);border-color:rgba(251,191,36,.4);}
+.pp-ch-check input[type=checkbox]{accent-color:#fbbf24;width:14px;height:14px;flex-shrink:0;}
+.pp-ch-label{font-size:.78rem;line-height:1.3;}
+.pp-multi-hint{font-size:.71rem;color:rgba(255,255,255,.28);margin-top:5px;}
+
+/* ── Content source tabs ── */
+.pp-src-tabs{display:flex;gap:6px;margin-bottom:10px;}
+.pp-src-tab{font-family:'Fredoka One',cursive;font-size:.78rem;padding:5px 13px;
+  border-radius:50px;border:2px solid rgba(255,255,255,.1);background:transparent;
+  color:rgba(255,255,255,.42);cursor:pointer;transition:all .18s;}
+.pp-src-tab.sel{border-color:rgba(251,191,36,.4);background:rgba(251,191,36,.1);color:#fbbf24;}
+.pp-src-panel{display:none;}
+.pp-src-panel.active{display:block;}
+
+/* ── PDF upload ── */
+.pp-upload-zone{border:2px dashed rgba(251,191,36,.25);border-radius:14px;
+  padding:22px 16px;text-align:center;cursor:pointer;transition:all .2s;
+  background:rgba(251,191,36,.04);}
+.pp-upload-zone:hover,.pp-upload-zone.drag{border-color:#fbbf24;background:rgba(251,191,36,.09);}
+.pp-upload-ico{font-size:2rem;margin-bottom:7px;}
+.pp-upload-lbl{font-family:'Fredoka One',cursive;font-size:.95rem;color:rgba(255,255,255,.6);margin-bottom:4px;}
+.pp-upload-sub{font-size:.72rem;color:rgba(255,255,255,.28);}
+.pp-upload-status{margin-top:10px;font-size:.82rem;border-radius:9px;padding:8px 12px;display:none;}
+.pp-upload-status.loading{display:block;background:rgba(78,205,196,.1);border:1px solid rgba(78,205,196,.2);color:var(--b);}
+.pp-upload-status.done{display:block;background:rgba(107,203,119,.1);border:1px solid rgba(107,203,119,.2);color:var(--g);}
+.pp-upload-status.err{display:block;background:rgba(255,77,139,.1);border:1px solid rgba(255,77,139,.2);color:var(--p);}
+
+/* ── Download / print ── */
+.pp-download-btn{background:linear-gradient(135deg,#1d4ed8,#0e7490);color:#fff;}
+@media print{
+  body > *:not(#study-section){ display:none !important; }
+  #study-section > *:not(#sbpage-paper){ display:none !important; }
+  #sbpage-paper .sb-nav,.pp-hero,.pp-setup,.pp-generating,.pp-action-bar,
+  .pp-ans-btns,.pp-cursor,#ppRevealAll,#ppNewPaper{ display:none !important; }
+  #sbpage-paper{ display:block !important; }
+  #ppPaper{ display:block !important; }
+  .pp-ans-box,.pp-hint-box,.pp-step-box{ display:block !important; }
+  .pp-q{ break-inside:avoid; border:1px solid #ccc !important;
+    background:#fff !important; color:#000 !important; margin-bottom:10px; }
+  .pp-paper-header{ background:#f8f8f8 !important; border:1px solid #ddd !important; color:#000 !important; }
+  .pp-school,.pp-section-tag,.pp-q-num,.pp-q-text,.pp-q-marks,
+  .pp-q-opt,.pp-ans-box,.pp-hint-box,.pp-step-box{ color:#000 !important; }
+  .pp-section-hdr{ border-bottom:1px solid #ddd !important; }
+  .pp-section-tag{ background:#eee !important; color:#333 !important; }
+  .pp-ans-box{ background:#f0fff4 !important; border:1px solid #86efac !important; }
+  .pp-hint-box{ background:#f5f3ff !important; border:1px solid #c4b5fd !important; }
+  .pp-step-box.s1{ background:#fefce8 !important; border:1px solid #fde68a !important; }
+  .pp-step-box.s2{ background:#fff7ed !important; border:1px solid #fed7aa !important; }
+  @page{ margin:1.5cm; size:A4; }
+}
+
+
+/* ── 4-slot PDF upload grid ── */
+.pp-pdf-intro{font-size:.78rem;color:rgba(255,255,255,.42);margin-bottom:10px;line-height:1.5;}
+.pp-pdf-intro strong{color:rgba(255,255,255,.65);}
+.pp-pdf-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-bottom:10px;}
+@media(max-width:480px){.pp-pdf-grid{grid-template-columns:1fr;}}
+.pp-pdf-slot{position:relative;border:2px solid rgba(255,255,255,.08);border-radius:14px;
+  padding:13px;background:rgba(255,255,255,.03);transition:border-color .2s;}
+.pp-pdf-slot-zone{border:2px dashed rgba(251,191,36,.2);border-radius:10px;
+  padding:16px 10px;text-align:center;cursor:pointer;transition:all .18s;
+  background:rgba(251,191,36,.03);}
+.pp-pdf-slot-zone:hover,.pp-pdf-slot-zone.drag{border-color:#fbbf24;background:rgba(251,191,36,.08);}
+.pp-pdf-slot-zone.done{border-color:rgba(107,203,119,.4);background:rgba(107,203,119,.05);border-style:solid;}
+.pp-pdf-slot-ico{font-size:1.6rem;margin-bottom:5px;}
+.pp-pdf-slot-lbl{font-family:'Fredoka One',cursive;font-size:.82rem;color:rgba(255,255,255,.55);margin-bottom:2px;}
+.pp-pdf-slot-sub{font-size:.65rem;color:rgba(255,255,255,.25);}
+.pp-pdf-slot-status{font-size:.72rem;margin-top:7px;min-height:18px;line-height:1.4;word-break:break-all;}
+.pp-pdf-slot-status.loading{color:var(--b);}
+.pp-pdf-slot-status.done{color:var(--g);}
+.pp-pdf-slot-status.err{color:var(--p);}
+.pp-pdf-slot-preview{font-size:.68rem;color:rgba(255,255,255,.38);margin-top:5px;
+  line-height:1.45;max-height:52px;overflow:hidden;word-break:break-word;}
+.pp-pdf-slot-clear{position:absolute;top:6px;right:8px;background:rgba(255,77,139,.15);
+  border:1px solid rgba(255,77,139,.25);border-radius:50%;width:20px;height:20px;
+  font-size:.65rem;cursor:pointer;color:var(--p);display:flex;align-items:center;
+  justify-content:center;transition:all .15s;}
+.pp-pdf-slot-clear:hover{background:rgba(255,77,139,.35);}
+.pp-pdf-total{font-size:.78rem;color:var(--g);background:rgba(107,203,119,.08);
+  border:1px solid rgba(107,203,119,.2);border-radius:9px;padding:7px 12px;text-align:center;}
+
+
+/* ══ CHAPTER LIBRARY ══ */
+.lib-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:14px;margin-bottom:20px;}
+.lib-subject-card{background:var(--c);border-radius:18px;border:2px solid rgba(255,255,255,.08);
+  padding:18px;backdrop-filter:blur(10px);transition:border-color .2s;}
+.lib-subj-header{display:flex;align-items:center;gap:10px;margin-bottom:12px;}
+.lib-subj-ico{font-size:1.8rem;}
+.lib-subj-info{flex:1;}
+.lib-subj-name{font-family:'Fredoka One',cursive;font-size:1rem;margin-bottom:1px;}
+.lib-subj-book{font-size:.7rem;color:rgba(255,255,255,.38);}
+.lib-subj-count{font-family:'Fredoka One',cursive;font-size:.85rem;color:var(--g);}
+.lib-upload-btn{width:100%;font-family:'Fredoka One',cursive;font-size:.88rem;
+  padding:11px 14px;border-radius:12px;border:none;cursor:pointer;
+  background:linear-gradient(135deg,rgba(245,158,11,.3),rgba(249,115,22,.2));
+  color:#fff;margin-bottom:8px;transition:all .18s;display:flex;
+  align-items:center;justify-content:center;gap:7px;
+  border:2px solid rgba(245,158,11,.4);}
+.lib-upload-btn:hover{background:linear-gradient(135deg,rgba(245,158,11,.5),rgba(249,115,22,.35));
+  border-color:#F59E0B;transform:translateY(-1px);}
+.lib-drop-zone{border:2px dashed rgba(255,255,255,.12);border-radius:10px;
+  padding:8px 10px;text-align:center;font-size:.68rem;color:rgba(255,255,255,.28);
+  margin-bottom:8px;transition:all .18s;cursor:default;}
+.lib-drop-zone.drag{border-color:rgba(245,158,11,.5);background:rgba(245,158,11,.06);
+  color:rgba(255,255,255,.5);}
+.lib-status{font-size:.72rem;margin:6px 0;min-height:16px;line-height:1.4;}
+.lib-status.loading{color:var(--b);}
+.lib-status.done{color:var(--g);}
+.lib-status.err{color:var(--p);}
+.lib-progress{height:5px;background:rgba(255,255,255,.08);border-radius:3px;overflow:hidden;margin:5px 0;}
+.lib-progress-fill{height:100%;background:linear-gradient(90deg,#F59E0B,var(--g));border-radius:3px;
+  transition:width .4s ease;width:0%;}
+.lib-chapters{display:flex;flex-direction:column;gap:4px;max-height:160px;overflow-y:auto;}
+.lib-chapters::-webkit-scrollbar{width:3px;}
+.lib-chapters::-webkit-scrollbar-thumb{background:rgba(255,255,255,.15);border-radius:3px;}
+.lib-ch-row{display:flex;align-items:center;gap:6px;font-size:.72rem;padding:3px 0;
+  border-bottom:1px solid rgba(255,255,255,.04);}
+.lib-ch-row:last-child{border:none;}
+.lib-ch-tick{font-size:.75rem;flex-shrink:0;width:16px;}
+.lib-ch-name{flex:1;color:rgba(255,255,255,.6);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.lib-ch-size{font-size:.62rem;color:rgba(255,255,255,.25);flex-shrink:0;}
+.lib-ch-del{background:none;border:none;color:rgba(255,255,255,.15);font-size:.65rem;
+  cursor:pointer;flex-shrink:0;padding:0;transition:color .15s;}
+.lib-ch-del:hover{color:var(--p);}
+.lib-clear-all{font-family:'Fredoka One',cursive;font-size:.7rem;padding:4px 10px;
+  border-radius:50px;border:1px solid rgba(255,77,139,.25);background:transparent;
+  color:rgba(255,77,139,.5);cursor:pointer;transition:all .15s;margin-top:8px;}
+.lib-clear-all:hover{border-color:var(--p);color:var(--p);background:rgba(255,77,139,.08);}
+
+/* Library indicator in Practice Paper */
+.pp-lib-indicator{display:none;margin-bottom:10px;background:rgba(107,203,119,.08);
+  border:1px solid rgba(107,203,119,.25);border-radius:10px;padding:8px 13px;
+  font-size:.78rem;color:var(--g);display:flex;align-items:center;gap:7px;}
+.pp-lib-indicator.active{display:flex;}
+
+
+/* ═══════════════ FOCUS MODE ═══════════════ */
+.focus-hero{text-align:center;padding:6px 0 22px;}
+.focus-hero-ico{font-size:3rem;animation:float 4s ease-in-out infinite;}
+.focus-hero-title{font-family:'Fredoka One',cursive;font-size:1.7rem;
+  background:linear-gradient(135deg,#60a5fa,#a78bfa);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:4px;}
+.focus-hero-sub{font-size:.86rem;color:rgba(255,255,255,.4);}
+
+/* Style picker */
+.focus-styles{display:flex;gap:10px;justify-content:center;margin-bottom:22px;flex-wrap:wrap;}
+.focus-style-btn{font-family:'Fredoka One',cursive;font-size:.88rem;padding:9px 20px;
+  border-radius:50px;border:2px solid rgba(255,255,255,.12);background:transparent;
+  color:rgba(255,255,255,.5);cursor:pointer;transition:all .2s;}
+.focus-style-btn.sel{box-shadow:0 4px 16px rgba(0,0,0,.4);}
+.fsb-deep.sel{background:linear-gradient(135deg,#1e3a5f,#0f172a);border-color:#60a5fa;color:#60a5fa;}
+.fsb-nature.sel{background:linear-gradient(135deg,#14532d,#052e16);border-color:#4ade80;color:#4ade80;}
+.fsb-space.sel{background:linear-gradient(135deg,#2e1065,#0f0a1e);border-color:#a78bfa;color:#a78bfa;}
+
+/* Setup card */
+.focus-setup{background:var(--c);border-radius:22px;border:2px solid rgba(96,165,250,.2);
+  padding:24px;max-width:480px;margin:0 auto 22px;backdrop-filter:blur(10px);}
+.focus-dur-row{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-bottom:18px;}
+.focus-dur-btn{font-family:'Fredoka One',cursive;font-size:.88rem;padding:8px 18px;
+  border-radius:50px;border:2px solid rgba(255,255,255,.12);background:transparent;
+  color:rgba(255,255,255,.48);cursor:pointer;transition:all .18s;}
+.focus-dur-btn.sel{background:rgba(96,165,250,.15);border-color:#60a5fa;color:#60a5fa;}
+.focus-subj-row{display:flex;gap:7px;flex-wrap:wrap;justify-content:center;margin-bottom:18px;}
+.focus-subj-btn{font-family:'Fredoka One',cursive;font-size:.78rem;padding:5px 13px;
+  border-radius:50px;border:2px solid rgba(255,255,255,.1);background:transparent;
+  color:rgba(255,255,255,.4);cursor:pointer;transition:all .18s;}
+.focus-subj-btn.sel{background:rgba(167,139,250,.15);border-color:#a78bfa;color:#a78bfa;}
+.focus-intention{width:100%;font-family:'Nunito',sans-serif;background:rgba(255,255,255,.06);
+  border:2px solid rgba(96,165,250,.2);border-radius:12px;color:#fff;padding:10px 14px;
+  font-size:.9rem;outline:none;margin-bottom:16px;transition:border-color .2s;resize:none;}
+.focus-intention:focus{border-color:#60a5fa;}
+.focus-intention::placeholder{color:rgba(255,255,255,.25);}
+
+/* FULLSCREEN OVERLAY — the actual focus session */
+.focus-overlay{
+  position:fixed;inset:0;z-index:300;
+  display:none;flex-direction:column;align-items:center;justify-content:center;
+  transition:background .5s;
+}
+.focus-overlay.active{display:flex;}
+
+/* Style themes */
+.focus-overlay.theme-deep{background:radial-gradient(ellipse at center,#0f1f3d 0%,#060d1a 100%);}
+.focus-overlay.theme-nature{background:radial-gradient(ellipse at center,#052e16 0%,#020f07 100%);}
+.focus-overlay.theme-space{background:radial-gradient(ellipse at center,#13002b 0%,#05000f 100%);}
+
+/* Ambient particles */
+.focus-particles{position:absolute;inset:0;overflow:hidden;pointer-events:none;}
+.focus-particle{position:absolute;border-radius:50%;opacity:0;animation:focusFloat linear infinite;}
+@keyframes focusFloat{
+  0%{transform:translateY(100vh) scale(0);opacity:0}
+  10%{opacity:.6}
+  90%{opacity:.3}
+  100%{transform:translateY(-20px) scale(1.2);opacity:0}
+}
+
+/* Clock */
+.focus-clock-wrap{text-align:center;position:relative;z-index:1;}
+.focus-phase-label{font-family:'Fredoka One',cursive;font-size:1rem;
+  letter-spacing:3px;text-transform:uppercase;margin-bottom:16px;opacity:.6;}
+.focus-clock{font-family:'Fredoka One',cursive;font-size:clamp(5rem,18vw,9rem);
+  line-height:1;letter-spacing:-2px;text-shadow:0 0 60px currentColor;
+  transition:color .5s;}
+.theme-deep  .focus-clock{color:#93c5fd;}
+.theme-nature .focus-clock{color:#86efac;}
+.theme-space  .focus-clock{color:#c4b5fd;}
+.focus-subject-tag{font-family:'Fredoka One',cursive;font-size:1.1rem;
+  margin-top:14px;opacity:.5;letter-spacing:1px;}
+.focus-intention-show{font-size:.88rem;color:rgba(255,255,255,.35);
+  margin-top:8px;font-style:italic;max-width:400px;text-align:center;}
+
+/* Quote */
+.focus-quote{position:absolute;bottom:100px;left:50%;transform:translateX(-50%);
+  width:90%;max-width:480px;text-align:center;font-size:.85rem;
+  color:rgba(255,255,255,.3);font-style:italic;line-height:1.6;z-index:1;}
+
+/* Ring progress */
+.focus-ring-wrap{position:relative;width:280px;height:280px;margin:0 auto 20px;}
+.focus-ring-svg{width:280px;height:280px;transform:rotate(-90deg);}
+.focus-ring-bg{fill:none;stroke:rgba(255,255,255,.07);stroke-width:6;}
+.focus-ring-fill{fill:none;stroke-width:6;stroke-linecap:round;
+  stroke-dasharray:838 838;stroke-dashoffset:0;transition:stroke-dashoffset 1s linear,stroke .5s;}
+.theme-deep   .focus-ring-fill{stroke:#60a5fa;}
+.theme-nature .focus-ring-fill{stroke:#4ade80;}
+.theme-space  .focus-ring-fill{stroke:#a78bfa;}
+.focus-clock-inside{position:absolute;inset:0;display:flex;flex-direction:column;
+  align-items:center;justify-content:center;}
+
+/* Controls */
+.focus-controls{display:flex;gap:14px;margin-top:22px;flex-wrap:wrap;justify-content:center;
+  position:relative;z-index:1;}
+.focus-ctrl-btn{font-family:'Fredoka One',cursive;font-size:.95rem;padding:10px 24px;
+  border-radius:50px;border:2px solid rgba(255,255,255,.2);background:rgba(255,255,255,.08);
+  color:#fff;cursor:pointer;transition:all .2s;backdrop-filter:blur(8px);}
+.focus-ctrl-btn:hover{background:rgba(255,255,255,.18);transform:scale(1.05);}
+.focus-ctrl-btn.end-btn{border-color:rgba(255,77,139,.4);color:rgba(255,77,139,.8);}
+.focus-ctrl-btn.end-btn:hover{background:rgba(255,77,139,.15);}
+
+/* Break screen */
+.focus-break-screen{position:absolute;inset:0;display:none;flex-direction:column;
+  align-items:center;justify-content:center;z-index:2;
+  background:rgba(0,0,0,.85);backdrop-filter:blur(8px);}
+.focus-break-screen.show{display:flex;animation:fadeIn .4s ease;}
+.focus-break-ico{font-size:4rem;margin-bottom:14px;animation:float 2s ease-in-out infinite;}
+.focus-break-title{font-family:'Fredoka One',cursive;font-size:2.2rem;margin-bottom:8px;}
+.focus-break-sub{font-size:.95rem;color:rgba(255,255,255,.55);margin-bottom:24px;}
+.focus-break-timer{font-family:'Fredoka One',cursive;font-size:3rem;color:#4ade80;margin-bottom:20px;}
+
+/* Stats bar */
+.focus-stats{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));
+  gap:10px;margin:0 auto;max-width:600px;}
+.focus-stat-card{background:var(--c);border-radius:14px;border:2px solid rgba(255,255,255,.07);
+  padding:14px;text-align:center;backdrop-filter:blur(10px);}
+.focus-stat-val{font-family:'Fredoka One',cursive;font-size:1.8rem;margin-bottom:2px;}
+.focus-stat-lbl{font-size:.7rem;color:rgba(255,255,255,.4);}
+.focus-history{display:flex;flex-direction:column;gap:8px;margin-top:18px;}
+.focus-hist-row{background:var(--c);border-radius:11px;border:2px solid rgba(255,255,255,.06);
+  padding:10px 14px;display:flex;align-items:center;gap:10px;}
+.focus-hist-ico{font-size:1.4rem;}
+.focus-hist-info{flex:1;}
+.focus-hist-title{font-family:'Fredoka One',cursive;font-size:.9rem;}
+.focus-hist-meta{font-size:.72rem;color:rgba(255,255,255,.38);}
+.focus-hist-mins{font-family:'Fredoka One',cursive;font-size:1.1rem;color:#60a5fa;}
+
+
+/* ══ LIBRARY ACCORDION ══ */
+.lib-subject-acc{background:var(--c);border-radius:16px;border:2px solid rgba(255,255,255,.07);
+  margin-bottom:10px;overflow:hidden;transition:border-color .2s;}
+.lib-subject-acc:hover{border-color:rgba(255,255,255,.12);}
+.lib-acc-header{display:flex;align-items:center;gap:12px;padding:14px 16px;cursor:pointer;
+  user-select:none;transition:background .15s;}
+.lib-acc-header:hover{background:rgba(255,255,255,.04);}
+.lib-acc-ico{font-size:1.6rem;}
+.lib-acc-info{flex:1;}
+.lib-acc-name{font-family:'Fredoka One',cursive;font-size:1rem;}
+.lib-acc-book{font-size:.7rem;color:rgba(255,255,255,.35);}
+.lib-acc-count{font-family:'Fredoka One',cursive;font-size:.88rem;}
+.lib-acc-arrow{font-size:.8rem;color:rgba(255,255,255,.3);transition:transform .2s;}
+.lib-acc-body{display:none;padding:0 14px 14px;}
+.lib-acc-body.open{display:block;}
+.lib-acc-arrow.open{transform:rotate(90deg);}
+.lib-ch-upload-row{display:flex;align-items:center;gap:8px;padding:7px 0;
+  border-bottom:1px solid rgba(255,255,255,.04);}
+.lib-ch-upload-row:last-child{border:none;}
+.lib-ch-status-ico{font-size:1rem;width:22px;text-align:center;flex-shrink:0;}
+.lib-ch-upload-name{flex:1;font-size:.8rem;color:rgba(255,255,255,.65);
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.lib-ch-upload-name.loaded{color:rgba(107,203,119,.9);}
+.lib-ch-sz{font-size:.65rem;color:rgba(255,255,255,.28);flex-shrink:0;}
+.lib-ch-upload-btn{font-family:'Fredoka One',cursive;font-size:.7rem;padding:4px 10px;
+  border-radius:50px;border:1.5px solid rgba(96,165,250,.3);background:rgba(96,165,250,.08);
+  color:rgba(96,165,250,.8);cursor:pointer;flex-shrink:0;transition:all .15s;white-space:nowrap;}
+.lib-ch-upload-btn:hover{background:rgba(96,165,250,.2);border-color:#60a5fa;color:#fff;}
+.lib-ch-upload-btn.loaded{border-color:rgba(107,203,119,.3);background:rgba(107,203,119,.08);
+  color:rgba(107,203,119,.8);}
+.lib-ch-del-btn{font-size:.65rem;color:rgba(255,255,255,.18);background:none;border:none;
+  cursor:pointer;flex-shrink:0;padding:2px 4px;border-radius:4px;transition:color .15s;}
+.lib-ch-del-btn:hover{color:var(--p);}
+
+
+/* ═══════════════ STORIES & COMICS ═══════════════ */
+.stories-hero{text-align:center;padding:6px 0 20px;}
+.stories-hero-ico{font-size:3rem;animation:float 4s ease-in-out infinite;}
+.stories-hero-title{font-family:'Fredoka One',cursive;font-size:1.7rem;
+  background:linear-gradient(135deg,#f59e0b,#ef4444,#a855f7);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:4px;}
+
+/* Collection tabs */
+.story-coll-tabs{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;margin-bottom:20px;}
+.story-coll-tab{font-family:'Fredoka One',cursive;font-size:.85rem;padding:8px 16px;
+  border-radius:50px;border:2px solid rgba(255,255,255,.1);background:transparent;
+  color:rgba(255,255,255,.45);cursor:pointer;transition:all .2s;}
+.story-coll-tab.active{box-shadow:0 4px 16px rgba(0,0,0,.3);}
+.sct-panchatantra.active{background:rgba(245,158,11,.15);border-color:#f59e0b;color:#f59e0b;}
+.sct-jataka.active{background:rgba(168,85,247,.15);border-color:#a855f7;color:#c4b5fd;}
+.sct-tenali.active{background:rgba(239,68,68,.15);border-color:#ef4444;color:#fca5a5;}
+.sct-aesop.active{background:rgba(74,222,128,.15);border-color:#4ade80;color:#86efac;}
+
+/* Story grid */
+.story-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:12px;margin-bottom:20px;}
+.story-card{background:var(--c);border-radius:18px;border:2px solid rgba(255,255,255,.07);
+  padding:0;overflow:hidden;cursor:pointer;transition:all .22s;position:relative;}
+.story-card:hover{transform:translateY(-3px);border-color:rgba(255,255,255,.2);}
+.story-card-banner{height:90px;display:flex;align-items:center;justify-content:center;
+  font-size:3.2rem;position:relative;}
+.story-card-banner::after{content:'';position:absolute;inset:0;background:linear-gradient(to bottom,transparent 40%,rgba(0,0,0,.4));}
+.story-card-body{padding:12px 14px 14px;}
+.story-card-title{font-family:'Fredoka One',cursive;font-size:.95rem;margin-bottom:4px;}
+.story-card-meta{font-size:.7rem;color:rgba(255,255,255,.38);margin-bottom:8px;}
+.story-card-tags{display:flex;gap:5px;flex-wrap:wrap;}
+.story-tag{font-size:.62rem;padding:2px 8px;border-radius:50px;background:rgba(255,255,255,.08);
+  color:rgba(255,255,255,.45);}
+.story-card-done{position:absolute;top:8px;right:8px;font-size:1.1rem;z-index:1;}
+
+/* ── STORY READER ── */
+.story-reader{display:none;position:fixed;inset:0;z-index:200;overflow-y:auto;
+  background:#0a0a1a;}
+.story-reader.open{display:block;animation:fadeIn .3s ease;}
+.sr-topbar{position:sticky;top:0;z-index:10;background:rgba(10,10,26,.92);
+  backdrop-filter:blur(12px);padding:12px 20px;display:flex;align-items:center;
+  gap:12px;border-bottom:1px solid rgba(255,255,255,.08);}
+.sr-back{font-family:'Fredoka One',cursive;font-size:.88rem;padding:6px 14px;
+  border-radius:50px;border:2px solid rgba(255,255,255,.15);background:transparent;
+  color:rgba(255,255,255,.6);cursor:pointer;transition:all .18s;}
+.sr-back:hover{background:rgba(255,255,255,.08);}
+.sr-title{font-family:'Fredoka One',cursive;font-size:1rem;flex:1;}
+.sr-coll{font-size:.72rem;color:rgba(255,255,255,.35);}
+.sr-content{max-width:680px;margin:0 auto;padding:24px 20px 40px;}
+
+/* Comic panels */
+.comic-panels{display:flex;flex-direction:column;gap:16px;margin-bottom:28px;}
+.comic-panel{border-radius:18px;overflow:hidden;border:3px solid;position:relative;}
+.comic-panel-inner{padding:20px 22px 18px;}
+.panel-num{font-family:'Fredoka One',cursive;font-size:.7rem;letter-spacing:2px;
+  text-transform:uppercase;opacity:.5;margin-bottom:8px;}
+.panel-scene{font-size:3rem;margin-bottom:12px;line-height:1;}
+.panel-text{font-size:.96rem;line-height:1.7;font-weight:500;}
+.panel-dialogue{font-size:.9rem;line-height:1.65;font-style:italic;
+  margin-top:8px;padding:8px 14px;border-radius:10px;background:rgba(0,0,0,.2);}
+.panel-speaker{font-family:'Fredoka One',cursive;font-size:.75rem;
+  margin-bottom:3px;opacity:.7;}
+
+/* Panel colour themes — cycles through 6 */
+.cp-0{border-color:#f59e0b;background:linear-gradient(135deg,#1c1200,#2a1a00);}
+.cp-0 .panel-num{color:#f59e0b;}
+.cp-1{border-color:#a855f7;background:linear-gradient(135deg,#120020,#1e0035);}
+.cp-1 .panel-num{color:#c4b5fd;}
+.cp-2{border-color:#4ade80;background:linear-gradient(135deg,#001a0a,#002a12);}
+.cp-2 .panel-num{color:#86efac;}
+.cp-3{border-color:#60a5fa;background:linear-gradient(135deg,#00102a,#001840);}
+.cp-3 .panel-num{color:#93c5fd;}
+.cp-4{border-color:#f472b6;background:linear-gradient(135deg,#1a0010,#2a0018);}
+.cp-4 .panel-num{color:#f9a8d4;}
+.cp-5{border-color:#fb923c;background:linear-gradient(135deg,#1a0800,#2a1000);}
+.cp-5 .panel-num{color:#fed7aa;}
+
+/* Moral banner */
+.story-moral{border-radius:16px;padding:20px 22px;margin-bottom:24px;
+  background:linear-gradient(135deg,rgba(245,158,11,.12),rgba(239,68,68,.08));
+  border:2px solid rgba(245,158,11,.3);}
+.moral-label{font-family:'Fredoka One',cursive;font-size:.9rem;color:#f59e0b;margin-bottom:6px;}
+.moral-text{font-size:.95rem;line-height:1.65;color:rgba(255,255,255,.85);}
+
+/* Questions */
+.story-questions{display:flex;flex-direction:column;gap:12px;margin-bottom:24px;}
+.sq-card{background:var(--c);border-radius:14px;border:2px solid rgba(255,255,255,.08);padding:16px 18px;}
+.sq-num{font-family:'Fredoka One',cursive;font-size:.75rem;color:rgba(255,255,255,.35);margin-bottom:6px;}
+.sq-text{font-size:.92rem;line-height:1.55;margin-bottom:12px;}
+.sq-opts{display:flex;flex-direction:column;gap:7px;}
+.sq-opt{background:rgba(255,255,255,.05);border:2px solid rgba(255,255,255,.1);
+  border-radius:10px;padding:9px 14px;font-size:.87rem;cursor:pointer;
+  text-align:left;color:#fff;font-family:'Nunito',sans-serif;transition:all .15s;}
+.sq-opt:hover{background:rgba(255,255,255,.1);}
+.sq-opt.correct{background:rgba(74,222,128,.15);border-color:#4ade80;color:#86efac;}
+.sq-opt.wrong{background:rgba(255,77,139,.1);border-color:rgba(255,77,139,.4);color:rgba(255,150,150,.8);}
+.sq-opt:disabled{cursor:default;}
+.sq-exp{font-size:.8rem;color:rgba(255,255,255,.45);margin-top:8px;font-style:italic;display:none;}
+.sq-exp.show{display:block;}
+
+/* Results */
+.story-result{text-align:center;padding:24px 16px;background:var(--c);
+  border-radius:18px;border:2px solid rgba(255,255,255,.08);}
+.sr-trophy{font-size:4rem;margin-bottom:10px;}
+.sr-score{font-family:'Fredoka One',cursive;font-size:2rem;margin-bottom:6px;}
+.sr-msg{font-size:.9rem;color:rgba(255,255,255,.55);margin-bottom:16px;}
+.sr-xp{font-family:'Fredoka One',cursive;font-size:1rem;color:#fbbf24;margin-bottom:18px;}
+
+/* Loading state */
+.story-loading{text-align:center;padding:60px 20px;}
+.story-loading-ico{font-size:3.5rem;animation:float 2s ease-in-out infinite;margin-bottom:14px;}
+.story-loading-txt{font-family:'Fredoka One',cursive;font-size:1.1rem;color:rgba(255,255,255,.5);}
+.story-loading-sub{font-size:.8rem;color:rgba(255,255,255,.28);margin-top:6px;}
+
+/* Read badge */
+.story-read-badge{display:inline-flex;align-items:center;gap:5px;font-size:.72rem;
+  padding:3px 9px;border-radius:50px;background:rgba(74,222,128,.12);
+  border:1px solid rgba(74,222,128,.3);color:#86efac;margin-top:8px;}
+
 </style>
 </head>
 <body>
@@ -753,6 +1303,8 @@ body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:0;opa
     <button class="nav-btn" data-tab="singing">🎤 Singing</button>
     <button class="nav-btn" data-tab="praclog">📋 Practice</button>
     <button class="nav-btn" data-tab="study">📚 Study</button>
+    <button class="nav-btn" data-tab="stories">📖 Stories</button>
+    <button class="nav-btn" data-tab="focus">🎯 Focus</button>
     <button class="nav-btn" data-tab="dad">👨‍👧 Dad's Board</button>
   </nav>
 
@@ -984,6 +1536,7 @@ body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:0;opa
       <button class="sb-nav-btn" data-sbpage="teacher">🤖 Dev-Sir</button>
       <button class="sb-nav-btn" data-sbpage="curious">🔭 I Am Curious</button>
       <button class="sb-nav-btn" data-sbpage="studywithme">🤝 Study With Me</button>
+      <button class="sb-nav-btn" data-sbpage="paper">📝 Practice Paper</button>
       <button class="sb-nav-btn" data-sbpage="challenge">🏆 Challenge</button>
     </div>
 
@@ -1339,6 +1892,165 @@ body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:0;opa
       </div>
     </div>
 
+
+    <!-- ── PRACTICE PAPER ─────────────────────────────────────────── -->
+    <div class="sb-page" id="sbpage-paper">
+
+      <div class="pp-hero">
+        <div class="pp-hero-ico">📝</div>
+        <div class="pp-hero-title">Practice Paper</div>
+        <div class="pp-hero-sub">School-style questions · Typewriter answers · Step-by-step for Maths</div>
+      </div>
+
+      <!-- Setup -->
+      <div class="pp-setup" id="ppSetup">
+        <div class="form-title" style="color:#fbbf24;margin-bottom:14px;">📋 Set Up Your Practice</div>
+
+        <!-- Subject -->
+        <div class="pp-setup-row" style="margin-bottom:14px;">
+          <select id="ppSubject">
+            <option value="">-- Subject --</option>
+            <option value="maths">📐 Maths · Maths Mela</option>
+            <option value="evs">🌿 EVS · Our Wondrous World</option>
+            <option value="english">📖 English · Santoor</option>
+            <option value="hindi">📚 Hindi · Veena</option>
+          </select>
+        </div>
+
+        <!-- Chapter selection mode -->
+        <div id="ppChapterArea" style="display:none;margin-bottom:14px;">
+          <div style="font-family:'Fredoka One',cursive;font-size:.82rem;color:rgba(255,255,255,.38);margin-bottom:8px;">
+            📚 Chapter Selection
+          </div>
+          <div class="pp-chapter-mode">
+            <button class="pp-cmode-btn sel" id="ppModeSingle">Single Chapter</button>
+            <button class="pp-cmode-btn" id="ppModeMulti">Multi-Chapter Mix (2–5)</button>
+          </div>
+
+          <!-- Single chapter -->
+          <div id="ppSingleArea">
+            <select id="ppTopic" style="width:100%;font-family:'Nunito',sans-serif;background:rgba(255,255,255,.07);border:2px solid rgba(255,255,255,.12);border-radius:12px;color:#fff;padding:9px 13px;font-size:.9rem;outline:none;margin-bottom:0;">
+              <option value="mixed">🌀 Mixed Topics (all chapters)</option>
+            </select>
+          </div>
+
+          <!-- Multi chapter -->
+          <div id="ppMultiArea" style="display:none;">
+            <div class="pp-multi-list" id="ppMultiList"></div>
+            <div class="pp-multi-hint" id="ppMultiHint">Select 2 to 5 chapters — 0 selected</div>
+          </div>
+        </div>
+
+        <!-- Dynamic section pills -->
+        <div id="ppSectionArea" style="display:none;margin-bottom:14px;">
+          <div style="font-family:'Fredoka One',cursive;font-size:.82rem;
+            color:rgba(255,255,255,.38);margin-bottom:8px;" id="ppSectionLabel">Select Section(s)</div>
+          <div class="pp-section-pills" id="ppSectionPills"></div>
+        </div>
+
+        <!-- Content source -->
+        <div id="ppContentArea" style="display:none;margin-bottom:14px;">
+          <div style="font-family:'Fredoka One',cursive;font-size:.82rem;color:rgba(255,255,255,.38);margin-bottom:8px;">
+            📖 Chapter Content
+            <span style="font-weight:400;font-family:'Nunito',sans-serif;font-size:.74rem;color:rgba(255,255,255,.28)">
+              · Strongly recommended for new NCERT books</span>
+          </div>
+          <div class="pp-src-tabs">
+            <button class="pp-src-tab sel" data-src="notes">✏️ Type / Paste Notes</button>
+            <button class="pp-src-tab" data-src="pdf">📄 Upload PDF / Image</button>
+          </div>
+
+          <!-- Notes panel -->
+          <div class="pp-src-panel active" id="ppSrcNotes">
+            <textarea id="ppChapterNotes" rows="4"
+              style="width:100%;font-family:'Nunito',sans-serif;background:rgba(255,255,255,.06);
+              border:2px solid rgba(251,191,36,.2);border-radius:12px;color:#fff;
+              padding:10px 13px;font-size:.85rem;outline:none;resize:vertical;line-height:1.6;"
+              placeholder="Paste key points, vocabulary, or chapter summary here.
+
+Example for Chatur Chitrakaar (Veena):
+- A clever painter meets a lion who wants his portrait
+- The painter tricks the lion using his artistic skills
+- Key words: chitrakaar (painter), sher (lion), chatur (clever)
+- Moral: intelligence wins over brute strength
+
+The AI will use ONLY this to write questions!"></textarea>
+            <div style="font-size:.71rem;color:rgba(255,255,255,.26);margin-top:4px;">
+              💡 Even 3–4 bullet points make a huge difference in question accuracy
+            </div>
+          </div>
+
+          <!-- PDF upload panel — 4 slots -->
+          <div class="pp-src-panel" id="ppSrcPdf">
+            <div class="pp-pdf-intro">
+              Upload up to <strong>4 PDFs or images</strong> — one per chapter.<br>
+              Gemini reads each file and extracts content for the AI to use.
+            </div>
+            <div class="pp-pdf-grid" id="ppPdfGrid">
+              <!-- 4 slots built by JS -->
+            </div>
+            <div class="pp-pdf-total" id="ppPdfTotal" style="display:none;">
+              ✅ <span id="ppPdfTotalCount">0</span> file(s) processed ·
+              <span id="ppPdfTotalKb">0</span>KB of chapter content extracted
+            </div>
+          </div>
+        </div>
+
+        <!-- Speed -->
+        <div class="pp-speed-row">
+          <span class="pp-speed-lbl">⌨️ Answer reveal speed:</span>
+          <button class="pp-speed-btn" data-sp="20">🐢 Slow</button>
+          <button class="pp-speed-btn sel" data-sp="8">🚀 Normal</button>
+          <button class="pp-speed-btn" data-sp="3">⚡ Fast</button>
+        </div>
+
+        <div id="ppNoKey" style="display:none;" class="pp-no-key">
+          🔑 Ask Dad to set the Gemini API key in ⚙️ Settings to generate papers!
+        </div>
+
+        <!-- Library content indicator -->
+        <div class="pp-lib-indicator" id="ppLibIndicator">
+          <span>✅</span>
+          <span id="ppLibIndicatorText">Chapter Library content loaded — questions will be chapter-accurate!</span>
+        </div>
+
+        <button class="btn btn-yellow" id="ppGenerateBtn"
+          style="width:100%;justify-content:center;font-size:1.05rem;padding:12px;">
+          📝 Generate Practice Paper
+        </button>
+      </div>
+
+      <!-- Generating spinner -->
+      <div class="pp-generating" id="ppGenerating" style="display:none;">
+        <div class="pp-gen-ico">📝</div>
+        <div class="pp-gen-msg">Writing your practice paper...</div>
+        <div class="pp-gen-sub">This takes about 10–15 seconds</div>
+      </div>
+
+      <!-- Paper output -->
+      <div id="ppPaper" style="display:none;">
+        <div class="pp-paper-header">
+          <div class="pp-school">Devagneya's Practice Paper</div>
+          <div style="font-size:.88rem;color:rgba(255,255,255,.6);margin-top:2px"
+            id="ppPaperSubTitle"></div>
+          <div class="pp-paper-meta">
+            <span id="ppPaperDate"></span>
+            <span id="ppPaperMarks"></span>
+            <span>Time: 2 Hours</span>
+          </div>
+        </div>
+
+        <div id="ppPaperBody"></div>
+
+        <div class="pp-action-bar">
+          <button class="btn btn-green" id="ppRevealAll">👁 Reveal All Answers</button>
+          <button class="btn pp-download-btn" id="ppDownloadBtn">📥 Download PDF</button>
+          <button class="btn btn-orange" id="ppNewPaper">🔄 New Paper</button>
+        </div>
+      </div>
+
+    </div>
+
     <!-- ── CHALLENGE ──────────────────────────────────────────────── -->
     <div class="sb-page" id="sbpage-challenge">
       <div class="form-box" style="margin-bottom:20px">
@@ -1390,6 +2102,7 @@ body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:0;opa
         <button class="dtab" data-dtab="target">🎯 Weekly Target</button>
         <button class="dtab" data-dtab="homework">📋 Homework</button>
         <button class="dtab" data-dtab="report">📄 Report</button>
+        <button class="dtab" data-dtab="library">📚 Chapter Library</button>
       </div>
 
       <!-- OVERVIEW -->
@@ -1489,7 +2202,71 @@ body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:0;opa
         <div class="empty" id="reportEmpty" style="display:none"><div class="empty-ico">📄</div>No report data yet!</div>
       </div>
 
-    </div><!-- /dad-board -->
+
+      <!-- CHAPTER LIBRARY -->
+      <div class="dtab-sub" id="dtab-library">
+        <div style="font-family:'Fredoka One',cursive;font-size:.95rem;color:rgba(255,255,255,.7);margin-bottom:4px;">
+          📚 Chapter Library
+        </div>
+        <div style="font-size:.8rem;color:rgba(255,255,255,.35);margin-bottom:16px;line-height:1.6;">
+          Upload <strong style="color:rgba(255,255,255,.55)">one chapter at a time</strong> — Gemini reads that file and saves the content permanently.
+          Practice Paper auto-loads it. Download individual chapter PDFs free from
+          <a href="https://ncert.nic.in/textbook.php?class=5" target="_blank"
+            style="color:rgba(78,205,196,.8);text-decoration:none;">ncert.nic.in ↗</a>
+        </div>
+
+        <!-- Subject accordion -->
+        <div id="libAccordion"></div>
+
+        <!-- Upload modal -->
+        <div id="libModal" style="display:none;position:fixed;inset:0;z-index:400;
+          background:rgba(0,0,0,.75);backdrop-filter:blur(8px);
+          align-items:center;justify-content:center;">
+          <div style="background:#1a1a2e;border:2px solid rgba(96,165,250,.3);border-radius:20px;
+            padding:28px 26px;max-width:420px;width:90%;position:relative;">
+            <div id="libModalTitle" style="font-family:'Fredoka One',cursive;font-size:1.1rem;
+              color:#fff;margin-bottom:6px;"></div>
+            <div id="libModalSub" style="font-size:.78rem;color:rgba(255,255,255,.4);margin-bottom:18px;"></div>
+
+            <!-- Drop zone -->
+            <div id="libModalZone" style="border:2px dashed rgba(96,165,250,.35);border-radius:14px;
+              padding:28px 16px;text-align:center;cursor:pointer;transition:all .2s;
+              background:rgba(96,165,250,.04);margin-bottom:12px;">
+              <div style="font-size:2.4rem;margin-bottom:8px">📄</div>
+              <div style="font-family:'Fredoka One',cursive;font-size:.95rem;color:rgba(255,255,255,.6);">
+                Click to choose file
+              </div>
+              <div style="font-size:.7rem;color:rgba(255,255,255,.28);margin-top:4px;">
+                PDF or photo of the chapter · Max 15MB
+              </div>
+            </div>
+            <input type="file" id="libModalFile" accept=".pdf,image/*" style="display:none;">
+
+            <div id="libModalStatus" style="font-size:.82rem;min-height:20px;margin-bottom:12px;"></div>
+            <div id="libModalProg" style="display:none;height:6px;background:rgba(255,255,255,.08);
+              border-radius:3px;overflow:hidden;margin-bottom:14px;">
+              <div id="libModalFill" style="height:100%;background:linear-gradient(90deg,#60a5fa,#4ade80);
+                border-radius:3px;transition:width .3s;width:0%"></div>
+            </div>
+
+            <div style="display:flex;gap:10px;">
+              <button id="libModalCancel" style="flex:1;font-family:'Fredoka One',cursive;
+                font-size:.9rem;padding:10px;border-radius:12px;
+                border:2px solid rgba(255,255,255,.15);background:transparent;
+                color:rgba(255,255,255,.5);cursor:pointer;">Cancel</button>
+              <button id="libModalUpload" style="flex:2;font-family:'Fredoka One',cursive;
+                font-size:.9rem;padding:10px;border-radius:12px;
+                background:linear-gradient(135deg,rgba(96,165,250,.3),rgba(74,222,128,.2));
+                border:2px solid rgba(96,165,250,.4);color:#fff;cursor:pointer;">
+                📤 Upload & Extract
+              </button>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+</div><!-- /dad-board -->
   </section>
 
   <!-- Comment Modal -->
@@ -1528,6 +2305,202 @@ body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:0;opa
     </div>
   </div>
 
+
+  <!-- ═══════════════ FOCUS MODE ═══════════════ -->
+  <section id="focus-section" class="section">
+
+    <div class="focus-hero">
+      <div class="focus-hero-ico">🎯</div>
+      <div class="focus-hero-title">Focus Mode</div>
+      <div class="focus-hero-sub">Block out the world. Do your best work.</div>
+    </div>
+
+    <!-- Style picker -->
+    <div class="focus-styles">
+      <button class="focus-style-btn fsb-deep sel"  data-theme="deep">🌊 Deep Work</button>
+      <button class="focus-style-btn fsb-nature"    data-theme="nature">🌿 Nature</button>
+      <button class="focus-style-btn fsb-space"     data-theme="space">🚀 Space</button>
+    </div>
+
+    <!-- Setup -->
+    <div class="focus-setup">
+      <div style="font-family:'Fredoka One',cursive;font-size:.85rem;
+        color:rgba(255,255,255,.38);margin-bottom:10px;text-align:center;">
+        ⏱ How long will you focus?
+      </div>
+      <div class="focus-dur-row">
+        <button class="focus-dur-btn" data-mins="10">10 min</button>
+        <button class="focus-dur-btn sel" data-mins="25">25 min</button>
+        <button class="focus-dur-btn" data-mins="35">35 min</button>
+        <button class="focus-dur-btn" data-mins="45">45 min</button>
+        <button class="focus-dur-btn" data-mins="60">60 min</button>
+      </div>
+
+      <div style="font-family:'Fredoka One',cursive;font-size:.85rem;
+        color:rgba(255,255,255,.38);margin-bottom:10px;text-align:center;">
+        📚 What are you studying?
+      </div>
+      <div class="focus-subj-row">
+        <button class="focus-subj-btn sel" data-subj="📐 Maths">📐 Maths</button>
+        <button class="focus-subj-btn" data-subj="🌿 EVS">🌿 EVS</button>
+        <button class="focus-subj-btn" data-subj="📖 English">📖 English</button>
+        <button class="focus-subj-btn" data-subj="📚 Hindi">📚 Hindi</button>
+        <button class="focus-subj-btn" data-subj="🎹 Piano">🎹 Piano</button>
+        <button class="focus-subj-btn" data-subj="✏️ Other">✏️ Other</button>
+      </div>
+
+      <textarea class="focus-intention" id="focusIntention" rows="2"
+        placeholder="What's your intention for this session? e.g. Finish Chapter 3 fractions..."></textarea>
+
+      <button class="btn btn-yellow" id="focusStartBtn"
+        style="width:100%;justify-content:center;font-size:1.1rem;padding:13px;">
+        🎯 Enter Focus Mode
+      </button>
+    </div>
+
+    <!-- Stats -->
+    <div style="font-family:'Fredoka One',cursive;font-size:.9rem;
+      color:rgba(255,255,255,.35);text-align:center;margin-bottom:12px;">
+      Your Focus Stats
+    </div>
+    <div class="focus-stats" id="focusStats"></div>
+    <div class="focus-history" id="focusHistory"></div>
+    <div class="empty" id="focusEmpty" style="display:none;margin-top:12px;">
+      <div class="empty-ico">🎯</div>Complete your first session!
+    </div>
+
+  </section>
+
+  <!-- ── FOCUS OVERLAY (fullscreen session) ── -->
+  <div class="focus-overlay theme-deep" id="focusOverlay">
+
+    <!-- Ambient particles -->
+    <div class="focus-particles" id="focusParticles"></div>
+
+    <!-- Ring + clock -->
+    <div class="focus-ring-wrap">
+      <svg class="focus-ring-svg" viewBox="0 0 280 280">
+        <circle class="focus-ring-bg"   cx="140" cy="140" r="133"/>
+        <circle class="focus-ring-fill" cx="140" cy="140" r="133" id="focusRingFill"/>
+      </svg>
+      <div class="focus-clock-inside">
+        <div class="focus-phase-label" id="focusPhaseLabel">FOCUS</div>
+        <div class="focus-clock" id="focusClock">25:00</div>
+        <div class="focus-subject-tag" id="focusSubjTag"></div>
+        <div class="focus-intention-show" id="focusIntentionShow"></div>
+      </div>
+    </div>
+
+    <!-- Controls -->
+    <div class="focus-controls">
+      <button class="focus-ctrl-btn" id="focusPauseBtn">⏸ Pause</button>
+      <button class="focus-ctrl-btn" id="focusResumeBtn" style="display:none">▶ Resume</button>
+      <button class="focus-ctrl-btn end-btn" id="focusEndBtn">✕ End Session</button>
+    </div>
+
+    <!-- Quote -->
+    <div class="focus-quote" id="focusQuote"></div>
+
+    <!-- Break screen (appears between pomodoros) -->
+    <div class="focus-break-screen" id="focusBreakScreen">
+      <div class="focus-break-ico">☕</div>
+      <div class="focus-break-title">Time for a Break!</div>
+      <div class="focus-break-sub">You focused hard. Rest your eyes and stretch a bit.</div>
+      <div class="focus-break-timer" id="focusBreakTimer">5:00</div>
+      <button class="focus-ctrl-btn" id="focusBreakSkip">Skip Break →</button>
+    </div>
+
+  </div>
+
+
+  <!-- ═══════════════ STORIES & COMICS ═══════════════ -->
+  <section id="stories-section" class="section">
+
+    <div class="stories-hero">
+      <div class="stories-hero-ico">📖</div>
+      <div class="stories-hero-title">Stories from the World</div>
+      <div style="font-size:.86rem;color:rgba(255,255,255,.4);">
+        Panchatantra · Jataka · Tenali Raman · Aesop · Comic panels · Morals · Quiz
+      </div>
+    </div>
+
+    <!-- Collection tabs -->
+    <div class="story-coll-tabs">
+      <button class="story-coll-tab sct-panchatantra active" data-coll="panchatantra">
+        🦁 Panchatantra
+      </button>
+      <button class="story-coll-tab sct-jataka" data-coll="jataka">
+        🌸 Jataka Tales
+      </button>
+      <button class="story-coll-tab sct-tenali" data-coll="tenali">
+        🪔 Tenali Raman
+      </button>
+      <button class="story-coll-tab sct-aesop" data-coll="aesop">
+        🦊 Aesop's Fables
+      </button>
+    </div>
+
+    <!-- Story grid -->
+    <div class="story-grid" id="storyGrid"></div>
+
+    <!-- AI generate button -->
+    <div style="text-align:center;margin-top:8px;margin-bottom:30px;">
+      <button class="btn btn-yellow" id="storyAiMoreBtn"
+        style="font-size:.88rem;padding:9px 22px;">
+        ✨ Generate a New Story with AI
+      </button>
+      <div style="font-size:.72rem;color:rgba(255,255,255,.28);margin-top:6px;">
+        Gemini will write an original story in comic panels from the selected collection
+      </div>
+    </div>
+
+  </section>
+
+  <!-- ── STORY READER (fullscreen) ── -->
+  <div class="story-reader" id="storyReader">
+    <div class="sr-topbar">
+      <button class="sr-back" id="srBack">← Back</button>
+      <div>
+        <div class="sr-title" id="srTitle"></div>
+        <div class="sr-coll" id="srColl"></div>
+      </div>
+      <div id="srReadBadge" style="display:none;">
+        <span class="story-read-badge">✅ Read</span>
+      </div>
+    </div>
+    <div class="sr-content">
+      <!-- Loading -->
+      <div class="story-loading" id="srLoading">
+        <div class="story-loading-ico">📜</div>
+        <div class="story-loading-txt">Opening the story scroll...</div>
+        <div class="story-loading-sub">Gemini is painting the panels</div>
+      </div>
+      <!-- Comic panels -->
+      <div id="srPanels" style="display:none;">
+        <div class="comic-panels" id="srPanelList"></div>
+        <div class="story-moral" id="srMoral" style="display:none;">
+          <div class="moral-label">🌟 The Moral</div>
+          <div class="moral-text" id="srMoralText"></div>
+        </div>
+        <div style="font-family:'Fredoka One',cursive;font-size:.9rem;
+          color:rgba(255,255,255,.4);margin-bottom:12px;">
+          🤔 Test Your Understanding
+        </div>
+        <div class="story-questions" id="srQuestions"></div>
+        <div class="story-result" id="srResult" style="display:none;">
+          <div class="sr-trophy" id="srTrophy"></div>
+          <div class="sr-score" id="srResultScore"></div>
+          <div class="sr-msg" id="srResultMsg"></div>
+          <div class="sr-xp" id="srResultXp"></div>
+          <div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap;">
+            <button class="btn btn-yellow" id="srReadAnother">📖 Read Another</button>
+            <button class="btn btn-teal" id="srShare">📋 Share Code</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
 </div><!-- /container -->
 <script>
 // ===== NAV =====
@@ -1548,6 +2521,208 @@ navBtns.forEach(btn=>{
 });
 
 // ===== SETTINGS =====
+// ── Global utilities ──────────────────────────────────────────────
+function fileToBase64(file){
+  return new Promise((res,rej)=>{
+    const r=new FileReader();
+    r.onload=()=>res(r.result.split(',')[1]);
+    r.onerror=rej;
+    r.readAsDataURL(file);
+  });
+}
+
+// ── Global library file handler (called from HTML onchange) ─────────────────
+const LIB_CHAPTERS_MAP = {
+  maths:  ['We the Travellers - I','Fractions','Angles as Turns','We the Travellers - II',
+    'Far and Near','The Dairy Farm','Shapes and Patterns','Weight and Capacity',
+    'Coconut Farm','Symmetrical Designs',"Grandmother's Quilt",
+    'Racing Seconds','Animal Jumps','Maps and Locations','Data Through Pictures'],
+  evs:    ['Water - The Essence of Life','Journey of a River','The Mystery of Food',
+    'Our School A Happy Place','Our Vibrant Country','Some Unique Places',
+    'Energy How Things Work','Clothes How Things are Made',
+    'Rhythms of Nature','Earth Our Shared Home'],
+  english:["Papa's Spectacles",'Gone with the Scooter','The Rainbow','The Wise Parrot',
+    'The Frog','What a Tank!','Gilli Danda','The Decision of the Panchayat',
+    'Vocation','Glass Bangles'],
+  hindi:  ['Kiran','Nyaay Ki Kursi','Chand Ka Kurta','Saanaken','Sundariya',
+    'Chatur Chitrakaar','Mera Bachapan','Kajiranga',
+    'Nyaay','Teen Machhaliyaan','Hamara Ye Kala Mandir','Ganga Ki Kahani']
+};
+function libHandleFile(subj, file){
+  if(!file) return;
+  const chapters = LIB_CHAPTERS_MAP[subj];
+  if(!chapters){ console.error('Unknown subject:', subj); return; }
+  processLibPdf(subj, chapters, file);
+}
+
+// ── Modal state ──────────────────────────────────────────────────────────────
+let _libModalSubj = '';
+let _libModalChap = '';
+
+function libOpenModal(subj, chapter){
+  _libModalSubj = subj;
+  _libModalChap = chapter;
+  const modal = document.getElementById('libModal');
+  const title = document.getElementById('libModalTitle');
+  const sub   = document.getElementById('libModalSub');
+  const status= document.getElementById('libModalStatus');
+  const fill  = document.getElementById('libModalFill');
+  const prog  = document.getElementById('libModalProg');
+  if(title) title.textContent = chapter;
+  if(sub)   sub.textContent   = 'Upload a PDF or photo of this specific chapter';
+  if(status){status.textContent='';status.style.color='';}
+  if(fill)  fill.style.width  = '0%';
+  if(prog)  prog.style.display= 'none';
+  document.getElementById('libModalFile').value = '';
+  if(modal) modal.style.display = 'flex';
+}
+
+// Modal wiring (runs once)
+(function(){
+  const modal   = document.getElementById('libModal');
+  const zone    = document.getElementById('libModalZone');
+  const fileInp = document.getElementById('libModalFile');
+  const cancel  = document.getElementById('libModalCancel');
+  const upload  = document.getElementById('libModalUpload');
+
+  if(!modal) return;
+
+  cancel?.addEventListener('click',()=>{ modal.style.display='none'; });
+  modal.addEventListener('click', e=>{ if(e.target===modal) modal.style.display='none'; });
+  zone?.addEventListener('click', ()=>fileInp?.click());
+  zone?.addEventListener('dragover', e=>{e.preventDefault();zone.style.borderColor='#60a5fa';});
+  zone?.addEventListener('dragleave', ()=>zone.style.borderColor='rgba(96,165,250,.35)');
+  zone?.addEventListener('drop', e=>{
+    e.preventDefault(); zone.style.borderColor='rgba(96,165,250,.35)';
+    const f=e.dataTransfer?.files?.[0];
+    if(f){ fileInp._droppedFile=f; document.getElementById('libModalStatus').textContent='📄 '+f.name+' ready'; }
+  });
+  fileInp?.addEventListener('change', e=>{
+    const f=e.target.files?.[0];
+    if(f) document.getElementById('libModalStatus').textContent='📄 '+f.name+' ready';
+  });
+
+  upload?.addEventListener('click', async()=>{
+    const file = fileInp._droppedFile || fileInp?.files?.[0];
+    if(!file){
+      document.getElementById('libModalStatus').textContent='⚠️ Please choose a file first!';
+      return;
+    }
+    await extractOneChapter(_libModalSubj, _libModalChap, file);
+  });
+})();
+
+window.libOpenModal = libOpenModal;
+async function extractOneChapter(subj, chapter, file){
+  const status = document.getElementById('libModalStatus');
+  const prog   = document.getElementById('libModalProg');
+  const fill   = document.getElementById('libModalFill');
+  const upload = document.getElementById('libModalUpload');
+  const BOOK   = {maths:'Maths Mela',evs:'Our Wondrous World',english:'Santoor',hindi:'Veena'};
+
+  const maxMB = 15;
+  if(file.size > maxMB*1024*1024){
+    status.style.color='var(--p)';
+    status.textContent='File too large — max 15MB per chapter. Try a single chapter PDF.';
+    return;
+  }
+
+  const k = getKey();
+  if(!k){
+    status.style.color='var(--p)';
+    status.textContent='Set the Gemini API key in ⚙️ Settings first!';
+    return;
+  }
+
+  if(upload) upload.disabled = true;
+  if(prog)   prog.style.display = 'block';
+  if(fill)   fill.style.width = '15%';
+  status.style.color = 'var(--b)';
+  status.textContent = 'Reading with Gemini Vision... ⏳';
+
+  try{
+    const base64   = await fileToBase64(file);
+    const mimeType = file.type || 'application/pdf';
+    if(fill) fill.style.width = '40%';
+
+    // Simple prompt — no chapter searching, just extract everything
+    const prompt = `This is the chapter "${chapter}" from the Class 5 NCERT textbook "${BOOK[subj]||subj}".
+
+Extract ALL of the following from this document:
+- Complete story/lesson/poem text (word for word if it is a story or poem)
+- All character names and what they do
+- Key events in order
+- All vocabulary words with their Hindi/English meanings
+- Important facts and numbers mentioned
+- The moral, lesson, or conclusion
+- Any questions or exercises at the end
+
+Write everything as clear bullet points. Be thorough — this content will be used to write exam questions.`;
+
+    const body = {
+      contents:[{role:'user', parts:[
+        {inline_data:{mime_type:mimeType, data:base64}},
+        {text: prompt}
+      ]}],
+      generationConfig:{maxOutputTokens:2500, temperature:0.1}
+    };
+    const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${k}`;
+    const r   = await fetch(url,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(body)});
+    if(fill) fill.style.width = '75%';
+
+    if(!r.ok){ const e=await r.json(); throw new Error(e.error?.message||'API error'); }
+    const d    = await r.json();
+    const text = (d.candidates?.[0]?.content?.parts?.[0]?.text||'').trim();
+
+    if(!text || text.length < 50) throw new Error('No content extracted. Is this the right file?');
+
+    if(fill) fill.style.width = '100%';
+
+    // Save
+    const lib = getLib(subj);
+    lib[chapter] = String(text);
+    saveLib(subj, lib);
+
+    const kb = Math.round(text.length/100)/10;
+    status.style.color = 'var(--g)';
+    status.textContent = `✅ Extracted ${kb}KB for "${chapter}"! Saved to library.`;
+
+    // Auto-close after 1.5s and refresh
+    setTimeout(()=>{
+      document.getElementById('libModal').style.display = 'none';
+      renderLibrary();
+    }, 1500);
+
+  }catch(e){
+    if(fill) fill.style.width = '0%';
+    if(prog) prog.style.display = 'none';
+    status.style.color = 'var(--p)';
+    status.textContent = 'Error: ' + e.message;
+  }
+  if(upload) upload.disabled = false;
+}
+
+// Keep libHandleFile working but redirect to modal
+function libHandleFile(subj, file){
+  if(!file) return;
+  // Show info — old full-book upload not recommended
+  const statusEl = document.getElementById('libStatus_'+subj);
+  if(statusEl){
+    statusEl.className='lib-status loading';
+    statusEl.textContent='For best results, use the Upload button next to each chapter name above.';
+  }
+}
+
+async function processLibPdf(subj, chapters, file){
+  // Legacy — redirect to per-chapter flow
+  console.log('processLibPdf called - use per-chapter upload instead');
+}
+
+
+function getKey(){return localStorage.getItem('dev_key')||'';}
+function libKey(subj){ return 'dev_lib_'+subj; }
+function getLib(subj){ return JSON.parse(localStorage.getItem(libKey(subj))||'{}'); }
+function saveLib(subj, data){ localStorage.setItem(libKey(subj), JSON.stringify(data)); }
 (function(){
   const btn=document.getElementById('settingsBtn'),panel=document.getElementById('sp');
   const gate=document.getElementById('spPinGate'),content=document.getElementById('spContent');
@@ -1568,7 +2743,7 @@ navBtns.forEach(btn=>{
   document.addEventListener('click',e=>{if(!panel.contains(e.target)&&e.target!==btn)panel.classList.remove('open');});
 })();
 
-function getKey(){return localStorage.getItem('dev_key')||'';}
+// getKey moved to global scope
 function checkAI(){
   const has=!!getKey();
   const el=(id,show)=>{const e=document.getElementById(id);if(e)e.style.display=show?'block':'none';};
@@ -1580,23 +2755,23 @@ checkAI();
 // ── Gemini API (google/gemini-1.5-flash) ──────────────────────────────────
 async function callClaude(messages, system='', maxTok=1400){
   const k = getKey(); if(!k) throw new Error('no-key');
-  // Convert chat history to Gemini format
   const geminiMsgs = messages.map(m=>({
     role: m.role==='assistant' ? 'model' : 'user',
     parts:[{text: m.content}]
   }));
-  // Prepend system prompt as a user→model exchange (Gemini doesn't have a system field)
   if(system){
     geminiMsgs.unshift(
       {role:'user',  parts:[{text:'[System instruction] '+system}]},
       {role:'model', parts:[{text:'Understood. I will follow these instructions.'}]}
     );
   }
+  // Cap at 8192 — Gemini 2.5 Flash max output
+  const safeMax = Math.min(maxTok, 8192);
   const body = {
     contents: geminiMsgs,
-    generationConfig:{ maxOutputTokens: maxTok, temperature: 0.7 }
+    generationConfig:{ maxOutputTokens: safeMax, temperature: 0.7 }
   };
-  const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${k}`;
+  const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${k}`;
   const r = await fetch(url, {
     method:'POST',
     headers:{'Content-Type':'application/json'},
@@ -1604,8 +2779,16 @@ async function callClaude(messages, system='', maxTok=1400){
   });
   if(!r.ok){ const e=await r.json(); throw new Error(e.error?.message||'Gemini API error'); }
   const d = await r.json();
-  return d.candidates?.[0]?.content?.parts?.[0]?.text || '';
+  const candidate = d.candidates?.[0];
+  const finishReason = candidate?.finishReason;
+  const text = candidate?.content?.parts?.[0]?.text || '';
+  // If truncated, throw a clear error instead of returning broken JSON
+  if(finishReason === 'MAX_TOKENS'){
+    throw new Error('Response was too long and got cut off. Try selecting fewer sections (e.g. just Section A or Section B) and generate again.');
+  }
+  return text;
 }
+
 
 // ===== MUSIC =====
 (function(){
@@ -2805,6 +3988,798 @@ document.querySelector('[data-sbpage="studywithme"]')?.addEventListener('click',
 
 })(); // end Study With Me IIFE
 
+
+// ════════════════════════════════════════════════════════
+//   PRACTICE PAPER - subject-aware + chapter-notes aware
+// ════════════════════════════════════════════════════════
+(function(){
+
+const PP_TOPICS = {
+  maths:['We the Travellers - I','Fractions','Angles as Turns','We the Travellers - II',
+    'Far and Near','The Dairy Farm','Shapes and Patterns','Weight and Capacity',
+    'Coconut Farm','Symmetrical Designs','Grandmother\'s Quilt',
+    'Racing Seconds','Animal Jumps','Maps and Locations','Data Through Pictures'],
+  evs:['Water - The Essence of Life','Journey of a River','The Mystery of Food',
+    'Our School A Happy Place','Our Vibrant Country','Some Unique Places',
+    'Energy How Things Work','Clothes How Things are Made',
+    'Rhythms of Nature','Earth Our Shared Home'],
+  english:['Papa\'s Spectacles','Gone with the Scooter','The Rainbow','The Wise Parrot',
+    'The Frog','What a Tank!','Gilli Danda','The Decision of the Panchayat',
+    'Vocation','Glass Bangles'],
+  hindi:['Kiran','Nyaay Ki Kursi','Chand Ka Kurta','Saanaken','Sundariya',
+    'Chatur Chitrakaar','Mera Bachapan','Kajiranga',
+    'Nyaay','Teen Machhaliyaan','Hamara Ye Kala Mandir','Ganga Ki Kahani']
+};
+const PP_BOOK  = {maths:'Maths Mela',evs:'Our Wondrous World',english:'Santoor',hindi:'Veena'};
+
+const SUBJ_SECTIONS = {
+  evs: [
+    {id:'A',    label:'Section A',       marks:15, desc:'MCQ + Fill Blanks + One Word'},
+    {id:'B',    label:'Section B',       marks:12, desc:'Short Answer Questions (2 marks each)'},
+    {id:'C',    label:'Section C',       marks:15, desc:'Long Answer Questions (3 marks each)'},
+    {id:'D',    label:'Section D',       marks:8,  desc:'Source-Based (Passage + Questions)'},
+    {id:'FULL', label:'Full Paper',      marks:50, desc:'All Sections'}
+  ],
+  maths: [
+    {id:'ARITH',  label:'Arithmetic',           marks:20, desc:'Word problems with step-by-step'},
+    {id:'FRAC',   label:'Fractions & Decimals',  marks:15, desc:'Fractions, decimals, parts'},
+    {id:'GEO',    label:'Geometry & Patterns',   marks:10, desc:'Shapes, angles, symmetry'},
+    {id:'DATA',   label:'Data & Measurement',    marks:5,  desc:'Charts, weight, capacity'},
+    {id:'FULL',   label:'Full Paper',            marks:50, desc:'Mixed problem sets'}
+  ],
+  english: [
+    {id:'A',    label:'Section A',  marks:10, desc:'Reading: Prose Passage + Poem'},
+    {id:'B',    label:'Section B',  marks:20, desc:'Creative Writing (8m) + Grammar (12m)'},
+    {id:'C',    label:'Section C',  marks:20, desc:'Literature: RTC + Short & Long Answers'},
+    {id:'FULL', label:'Full Paper', marks:50, desc:'All Sections'}
+  ],
+  hindi: [
+    {id:'KA',   label:'खण्ड क',      marks:8,  desc:'अपठित गद्यांश (Unseen Passage)'},
+    {id:'KHA',  label:'खण्ड ख',      marks:10, desc:'व्याकरण (Grammar)'},
+    {id:'GA',   label:'खण्ड ग',      marks:28, desc:'पठित पाठ (Literature)'},
+    {id:'GHA',  label:'खण्ड घ',      marks:4,  desc:'रचनात्मक लेखन (Creative Writing)'},
+    {id:'FULL', label:'पूरा पेपर',   marks:50, desc:'सभी खण्ड'}
+  ]
+};
+
+let ppSpeed = 8;
+let ppSelectedSecs = ['A'];
+let ppCurrentSubj = '';
+
+// ── Subject change ───────────────────────────────────────────────────────────
+document.getElementById('ppSubject')?.addEventListener('change', function(){
+  ppCurrentSubj = this.value;
+  const topics = PP_TOPICS[this.value]||[];
+  // Populate single dropdown
+  const sel = document.getElementById('ppTopic');
+  if(sel){
+    sel.innerHTML = '<option value="mixed">Mixed Topics (all chapters)</option>';
+    topics.forEach(t=>{ const o=document.createElement('option');o.value=t;o.textContent=t;sel.appendChild(o); });
+  }
+  // Populate multi-chapter checkboxes
+  const ml = document.getElementById('ppMultiList');
+  if(ml){
+    ml.innerHTML = topics.map((t,i)=>`
+      <label class="pp-ch-check" data-idx="${i}">
+        <input type="checkbox" value="${t}">
+        <span class="pp-ch-label">${t}</span>
+      </label>`).join('');
+    ml.querySelectorAll('input[type=checkbox]').forEach(cb=>{
+      cb.addEventListener('change', updateMultiHint);
+    });
+  }
+  // Show chapter area, section pills
+  const ca=document.getElementById('ppChapterArea');
+  if(ca) ca.style.display=this.value?'block':'none';
+  renderSectionPills(this.value);
+  // Hide content area until a chapter is chosen
+  const cona=document.getElementById('ppContentArea');
+  if(cona) cona.style.display='none';
+  ppExtractedText='';
+  checkPpKey();
+  if(typeof window.updateLibIndicator==='function') window.updateLibIndicator(this.value,[]);
+});
+
+function updateMultiHint(){
+  const checked=[...document.querySelectorAll('#ppMultiList input:checked')];
+  const hint=document.getElementById('ppMultiHint');
+  if(hint) hint.textContent=`Select 2 to 5 chapters — ${checked.length} selected`;
+  // Disable unchecked if 5 already selected
+  document.querySelectorAll('#ppMultiList input').forEach(cb=>{
+    if(!cb.checked) cb.disabled = checked.length>=5;
+  });
+  // Show content area when >=1 selected
+  const cona=document.getElementById('ppContentArea');
+  if(cona) cona.style.display=checked.length>=1?'block':'none';
+}
+
+// ── Mode toggle: single / multi ───────────────────────────────────────────────
+document.getElementById('ppModeSingle')?.addEventListener('click',()=>{
+  document.getElementById('ppModeSingle').classList.add('sel');
+  document.getElementById('ppModeMulti').classList.remove('sel');
+  document.getElementById('ppSingleArea').style.display='block';
+  document.getElementById('ppMultiArea').style.display='none';
+  // Show content area based on single topic value
+  const v=document.getElementById('ppTopic')?.value;
+  const cona=document.getElementById('ppContentArea');
+  if(cona) cona.style.display=(v&&v!=='mixed')?'block':'none';
+});
+document.getElementById('ppModeMulti')?.addEventListener('click',()=>{
+  document.getElementById('ppModeMulti').classList.add('sel');
+  document.getElementById('ppModeSingle').classList.remove('sel');
+  document.getElementById('ppSingleArea').style.display='none';
+  document.getElementById('ppMultiArea').style.display='block';
+  updateMultiHint();
+});
+
+// ── Single topic change ───────────────────────────────────────────────────────
+document.getElementById('ppTopic')?.addEventListener('change', function(){
+  const cona=document.getElementById('ppContentArea');
+  if(cona) cona.style.display=(this.value&&this.value!=='mixed')?'block':'none';
+  if(this.value&&this.value!=='mixed'){
+    const cn=document.getElementById('ppChapterNotes'); if(cn) cn.value='';
+    ppExtractedText=''; clearUploadStatus();
+  }
+  const subj=document.getElementById('ppSubject')?.value;
+  const topic=this.value&&this.value!=='mixed'?[this.value]:[];
+  if(typeof window.updateLibIndicator==='function') window.updateLibIndicator(subj,topic);
+});
+
+// ── Content source tabs ───────────────────────────────────────────────────────
+document.querySelectorAll('.pp-src-tab').forEach(tab=>{
+  tab.addEventListener('click',()=>{
+    document.querySelectorAll('.pp-src-tab').forEach(t=>t.classList.remove('sel'));
+    document.querySelectorAll('.pp-src-panel').forEach(p=>p.classList.remove('active'));
+    tab.classList.add('sel');
+    document.getElementById('ppSrc'+tab.dataset.src.charAt(0).toUpperCase()+tab.dataset.src.slice(1))?.classList.add('active');
+  });
+});
+
+// ── PDF / Image upload ────────────────────────────────────────────────────────
+// ppPdfTexts array (4 slots) replaces single ppExtractedText
+
+function clearUploadStatus(){
+  if(typeof ppPdfTexts!=='undefined'){
+    ppPdfTexts.fill('');
+    for(let i=0;i<PDF_SLOTS;i++) clearPdfSlot(i);
+  }
+}
+
+// ── 4-slot PDF upload system ──────────────────────────────────────────────────
+const PDF_SLOTS = 4;
+const ppPdfTexts = new Array(PDF_SLOTS).fill(''); // extracted text per slot
+
+function buildPdfSlots(){
+  const grid = document.getElementById('ppPdfGrid');
+  if(!grid) return;
+  grid.innerHTML = '';
+  for(let i=0;i<PDF_SLOTS;i++){
+    const slot = document.createElement('div');
+    slot.className = 'pp-pdf-slot';
+    slot.id = 'pdfSlot'+i;
+    slot.innerHTML = `
+      <input type="file" id="pdfInput${i}" accept=".pdf,image/*" style="display:none;">
+      <div class="pp-pdf-slot-zone" id="pdfZone${i}">
+        <div class="pp-pdf-slot-ico" id="pdfIco${i}">📄</div>
+        <div class="pp-pdf-slot-lbl">Chapter ${i+1}</div>
+        <div class="pp-pdf-slot-sub">PDF / JPG / PNG · 10MB max</div>
+      </div>
+      <div class="pp-pdf-slot-status" id="pdfStatus${i}"></div>
+      <div class="pp-pdf-slot-preview" id="pdfPreview${i}" style="display:none;"></div>
+      <button class="pp-pdf-slot-clear" id="pdfClear${i}" style="display:none;" title="Remove this file">✕</button>`;
+    grid.appendChild(slot);
+    wirePdfSlot(i);
+  }
+}
+
+function wirePdfSlot(i){
+  const zone  = document.getElementById('pdfZone'+i);
+  const input = document.getElementById('pdfInput'+i);
+  const clear = document.getElementById('pdfClear'+i);
+
+  zone?.addEventListener('click',()=>input?.click());
+  zone?.addEventListener('dragover',e=>{e.preventDefault();zone.classList.add('drag');});
+  zone?.addEventListener('dragleave',()=>zone.classList.remove('drag'));
+  zone?.addEventListener('drop',e=>{
+    e.preventDefault(); zone.classList.remove('drag');
+    const f=e.dataTransfer?.files?.[0]; if(f) processPdfSlot(i,f);
+  });
+  input?.addEventListener('change',e=>{ if(e.target.files?.[0]) processPdfSlot(i,e.target.files[0]); });
+  clear?.addEventListener('click',()=>clearPdfSlot(i));
+}
+
+function clearPdfSlot(i){
+  ppPdfTexts[i]='';
+  const status  = document.getElementById('pdfStatus'+i);
+  const preview = document.getElementById('pdfPreview'+i);
+  const clear   = document.getElementById('pdfClear'+i);
+  const ico     = document.getElementById('pdfIco'+i);
+  const zone    = document.getElementById('pdfZone'+i);
+  const input   = document.getElementById('pdfInput'+i);
+  if(status){status.className='pp-pdf-slot-status';status.textContent='';}
+  if(preview){preview.style.display='none';preview.textContent='';}
+  if(clear) clear.style.display='none';
+  if(ico) ico.textContent='📄';
+  if(zone) zone.classList.remove('done');
+  if(input) input.value='';
+  updatePdfTotal();
+}
+
+async function processPdfSlot(i, file){
+  const status  = document.getElementById('pdfStatus'+i);
+  const preview = document.getElementById('pdfPreview'+i);
+  const clear   = document.getElementById('pdfClear'+i);
+  const ico     = document.getElementById('pdfIco'+i);
+  const zone    = document.getElementById('pdfZone'+i);
+  const maxMB   = 10;
+
+  if(file.size > maxMB*1024*1024){
+    status.className='pp-pdf-slot-status err';
+    status.textContent='Too large — max 10MB'; return;
+  }
+  status.className='pp-pdf-slot-status loading';
+  status.textContent='Reading with Gemini... ⏳';
+  ico.textContent='⏳'; preview.style.display='none'; ppPdfTexts[i]='';
+
+  try{
+    const base64  = await fileToBase64(file);
+    const mimeType = file.type||'application/pdf';
+    const k = getKey(); if(!k) throw new Error('no-key');
+    const body={
+      contents:[{role:'user',parts:[
+        {inline_data:{mime_type:mimeType,data:base64}},
+        {text:'This is a page or chapter from an Indian school textbook. Extract ALL the important content: the full story or lesson text, key vocabulary words with meanings, important facts, character names, events in order, and the moral or lesson if any. Format it clearly as bullet points so a teacher can use it to write exam questions. Be thorough.'}
+      ]}],
+      generationConfig:{maxOutputTokens:2000,temperature:0.2}
+    };
+    const url=`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${k}`;
+    const r=await fetch(url,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(body)});
+    if(!r.ok){const e=await r.json();throw new Error(e.error?.message||'Gemini error');}
+    const d=await r.json();
+    const text=d.candidates?.[0]?.content?.parts?.[0]?.text||'';
+    if(!text) throw new Error('No content extracted');
+
+    ppPdfTexts[i]=text;
+    const kb=Math.round(text.length/100)/10;
+    status.className='pp-pdf-slot-status done';
+    status.textContent=`✅ ${file.name.slice(0,22)} · ${kb}KB extracted`;
+    ico.textContent='✅';
+    zone.classList.add('done');
+    clear.style.display='block';
+    preview.style.display='block';
+    preview.textContent=text.slice(0,200)+(text.length>200?'…':'');
+    updatePdfTotal();
+  }catch(e){
+    ppPdfTexts[i]='';
+    status.className='pp-pdf-slot-status err';
+    status.textContent='Error: '+(e.message==='no-key'?'Set API key in ⚙️ Settings!':e.message);
+    ico.textContent='❌';
+  }
+}
+
+function updatePdfTotal(){
+  const filled = ppPdfTexts.filter(t=>t.trim());
+  const total  = document.getElementById('ppPdfTotal');
+  const count  = document.getElementById('ppPdfTotalCount');
+  const kb     = document.getElementById('ppPdfTotalKb');
+  if(!total) return;
+  if(filled.length){
+    total.style.display='block';
+    count.textContent=filled.length;
+    kb.textContent=Math.round(filled.reduce((a,t)=>a+t.length,0)/100)/10;
+  } else {
+    total.style.display='none';
+  }
+}
+
+// fileToBase64 is global — defined below
+
+// Build slots on load
+buildPdfSlots();
+
+// ── Get content for prompt ────────────────────────────────────────────────────
+function getChapterNotes(){
+  // Returns {hasContent, block} where block goes at TOP of prompt
+  // Priority: 1) Uploaded PDFs  2) Chapter Library  3) Typed notes
+
+  function makeBlock(src, content){
+    return {
+      hasContent: true,
+      block:
+        '########################################\n'+
+        '# AUTHORITATIVE SOURCE MATERIAL ('+src+')\n'+
+        '# You MUST use ONLY the text below.\n'+
+        '# Do NOT use your training knowledge.\n'+
+        '# Every question and answer MUST come\n'+
+        '# directly from this content.\n'+
+        '########################################\n\n'+
+        content+'\n\n'+
+        '########################################\n'+
+        '# END OF SOURCE MATERIAL\n'+
+        '# REMINDER: Base EVERY question and\n'+
+        '# answer strictly on the text above.\n'+
+        '# If it is not in the text above,\n'+
+        '# do NOT include it.\n'+
+        '########################################\n'
+    };
+  }
+
+  // 1. Uploaded PDF slots
+  const pdfTexts = typeof ppPdfTexts!=='undefined' ? ppPdfTexts.filter(t=>t.trim()) : [];
+  if(pdfTexts.length){
+    const combined = pdfTexts.map((t,i)=>'=== SOURCE '+String(i+1)+' ===\n'+t).join('\n\n');
+    return makeBlock('uploaded PDF x'+pdfTexts.length, combined);
+  }
+
+  // 2. Chapter Library (auto-load from Dad's saved content)
+  const subj = ppCurrentSubj;
+  const topics = getSelectedTopics();
+  if(subj && topics.length && typeof window.getLibraryContent==='function'){
+    const libContent = window.getLibraryContent(subj, topics);
+    if(libContent) return makeBlock('Chapter Library', libContent);
+  }
+
+  // 3. Typed/pasted notes
+  const notes=(document.getElementById('ppChapterNotes')?.value||'').trim();
+  if(!notes) return {hasContent:false, block:''};
+  return makeBlock('teacher notes', notes);
+}
+
+// ── Get selected topic(s) ─────────────────────────────────────────────────────
+function getSelectedTopics(){
+  const isMulti = document.getElementById('ppModeMulti')?.classList.contains('sel');
+  if(isMulti){
+    return [...document.querySelectorAll('#ppMultiList input:checked')].map(cb=>cb.value);
+  }
+  const single = document.getElementById('ppTopic')?.value;
+  return single&&single!=='mixed' ? [single] : [];
+}
+function getTopicLine(topics, subj){
+  if(!topics.length) return 'mixed topics from across the syllabus';
+  if(topics.length===1) return `the chapter "${topics[0]}"`;
+  return `a mix of chapters: ${topics.map(t=>`"${t}"`).join(', ')}`;
+}
+
+function renderSectionPills(subj){
+  const area=document.getElementById('ppSectionArea');
+  const pills=document.getElementById('ppSectionPills');
+  const lbl=document.getElementById('ppSectionLabel');
+  if(!area||!pills) return;
+  const defs=SUBJ_SECTIONS[subj];
+  if(!defs){area.style.display='none';return;}
+  area.style.display='block';
+  lbl.textContent=subj==='hindi'?'खण्ड चुनें':'Select Section(s)';
+  pills.innerHTML=defs.map(d=>`<button class="pp-sec-pill${d.id==='A'||d.id==='KA'||d.id==='ARITH'?' sel':''}" data-sec="${d.id}">${d.label} - ${d.desc} (${d.marks}m)</button>`).join('');
+  ppSelectedSecs=[defs[0].id];
+  pills.querySelectorAll('.pp-sec-pill').forEach(btn=>{
+    btn.addEventListener('click',()=>{
+      if(btn.dataset.sec==='FULL'){
+        pills.querySelectorAll('.pp-sec-pill').forEach(b=>b.classList.remove('sel'));
+        btn.classList.add('sel'); ppSelectedSecs=['FULL'];
+      } else {
+        pills.querySelector('[data-sec="FULL"]')?.classList.remove('sel');
+        btn.classList.toggle('sel');
+        ppSelectedSecs=[...pills.querySelectorAll('.pp-sec-pill.sel')].map(b=>b.dataset.sec).filter(s=>s!=='FULL');
+        if(!ppSelectedSecs.length){btn.classList.add('sel');ppSelectedSecs=[btn.dataset.sec];}
+      }
+    });
+  });
+}
+
+document.querySelectorAll('.pp-speed-btn').forEach(b=>{
+  b.addEventListener('click',()=>{
+    document.querySelectorAll('.pp-speed-btn').forEach(x=>x.classList.remove('sel'));
+    b.classList.add('sel'); ppSpeed=parseInt(b.dataset.sp);
+  });
+});
+
+function checkPpKey(){
+  const has=!!getKey();
+  const nk=document.getElementById('ppNoKey');
+  const gb=document.getElementById('ppGenerateBtn');
+  if(nk) nk.style.display=has?'none':'block';
+  if(gb) gb.style.opacity=has?'1':'0.45';
+}
+checkPpKey();
+document.querySelector('[data-sbpage="paper"]')?.addEventListener('click',()=>setTimeout(checkPpKey,50));
+
+function getChapterNotes(){
+  const notes=(document.getElementById('ppChapterNotes')?.value||'').trim();
+  if(!notes) return '';
+  return '\n\nCHAPTER CONTENT - base ALL questions STRICTLY on this content only:\n<<<\n'+notes+'\n>>>\nDo NOT use any other source. Every question must be answerable from the content above.';
+}
+
+
+// ── Helper: strong content prefix for prompts ────────────────────────────────
+function makePrompt(contentNotes, role, topic, format, extra){
+  const cn = contentNotes; // {hasContent, block}
+  if(cn.hasContent){
+    // Content FIRST — model reads source before role to prevent training-data override
+    return cn.block +
+      '\n\nROLE: '+role+'\n'+
+      'TOPIC: '+topic+'\n\n'+
+      'TASK: Generate a practice paper using ONLY the source material above.\n'+
+      'Return ONLY raw valid JSON, no markdown, no backticks, no explanation.\n\n'+
+      'JSON FORMAT:\n'+format+
+      (extra?'\n\n'+extra:'');
+  } else {
+    // No content — use topic-based generation with standard prompt
+    return 'ROLE: '+role+'\n'+
+      'TOPIC: '+topic+'\n\n'+
+      'TASK: Generate a Class 5 CBSE-style practice paper on the topic above.\n'+
+      'Make all questions age-appropriate for a 10-year-old Indian student.\n'+
+      'Return ONLY raw valid JSON, no markdown, no backticks.\n\n'+
+      'JSON FORMAT:\n'+format+
+      (extra?'\n\nADDITIONAL INSTRUCTIONS:\n'+extra:'');
+  }
+}
+
+// EVS prompt
+function buildPromptEVS(topic, sections){
+  const cn=getChapterNotes();
+  const tl=getTopicLine(Array.isArray(topic)?topic:[topic],'evs');
+  const allSecs=sections.includes('FULL');
+  const secKeys=allSecs?['A','B','C','D']:sections;
+  const format=`{"sections":{${secKeys.map(s=>'"'+s+'": [...]').join(',')}}}
+
+Section A array (15 marks): 5 MCQs {"type":"mcq","q":"...","opts":["a) ...","b) ...","c) ...","d) ..."],"ans":"a) ...","marks":1} + 4 fill-blanks {"type":"fill","q":"The ___ is ...","ans":"word","marks":1} + 6 one-word {"type":"oneword","q":"...?","ans":"word","marks":1}
+Section B array (12 marks): 6 short-answer {"type":"short","q":"...","ans":"2-3 sentences","or_q":"optional","or_ans":"optional","marks":2}
+Section C array (15 marks): 5 long-answer {"type":"long","q":"...","ans":"4-6 sentences","or_q":"optional","or_ans":"optional","marks":3}
+Section D array (8 marks): [{"type":"source","passage":"...","questions":[{"q":"...","ans":"...","marks":2}]}] — 4 questions`;
+  return makePrompt(cn,
+    'Class 5 EVS teacher (Our Wondrous World, NCERT 2025-26)',
+    tl,
+    format,
+    'Generate only the sections requested: '+secKeys.join(', ')+'. All answers must be factually correct and based on CBSE Class 5 level.'
+  );
+}
+
+// Maths prompt
+function buildPromptMaths(topic, sections){
+  const cn=getChapterNotes();
+  const tl=getTopicLine(Array.isArray(topic)?topic:[topic],'maths')+' from Maths Mela';
+  const allSecs=sections.includes('FULL');
+  const sets=[];
+  if(allSecs||sections.includes('ARITH')) sets.push('"ARITH":[{"type":"problem","q":"word problem in Indian everyday context","hint":"concept/formula to use","step1":"first calculation with actual numbers","step2":"next step","ans":"final answer with units","marks":5}] — 4 problems');
+  if(allSecs||sections.includes('FRAC'))  sets.push('"FRAC":[{"type":"problem","q":"fraction or decimal problem","hint":"...","step1":"...","step2":"...","ans":"...","marks":5}] — 3 problems');
+  if(allSecs||sections.includes('GEO'))   sets.push('"GEO":[{"type":"problem","q":"geometry or pattern problem","hint":"formula","step1":"...","step2":"...","ans":"...","marks":5}] — 2 problems');
+  if(allSecs||sections.includes('DATA'))  sets.push('"DATA":[{"type":"problem","q":"data or measurement question","hint":"...","step1":"...","step2":"...","ans":"...","marks":2.5}] — 2 problems');
+  const format='{"sections":{'+sets.join(',')+'}}\n\nFor EVERY problem include: hint (concept/formula), step1 (first working step with numbers), step2 (next step), ans (final answer with unit).';
+  return makePrompt(cn,
+    'Class 5 Maths teacher (Maths Mela, NCERT 2025-26)',
+    tl,
+    format,
+    'Write problems in everyday Indian contexts: markets, cricket, cooking, travel. Every answer must show complete working.'
+  );
+}
+
+// English prompt
+function buildPromptEnglish(topic, sections){
+  const cn=getChapterNotes();
+  const tl=getTopicLine(Array.isArray(topic)?topic:[topic],'english')+' from Santoor';
+  const allSecs=sections.includes('FULL');
+  let secDefs=[];
+  if(allSecs||sections.includes('A')) secDefs.push('"A":[{"type":"passage","title":"Reading Comprehension - Prose","passage":"5-6 sentence paragraph","questions":[{"q":"MCQ","opts":["a)...","b)...","c)...","d)..."],"ans":"a)...","marks":1}x4, {"q":"Find words: (a) meaning (b) meaning","ans":"(a) word (b) word","marks":1}]},{"type":"poem","title":"Reading Comprehension - Poem","poem":"3-stanza poem","questions":[5 questions same format]}]');
+  if(allSecs||sections.includes('B')) secDefs.push('"B":[{"type":"creative","subtype":"poster","q":"Design a poster on [theme].","ans":"sample","or_q":"alternate","or_ans":"sample","marks":4},{"type":"creative","subtype":"diary","q":"Write a diary entry about [event].","ans":"sample diary","or_q":"alternate","or_ans":"sample","marks":4},{"type":"grammar","subtype":"verb_tense","q":"Fill blanks with correct verb form","items":[{"sentence":"She usually ___ (walk) to school, but today she ___ (ride) her bicycle.","ans":"walks / is riding"},{"sentence":"The birds ___ (chirp) every morning, but right now they ___ (rest) on the tree.","ans":"chirp / are resting"}],"marks":2},{"type":"grammar","subtype":"adverb","q":"Underline adverb and write type","items":[{"sentence":"She sang beautifully.","ans":"beautifully - manner"},{"sentence":"We will go tomorrow.","ans":"tomorrow - time"},{"sentence":"He often visits.","ans":"often - frequency"},{"sentence":"The dog sleeps outside.","ans":"outside - place"}],"marks":4},{"type":"grammar","subtype":"preposition","q":"Choose correct preposition","items":[{"sentence":"She goes to school ___ bus. (by/with)","ans":"by"},{"sentence":"Books are ___ the shelf. (on/in)","ans":"on"},{"sentence":"Meet me ___ 5 PM. (at/in)","ans":"at"},{"sentence":"They walked ___ the bridge. (across/above)","ans":"across"}],"marks":2},{"type":"grammar","subtype":"conjunction","q":"Underline the conjunctions","items":[{"sentence":"I wanted to play, but I had homework.","ans":"but"},{"sentence":"She is both intelligent and hardworking.","ans":"both...and"},{"sentence":"He did not come although invited.","ans":"although"},{"sentence":"I did not eat because I was not hungry.","ans":"because"}],"marks":2}]');
+  if(allSecs||sections.includes('C')) secDefs.push('"C":[{"type":"rtc","title":"RTC 1","extract":"3-4 lines from chapter","subqs":[{"q":"Who is the author/poet and title?","ans":"...","marks":1},{"q":"Explain these lines.","ans":"...","marks":1},{"q":"What does [word] mean?","ans":"...","marks":1}],"marks":3},{"type":"rtc","title":"RTC 2","extract":"different 3-4 lines","subqs":[{"q":"What did the character do?","ans":"...","marks":1},{"q":"What happened next?","ans":"...","marks":1},{"q":"Reaction?","ans":"...","marks":1}],"marks":3},{"type":"value","q":"What lesson does this chapter teach? Do you agree that [moral]? Give reasons.","ans":"4-5 sentence reflection","marks":4},{"type":"short_lit","q":"Give short answers to any FIVE (2 marks each):","items":[{"q":"Q1","ans":"2 sentences"},{"q":"Q2","ans":"..."},{"q":"Q3","ans":"..."},{"q":"Q4","ans":"..."},{"q":"Q5","ans":"..."},{"q":"Q6","ans":"..."},{"q":"Q7","ans":"..."}],"marks":10}]');
+  const secKeys=allSecs?['A','B','C']:sections;
+  const format='{"sections":{'+secDefs.join(',')+'}}\n\nGenerate only: '+secKeys.join(', ');
+  return makePrompt(cn,
+    'Class 5 English teacher (Santoor, NCERT 2025-26)',
+    tl,
+    format,
+    'For Section C: extract quotes/lines directly from the source material provided. Grammar questions (Section B) may use standard patterns but creative writing themes should connect to the chapter.'
+  );
+}
+
+// Hindi prompt
+function buildPromptHindi(topic, sections){
+  const cn=getChapterNotes();
+  const tl=getTopicLine(Array.isArray(topic)?topic:[topic],'hindi');
+  const allSecs=sections.includes('FULL');
+  let secDefs=[];
+  if(allSecs||sections.includes('KA'))  secDefs.push('"KA":[{"type":"apathit","passage":"original Hindi gadyansh 5-6 sentences with moral","questions":[{"q":"(ka) ...","ans":"...","marks":1},{"q":"(kha) ...","ans":"...","marks":1},{"q":"(ga) ...","ans":"...","marks":1},{"q":"(gha) ...","ans":"...","marks":1},{"q":"(nga) mukhya sandesh","ans":"...","marks":1},{"q":"(cha) rekhankit shabd arth","ans":"...","marks":1},{"q":"(chha) vachan badlo: [word1] ___ [word2] ___","ans":"plurals","marks":2}],"marks":8}]');
+  if(allSecs||sections.includes('KHA')) secDefs.push('"KHA":[{"type":"grammar","subtype":"kriya_bhed","q":"kriya ka bhed likhiye","items":[{"sentence":"Reena kitab padh rahi hai.","ans":"sakarmak kriya"},{"sentence":"Pakshi ud rahe hain.","ans":"akarmak kriya"}],"marks":1},{"type":"grammar","subtype":"paryayvachi","q":"paryayvachi shabd likhiye","items":[{"word":"Suraj","ans":"Ravi, Dinakar, Bhaskar"},{"word":"Raat","ans":"Ratri, Nisha, Yamini"}],"marks":2},{"type":"grammar","subtype":"muhavare","q":"muhaavaron ke arth aur vakya","items":[{"muhavra":"laal peela hona","arth":"bahut krodhit hona","vakya":"example vakya"},{"muhavra":"daant khatte karna","arth":"harana","vakya":"example vakya"}],"marks":2},{"type":"grammar","subtype":"vakya_shuddhi","q":"vakya shuddh kariye","items":[{"wrong":"Bachche kaksha mein shor kar raha hai.","correct":"Bachche kaksha mein shor kar rahe hain."}],"marks":1},{"type":"grammar","subtype":"vilom","q":"vilom shabd likhiye","items":[{"word":"aasaan","ans":"kathin"},{"word":"darpok","ans":"saahasi"}],"marks":1},{"type":"grammar","subtype":"visheshan","q":"uchit visheshan se vakya poore kijiye","items":[{"sentence":"Frij mein ___ paani.","ans":"thanda"},{"sentence":"Mere paas ___ kitaab.","ans":"nayi"}],"marks":1},{"type":"grammar","subtype":"ling_badlo","q":"ling badliye","items":[{"sentence":"Dulha taiyaar ho raha hai.","ans":"Dulhan taiyaar ho rahi hai."},{"sentence":"Sher gufa mein soya.","ans":"Sherni gufa mein soyi."}],"marks":1},{"type":"grammar","subtype":"shabd_arth","q":"do arth batayen","items":[{"word":"Baal","ans":"hair / child"}],"marks":1}]');
+  if(allSecs||sections.includes('GA'))  secDefs.push('"GA":[{"type":"pathit_padyansh","title":"pathit padyansh","extract":"4-6 lines from a poem in the source material","questions":[{"q":"ye panktiyan kis kavita se?","opts":["i)...","ii)...","iii)...","iv) koi nahin"],"ans":"i)...","marks":1},{"q":"[question]","opts":["i)...","ii)...","iii)...","iv)..."],"ans":"i)...","marks":1},{"q":"[question]","opts":["i)...","ii)...","iii)...","iv)..."],"ans":"i)...","marks":1},{"q":"[question]","opts":["i)...","ii)...","iii)...","iv)..."],"ans":"i)...","marks":1}],"marks":4},{"type":"pathit_gadyansh","title":"pathit gadyansh","extract":"3-4 lines from prose in the source material","questions":[{"q":"[question]","opts":["i)...","ii)...","iii)...","iv)..."],"ans":"i)...","marks":1},{"q":"[question]","opts":["i)...","ii)...","iii)...","iv)..."],"ans":"i)...","marks":1},{"q":"[question]","opts":["i)...","ii)...","iii)...","iv)..."],"ans":"i)...","marks":1},{"q":"[question]","opts":["i)...","ii)...","iii)...","iv)..."],"ans":"i)...","marks":1}],"marks":4},{"type":"prashnottar","q":"prashno ke uttar dijiye (2-2 ank)","items":[{"q":"question from source","ans":"2-3 sentences","marks":2},{"q":"question from source","ans":"...","marks":2},{"q":"question from source","ans":"...","marks":2}],"marks":6},{"type":"kisne_kaha","q":"kisne kaha, kisse kaha, kyon kaha","items":[{"quote":"dialogue from source","ans":"vakta - shrota - kaaran","marks":2},{"quote":"dialogue from source","ans":"vakta - shrota - kaaran","marks":2}],"marks":4},{"type":"sahi_galat","q":"sahi aur galat","items":[{"statement":"from source","ans":"sahi"},{"statement":"from source","ans":"galat"},{"statement":"from source","ans":"sahi"},{"statement":"from source","ans":"galat"}],"marks":4},{"type":"dirgh_uttar","q":"vistar se uttar dijiye (3-3 ank)","items":[{"q":"question from source","ans":"4-5 sentences","marks":3},{"q":"question from source","ans":"4-5 sentences","marks":3}],"marks":6}]');
+  if(allSecs||sections.includes('GHA')) secDefs.push('"GHA":[{"type":"rachnatmak","q":"patra: apne mitra ko chapter ke baare mein batate hue patra likhiye","ans":"sample patra","or_q":"chitra varnan kijiye","or_ans":"sample varnan","marks":4}]');
+  const secKeys=allSecs?['KA','KHA','GA','GHA']:sections;
+  const format='{"sections":{'+secDefs.join(',')+'}}\n\nGenerate only: '+secKeys.join(', ')+'. Write questions in Hindi (Devanagari) where appropriate.';
+  return makePrompt(cn,
+    'Class 5 Hindi teacher (Veena, NCERT 2025-26)',
+    tl,
+    format,
+    'For KHA (grammar): use standard Hindi grammar patterns. For GA (literature): extract actual dialogues, lines and facts ONLY from the source material provided above. For sahi_galat and kisne_kaha: use actual statements and dialogues from the source.'
+  );
+}
+
+function buildPrompt(subj, topic, sections){
+  if(subj==='evs')     return buildPromptEVS(topic, sections);
+  if(subj==='maths')   return buildPromptMaths(topic, sections);
+  if(subj==='english') return buildPromptEnglish(topic, sections);
+  if(subj==='hindi')   return buildPromptHindi(topic, sections);
+  return buildPromptEVS(topic, sections);
+}
+
+// Generate
+document.getElementById('ppGenerateBtn')?.addEventListener('click', async()=>{
+  const subj  = document.getElementById('ppSubject').value;
+  if(!subj){ alert('Please pick a subject first!'); return; }
+  if(!getKey()){ checkPpKey(); return; }
+  const topics = getSelectedTopics();
+  const topic  = topics.length===1?topics[0]:topics.length>1?topics:'mixed';
+  const pills  = document.getElementById('ppSectionPills');
+  const sels   = pills ? [...pills.querySelectorAll('.pp-sec-pill.sel')].map(b=>b.dataset.sec) : ['FULL'];
+  const sections = sels.includes('FULL') ? ['FULL'] : sels.filter(s=>s!=='FULL');
+  if(!sections.length){ alert('Please select at least one section!'); return; }
+  document.getElementById('ppSetup').style.display     = 'none';
+  document.getElementById('ppGenerating').style.display = 'block';
+  document.getElementById('ppPaper').style.display      = 'none';
+  try{
+    const prompt = buildPrompt(subj, topic, sections);
+    const raw    = await callClaude([{role:'user',content:prompt}],
+      'You are an expert CBSE Class 5 Indian school teacher. CRITICAL RULE: When source material is provided at the top of the message (between ### markers), you MUST use ONLY that material for all questions and answers. Do NOT use your training knowledge about NCERT books. Do NOT invent content not present in the source. Return ONLY raw valid JSON — no markdown, no backticks, no explanation.',8192);
+    const data   = JSON.parse(raw.replace(/```json|```/g,'').trim());
+    renderPaper(data, subj, topic, sections);
+  }catch(e){
+    document.getElementById('ppGenerating').style.display = 'none';
+    document.getElementById('ppSetup').style.display      = 'block';
+    alert('Could not generate: '+(e.message||'Please try again with fewer sections.'));
+  }
+});
+
+// Render
+function renderPaper(data, subj, topic, sections){
+  document.getElementById('ppGenerating').style.display = 'none';
+  document.getElementById('ppPaper').style.display      = 'block';
+  const topicLabel = topic==='mixed'?'Mixed Topics':topic;
+  document.getElementById('ppPaperSubTitle').textContent = PP_BOOK[subj]+' - '+topicLabel;
+  document.getElementById('ppPaperDate').textContent     = new Date().toDateString();
+  const defs    = SUBJ_SECTIONS[subj]||[];
+  const allSecs = sections.includes('FULL');
+  const usedIds = allSecs ? defs.filter(d=>d.id!=='FULL').map(d=>d.id) : sections;
+  const totalM  = usedIds.reduce((a,s)=>{ const d=defs.find(x=>x.id===s); return a+(d?d.marks:0); },0);
+  document.getElementById('ppPaperMarks').textContent = 'Max Marks: '+totalM;
+  const body = document.getElementById('ppPaperBody');
+  body.innerHTML = '';
+  const isMaths = subj==='maths';
+  const colorMap = {A:'pp-sec-a',B:'pp-sec-b',C:'pp-sec-c',D:'pp-sec-d',
+    KA:'pp-sec-a',KHA:'pp-sec-b',GA:'pp-sec-c',GHA:'pp-sec-d',
+    ARITH:'pp-sec-a',FRAC:'pp-sec-b',GEO:'pp-sec-c',DATA:'pp-sec-d'};
+  let qNum = 1;
+  usedIds.forEach(sec=>{
+    const secDef  = defs.find(d=>d.id===sec);
+    const secData = data.sections?.[sec];
+    if(!secData||!secData.length) return;
+    const secDiv = document.createElement('div');
+    secDiv.className = 'pp-section-block';
+    secDiv.innerHTML = `<div class="pp-section-hdr">
+      <span class="pp-section-tag ${colorMap[sec]||'pp-sec-a'}">${secDef?.label||sec}</span>
+      <span style="font-size:.82rem;color:rgba(255,255,255,.5)">${secDef?.desc||''}</span>
+      <span class="pp-section-marks">${secDef?.marks||'?'} marks</span>
+    </div>`;
+    secData.forEach(q=>{
+      const t = q.type||'';
+      if(t==='apathit'||t==='passage'||t==='poem'){
+        const block=document.createElement('div');
+        block.style.cssText='background:rgba(255,255,255,.04);border-radius:14px;border:2px solid rgba(255,255,255,.07);padding:16px;margin-bottom:14px;';
+        block.innerHTML=`<div style="font-family:'Fredoka One',cursive;font-size:.85rem;color:rgba(255,255,255,.4);margin-bottom:8px">${q.title||'Read carefully:'}</div>
+          <div style="font-size:.9rem;line-height:1.8;color:rgba(255,255,255,.82);background:rgba(78,205,196,.06);border-left:3px solid rgba(78,205,196,.3);padding:10px 14px;border-radius:0 8px 8px 0;margin-bottom:12px;white-space:pre-wrap">${q.passage||q.poem||''}</div>`;
+        (q.questions||[]).forEach(sq=>block.appendChild(buildQCard(qNum++,{...sq,type:'passage_q'},false)));
+        secDiv.appendChild(block);
+      } else if(t==='source'){
+        const block=document.createElement('div');
+        block.style.cssText='background:rgba(255,107,53,.05);border:1px solid rgba(255,107,53,.18);border-radius:14px;padding:14px;margin-bottom:14px;';
+        block.innerHTML=`<div style="font-family:'Fredoka One',cursive;font-size:.82rem;color:var(--o);margin-bottom:6px">Read carefully:</div>
+          <div style="font-size:.88rem;line-height:1.7;color:rgba(255,255,255,.8);margin-bottom:12px">${q.passage||''}</div>`;
+        (q.questions||[]).forEach(sq=>block.appendChild(buildQCard(qNum++,{...sq,type:'source_q'},false)));
+        secDiv.appendChild(block);
+      } else if(t==='pathit_padyansh'||t==='pathit_gadyansh'){
+        const block=document.createElement('div');
+        block.style.cssText='background:rgba(168,85,247,.05);border:1px solid rgba(168,85,247,.18);border-radius:14px;padding:14px;margin-bottom:14px;';
+        block.innerHTML=`<div style="font-family:'Fredoka One',cursive;font-size:.85rem;color:var(--v);margin-bottom:8px">${q.title||'पठित अंश'}</div>
+          <div style="font-size:.9rem;line-height:1.8;color:rgba(255,255,255,.82);background:rgba(168,85,247,.06);border-left:3px solid rgba(168,85,247,.3);padding:10px 14px;border-radius:0 8px 8px 0;margin-bottom:12px;white-space:pre-wrap">${q.extract||''}</div>`;
+        (q.questions||[]).forEach(sq=>block.appendChild(buildQCard(qNum++,{...sq,type:'mcq'},false)));
+        secDiv.appendChild(block);
+      } else if(t==='grammar'){
+        secDiv.appendChild(buildGrammarCard(qNum++,q));
+      } else if(t==='creative'){
+        secDiv.appendChild(buildQCard(qNum++,q,false));
+      } else if(t==='prashnottar'||t==='kisne_kaha'||t==='sahi_galat'||t==='dirgh_uttar'){
+        secDiv.appendChild(buildMultiCard(qNum++,q));
+      } else if(t==='short_lit'){
+        secDiv.appendChild(buildShortLitCard(qNum++,q));
+      } else if(t==='rtc'){
+        secDiv.appendChild(buildRtcCard(qNum++,q));
+      } else if(t==='rachnatmak'){
+        secDiv.appendChild(buildQCard(qNum++,{q:q.q,ans:q.ans,or_q:q.or_q,or_ans:q.or_ans,marks:q.marks,type:'creative'},false));
+      } else {
+        secDiv.appendChild(buildQCard(qNum++,q,isMaths));
+      }
+    });
+    body.appendChild(secDiv);
+  });
+}
+
+function buildGrammarCard(num,q){
+  const div=document.createElement('div'); div.className='pp-q';
+  const items=(q.items||[]).map((it,i)=>{
+    const letter=String.fromCharCode(97+i);
+    if(it.sentence||it.wrong) return `<div class="pp-q-opt">${letter}) ${it.sentence||it.wrong}</div>`;
+    if(it.word) return `<div class="pp-q-opt">${it.word} - ____</div>`;
+    if(it.muhavra) return `<div class="pp-q-opt">${it.muhavra}</div>`;
+    if(it.statement) return `<div class="pp-q-opt">${it.statement} ____</div>`;
+    return '';
+  }).join('');
+  div.innerHTML=`<div class="pp-q-top"><span class="pp-q-num">Q${num}.</span><span class="pp-q-text">${q.q||''}</span><span class="pp-q-marks">${q.marks||1} marks</span></div><div class="pp-q-opts">${items}</div><div class="pp-ans-area" id="ansArea_${num}"></div>`;
+  const ansText=(q.items||[]).map((it,i)=>{
+    const letter=String.fromCharCode(97+i);
+    if(it.ans&&it.muhavra) return `${it.muhavra}: Arth - ${it.arth}\nVakya - ${it.vakya}`;
+    if(it.correct) return `${letter}) ${it.correct}`;
+    if(it.ans) return `${letter}) ${it.ans}`;
+    return '';
+  }).filter(Boolean).join('\n');
+  const area=div.querySelector('#ansArea_'+num);
+  const row=document.createElement('div'); row.className='pp-ans-btns';
+  const ab=mkBtn('Show Answer','pp-reveal-btn');
+  const box=mkBox('pp-ans-box'); box.style.display='none';
+  ab.onclick=()=>{box.style.display='block';typewrite(box,ansText);ab.disabled=true;};
+  row.appendChild(ab); area.append(row,box);
+  div.dataset.allAns=JSON.stringify({ans:ansText});
+  return div;
+}
+
+function buildMultiCard(num,q){
+  const div=document.createElement('div'); div.className='pp-q';
+  const items=(q.items||[]).map(it=>`<div class="pp-q-opt">${it.q||it.statement||it.quote||''}</div>`).join('');
+  div.innerHTML=`<div class="pp-q-top"><span class="pp-q-num">Q${num}.</span><span class="pp-q-text">${q.q||''}</span><span class="pp-q-marks">${q.marks||2} marks</span></div><div class="pp-q-opts">${items}</div><div class="pp-ans-area" id="ansArea_${num}"></div>`;
+  const ansText=(q.items||[]).map((it,i)=>`${i+1}. ${it.ans||''}`).join('\n');
+  const area=div.querySelector('#ansArea_'+num);
+  const row=document.createElement('div'); row.className='pp-ans-btns';
+  const ab=mkBtn('Show Answers','pp-reveal-btn');
+  const box=mkBox('pp-ans-box'); box.style.display='none';
+  ab.onclick=()=>{box.style.display='block';typewrite(box,ansText);ab.disabled=true;};
+  row.appendChild(ab); area.append(row,box);
+  div.dataset.allAns=JSON.stringify({ans:ansText});
+  return div;
+}
+
+function buildShortLitCard(num,q){
+  const div=document.createElement('div'); div.className='pp-q';
+  div.innerHTML=`<div class="pp-q-top"><span class="pp-q-num">Q${num}.</span><span class="pp-q-text">${q.q||'Give short answers (any 5):'}</span><span class="pp-q-marks">${q.marks||10} marks</span></div><div class="pp-ans-area" id="ansArea_${num}"></div>`;
+  const area=div.querySelector('#ansArea_'+num);
+  const roms=['i','ii','iii','iv','v','vi','vii'];
+  (q.items||[]).forEach((it,i)=>{
+    const row=document.createElement('div'); row.style.marginBottom='10px';
+    row.innerHTML=`<div class="pp-q-opt" style="margin-bottom:6px">(${roms[i]}) ${it.q||''}</div>`;
+    const br=document.createElement('div'); br.className='pp-ans-btns';
+    const ab=mkBtn('Answer','pp-reveal-btn');
+    const box=mkBox('pp-ans-box'); box.style.cssText='display:none;margin-left:28px;';
+    ab.onclick=()=>{box.style.display='block';typewrite(box,it.ans||'');ab.disabled=true;};
+    br.appendChild(ab); row.append(br,box); area.appendChild(row);
+  });
+  const allAns=(q.items||[]).map((it,i)=>`(${i+1}) ${it.ans||''}`).join('\n');
+  div.dataset.allAns=JSON.stringify({ans:allAns});
+  return div;
+}
+
+function buildRtcCard(num,q){
+  const div=document.createElement('div'); div.className='pp-q';
+  div.innerHTML=`<div class="pp-q-top"><span class="pp-q-num">Q${num}.</span><span class="pp-q-text">${q.q||q.title||'Read and answer:'}</span><span class="pp-q-marks">${q.marks||3} marks</span></div>
+  ${q.extract?`<div style="background:rgba(168,85,247,.06);border-left:3px solid rgba(168,85,247,.3);padding:10px 14px;margin:8px 0 8px 28px;border-radius:0 8px 8px 0;font-size:.88rem;line-height:1.7;color:rgba(255,255,255,.8)">${q.extract}</div>`:''}
+  <div class="pp-ans-area" id="ansArea_${num}"></div>`;
+  const area=div.querySelector('#ansArea_'+num);
+  (q.subqs||[]).forEach((sq,i)=>{
+    const row=document.createElement('div'); row.style.marginBottom='8px';
+    row.innerHTML=`<div class="pp-q-opt">${sq.q}</div>`;
+    const br=document.createElement('div'); br.className='pp-ans-btns';
+    const ab=mkBtn('Answer','pp-reveal-btn');
+    const box=mkBox('pp-ans-box'); box.style.display='none';
+    ab.onclick=()=>{box.style.display='block';typewrite(box,sq.ans||'');ab.disabled=true;};
+    br.appendChild(ab); row.append(br,box); area.appendChild(row);
+  });
+  div.dataset.allAns=JSON.stringify({ans:(q.subqs||[]).map((sq,i)=>`(${i+1}) ${sq.ans||''}`).join('\n')});
+  return div;
+}
+
+function buildQCard(num,q,isMaths){
+  const div=document.createElement('div'); div.className='pp-q';
+  const optsHtml=(q.opts||[]).map(o=>`<div class="pp-q-opt">${o}</div>`).join('');
+  const orHtml=q.or_q?`<div class="pp-or">- OR -</div><div style="font-size:.9rem;color:rgba(255,255,255,.65);margin-bottom:4px">${q.or_q}</div>`:'';
+  div.innerHTML=`<div class="pp-q-top"><span class="pp-q-num">Q${num}.</span><span class="pp-q-text">${q.q||q.question||''}</span><span class="pp-q-marks">${q.marks||1} mark${(q.marks||1)>1?'s':''}</span></div>${optsHtml?'<div class="pp-q-opts">'+optsHtml+'</div>':''}${orHtml}<div class="pp-ans-area" id="ansArea_${num}"></div>`;
+  const area=div.querySelector('#ansArea_'+num);
+  const row=document.createElement('div'); row.className='pp-ans-btns';
+  if(isMaths&&q.hint){
+    const hb=mkBtn('Hint','pp-reveal-btn pp-hint-btn');
+    const s1=mkBtn('Step 1','pp-reveal-btn pp-step1-btn');
+    const s2=mkBtn('Step 2','pp-reveal-btn pp-step2-btn');
+    const ab=mkBtn('Full Answer','pp-reveal-btn');
+    s1.disabled=true; s2.disabled=true; ab.disabled=true;
+    const hbox=mkBox('pp-hint-box'); hbox.style.display='none';
+    const s1box=mkBox('pp-step-box s1'); s1box.style.display='none';
+    const s2box=mkBox('pp-step-box s2'); s2box.style.display='none';
+    const abox=mkBox('pp-ans-box'); abox.style.display='none';
+    hb.onclick=()=>{hbox.style.display='block';typewrite(hbox,q.hint||'');hb.disabled=true;s1.disabled=false;};
+    s1.onclick=()=>{s1box.style.display='block';typewrite(s1box,q.step1||'');s1.disabled=true;s2.disabled=false;};
+    s2.onclick=()=>{s2box.style.display='block';typewrite(s2box,q.step2||'');s2.disabled=true;ab.disabled=false;};
+    ab.onclick=()=>{abox.style.display='block';typewrite(abox,q.ans||'');ab.disabled=true;};
+    row.append(hb,s1,s2,ab); area.append(row,hbox,s1box,s2box,abox);
+    div.dataset.allAns=JSON.stringify({hint:q.hint,step1:q.step1,step2:q.step2,ans:q.ans,isMaths:true});
+  } else {
+    const ab=mkBtn('Show Answer','pp-reveal-btn');
+    const box=mkBox('pp-ans-box'); box.style.display='none';
+    let at=q.ans||''; if(q.or_ans) at+='\n\n- OR -\n'+q.or_ans;
+    ab.onclick=()=>{box.style.display='block';typewrite(box,at);ab.disabled=true;};
+    row.appendChild(ab); area.append(row,box);
+    div.dataset.allAns=JSON.stringify({ans:at});
+  }
+  return div;
+}
+
+function mkBtn(label,cls){const b=document.createElement('button');b.className=cls;b.textContent=label;return b;}
+function mkBox(cls){const d=document.createElement('div');d.className=cls;return d;}
+
+function typewrite(el,text){
+  el.innerHTML='';
+  const cur=document.createElement('span'); cur.className='pp-cursor'; el.appendChild(cur);
+  let i=0;
+  function tick(){if(i<text.length){el.insertBefore(document.createTextNode(text[i]),cur);i++;setTimeout(tick,ppSpeed);}else cur.remove();}
+  tick();
+}
+
+document.getElementById('ppRevealAll')?.addEventListener('click',()=>{
+  document.querySelectorAll('.pp-q').forEach(card=>{
+    try{
+      const d=JSON.parse(card.dataset.allAns||'{}');
+      const area=card.querySelector('.pp-ans-area'); if(!area) return;
+      area.querySelectorAll('button').forEach(b=>b.disabled=true);
+      if(d.isMaths){
+        const hb=area.querySelector('.pp-hint-box');
+        const s1b=area.querySelector('.pp-step-box.s1');
+        const s2b=area.querySelector('.pp-step-box.s2');
+        const ab=area.querySelector('.pp-ans-box');
+        if(hb){hb.style.display='block';if(!hb.textContent.trim())hb.textContent=d.hint||'';}
+        if(s1b){s1b.style.display='block';if(!s1b.textContent.trim())s1b.textContent=d.step1||'';}
+        if(s2b){s2b.style.display='block';if(!s2b.textContent.trim())s2b.textContent=d.step2||'';}
+        if(ab){ab.style.display='block';if(!ab.textContent.trim())ab.textContent=d.ans||'';}
+      } else {
+        area.querySelectorAll('.pp-ans-box').forEach(ab=>{ab.style.display='block';if(!ab.textContent.trim())ab.textContent=d.ans||'';});
+      }
+    }catch(e){}
+  });
+  const btn=document.getElementById('ppRevealAll');
+  if(btn){btn.textContent='All Revealed';btn.disabled=true;}
+});
+
+document.getElementById('ppNewPaper')?.addEventListener('click',()=>{
+  document.getElementById('ppPaper').style.display='none';
+  document.getElementById('ppSetup').style.display='block';
+  const rb=document.getElementById('ppRevealAll');
+  if(rb){rb.textContent='Reveal All Answers';rb.disabled=false;}
+});
+
+document.getElementById('ppDownloadBtn')?.addEventListener('click',()=>{
+  // Reveal all answers first so they print
+  document.querySelectorAll('.pp-q').forEach(card=>{
+    try{
+      const d=JSON.parse(card.dataset.allAns||'{}');
+      const area=card.querySelector('.pp-ans-area'); if(!area) return;
+      if(d.isMaths){
+        const hb=area.querySelector('.pp-hint-box');const s1b=area.querySelector('.pp-step-box.s1');
+        const s2b=area.querySelector('.pp-step-box.s2');const ab=area.querySelector('.pp-ans-box');
+        if(hb){hb.style.display='block';if(!hb.textContent.trim())hb.textContent=d.hint||'';}
+        if(s1b){s1b.style.display='block';if(!s1b.textContent.trim())s1b.textContent=d.step1||'';}
+        if(s2b){s2b.style.display='block';if(!s2b.textContent.trim())s2b.textContent=d.step2||'';}
+        if(ab){ab.style.display='block';if(!ab.textContent.trim())ab.textContent=d.ans||'';}
+      } else {
+        area.querySelectorAll('.pp-ans-box').forEach(ab=>{ab.style.display='block';if(!ab.textContent.trim())ab.textContent=d.ans||'';});
+      }
+    }catch(e){}
+  });
+  setTimeout(()=>window.print(), 300);
+});
+
+})(); // end Practice Paper IIFE
+
 // ============================== DAD'S BOARD ==============================
 (function(){
 
@@ -2851,6 +4826,7 @@ document.querySelectorAll('.dtab').forEach(tab=>{
     if(tab.dataset.dtab==='target'){ renderTarget(); loadTargetTopics(); }
     if(tab.dataset.dtab==='homework') renderHw();
     if(tab.dataset.dtab==='report') renderReport();
+    if(tab.dataset.dtab==='library') renderLibrary();
   });
 });
 
@@ -3206,6 +5182,7 @@ document.getElementById('printReport').addEventListener('click', ()=>window.prin
 function refreshDadBoard(){
   renderOverview();
   renderHw();
+  renderLibrary();
   injectTargetBanner();
   injectHwBanner();
 }
@@ -3214,31 +5191,956 @@ function refreshDadBoard(){
 const origShowScore_dad = window.showScore || function(){};
 // Patch: after quiz ends, check if dad left a comment on this topic
 // Devagneya sees a speech bubble if dad commented
-const scoreCardEl = document.getElementById('scoreCard');
+const scoreCardEl = document.getElementById('qaResult') || document.getElementById('scoreCard');
 const dadCommentEl = document.createElement('div');
 dadCommentEl.id = 'dadCommentOnScore';
 dadCommentEl.style.cssText = 'display:none;background:rgba(255,217,61,.1);border:2px solid rgba(255,217,61,.25);border-radius:14px;padding:14px 18px;margin:0 auto 18px;max-width:380px;text-align:left;';
-scoreCardEl.insertBefore(dadCommentEl, scoreCardEl.querySelector('#copyCodeBtn')?.closest('.code-box') || scoreCardEl.firstChild);
-
-// Check for dad's note when score shows
-const observer = new MutationObserver(()=>{
-  if(scoreCardEl.classList.contains('show')){
-    const comments = getComments();
-    const keys = Object.keys(comments);
-    // Find most recent comment for current topic
-    const match = keys.find(k=>k.startsWith(window.cq?.topic||'NOMATCH'));
-    const dadCommentOnScore = document.getElementById('dadCommentOnScore');
-    if(match && dadCommentOnScore){
-      dadCommentOnScore.innerHTML = `<div style="font-family:'Fredoka One',cursive;font-size:.9rem;color:var(--y);margin-bottom:5px">💬 Dad's Note</div><div style="font-size:.85rem;color:rgba(255,255,255,.75);font-style:italic">"${comments[match]}"</div>`;
-      dadCommentOnScore.style.display='block';
-    } else if(dadCommentOnScore) {
-      dadCommentOnScore.style.display='none';
+if(scoreCardEl){
+  scoreCardEl.insertBefore(dadCommentEl, scoreCardEl.querySelector('#copyCodeBtn')?.closest('.code-box') || scoreCardEl.firstChild);
+  const observer = new MutationObserver(()=>{
+    if(scoreCardEl.classList.contains('show')){
+      const comments = getComments();
+      const keys = Object.keys(comments);
+      const match = keys.find(k=>k.startsWith(window.cq?.topic||'NOMATCH'));
+      const dadCommentOnScore = document.getElementById('dadCommentOnScore');
+      if(match && dadCommentOnScore){
+        dadCommentOnScore.innerHTML = `<div style="font-family:'Fredoka One',cursive;font-size:.9rem;color:var(--y);margin-bottom:5px">💬 Dad's Note</div><div style="font-size:.85rem;color:rgba(255,255,255,.75);font-style:italic">"${comments[match]}"</div>`;
+        dadCommentOnScore.style.display='block';
+      } else if(dadCommentOnScore) {
+        dadCommentOnScore.style.display='none';
+      }
     }
+  });
+  observer.observe(scoreCardEl, {attributes:true, attributeFilter:['class']});
+}
+
+
+// ════════════════════════════════════════════════════════
+//   CHAPTER LIBRARY  (Dad's Board)
+// ════════════════════════════════════════════════════════
+const LIB_SUBJECTS = [
+  {key:'maths',   name:'Maths',   book:'Maths Mela',       ico:'📐',
+   chapters:['We the Travellers - I','Fractions','Angles as Turns','We the Travellers - II',
+     'Far and Near','The Dairy Farm','Shapes and Patterns','Weight and Capacity',
+     'Coconut Farm','Symmetrical Designs',"Grandmother's Quilt",
+     'Racing Seconds','Animal Jumps','Maps and Locations','Data Through Pictures']},
+  {key:'evs',     name:'EVS',     book:'Our Wondrous World',ico:'🌿',
+   chapters:['Water - The Essence of Life','Journey of a River','The Mystery of Food',
+     'Our School A Happy Place','Our Vibrant Country','Some Unique Places',
+     'Energy How Things Work','Clothes How Things are Made',
+     'Rhythms of Nature','Earth Our Shared Home']},
+  {key:'english', name:'English', book:'Santoor',           ico:'📖',
+   chapters:["Papa's Spectacles",'Gone with the Scooter','The Rainbow','The Wise Parrot',
+     'The Frog','What a Tank!','Gilli Danda','The Decision of the Panchayat',
+     'Vocation','Glass Bangles']},
+  {key:'hindi',   name:'Hindi',   book:'Veena',             ico:'📚',
+   chapters:['Kiran','Nyaay Ki Kursi','Chand Ka Kurta','Saanaken','Sundariya',
+     'Chatur Chitrakaar','Mera Bachapan','Kajiranga',
+     'Nyaay','Teen Machhaliyaan','Hamara Ye Kala Mandir','Ganga Ki Kahani']}
+];
+
+// localStorage helpers
+function libKey(subj){ return 'dev_lib_'+subj; }
+// getLib moved to global scope
+function saveLib(subj, data){ localStorage.setItem(libKey(subj), JSON.stringify(data)); }
+function clearLibChapter(subj, ch){ const d=getLib(subj); delete d[ch]; saveLib(subj,d); }
+function clearLibSubject(subj){ localStorage.removeItem(libKey(subj)); }
+function getLibChapter(subj, ch){
+  // fuzzy match — chapter names may differ slightly
+  const d=getLib(subj);
+  const toStr = v => v ? String(v) : '';
+  if(d[ch]) return toStr(d[ch]);
+  const key=Object.keys(d).find(k=>k.toLowerCase().includes(ch.toLowerCase().slice(0,8))||ch.toLowerCase().includes(k.toLowerCase().slice(0,8)));
+  return key ? toStr(d[key]) : '';
+}
+
+function renderLibrary(){
+  const CHAPTERS = {
+    maths:  ['We the Travellers - I','Fractions','Angles as Turns','We the Travellers - II',
+             'Far and Near','The Dairy Farm','Shapes and Patterns','Weight and Capacity',
+             'Coconut Farm','Symmetrical Designs',"Grandmother's Quilt",
+             'Racing Seconds','Animal Jumps','Maps and Locations','Data Through Pictures'],
+    evs:    ['Water - The Essence of Life','Journey of a River','The Mystery of Food',
+             'Our School - A Happy Place','Our Vibrant Country','Some Unique Places',
+             'Energy - How Things Work','Clothes - How Things are Made',
+             'Rhythms of Nature','Earth - Our Shared Home'],
+    english:["Papa's Spectacles",'Gone with the Scooter','The Rainbow','The Wise Parrot',
+             'The Frog','What a Tank!','Gilli Danda','The Decision of the Panchayat',
+             'Vocation','Glass Bangles'],
+    hindi:  ['Kiran','Nyaay Ki Kursi','Chand Ka Kurta','Saanaken','Sundariya',
+             'Chatur Chitrakaar','Mera Bachapan','Kajiranga',
+             'Nyaay','Teen Machhaliyaan','Hamara Ye Kala Mandir','Ganga Ki Kahani']
+  };
+  const META = {
+    maths:  {name:'Maths',   book:'Maths Mela',        ico:'📐', color:'#a78bfa'},
+    evs:    {name:'EVS',     book:'Our Wondrous World', ico:'🌿', color:'#4ade80'},
+    english:{name:'English', book:'Santoor',            ico:'📖', color:'#4ecdc4'},
+    hindi:  {name:'Hindi',   book:'Veena',              ico:'📚', color:'#fb923c'}
+  };
+
+  const acc = document.getElementById('libAccordion');
+  if(!acc) return;
+  // Preserve open/closed states
+  const openStates = {};
+  acc.querySelectorAll('.lib-subject-acc').forEach(el=>{
+    openStates[el.dataset.subj] = el.querySelector('.lib-acc-body')?.classList.contains('open');
+  });
+  acc.innerHTML = '';
+
+  Object.entries(CHAPTERS).forEach(([subj, chapters])=>{
+    const lib = getLib(subj);
+    const m   = META[subj];
+    const loaded = Object.keys(lib).length;
+    const isOpen = openStates[subj] !== false; // default open
+
+    const card = document.createElement('div');
+    card.className = 'lib-subject-acc';
+    card.dataset.subj = subj;
+
+    // Header
+    const hdr = document.createElement('div');
+    hdr.className = 'lib-acc-header';
+    hdr.innerHTML = `
+      <div class="lib-acc-ico">${m.ico}</div>
+      <div class="lib-acc-info">
+        <div class="lib-acc-name">${m.name}</div>
+        <div class="lib-acc-book">${m.book} · NCERT 2025-26</div>
+      </div>
+      <div class="lib-acc-count" style="color:${loaded>0?m.color:'rgba(255,255,255,.25)'}">
+        ${loaded}/${chapters.length} chapters
+      </div>
+      <div class="lib-acc-arrow">▶</div>`;
+    hdr.addEventListener('click',()=>{
+      const body = card.querySelector('.lib-acc-body');
+      const arrow = card.querySelector('.lib-acc-arrow');
+      body.classList.toggle('open');
+      arrow.classList.toggle('open');
+    });
+    card.appendChild(hdr);
+
+    // Body — chapter rows
+    const body = document.createElement('div');
+    body.className = 'lib-acc-body'; if(isOpen) body.classList.add('open');
+
+    chapters.forEach(ch=>{
+      // Fuzzy match
+      const stored = lib[ch] || (()=>{
+        const k = Object.keys(lib).find(k=>
+          k.toLowerCase().includes(ch.toLowerCase().slice(0,8)) ||
+          ch.toLowerCase().includes(k.toLowerCase().slice(0,8))
+        );
+        return k ? lib[k] : null;
+      })();
+      const has = !!stored;
+      const sz  = has && stored ? Math.round(String(stored).length/100)/10 : 0;
+
+      const row = document.createElement('div');
+      row.className = 'lib-ch-upload-row';
+      row.innerHTML = `
+        <div class="lib-ch-status-ico">${has?'✅':'⬜'}</div>
+        <div class="lib-ch-upload-name ${has?'loaded':''}" title="${ch}">${ch}</div>
+        ${has?`<div class="lib-ch-sz">${sz}KB</div>`:''}
+        <button class="lib-ch-upload-btn ${has?'loaded':''}"
+          onclick="libOpenModal('${subj}','${ch.replace(/'/g,"\\'")}')"
+        >${has?'🔄 Re-upload':'📤 Upload'}</button>
+        ${has?`<button class="lib-ch-del-btn"
+          onclick="libDelCh('${subj}','${ch.replace(/'/g,"\\'")}')">✕</button>`:''}`;
+      body.appendChild(row);
+    });
+    card.appendChild(body);
+    acc.appendChild(card);
+  });
+}
+
+
+window.libDelCh = function(subj, ch){
+  if(confirm('Remove saved content for "'+ch+'"?')){
+    clearLibChapter(subj, ch); renderLibrary();
   }
-});
-observer.observe(scoreCardEl, {attributes:true, attributeFilter:['class']});
+};
+window.libClearAll = function(subj){
+  if(confirm('Clear all saved content for '+subj+'?')){ clearLibSubject(subj); renderLibrary(); }
+};
+
+
+// processLibPdf is defined globally above
+
+// ── Practice Paper: update getChapterNotes to check library first ──────────
+// Override the getChapterNotes function defined in Practice Paper IIFE
+// We patch it via a global wrapper
+const _origGetChapterNotes = window._ppGetChapterNotes;
+
+// Called by Practice Paper when generating
+window.getLibraryContent = function(subj, topics){
+  if(!subj||!topics||!topics.length) return null;
+  const lib=getLib(subj);
+  if(!Object.keys(lib).length) return null;
+  const found=[];
+  topics.forEach(topic=>{
+    const raw=getLibChapter(subj,topic);
+    // Always coerce to string — prevents .trim() crash from malformed stored data
+    const content = raw ? String(raw) : null;
+    if(content&&content.trim()) found.push({topic,content:content.trim()});
+  });
+  if(!found.length) return null;
+  return found.map(f=>'=== '+f.topic+' ===\n'+f.content).join('\n\n');
+};
+
+// Update library indicator in Practice Paper when topic changes
+function updateLibIndicator(subj, topics){
+  const ind=document.getElementById('ppLibIndicator');
+  const txt=document.getElementById('ppLibIndicatorText');
+  if(!ind) return;
+  if(!subj){ ind.classList.remove('active'); return; }
+  // Show library status for the whole subject even with no topic selected
+  if(typeof window.getLibraryContent !== 'function'){ ind.classList.remove('active'); return; }
+  const checkTopics = topics&&topics.length ? topics : (typeof PP_TOPICS!=='undefined'?PP_TOPICS[subj]||[]:[]); 
+  const content = window.getLibraryContent(subj, checkTopics.slice(0,1)); // sample first chapter
+  const libData = typeof getLib==='function' ? getLib(subj) : {};
+  const chapCount = Object.keys(libData).length;
+  if(chapCount > 0){
+    ind.classList.add('active');
+    const totalKb = Math.round(Object.values(libData).reduce((a,v)=>a+v.length,0)/100)/10;
+    const specific = topics&&topics.length ? window.getLibraryContent(subj,topics) : null;
+    if(txt){
+      if(specific){
+        txt.textContent = '📚 Library loaded: ' + topics.join(', ') + ' (' + Math.round(specific.length/100)/10 + 'KB)';
+      } else {
+        txt.textContent = '📚 Library ready: ' + chapCount + ' chapters saved for ' + subj + ' (' + totalKb + 'KB total) — pick a topic to use';
+      }
+    }
+  } else {
+    ind.classList.remove('active');
+  }
+}
+window.updateLibIndicator=updateLibIndicator;
+
 
 })(); // end IIFE
+
+
+// ════════════════════════════════════════════════════════
+//   FOCUS MODE
+// ════════════════════════════════════════════════════════
+(function(){
+
+const QUOTES = [
+  "The secret of getting ahead is getting started. 🚀",
+  "One chapter at a time. One page at a time. 📖",
+  "Your future self will thank you for studying today. ⭐",
+  "Focus is the art of knowing what to ignore. 🎯",
+  "Every expert was once a beginner. Keep going! 💪",
+  "Small steps every day lead to big achievements. 🌟",
+  "You are building your brain right now. 🧠",
+  "The harder you work, the luckier you get. 🍀",
+  "Difficult roads often lead to beautiful destinations. 🏔️",
+  "Today's effort is tomorrow's success. ✨",
+  "Be so good they can't ignore you. 🌠",
+  "Learning is a treasure that follows its owner everywhere. 💎",
+];
+
+// State
+let focusDuration = 25;
+let focusSubject  = '📐 Maths';
+let focusTheme    = 'deep';
+let focusTimer    = null;
+let focusSecs     = 0;
+let focusTotal    = 0;
+let focusPaused   = false;
+let breakTimer    = null;
+let breakSecs     = 0;
+const BREAK_MINS  = 5;
+const CIRCUMFERENCE = 2 * Math.PI * 133; // r=133
+
+// ── localStorage ─────────────────────────────────────────────────
+function getSessions(){ return JSON.parse(localStorage.getItem('dev_focus')||'[]'); }
+function saveSessions(s){ localStorage.setItem('dev_focus', JSON.stringify(s)); }
+
+// ── Style picker ─────────────────────────────────────────────────
+document.querySelectorAll('.focus-style-btn').forEach(btn=>{
+  btn.addEventListener('click',()=>{
+    document.querySelectorAll('.focus-style-btn').forEach(b=>b.classList.remove('sel'));
+    btn.classList.add('sel');
+    focusTheme = btn.dataset.theme;
+  });
+});
+
+// ── Duration picker ───────────────────────────────────────────────
+document.querySelectorAll('.focus-dur-btn').forEach(btn=>{
+  btn.addEventListener('click',()=>{
+    document.querySelectorAll('.focus-dur-btn').forEach(b=>b.classList.remove('sel'));
+    btn.classList.add('sel');
+    focusDuration = parseInt(btn.dataset.mins);
+  });
+});
+
+// ── Subject picker ────────────────────────────────────────────────
+document.querySelectorAll('.focus-subj-btn').forEach(btn=>{
+  btn.addEventListener('click',()=>{
+    document.querySelectorAll('.focus-subj-btn').forEach(b=>b.classList.remove('sel'));
+    btn.classList.add('sel');
+    focusSubject = btn.dataset.subj;
+  });
+});
+
+// ── Build ambient particles ───────────────────────────────────────
+function buildParticles(){
+  const container = document.getElementById('focusParticles');
+  if(!container) return;
+  container.innerHTML='';
+  const colors = {
+    deep:   ['#60a5fa','#93c5fd','#bfdbfe','#dbeafe'],
+    nature: ['#4ade80','#86efac','#bbf7d0','#dcfce7'],
+    space:  ['#a78bfa','#c4b5fd','#ddd6fe','#818cf8','#fbbf24'],
+  };
+  const palette = colors[focusTheme]||colors.deep;
+  const count = focusTheme==='space' ? 60 : 30;
+  for(let i=0;i<count;i++){
+    const p = document.createElement('div');
+    p.className = 'focus-particle';
+    const size = focusTheme==='space' ? Math.random()*3+1 : Math.random()*8+4;
+    p.style.cssText = `
+      width:${size}px;height:${size}px;
+      background:${palette[Math.floor(Math.random()*palette.length)]};
+      left:${Math.random()*100}%;
+      animation-duration:${Math.random()*12+8}s;
+      animation-delay:${Math.random()*8}s;
+      ${focusTheme==='space'?'border-radius:50%;':'border-radius:50%;filter:blur(1px);'}
+    `;
+    container.appendChild(p);
+  }
+}
+
+// ── Update ring ───────────────────────────────────────────────────
+function updateRing(){
+  const ring = document.getElementById('focusRingFill');
+  if(!ring) return;
+  const pct  = focusSecs / focusTotal;
+  const offset = CIRCUMFERENCE * pct;
+  ring.style.strokeDashoffset = offset;
+  ring.style.strokeDasharray  = CIRCUMFERENCE;
+}
+
+// ── Update clock ──────────────────────────────────────────────────
+function updateClock(){
+  const m = Math.floor(focusSecs/60);
+  const s = focusSecs%60;
+  const el = document.getElementById('focusClock');
+  if(el) el.textContent = `${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`;
+  updateRing();
+}
+
+// ── Get a quote ───────────────────────────────────────────────────
+async function loadQuote(){
+  const el = document.getElementById('focusQuote');
+  if(!el) return;
+  // Try AI first, fallback to built-in
+  if(getKey()){
+    try{
+      const raw = await callClaude(
+        [{role:'user',content:`Give ONE short motivational quote (max 12 words) for a 10-year-old student named Devagneya who is about to study ${focusSubject}. Return only the quote and one emoji at the end. No attribution.`}],
+        'You are a motivational coach for children. Return only the quote, nothing else.',
+        80
+      );
+      el.textContent = '"'+raw.trim()+'"';
+      return;
+    }catch(e){}
+  }
+  el.textContent = '"'+QUOTES[Math.floor(Math.random()*QUOTES.length)]+'"';
+}
+
+// ── Start session ─────────────────────────────────────────────────
+document.getElementById('focusStartBtn')?.addEventListener('click', startFocus);
+
+function startFocus(){
+  focusSecs  = focusDuration * 60;
+  focusTotal = focusDuration * 60;
+  focusPaused= false;
+
+  // Setup overlay
+  const overlay = document.getElementById('focusOverlay');
+  overlay.className = 'focus-overlay active theme-'+focusTheme;
+  buildParticles();
+
+  // Labels
+  const tag  = document.getElementById('focusSubjTag');
+  const intEl= document.getElementById('focusIntentionShow');
+  const phase= document.getElementById('focusPhaseLabel');
+  const intention = document.getElementById('focusIntention')?.value.trim();
+  if(tag)   tag.textContent   = focusSubject;
+  if(intEl) intEl.textContent = intention ? '"'+intention+'"' : '';
+  if(phase) phase.textContent = 'FOCUS';
+
+  // Controls
+  document.getElementById('focusPauseBtn').style.display  = 'inline-flex';
+  document.getElementById('focusResumeBtn').style.display = 'none';
+  document.getElementById('focusBreakScreen').classList.remove('show');
+
+  updateClock();
+  loadQuote();
+
+  // Lock scroll on body
+  document.body.style.overflow = 'hidden';
+
+  // Start tick
+  clearInterval(focusTimer);
+  focusTimer = setInterval(()=>{
+    if(focusPaused) return;
+    focusSecs--;
+    updateClock();
+    if(focusSecs<=0){
+      clearInterval(focusTimer);
+      sessionComplete();
+    }
+  }, 1000);
+}
+
+// ── Pause / Resume ────────────────────────────────────────────────
+document.getElementById('focusPauseBtn')?.addEventListener('click',()=>{
+  focusPaused=true;
+  document.getElementById('focusPauseBtn').style.display='none';
+  document.getElementById('focusResumeBtn').style.display='inline-flex';
+  document.getElementById('focusPhaseLabel').textContent='PAUSED';
+});
+document.getElementById('focusResumeBtn')?.addEventListener('click',()=>{
+  focusPaused=false;
+  document.getElementById('focusResumeBtn').style.display='none';
+  document.getElementById('focusPauseBtn').style.display='inline-flex';
+  document.getElementById('focusPhaseLabel').textContent='FOCUS';
+});
+
+// ── End session manually ──────────────────────────────────────────
+document.getElementById('focusEndBtn')?.addEventListener('click',()=>{
+  if(!confirm('End this focus session?')) return;
+  clearInterval(focusTimer);
+  const completed = Math.round((focusTotal-focusSecs)/60);
+  if(completed>=1) logSession(completed);
+  closeFocus();
+});
+
+// ── Session complete → break ──────────────────────────────────────
+function sessionComplete(){
+  logSession(focusDuration);
+  // Play gentle chime via Web Audio
+  playChime();
+  // Show break screen
+  document.getElementById('focusPhaseLabel').textContent='DONE!';
+  startBreak();
+}
+
+function startBreak(){
+  breakSecs = BREAK_MINS*60;
+  const bs = document.getElementById('focusBreakScreen');
+  bs.classList.add('show');
+  updateBreakClock();
+  clearInterval(breakTimer);
+  breakTimer=setInterval(()=>{
+    breakSecs--;
+    updateBreakClock();
+    if(breakSecs<=0){ clearInterval(breakTimer); closeFocus(); }
+  },1000);
+}
+function updateBreakClock(){
+  const m=Math.floor(breakSecs/60),s=breakSecs%60;
+  const el=document.getElementById('focusBreakTimer');
+  if(el) el.textContent=`${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`;
+}
+document.getElementById('focusBreakSkip')?.addEventListener('click',()=>{
+  clearInterval(breakTimer); closeFocus();
+});
+
+// ── Close overlay ─────────────────────────────────────────────────
+function closeFocus(){
+  clearInterval(focusTimer);
+  clearInterval(breakTimer);
+  document.getElementById('focusOverlay').classList.remove('active');
+  document.body.style.overflow='';
+  renderFocusStats();
+}
+
+// ── Log session ───────────────────────────────────────────────────
+function logSession(mins){
+  const sessions = getSessions();
+  const entry = {subj:focusSubject,mins,date:new Date().toDateString(),
+    time:new Date().toLocaleTimeString('en-IN',{hour:'2-digit',minute:'2-digit'}),
+    theme:focusTheme};
+  sessions.unshift(entry);
+  saveSessions(sessions.slice(0,50));
+  // Also log to practice log
+  const plog=JSON.parse(localStorage.getItem('dev_plog')||'[]');
+  plog.unshift({type:'🎯',what:focusSubject+' – Focus session',mins,mood:'Focused 🎯',date:new Date().toDateString()});
+  localStorage.setItem('dev_plog',JSON.stringify(plog));
+}
+
+// ── Gentle chime via Web Audio ────────────────────────────────────
+function playChime(){
+  try{
+    const ac=new(window.AudioContext||window.webkitAudioContext)();
+    [523,659,784,1047].forEach((freq,i)=>{
+      const o=ac.createOscillator(),g=ac.createGain();
+      o.connect(g);g.connect(ac.destination);
+      o.type='sine';o.frequency.value=freq;
+      g.gain.setValueAtTime(0,ac.currentTime+i*.3);
+      g.gain.linearRampToValueAtTime(.18,ac.currentTime+i*.3+.05);
+      g.gain.exponentialRampToValueAtTime(.001,ac.currentTime+i*.3+1.2);
+      o.start(ac.currentTime+i*.3);
+      o.stop(ac.currentTime+i*.3+1.2);
+    });
+  }catch(e){}
+}
+
+// ── Render stats ──────────────────────────────────────────────────
+function renderFocusStats(){
+  const sessions=getSessions();
+  const statsEl=document.getElementById('focusStats');
+  const histEl=document.getElementById('focusHistory');
+  const emptyEl=document.getElementById('focusEmpty');
+  if(!statsEl) return;
+
+  if(!sessions.length){
+    statsEl.innerHTML='';
+    if(histEl) histEl.innerHTML='';
+    if(emptyEl) emptyEl.style.display='block';
+    return;
+  }
+  if(emptyEl) emptyEl.style.display='none';
+
+  const totalMins=sessions.reduce((a,s)=>a+s.mins,0);
+  const totalSess=sessions.length;
+  const today=sessions.filter(s=>s.date===new Date().toDateString());
+  const todayMins=today.reduce((a,s)=>a+s.mins,0);
+  const best=Math.max(...sessions.map(s=>s.mins));
+  // Streak
+  const days={};sessions.forEach(s=>days[s.date]=true);
+  let streak=0;for(let i=0;i<30;i++){const d=new Date();d.setDate(d.getDate()-i);if(days[d.toDateString()])streak++;else if(i>0)break;}
+
+  statsEl.innerHTML=`
+    <div class="focus-stat-card"><div class="focus-stat-val" style="color:#60a5fa">${totalSess}</div><div class="focus-stat-lbl">Total Sessions</div></div>
+    <div class="focus-stat-card"><div class="focus-stat-val" style="color:#4ade80">${totalMins}m</div><div class="focus-stat-lbl">Total Focus Time</div></div>
+    <div class="focus-stat-card"><div class="focus-stat-val" style="color:#f59e0b">${todayMins}m</div><div class="focus-stat-lbl">Today's Focus</div></div>
+    <div class="focus-stat-card"><div class="focus-stat-val" style="color:#f472b6">${streak}🔥</div><div class="focus-stat-lbl">Day Streak</div></div>
+    <div class="focus-stat-card"><div class="focus-stat-val" style="color:#a78bfa">${best}m</div><div class="focus-stat-lbl">Best Session</div></div>`;
+
+  if(histEl){
+    histEl.innerHTML=sessions.slice(0,8).map(s=>`
+      <div class="focus-hist-row">
+        <div class="focus-hist-ico">🎯</div>
+        <div class="focus-hist-info">
+          <div class="focus-hist-title">${s.subj}</div>
+          <div class="focus-hist-meta">${s.date} · ${s.time||''} · ${s.theme||'deep'} theme</div>
+        </div>
+        <div class="focus-hist-mins">${s.mins}m</div>
+      </div>`).join('');
+  }
+}
+
+// Init on tab open
+document.querySelector('[data-tab="focus"]')?.addEventListener('click',()=>{
+  setTimeout(renderFocusStats, 50);
+});
+renderFocusStats();
+
+})(); // end Focus IIFE
+
+
+// ════════════════════════════════════════════════════════
+//   STORIES & COMICS
+// ════════════════════════════════════════════════════════
+(function(){
+
+// ── Built-in story library ────────────────────────────────────────────────────
+const STORIES = {
+  panchatantra: [
+    {id:'p1', title:'The Monkey and the Crocodile', emoji:'🐊', value:'Friendship & Betrayal',
+     tags:['Animals','Wit','Loyalty'],
+     summary:'A clever monkey lives on a berry tree by the river. A crocodile becomes his friend — but the crocodile\'s wife wants to eat the monkey\'s heart.'},
+    {id:'p2', title:'The Lion and the Hare', emoji:'🦁', value:'Courage & Intelligence',
+     tags:['Animals','Bravery','Cleverness'],
+     summary:'A tiny hare outsmarts the mighty lion who terrorises the forest, proving that brains beat brawn.'},
+    {id:'p3', title:'The Crow and the Snake', emoji:'🐦', value:'Wisdom & Strategy',
+     tags:['Animals','Planning','Justice'],
+     summary:'A family of crows is tormented by a snake. The clever mother crow devises a brilliant plan using a king\'s golden necklace.'},
+    {id:'p4', title:'The Jackal and the Drum', emoji:'🥁', value:'Courage vs Fear',
+     tags:['Animals','Fear','Observation'],
+     summary:'A hungry jackal hears terrifying sounds in the forest. He overcomes his fear and discovers the truth — a drum hitting a tree in the wind.'},
+    {id:'p5', title:'The Blue Jackal', emoji:'💙', value:'Truth & Consequences',
+     tags:['Animals','Deception','Pride'],
+     summary:'A jackal falls into a vat of blue dye and pretends to be a divine creature. His pride leads to his downfall.'},
+    {id:'p6', title:'The Tortoise and the Two Swans', emoji:'🦢', value:'The Danger of Too Much Talk',
+     tags:['Animals','Wisdom','Self-control'],
+     summary:'Two swans carry their tortoise friend in the sky on a stick — but the tortoise cannot resist speaking when taunted by villagers below.'},
+  ],
+  jataka: [
+    {id:'j1', title:'The Monkey King and the Mango Tree', emoji:'🐒', value:'Sacrifice & Leadership',
+     tags:['Buddha','Sacrifice','Compassion'],
+     summary:'The Bodhisatta (future Buddha) as a monkey king sacrifices himself to save his tribe from a human king who wants to hunt them.'},
+    {id:'j2', title:'The Golden Goose', emoji:'🪿', value:'Greed Destroys Everything',
+     tags:['Buddha','Greed','Family'],
+     summary:'A man was once a golden goose who gave feathers of gold to his poor family — until their greed leads to a terrible mistake.'},
+    {id:'j3', title:'The Wise Elephant', emoji:'🐘', value:'Patience & Forgiveness',
+     tags:['Buddha','Patience','Justice'],
+     summary:'An elephant in the royal stable is corrupted by thieves who plot nearby. His goodness is restored by a monk\'s virtuous teachings.'},
+    {id:'j4', title:'The Cunning Crow', emoji:'🦅', value:'Using Wisdom Over Force',
+     tags:['Buddha','Cleverness','Non-violence'],
+     summary:'A clever crow helps a princess by using its wits rather than force to solve a seemingly impossible challenge posed by the king.'},
+  ],
+  tenali: [
+    {id:'t1', title:'Tenali and the Thieves', emoji:'🪔', value:'Quick Thinking',
+     tags:['Wit','Humour','Justice'],
+     summary:'Thieves break into Tenali Raman\'s house at night. His hilarious response sends them running — and earns him a royal reward.'},
+    {id:'t2', title:'The Weight of the Elephant', emoji:'🐘', value:'Lateral Thinking',
+     tags:['Puzzle','Humour','Cleverness'],
+     summary:'The king challenges his courtiers to weigh the royal elephant. Everyone is stumped until Tenali solves it with a brilliantly simple idea.'},
+    {id:'t3', title:'Tenali and the Magic Brinjal', emoji:'🍆', value:'Honesty vs Flattery',
+     tags:['Wit','Royalty','Truth'],
+     summary:'All the courtiers praise the king\'s terrible soup. Only Tenali tells the truth — but so cleverly that the king laughs instead of getting angry.'},
+    {id:'t4', title:'The Cat and the Milk', emoji:'🐱', value:'Solving Problems Wisely',
+     tags:['Humour','Cleverness','Animals'],
+     summary:'The king\'s cats keep stealing milk from temples. Tenali trains them in a hilariously unexpected way that permanently solves the problem.'},
+  ],
+  aesop: [
+    {id:'a1', title:'The Tortoise and the Hare', emoji:'🐢', value:'Slow & Steady Wins',
+     tags:['Animals','Perseverance','Pride'],
+     summary:'A speedy hare mocks a tortoise for being slow. They race — and the hare\'s overconfidence leads to a stunning upset.'},
+    {id:'a2', title:'The Boy Who Cried Wolf', emoji:'🐺', value:'Truth Always Matters',
+     tags:['Honesty','Consequences','Village'],
+     summary:'A bored shepherd boy cries wolf twice as a prank. When the wolf really comes, nobody believes him. A lesson about honesty with real stakes.'},
+    {id:'a3', title:'The Ant and the Grasshopper', emoji:'🦗', value:'Hard Work & Preparation',
+     tags:['Animals','Planning','Winter'],
+     summary:'While the ant works hard all summer storing food, the grasshopper sings and dances. When winter comes, their choices have very different consequences.'},
+    {id:'a4', title:'The Fox and the Grapes', emoji:'🍇', value:'Sour Grapes & Honesty',
+     tags:['Animals','Pride','Self-deception'],
+     summary:'A hungry fox tries and fails to reach a bunch of grapes. "They\'re probably sour anyway," he says as he walks away. A story about how we lie to ourselves.'},
+    {id:'a5', title:'The Lion and the Mouse', emoji:'🐭', value:'Kindness Always Returns',
+     tags:['Animals','Gratitude','Kindness'],
+     summary:'A tiny mouse accidentally wakes a sleeping lion. The lion spares him. Later, when the lion is trapped in a net, the mouse repays the kindness.'},
+  ]
+};
+
+const COLL_NAMES = {
+  panchatantra: '🦁 Panchatantra',
+  jataka:       '🌸 Jataka Tales',
+  tenali:       '🪔 Tenali Raman',
+  aesop:        '🦊 Aesop\'s Fables'
+};
+
+// ── State ────────────────────────────────────────────────────────────────────
+let currentColl   = 'panchatantra';
+let currentStory  = null;
+let srAnswers     = [];
+let srQuizData    = [];
+let srAnswered    = 0;
+let srScore       = 0;
+
+function getReadStories(){ return JSON.parse(localStorage.getItem('dev_stories_read')||'{}'); }
+function markRead(id){ const r=getReadStories(); r[id]=true; localStorage.setItem('dev_stories_read',JSON.stringify(r)); }
+
+// ── Collection tabs ───────────────────────────────────────────────────────────
+document.querySelectorAll('.story-coll-tab').forEach(tab=>{
+  tab.addEventListener('click',()=>{
+    document.querySelectorAll('.story-coll-tab').forEach(t=>t.classList.remove('active'));
+    tab.classList.add('active');
+    currentColl = tab.dataset.coll;
+    renderStoryGrid(currentColl);
+  });
+});
+
+// ── Render grid ───────────────────────────────────────────────────────────────
+const COLL_COLORS = {
+  panchatantra:'linear-gradient(135deg,#1c1000,#2d1a00)',
+  jataka:      'linear-gradient(135deg,#120020,#1e0030)',
+  tenali:      'linear-gradient(135deg,#200000,#350000)',
+  aesop:       'linear-gradient(135deg,#001a08,#002a10)'
+};
+const COLL_ACCENT = {
+  panchatantra:'#f59e0b', jataka:'#a855f7', tenali:'#ef4444', aesop:'#4ade80'
+};
+
+function renderStoryGrid(coll){
+  const grid  = document.getElementById('storyGrid');
+  if(!grid) return;
+  const stories = STORIES[coll]||[];
+  const read    = getReadStories();
+  grid.innerHTML = stories.map(s=>`
+    <div class="story-card" onclick="openStory('${s.id}','${coll}')" data-id="${s.id}">
+      <div class="story-card-banner" style="background:${COLL_COLORS[coll]}">
+        <span style="position:relative;z-index:1">${s.emoji}</span>
+        ${read[s.id]?`<div class="story-card-done">✅</div>`:''}
+      </div>
+      <div class="story-card-body">
+        <div class="story-card-title">${s.title}</div>
+        <div class="story-card-meta">🌟 ${s.value}</div>
+        <div class="story-card-tags">
+          ${s.tags.map(t=>`<span class="story-tag">${t}</span>`).join('')}
+        </div>
+        ${read[s.id]?`<div class="story-read-badge">✅ Read</div>`:''}
+      </div>
+    </div>`).join('');
+}
+
+// ── Open story ────────────────────────────────────────────────────────────────
+window.openStory = async function(storyId, coll){
+  const stories = STORIES[coll||currentColl]||[];
+  const story   = stories.find(s=>s.id===storyId);
+  if(!story) return;
+  currentStory = {...story, coll:coll||currentColl};
+  srAnswers=[]; srQuizData=[]; srAnswered=0; srScore=0;
+
+  // Open reader
+  const reader = document.getElementById('storyReader');
+  reader.classList.add('open');
+  document.body.style.overflow='hidden';
+  document.getElementById('srTitle').textContent = story.title;
+  document.getElementById('srColl').textContent  = COLL_NAMES[coll||currentColl];
+  const readBadge = document.getElementById('srReadBadge');
+  readBadge.style.display = getReadStories()[storyId] ? 'block' : 'none';
+  document.getElementById('srLoading').style.display  = 'block';
+  document.getElementById('srPanels').style.display   = 'none';
+  document.getElementById('srResult').style.display   = 'none';
+  reader.scrollTo(0,0);
+
+  // Generate with Gemini
+  try{
+    const data = await generateStoryPanels(story, coll||currentColl);
+    renderStoryPanels(data, story);
+  } catch(e){
+    document.getElementById('srLoading').innerHTML = `
+      <div style="text-align:center;padding:40px 20px">
+        <div style="font-size:2rem;margin-bottom:12px">⚠️</div>
+        <div style="font-family:'Fredoka One',cursive;color:rgba(255,255,255,.5);margin-bottom:8px">
+          ${e.message==='no-key'?'Set the Gemini API key in ⚙️ Settings to read stories!':'Could not load story — please try again.'}
+        </div>
+        <button class="sr-back" onclick="closeStoryReader()" style="margin-top:12px">← Go Back</button>
+      </div>`;
+  }
+};
+
+// ── Generate panels ───────────────────────────────────────────────────────────
+async function generateStoryPanels(story, coll){
+  const collName = COLL_NAMES[coll].replace(/^[^\s]+ /,'');
+  const prompt = `You are writing a story for Devagneya, a curious 10-year-old boy from India who loves space, cars, and games.
+
+Story: "${story.title}" from ${collName}
+Summary: ${story.summary}
+Core value: ${story.value}
+
+Create a COMIC PANEL adaptation with EXACTLY 5-6 panels, then 3 comprehension questions.
+
+Return ONLY raw valid JSON, no markdown:
+{
+  "title": "${story.title}",
+  "panels": [
+    {
+      "scene": "one vivid emoji that captures this moment (single emoji)",
+      "narration": "1-2 sentences of scene-setting narration",
+      "dialogue": "optional: character speech in quotes, or empty string",
+      "speaker": "character name if dialogue exists, or empty string"
+    }
+  ],
+  "moral": "The moral of this story in 1-2 sentences — make it feel relevant to a 10-year-old today",
+  "questions": [
+    {
+      "q": "question text",
+      "opts": ["A. option","B. option","C. option","D. option"],
+      "ans": "A",
+      "exp": "brief explanation why this is correct"
+    }
+  ]
+}
+
+Make the story vivid, fun and emotional. Dialogue should feel natural and exciting for a child.
+Questions should test understanding and reflection, not just memory.`;
+
+  const raw = await callClaude([{role:'user',content:prompt}],
+    'You are a master storyteller for children. Return only valid JSON.',
+    2000
+  );
+  return JSON.parse(raw.replace(/```json|```/g,'').trim());
+}
+
+// ── Render panels ─────────────────────────────────────────────────────────────
+function renderStoryPanels(data, story){
+  document.getElementById('srLoading').style.display = 'none';
+  document.getElementById('srPanels').style.display  = 'block';
+
+  // Panels
+  const list = document.getElementById('srPanelList');
+  list.innerHTML = (data.panels||[]).map((p,i)=>`
+    <div class="comic-panel cp-${i%6}">
+      <div class="comic-panel-inner">
+        <div class="panel-num">Panel ${i+1}</div>
+        <div class="panel-scene">${p.scene||'📖'}</div>
+        <div class="panel-text">${p.narration||''}</div>
+        ${p.dialogue?`
+          <div class="panel-dialogue">
+            ${p.speaker?`<div class="panel-speaker">${p.speaker}:</div>`:''}
+            "${p.dialogue}"
+          </div>`:''
+        }
+      </div>
+    </div>`).join('');
+
+  // Moral
+  const moralEl = document.getElementById('srMoral');
+  const moralTxt = document.getElementById('srMoralText');
+  if(data.moral){ moralTxt.textContent=data.moral; moralEl.style.display='block'; }
+  else { moralEl.style.display='none'; }
+
+  // Questions
+  srQuizData = data.questions||[];
+  const qContainer = document.getElementById('srQuestions');
+  qContainer.innerHTML = '';
+  document.getElementById('srResult').style.display = 'none';
+  srAnswered=0; srScore=0;
+
+  srQuizData.forEach((q,qi)=>{
+    const card = document.createElement('div');
+    card.className='sq-card';
+    card.innerHTML=`
+      <div class="sq-num">Question ${qi+1} of ${srQuizData.length}</div>
+      <div class="sq-text">${q.q}</div>
+      <div class="sq-opts" id="sqOpts${qi}">
+        ${(q.opts||[]).map((o,oi)=>`
+          <button class="sq-opt" onclick="answerSQ(${qi},${oi},'${q.ans}')"
+            data-idx="${oi}" data-letter="${String.fromCharCode(65+oi)}">
+            ${o}
+          </button>`).join('')}
+      </div>
+      <div class="sq-exp" id="sqExp${qi}">${q.exp||''}</div>`;
+    qContainer.appendChild(card);
+  });
+}
+
+// ── Answer question ───────────────────────────────────────────────────────────
+window.answerSQ = function(qi, oi, correct){
+  const opts = document.querySelectorAll(`#sqOpts${qi} .sq-opt`);
+  opts.forEach(b=>b.disabled=true);
+  const chosen = String.fromCharCode(65+oi);
+  const isCorrect = chosen===correct;
+  opts[oi].classList.add(isCorrect?'correct':'wrong');
+  // Show correct answer
+  opts.forEach(b=>{ if(b.dataset.letter===correct) b.classList.add('correct'); });
+  const exp = document.getElementById('sqExp'+qi);
+  if(exp) exp.classList.add('show');
+  if(isCorrect) srScore++;
+  srAnswered++;
+  if(srAnswered===srQuizData.length) setTimeout(showStoryResult,800);
+};
+
+// ── Show result ───────────────────────────────────────────────────────────────
+function showStoryResult(){
+  const total = srQuizData.length;
+  const pct   = Math.round(srScore/total*100);
+  const trophies = ['😤','📚','😊','🌟','🏆'];
+  const ti = pct===100?4:pct>=75?3:pct>=50?2:pct>=25?1:0;
+  const msgs=['Keep reading — every story teaches something!','Good effort! Try another story.','Nice work! You understood the story well.','Excellent! You really paid attention!','Perfect! You are a true story champion! 🏆'];
+  const xp = 20 + (pct===100?30:pct>=75?15:pct>=50?5:0);
+
+  document.getElementById('srTrophy').textContent       = trophies[ti];
+  document.getElementById('srResultScore').textContent  = `${srScore} / ${total}`;
+  document.getElementById('srResultMsg').textContent    = msgs[ti];
+  document.getElementById('srResultXp').textContent     = `✨ +${xp} XP earned!`;
+  document.getElementById('srResult').style.display     = 'block';
+  document.getElementById('srResult').scrollIntoView({behavior:'smooth',block:'nearest'});
+
+  // Award XP
+  if(typeof addXP==='function') addXP(xp);
+  // Mark as read
+  if(currentStory){ markRead(currentStory.id); }
+  document.getElementById('srReadBadge').style.display = 'block';
+  // Refresh grid
+  renderStoryGrid(currentColl);
+}
+
+// ── Close reader ──────────────────────────────────────────────────────────────
+function closeStoryReader(){
+  document.getElementById('storyReader').classList.remove('open');
+  document.body.style.overflow='';
+}
+document.getElementById('srBack')?.addEventListener('click', closeStoryReader);
+document.getElementById('srReadAnother')?.addEventListener('click', closeStoryReader);
+
+// ── Share code ────────────────────────────────────────────────────────────────
+document.getElementById('srShare')?.addEventListener('click',()=>{
+  if(!currentStory) return;
+  const code = 'ST-'+currentStory.id.toUpperCase();
+  navigator.clipboard.writeText(code).then(()=>{
+    document.getElementById('srShare').textContent='✅ Copied!';
+    setTimeout(()=>document.getElementById('srShare').textContent='📋 Share Code',2000);
+  });
+});
+
+// ── AI generate new story ────────────────────────────────────────────────────
+document.getElementById('storyAiMoreBtn')?.addEventListener('click', async()=>{
+  if(!getKey()){
+    alert('Set the Gemini API key in ⚙️ Settings to generate AI stories!');
+    return;
+  }
+  const btn = document.getElementById('storyAiMoreBtn');
+  btn.textContent='✨ Generating...'; btn.disabled=true;
+
+  const collTitles={
+    panchatantra:'Panchatantra (ancient Indian fables with animals)',
+    jataka:'Jataka Tales (Buddhist stories of the Bodhisatta)',
+    tenali:'Tenali Raman (witty South Indian court jester)',
+    aesop:"Aesop's Fables (ancient Greek animal fables)"
+  };
+  // Pick a random theme
+  const themes=['friendship','courage','honesty','cleverness','kindness','patience','justice'];
+  const theme = themes[Math.floor(Math.random()*themes.length)];
+
+  try{
+    const prompt = `Write a NEW original story in the style of ${collTitles[currentColl]}.
+Theme: ${theme}. Make it different from these existing titles: ${(STORIES[currentColl]||[]).map(s=>s.title).join(', ')}.
+
+Return ONLY raw JSON:
+{
+  "title": "story title",
+  "panels": [{"scene":"emoji","narration":"text","dialogue":"optional","speaker":"optional"}],
+  "moral": "the moral",
+  "questions": [{"q":"question","opts":["A. ...","B. ...","C. ...","D. ..."],"ans":"A","exp":"explanation"}]
+}
+5-6 panels. 3 questions. Make it exciting for a 10-year-old Indian boy who loves adventure.`;
+
+    const raw  = await callClaude([{role:'user',content:prompt}],
+      'You are a master children\'s storyteller. Return only valid JSON.',2000);
+    const data = JSON.parse(raw.replace(/```json|```/g,'').trim());
+
+    // Add to grid as a temporary AI story
+    const aiStory = {
+      id:'ai_'+Date.now(), title:data.title,
+      emoji:'✨', value:theme.charAt(0).toUpperCase()+theme.slice(1),
+      tags:['AI Generated', collTitles[currentColl].split(' ')[0]],
+      summary: data.panels?.[0]?.narration||'', coll:currentColl
+    };
+    STORIES[currentColl].unshift(aiStory);
+    renderStoryGrid(currentColl);
+
+    // Open the reader directly
+    currentStory = aiStory;
+    document.getElementById('srTitle').textContent = data.title;
+    document.getElementById('srColl').textContent  = COLL_NAMES[currentColl];
+    document.getElementById('srReadBadge').style.display='none';
+    document.getElementById('storyReader').classList.add('open');
+    document.body.style.overflow='hidden';
+    document.getElementById('srLoading').style.display='none';
+    document.getElementById('srPanels').style.display='block';
+    srAnswered=0; srScore=0;
+    renderStoryPanels(data, aiStory);
+
+  }catch(e){
+    alert('Could not generate: '+(e.message||'Please try again.'));
+  }
+  btn.textContent='✨ Generate a New Story with AI'; btn.disabled=false;
+});
+
+// ── Init on tab open ──────────────────────────────────────────────────────────
+document.querySelector('[data-tab="stories"]')?.addEventListener('click',()=>{
+  setTimeout(()=>renderStoryGrid(currentColl), 50);
+});
+renderStoryGrid('panchatantra');
+
+})(); // end Stories IIFE
 
 </script>
 </body>
